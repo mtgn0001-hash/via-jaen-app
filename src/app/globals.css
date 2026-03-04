@@ -46,14 +46,29 @@
   }
 
   [data-theme='night'] {
-    --background: 260 20% 4%;
-    --foreground: 260 20% 95%;
-    --card: 260 20% 6%;
-    --card-foreground: 260 20% 95%;
-    --primary: 262 70% 60%;
-    --primary-foreground: 260 20% 98%;
-    --border: 260 20% 15%;
-    --ring: 262 70% 60%;
+    /* TEMA NOCHE REFINADO: FONDO BERENJENA PROFUNDO Y TEXTOS PLATA */
+    --background: 260 25% 8%;
+    --foreground: 260 10% 90%;
+    --card: 260 25% 12%;
+    --card-foreground: 260 10% 95%;
+    --popover: 260 25% 10%;
+    --popover-foreground: 260 10% 90%;
+    --primary: 262 80% 65%;
+    --primary-foreground: 260 10% 10%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 10% 95%;
+    --muted: 260 20% 15%;
+    --muted-foreground: 260 10% 65%;
+    --accent: 260 20% 20%;
+    --accent-foreground: 262 80% 75%;
+    --border: 260 20% 20%;
+    --input: 260 20% 20%;
+    --ring: 262 80% 65%;
+    
+    --sidebar-background: 260 25% 6%;
+    --sidebar-foreground: 260 10% 90%;
+    --sidebar-primary: 262 80% 65%;
+    --sidebar-border: 260 20% 15%;
   }
 }
 
