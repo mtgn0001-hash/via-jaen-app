@@ -37,12 +37,61 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
   const { progress } = useLocalStorage();
 
   const mainCategories = [
-    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard },
-    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase },
-    { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap },
-    { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby },
-    { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin },
-    { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Urgencias', icon: ShieldAlert, isEmergency: true },
+    { 
+      id: 'procedures', 
+      tab: 'procedures', 
+      title: t.procedures, 
+      desc: 'Papeles y NIE', 
+      icon: CreditCard,
+      color: 'text-indigo-500',
+      bgColor: 'bg-indigo-500/10'
+    },
+    { 
+      id: 'employment', 
+      tab: 'employment_portal', 
+      title: t.employment.title, 
+      desc: 'Trabajo y CV', 
+      icon: Briefcase,
+      color: 'text-emerald-500',
+      bgColor: 'bg-emerald-500/10'
+    },
+    { 
+      id: 'study', 
+      tab: 'study', 
+      title: 'Estudios', 
+      desc: 'Aprender', 
+      icon: GraduationCap,
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10'
+    },
+    { 
+      id: 'family', 
+      tab: 'family', 
+      title: 'Familia', 
+      desc: 'Niños y Ayudas', 
+      icon: Baby,
+      color: 'text-rose-500',
+      bgColor: 'bg-rose-500/10'
+    },
+    { 
+      id: 'help', 
+      tab: 'directory', 
+      title: 'Ayuda', 
+      desc: 'ONGs y Comida', 
+      icon: MapPin,
+      color: 'text-cyan-500',
+      bgColor: 'bg-cyan-500/10'
+    },
+    { 
+      id: 'emergency', 
+      tab: 'emergency', 
+      title: 'S.O.S', 
+      desc: 'Urgencias', 
+      icon: ShieldAlert, 
+      isEmergency: true,
+      color: 'text-destructive',
+      bgColor: 'bg-destructive/10'
+    },
   ];
 
   // VISTA DE LECTURA FÁCIL (Simplificada al máximo)
@@ -65,8 +114,8 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
                className={`h-28 rounded-[35px] bg-card border-[6px] text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all ${cat.isEmergency ? 'border-destructive/20 text-destructive' : 'border-primary/10'}`}
              >
                <div className="flex items-center gap-6">
-                 <div className={`p-3 rounded-2xl ${cat.isEmergency ? 'bg-destructive/5' : 'bg-primary/5'}`}>
-                   <cat.icon className="h-12 w-12" />
+                 <div className={`p-3 rounded-2xl ${cat.bgColor}`}>
+                   <cat.icon className={`h-12 w-12 ${cat.color}`} />
                  </div>
                  <div className="text-left">
                    <span className="block text-2xl font-black uppercase tracking-tight leading-none">{cat.title}</span>
@@ -142,12 +191,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           {mainCategories.map((cat) => (
             <Card 
               key={cat.id} 
-              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-card overflow-hidden"
+              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-card overflow-hidden group hover:shadow-md"
               onClick={() => setActiveTab(cat.tab)}
             >
               <CardContent className="p-4 flex flex-col items-center text-center gap-2">
-                <div className={`p-3 rounded-2xl ${cat.isEmergency ? 'bg-destructive/10' : 'bg-primary/10'}`}>
-                  <cat.icon className={`h-6 w-6 ${cat.isEmergency ? 'text-destructive' : 'text-primary'}`} />
+                <div className={`p-3 rounded-2xl transition-transform group-hover:scale-110 ${cat.bgColor}`}>
+                  <cat.icon className={`h-6 w-6 ${cat.color}`} />
                 </div>
                 <div className="space-y-0.5">
                   <h4 className="font-bold text-xs uppercase tracking-tight">{cat.title}</h4>
