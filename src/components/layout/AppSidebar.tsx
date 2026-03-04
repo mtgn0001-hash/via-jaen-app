@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -18,7 +17,8 @@ import {
   Palette,
   Check,
   Share2,
-  Library
+  Library,
+  UserCircle
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -48,6 +48,7 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { QRCodeShare } from "@/components/ui/QRCodeShare"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 type AppSidebarProps = {
   lang: Language;
@@ -79,6 +80,7 @@ export function AppSidebar({
   const categories = [
     { id: 'general', label: 'Inicio', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard },
+      { id: 'profile', icon: UserCircle, label: 'Mis Datos / Perfil' },
     ]},
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
@@ -117,16 +119,22 @@ export function AppSidebar({
     <>
       <Sidebar variant="floating" className="border-none shadow-none">
         <SidebarHeader className="p-6">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary p-2 rounded-2xl shadow-lg">
-              <User className="h-6 w-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <h2 className="font-headline font-black text-lg tracking-tight text-primary uppercase">
-                {t.title}
+          <div 
+            className="flex items-center gap-3 cursor-pointer hover:bg-primary/5 p-2 rounded-2xl transition-colors"
+            onClick={() => handleNav('profile')}
+          >
+            <Avatar className="h-10 w-10 border-2 border-primary/20 shadow-md">
+              <AvatarImage src={progress.profile.photo} className="object-cover" />
+              <AvatarFallback className="bg-primary text-white font-black">
+                {progress.profile.name?.charAt(0) || <User className="h-5 w-5" />}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col overflow-hidden">
+              <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
+                {progress.profile.name || t.title}
               </h2>
-              <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Guía Jaén
+              <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">
+                {progress.profile.nie || 'Ver Perfil'}
               </span>
             </div>
           </div>

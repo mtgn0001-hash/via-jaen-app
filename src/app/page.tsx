@@ -1,8 +1,7 @@
-
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage, Language as LanguageType } from "@/lib/store";
+import { useLocalStorage } from "@/lib/store";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -10,10 +9,8 @@ import { ProcedureList } from "@/components/procedures/ProcedureList";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
 import { FamilyResources } from "@/components/family/FamilyResources";
 import { StudyUJA } from "@/components/study/StudyUJA";
-import { WorkTab } from "@/components/work/WorkTab";
 import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 import { IntegrationTab } from "@/components/integration/IntegrationTab";
-import { TransportTab } from "@/components/transport/TransportTab";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { Onboarding } from "@/components/onboarding/Onboarding";
 import { DocumentChecklist } from "@/components/procedures/DocumentChecklist";
@@ -25,6 +22,8 @@ import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { AlertCircle, ShieldAlert } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
+import { UserProfile } from "@/components/profile/UserProfile";
+import { TransportTab } from "@/components/transport/TransportTab";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -88,6 +87,10 @@ export default function Home() {
               <Dashboard lang={lang} setActiveTab={setActiveTab} />
             )}
             
+            {activeTab === 'profile' && (
+              <UserProfile lang={lang} />
+            )}
+
             {activeTab === 'procedures' && (
               <div className="space-y-8">
                 {!isEasy && <DocumentChecklist lang={lang} />}
@@ -112,12 +115,8 @@ export default function Home() {
               <StudyUJA lang={lang} />
             )}
 
-            {activeTab === 'employment' && (
+            {activeTab === 'employment_portal' && (
               <EmploymentPortal lang={lang} />
-            )}
-
-            {activeTab === 'work' && (
-              <WorkTab lang={lang} />
             )}
 
             {activeTab === 'community' && (
@@ -137,10 +136,6 @@ export default function Home() {
 
             {activeTab === 'emergency' && (
               <EmergencyTab lang={lang} />
-            )}
-
-            {activeTab === 'employment_portal' && (
-              <EmploymentPortal lang={lang} />
             )}
 
             {!isEasy && (

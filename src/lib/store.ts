@@ -5,6 +5,13 @@ import { useState, useEffect } from 'react';
 export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
 export type ProvinceType = 'jaen';
 
+export type UserProfile = {
+  name: string;
+  nie: string;
+  phone: string;
+  photo?: string; // Base64 encoded image
+};
+
 export type UserProgress = {
   procedures: { [key: string]: boolean };
   checklist: { [key: string]: boolean };
@@ -13,6 +20,7 @@ export type UserProgress = {
   theme: ThemeType;
   province: ProvinceType;
   easyReading: boolean;
+  profile: UserProfile;
 };
 
 const STORAGE_KEY = 'jaen_integra_storage';
@@ -25,6 +33,11 @@ const defaultProgress: UserProgress = {
   theme: 'olive',
   province: 'jaen',
   easyReading: false,
+  profile: {
+    name: '',
+    nie: '',
+    phone: '',
+  }
 };
 
 export function useLocalStorage() {
@@ -52,6 +65,12 @@ export function useLocalStorage() {
     });
   };
 
+  const updateProfile = (profileUpdates: Partial<UserProfile>) => {
+    updateProgress({
+      profile: { ...progress.profile, ...profileUpdates }
+    });
+  };
+
   const toggleProcedure = (id: string) => {
     const newProcedures = { ...progress.procedures, [id]: !progress.procedures[id] };
     updateProgress({ procedures: newProcedures });
@@ -73,6 +92,7 @@ export function useLocalStorage() {
   return {
     progress,
     updateProgress,
+    updateProfile,
     toggleProcedure,
     toggleChecklist,
     calculateCompletion,
