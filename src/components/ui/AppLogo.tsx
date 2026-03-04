@@ -11,8 +11,8 @@ type AppLogoProps = {
 
 export function AppLogo({ className, size = 40, variant = "default" }: AppLogoProps) {
   const containerColors = {
-    default: "bg-primary/10",
-    white: "bg-white/20",
+    default: "bg-primary/5",
+    white: "bg-white/10",
     minimal: "bg-transparent",
   };
 
@@ -25,7 +25,7 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
   return (
     <div 
       className={cn(
-        "relative flex items-center justify-center rounded-full transition-all duration-500",
+        "relative flex items-center justify-center rounded-[1.25rem] transition-all duration-500",
         containerColors[variant],
         className
       )}
@@ -36,24 +36,30 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
         className={cn("transition-all duration-300", strokeColors[variant])}
-        style={{ width: size * 0.6, height: size * 0.6 }}
+        style={{ width: size * 0.7, height: size * 0.7 }}
       >
-        {/* Silueta lineal (outline) de la Catedral de Jaén con formas suaves */}
+        {/* Silueta de la Catedral de Jaén: Trazos suaves y reconocibles */}
         <path 
-          d="M25 80V35C25 32 27 30 30 30H40V80M60 80V30H70C73 30 75 32 75 35V80M40 80V45C40 38 44 33 50 33C56 33 60 38 60 45V80" 
+          d="M20 80V35C20 32.2386 22.2386 30 25 30H35V80M65 80V30C65 27.2386 67.2386 25 70 25H80V80M35 80V45C35 36.7157 41.7157 30 50 30C58.2843 30 65 36.7157 65 45V80" 
           stroke="currentColor" 
-          strokeWidth="6" 
+          strokeWidth="4.5" 
           strokeLinecap="round" 
           strokeLinejoin="round"
-          fill="none"
         />
-        {/* Detalle de la cúpula/arco superior suavizado */}
+        {/* Detalle del frontón central/arco característico */}
         <path 
-          d="M42 30C42 26 45 23 50 23C55 23 58 26 58 30" 
+          d="M42 30C42 24.4772 45.5817 20 50 20C54.4183 20 58 24.4772 58 30" 
           stroke="currentColor" 
-          strokeWidth="4" 
+          strokeWidth="3.5" 
           strokeLinecap="round"
-          fill="none"
+        />
+        {/* Línea de base suave */}
+        <path 
+          d="M15 80H85" 
+          stroke="currentColor" 
+          strokeWidth="3" 
+          strokeLinecap="round"
+          opacity="0.3"
         />
       </svg>
     </div>
