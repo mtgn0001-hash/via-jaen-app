@@ -1,9 +1,8 @@
-
 "use client"
 
 import { useState, useEffect } from 'react';
 
-export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean';
+export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
 
 export type UserProgress = {
   procedures: { [key: string]: boolean };

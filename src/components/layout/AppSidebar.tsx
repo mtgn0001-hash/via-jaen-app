@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -95,6 +94,7 @@ export function AppSidebar({
   const themes: { id: ThemeType, label: string, color: string }[] = [
     { id: 'purple', label: 'Morado', color: 'bg-[#7C3AED]' },
     { id: 'olive', label: 'Olivo', color: 'bg-[#3D5229]' },
+    { id: 'red', label: 'Rojo', color: 'bg-[#E11D48]' },
     { id: 'night', label: 'Noche', color: 'bg-[#121212]' },
     { id: 'contrast', label: 'Alto Contraste', color: 'bg-white border-2 border-black' },
     { id: 'ocean', label: 'Océano', color: 'bg-[#3B82F6]' },
