@@ -10,11 +10,16 @@ import { CurrencyConverter } from "@/components/economy/CurrencyConverter";
 import { 
   Building2, 
   CreditCard, 
-  Stethoscope, 
-  ShieldCheck,
+  Briefcase, 
+  GraduationCap,
+  Baby,
+  MapPin,
+  Bus,
+  Heart,
+  ShieldAlert,
   ArrowRight,
   Info,
-  Users
+  LayoutGrid
 } from "lucide-react";
 
 type DashboardProps = {
@@ -25,45 +30,67 @@ type DashboardProps = {
 export function Dashboard({ lang, setActiveTab }: DashboardProps) {
   const t = translations[lang];
 
-  const quickLinks = [
-    { id: 'empadronamiento', icon: Building2, title: 'Empadronamiento', desc: 'Registro en el Ayuntamiento', status: 'critical' },
-    { id: 'nie', icon: CreditCard, title: 'NIE / TIE', desc: 'Identificación oficial', status: 'standard' },
-    { id: 'seguridad-social', icon: ShieldCheck, title: 'Seguridad Social', desc: 'Derecho al trabajo', status: 'important' },
-    { id: 'salud', icon: Stethoscope, title: 'Tarjeta Sanitaria', desc: 'Acceso médico SAS', status: 'standard' },
+  const mainCategories = [
+    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'NIE, Padrón, Arraigo', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { id: 'work', tab: 'community', title: t.work.title, desc: t.work.oliveCampaign, icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { id: 'study', tab: 'community', title: 'Estudios UJA', desc: 'Universidad e Idiomas', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50' },
+    { id: 'family', tab: 'directory', title: t.familyResources.title, desc: 'Colegios y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-50' },
+    { id: 'help', tab: 'directory', title: t.directory, desc: 'ONGs y Comedores', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { id: 'transport', tab: 'directory', title: t.transport.title, desc: 'Buses y Horarios', icon: Bus, color: 'text-slate-600', bg: 'bg-slate-50' },
+    { id: 'integration', tab: 'community', title: 'Integración', desc: 'Tapas y Glosario', icon: Heart, color: 'text-red-600', bg: 'bg-red-50' },
+    { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Derechos y Ayuda', icon: ShieldAlert, color: 'text-destructive', bg: 'bg-destructive/10' },
   ];
 
   return (
     <div className="space-y-6">
       <section>
         <div className="flex items-center gap-2 mb-4">
-          <Info className="h-5 w-5 text-secondary" />
+          <Info className="h-5 w-5 text-primary/60" />
           <p className="text-sm font-medium text-muted-foreground">
             {t.welcome}
           </p>
         </div>
         
-        <div className="grid grid-cols-1 gap-4">
-          <Card className="bg-primary text-white overflow-hidden border-none shadow-lg active:scale-95 transition-transform">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Jaén Integra</h2>
-                  <p className="text-white/80 text-sm max-w-[200px]">
-                    Tu guía segura para vivir y trabajar en Jaén.
-                  </p>
-                </div>
-                <div className="bg-white/20 p-3 rounded-2xl">
-                  <ShieldCheck className="h-8 w-8" />
-                </div>
+        <Card className="bg-primary text-white overflow-hidden border-none shadow-lg mb-6">
+          <CardContent className="p-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Jaén Integra</h2>
+                <p className="text-white/80 text-xs max-w-[200px] leading-relaxed">
+                  Tu guía segura y privada para la vida en Jaén. Todo funciona sin internet.
+                </p>
               </div>
-              <button 
-                onClick={() => setActiveTab('procedures')}
-                className="mt-6 flex items-center gap-2 text-sm font-bold bg-white text-primary px-4 py-2 rounded-full shadow-md"
-              >
-                Trámites <ArrowRight className="h-4 w-4" />
-              </button>
-            </CardContent>
-          </Card>
+              <div className="bg-white/20 p-3 rounded-2xl">
+                <LayoutGrid className="h-8 w-8" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Main Navigation Grid */}
+      <section>
+        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1">
+          Categorías
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          {mainCategories.map((cat) => (
+            <Card 
+              key={cat.id} 
+              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-white overflow-hidden"
+              onClick={() => setActiveTab(cat.tab)}
+            >
+              <CardContent className="p-4 flex flex-col items-center text-center gap-2">
+                <div className={`${cat.bg} p-3 rounded-2xl`}>
+                  <cat.icon className={`h-6 w-6 ${cat.color}`} />
+                </div>
+                <div className="space-y-0.5">
+                  <h4 className="font-bold text-xs">{cat.title}</h4>
+                  <p className="text-[9px] text-muted-foreground line-clamp-1">{cat.desc}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -76,38 +103,23 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       {/* Currency Converter Utility */}
       <CurrencyConverter lang={lang} />
 
-      <section className="grid grid-cols-1 gap-3">
-        <Card 
-          className="bg-secondary/10 border-2 border-secondary/30 cursor-pointer hover:bg-secondary/20 transition-all rounded-3xl"
-          onClick={() => setActiveTab('community')}
-        >
-          <CardContent className="p-4 flex items-center gap-4">
-            <div className="bg-secondary p-3 rounded-xl">
-              <Users className="h-6 w-6 text-white" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-bold text-sm text-secondary-foreground">Cultura y Comunidad</h4>
-              <p className="text-xs text-muted-foreground mt-1">Glosario, tapas y vida en Jaén.</p>
-            </div>
-            <ArrowRight className="h-5 w-5 text-secondary" />
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
+      <section className="pb-10">
         <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1">
           Guías Destacadas
         </h3>
         <div className="grid grid-cols-1 gap-3">
-          {quickLinks.map((link) => (
+          {[
+            { id: 'empadronamiento', title: 'Empadronamiento', desc: 'Registro en el Ayuntamiento', icon: Building2 },
+            { id: 'nie', title: 'NIE / TIE', desc: 'Identificación oficial', icon: CreditCard },
+          ].map((link) => (
             <Card 
               key={link.id} 
-              className="group hover:border-secondary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-white"
+              className="group hover:border-primary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-white"
               onClick={() => setActiveTab('procedures')}
             >
               <CardContent className="p-4 flex items-center gap-4">
-                <div className="bg-muted p-3 rounded-xl group-hover:bg-secondary/10 transition-colors">
-                  <link.icon className="h-6 w-6 text-primary group-hover:text-secondary" />
+                <div className="bg-muted p-3 rounded-xl group-hover:bg-primary/10 transition-colors">
+                  <link.icon className="h-6 w-6 text-primary" />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
@@ -118,6 +130,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">{link.desc}</p>
                 </div>
+                <ArrowRight className="h-4 w-4 text-muted-foreground opacity-30" />
               </CardContent>
             </Card>
           ))}
