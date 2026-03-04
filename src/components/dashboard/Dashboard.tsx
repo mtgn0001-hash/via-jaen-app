@@ -34,12 +34,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
   const { progress } = useLocalStorage();
 
   const mainCategories = [
-    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-100' },
-    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-100' },
-    { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-100' },
-    { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-100' },
-    { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-100' },
-    { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Urgencias', icon: ShieldAlert, color: 'text-destructive', bg: 'bg-destructive/10' },
+    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard },
+    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase },
+    { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap },
+    { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby },
+    { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin },
+    { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Urgencias', icon: ShieldAlert, isEmergency: true },
   ];
 
   // VISTA DE LECTURA FÁCIL (Simplificada al máximo)
@@ -59,10 +59,10 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
              <Button 
                key={cat.id} 
                onClick={() => setActiveTab(cat.tab)}
-               className="h-28 rounded-[35px] bg-card border-[6px] border-primary/10 text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all"
+               className={`h-28 rounded-[35px] bg-card border-[6px] text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all ${cat.isEmergency ? 'border-destructive/20 text-destructive' : 'border-primary/10'}`}
              >
                <div className="flex items-center gap-6">
-                 <div className="p-3 bg-primary/5 rounded-2xl">
+                 <div className={`p-3 rounded-2xl ${cat.isEmergency ? 'bg-destructive/5' : 'bg-primary/5'}`}>
                    <cat.icon className="h-12 w-12" />
                  </div>
                  <div className="text-left">
@@ -70,7 +70,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
                    <span className="text-xs font-bold text-muted-foreground uppercase mt-1 block">{cat.desc}</span>
                  </div>
                </div>
-               <ArrowRight className="h-10 w-10 text-primary/20" />
+               <ArrowRight className="h-10 w-10 opacity-20" />
              </Button>
           ))}
         </div>
@@ -140,8 +140,8 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
               onClick={() => setActiveTab(cat.tab)}
             >
               <CardContent className="p-4 flex flex-col items-center text-center gap-2">
-                <div className={`${cat.bg} p-3 rounded-2xl`}>
-                  <cat.icon className={`h-6 w-6 ${cat.color}`} />
+                <div className={`p-3 rounded-2xl ${cat.isEmergency ? 'bg-destructive/10' : 'bg-primary/10'}`}>
+                  <cat.icon className={`h-6 w-6 ${cat.isEmergency ? 'text-destructive' : 'text-primary'}`} />
                 </div>
                 <div className="space-y-0.5">
                   <h4 className="font-bold text-xs">{cat.title}</h4>
