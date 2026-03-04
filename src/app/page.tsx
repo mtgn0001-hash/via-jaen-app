@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from "react";
@@ -20,6 +19,7 @@ import { DocumentChecklist } from "@/components/procedures/DocumentChecklist";
 import { WifiPoints } from "@/components/directory/WifiPoints";
 import { Flashcards } from "@/components/integration/Flashcards";
 import { Language, translations } from "@/lib/translations";
+import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { AlertCircle, ShieldAlert } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 
@@ -92,6 +92,10 @@ export default function Home() {
                   completedProcedures={progress.procedures} 
                 />
               </div>
+            )}
+
+            {activeTab === 'andalucia_common' && (
+              <CommonAndalucia lang={lang} />
             )}
 
             {activeTab === 'family' && (

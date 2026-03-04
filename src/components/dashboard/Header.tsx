@@ -1,7 +1,6 @@
-
 "use client"
 
-import { Share2, Info, Mic } from "lucide-react";
+import { Share2, Info, Mic, MapPin } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -9,6 +8,14 @@ import { QRCodeShare } from "@/components/ui/QRCodeShare";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useLocalStorage, ProvinceType } from "@/lib/store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { provincesData } from "@/lib/provinces";
 
 type HeaderProps = {
   lang: Language;
@@ -17,6 +24,7 @@ type HeaderProps = {
 
 export function Header({ lang, completion }: HeaderProps) {
   const t = translations[lang];
+  const { progress, updateProgress } = useLocalStorage();
   const [showQR, setShowQR] = useState(false);
   const { toast } = useToast();
 
@@ -26,11 +34,12 @@ export function Header({ lang, completion }: HeaderProps) {
       description: "Dí una palabra clave como 'Trabajo', 'Salud' o 'Cita'.",
     });
     
-    // Simple simulation of Haptic Feedback
     if ('vibrate' in navigator) {
       navigator.vibrate(50);
     }
   };
+
+  const currentProvince = provincesData[progress.province] || provincesData.jaen;
 
   return (
     <header className="sticky top-0 bg-white/80 backdrop-blur-xl z-40 px-4 py-3 border-b border-border/50">
@@ -43,6 +52,26 @@ export function Header({ lang, completion }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-10 rounded-xl px-3 flex items-center gap-2 border border-primary/10 hover:bg-primary/5">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="text-xs font-bold text-primary">{currentProvince.name}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48 rounded-2xl border-none shadow-2xl p-2 bg-white/95 backdrop-blur-xl">
+              {Object.values(provincesData).map((p) => (
+                <DropdownMenuItem 
+                  key={p.id}
+                  onClick={() => updateProgress({ province: p.id as ProvinceType })}
+                  className="rounded-xl font-bold p-3 focus:bg-primary/10 focus:text-primary cursor-pointer"
+                >
+                  {p.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Button 
             variant="ghost" 
             size="icon" 
@@ -50,15 +79,6 @@ export function Header({ lang, completion }: HeaderProps) {
             onClick={handleVoiceCommand}
           >
             <Mic className="h-5 w-5 text-primary" />
-          </Button>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="rounded-full hover:bg-primary/10 h-10 w-10"
-            onClick={() => setShowQR(true)}
-            aria-label="Share application"
-          >
-            <Share2 className="h-5 w-5 text-primary" />
           </Button>
         </div>
       </div>

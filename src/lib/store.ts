@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
+export type ProvinceType = 'almeria' | 'cadiz' | 'cordoba' | 'granada' | 'huelva' | 'jaen' | 'malaga' | 'sevilla';
 
 export type UserProgress = {
   procedures: { [key: string]: boolean };
@@ -10,6 +11,7 @@ export type UserProgress = {
   language: string;
   onboardingCompleted: boolean;
   theme: ThemeType;
+  province: ProvinceType;
 };
 
 const STORAGE_KEY = 'jaen_integra_storage';
@@ -20,6 +22,7 @@ const defaultProgress: UserProgress = {
   language: 'es',
   onboardingCompleted: false,
   theme: 'purple',
+  province: 'jaen',
 };
 
 export function useLocalStorage() {
@@ -31,7 +34,6 @@ export function useLocalStorage() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Merge with defaults to handle new keys
         setProgress({ ...defaultProgress, ...parsed });
       } catch (e) {
         console.error("Failed to parse local storage", e);

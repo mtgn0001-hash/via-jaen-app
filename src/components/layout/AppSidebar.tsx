@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -17,10 +16,12 @@ import {
   FileText,
   Palette,
   Check,
-  Share2
+  Share2,
+  Library,
+  Ticket
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
-import { ThemeType } from "@/lib/store"
+import { ThemeType, useLocalStorage } from "@/lib/store"
 import {
   Sidebar,
   SidebarContent,
@@ -79,14 +80,18 @@ export function AppSidebar({
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
     ]},
+    { id: 'regional', label: 'Trámites Autonómicos', items: [
+      { id: 'employment_portal', icon: FileText, label: t.employment.title },
+      { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
+      { id: 'carnet_joven', icon: Ticket, label: 'Carné Joven Andaluz' },
+    ]},
     { id: 'social', label: 'Salud y Familia', items: [
       { id: 'family', icon: HeartPulse, label: t.familyResources.title },
     ]},
-    { id: 'education', label: 'Universidad (UJA)', items: [
+    { id: 'education', label: 'Universidad', items: [
       { id: 'study', icon: GraduationCap, label: t.studyUJA.title },
     ]},
     { id: 'economy', label: 'Trabajo y Empleo', items: [
-      { id: 'employment_portal', icon: FileText, label: t.employment.title },
       { id: 'work', icon: Briefcase, label: t.work.title },
     ]},
     { id: 'culture', label: 'Integración', items: [
@@ -119,10 +124,10 @@ export function AppSidebar({
             </div>
             <div className="flex flex-col">
               <h2 className="font-headline font-black text-lg tracking-tight text-primary uppercase">
-                Vía Jaén
+                {t.title}
               </h2>
               <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Guía Comunitaria
+                Guía Regional
               </span>
             </div>
           </div>
