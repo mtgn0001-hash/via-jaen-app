@@ -2,13 +2,13 @@
 export const translations = {
   es: {
     title: 'Jaén Integra',
-    dashboard: 'Panel',
+    dashboard: 'Inicio',
     procedures: 'Trámites',
-    forms: 'Papeles',
-    family: 'Familia',
-    study: 'Estudio',
+    backpack: 'Mochila',
+    backpackDesc: 'Tus documentos listos.',
+    community: 'Cultura',
     directory: 'Ayuda',
-    emergency: 'EMERGENCIA',
+    emergency: 'S.O.S',
     progress: 'Tu Progreso',
     welcome: 'Hola, bienvenido',
     privacyNotice: 'Privacidad: Tus datos se guardan solo en este móvil. Nada sale de aquí.',
@@ -23,6 +23,33 @@ export const translations = {
     tipsDesc: 'Comisaría (Plaza Batallas): Prueba los viernes a las 9:00 AM.',
     claveNote: 'Importante: Saca tu Cl@ve en cuanto tengas el NIE.',
     disclaimer: 'Guía comunitaria. No oficial. Los datos se guardan solo en tu móvil.',
+    appointmentLight: {
+      title: 'Semáforo de Citas',
+      desc: 'Estado actual en Extranjería Jaén.',
+      updated: 'Actualizado hace 5 min',
+      green: 'Hay citas libres',
+      yellow: 'Pocas citas',
+      red: 'Sin citas hoy',
+      report: '¿Has visto citas hoy?',
+      thanks: '¡Gracias por avisar!'
+    },
+    currency: {
+      title: 'Conversor de Moneda',
+      from: 'De',
+      to: 'A',
+      result: 'Valor aproximado'
+    },
+    wifi: {
+      title: 'WiFi Gratis en Jaén',
+      desc: 'Puntos de conexión pública gratuita.'
+    },
+    learn: {
+      title: 'Aprende Idioma',
+      desc: 'Frases útiles para el día a día.',
+      flashcards: 'Tarjetas de Memoria',
+      flip: 'Ver traducción',
+      next: 'Siguiente'
+    },
     onboarding: {
       title1: 'Bienvenido a Jaén Integra',
       desc1: 'Tu guía segura para la regularización y vida en la provincia de Jaén.',
@@ -140,27 +167,48 @@ export const translations = {
   },
   en: {
     title: 'Jaén Integra',
-    dashboard: 'Dashboard',
-    procedures: 'Procedures',
-    forms: 'Papers',
-    family: 'Family',
-    study: 'Study',
+    dashboard: 'Home',
+    procedures: 'Steps',
+    backpack: 'Backpack',
+    backpackDesc: 'Your docs ready.',
+    community: 'Culture',
     directory: 'Help',
-    emergency: 'EMERGENCY',
+    emergency: 'S.O.S',
     progress: 'Your Progress',
     welcome: 'Hello, welcome',
     privacyNotice: 'Privacy: Your data is saved only on this phone. Nothing leaves here.',
     downloadForm: 'Download PDF',
     fillOnline: 'Fill Online',
     pdfNote: 'Note: Use Adobe Acrobat to fill out PDF forms.',
-    emergencyTitle: 'Urgent Help',
-    emergencyDesc: 'Direct emergency and legal aid numbers.',
-    legalHelp: 'Legal Assistance',
-    officialSources: 'Official Sources',
-    tipsTitle: 'Jaén Appts',
     tipsDesc: 'Police (Plaza Batallas): Try Fridays at 9:00 AM.',
-    claveNote: 'Important: Get your Cl@ve as soon as you have your NIE.',
     disclaimer: 'Community guide. Unofficial. Data stays only on your mobile.',
+    appointmentLight: {
+      title: 'Appt. Traffic Light',
+      desc: 'Current status in Extranjería Jaén.',
+      updated: 'Updated 5 min ago',
+      green: 'Appointments available',
+      yellow: 'Few appointments',
+      red: 'No appointments today',
+      report: 'Did you see appts today?',
+      thanks: 'Thanks for reporting!'
+    },
+    currency: {
+      title: 'Currency Converter',
+      from: 'From',
+      to: 'To',
+      result: 'Approx. value'
+    },
+    wifi: {
+      title: 'Free WiFi in Jaén',
+      desc: 'Public free connection points.'
+    },
+    learn: {
+      title: 'Learn Language',
+      desc: 'Useful phrases for daily life.',
+      flashcards: 'Flashcards',
+      flip: 'See translation',
+      next: 'Next'
+    },
     onboarding: {
       title1: 'Welcome to Jaén Integra',
       desc1: 'Your safe guide for legalization and life in the Jaén province.',
@@ -278,27 +326,47 @@ export const translations = {
   },
   fr: {
     title: 'Jaén Integra',
-    dashboard: 'Tableau',
+    dashboard: 'Accueil',
     procedures: 'Démarches',
-    forms: 'Papiers',
-    family: 'Famille',
-    study: 'Études',
+    backpack: 'Sac à Dos',
+    backpackDesc: 'Vos documents prêts.',
+    community: 'Culture',
     directory: 'Aide',
-    emergency: 'URGENCE',
+    emergency: 'S.O.S',
     progress: 'Progrès',
     welcome: 'Bonjour, bienvenue',
     privacyNotice: 'Confidentialité : Vos données sont enregistrées uniquement sur ce mobile.',
     downloadForm: 'Télécharger PDF',
     fillOnline: 'Remplir en ligne',
-    pdfNote: 'Note: Utilisez Adobe Acrobat pour les formulaires PDF.',
-    emergencyTitle: 'Aide Urgente',
-    emergencyDesc: 'Numéros d\'urgence et aide juridique.',
-    legalHelp: 'Aide Juridique',
-    officialSources: 'Sources Officielles',
-    tipsTitle: 'RDV à Jaén',
     tipsDesc: 'Commissariat (Plaza Batallas) : Essayez le vendredi à 9h00.',
-    claveNote: 'Important: Demandez votre Cl@ve dès que vous avez le NIE.',
     disclaimer: 'Guide communautaire. Non officiel. Données locales uniquement.',
+    appointmentLight: {
+      title: 'Trafic de RDV',
+      desc: 'État actuel à Extranjería Jaén.',
+      updated: 'Mis à jour il y a 5 min',
+      green: 'Rendez-vous disponibles',
+      yellow: 'Peu de rendez-vous',
+      red: 'Pas de RDV aujourd\'hui',
+      report: 'Avez-vous vu des RDV aujourd\'hui ?',
+      thanks: 'Merci de l\'avoir signalé !'
+    },
+    currency: {
+      title: 'Convertisseur',
+      from: 'De',
+      to: 'À',
+      result: 'Valeur approx.'
+    },
+    wifi: {
+      title: 'WiFi Gratuit Jaén',
+      desc: 'Points de connexion publics gratuits.'
+    },
+    learn: {
+      title: 'Apprendre Langue',
+      desc: 'Phrases utiles au quotidien.',
+      flashcards: 'Cartes Flash',
+      flip: 'Voir traduction',
+      next: 'Suivant'
+    },
     onboarding: {
       title1: 'Bienvenue sur Jaén Integra',
       desc1: 'Votre guide sûr pour la régularisation et la vie à Jaén.',
@@ -418,9 +486,9 @@ export const translations = {
     title: 'خاين إنتيغرا',
     dashboard: 'الرئيسية',
     procedures: 'الإجراءات',
-    forms: 'الأوراق',
-    family: 'العائلة',
-    study: 'الدراسة',
+    backpack: 'حقيبتي',
+    backpackDesc: 'أوراقك جاهزة.',
+    community: 'الثقافة',
     directory: 'مساعدة',
     emergency: 'طوارئ',
     progress: 'تقدمك',
@@ -428,15 +496,35 @@ export const translations = {
     privacyNotice: 'الخصوصية: بياناتك محفوظة فقط على هذا الهاتف.',
     downloadForm: 'تحميل PDF',
     fillOnline: 'ملء أونلاين',
-    pdfNote: 'ملاحظة: استخدم Adobe Acrobat لملء النماذج.',
-    emergencyTitle: 'مساعدة عاجلة',
-    emergencyDesc: 'أرقام الطوارئ والمساعدة القانونية.',
-    legalHelp: 'مساعدة قانونية',
-    officialSources: 'مصادر رسمية',
-    tipsTitle: 'مواعيد خاين',
     tipsDesc: 'الشرطة (بلازا باتاياس): جرب أيام الجمعة الساعة 9 صباحاً.',
-    claveNote: 'مهم: اطلب Cl@ve فور حصولك على NIE.',
     disclaimer: 'دليل مجتمعي. غير رسمي. البيانات تبقى فقط على هاتفك.',
+    appointmentLight: {
+      title: 'إشارة المواعيد',
+      desc: 'الحالة الحالية في مكتب الأجانب بخاين.',
+      updated: 'تم التحديث منذ 5 دقائق',
+      green: 'توجد مواعيد متاحة',
+      yellow: 'مواعيد قليلة جداً',
+      red: 'لا توجد مواعيد اليوم',
+      report: 'هل رأيت مواعيد اليوم؟',
+      thanks: 'شكراً لإبلاغنا!'
+    },
+    currency: {
+      title: 'محول العملات',
+      from: 'من',
+      to: 'إلى',
+      result: 'القيمة التقريبية'
+    },
+    wifi: {
+      title: 'واي فاي مجاني',
+      desc: 'نقاط اتصال عامة مجانية في خاين.'
+    },
+    learn: {
+      title: 'تعلم اللغة',
+      desc: 'جمل مفيدة للحياة اليومية.',
+      flashcards: 'بطاقات تعليمية',
+      flip: 'انظر الترجمة',
+      next: 'التالي'
+    },
     onboarding: {
       title1: 'مرحباً بك في خاين إنتيغرا',
       desc1: 'دليلك الآمن للتسوية والحياة في مقاطعة خاين.',
@@ -554,27 +642,47 @@ export const translations = {
   },
   ro: {
     title: 'Jaén Integra',
-    dashboard: 'Panou',
+    dashboard: 'Acasă',
     procedures: 'Proceduri',
-    forms: 'Acte',
-    family: 'Familie',
-    study: 'Studii',
+    backpack: 'Rucsac',
+    backpackDesc: 'Actele tale gata.',
+    community: 'Cultură',
     directory: 'Ajutor',
-    emergency: 'URGENȚĂ',
+    emergency: 'S.O.S',
     progress: 'Progresul tău',
     welcome: 'Bună, bine ai venit',
     privacyNotice: 'Confidențialitate: Datele tale sunt salvate doar pe acest telefon.',
     downloadForm: 'Descarcă PDF',
     fillOnline: 'Completare Online',
-    pdfNote: 'Notă: Folosește Adobe Acrobat pentru formulare PDF.',
-    emergencyTitle: 'Ajutor Urgent',
-    emergencyDesc: 'Numere urgență și asistență juridică.',
-    legalHelp: 'Asistență Juridică',
-    officialSources: 'Surse Oficiale',
-    tipsTitle: 'Programări Jaén',
     tipsDesc: 'Poliția (Plaza Batallas): Încearcă vinerea la 9:00 AM.',
-    claveNote: 'Important: Cere Cl@ve imediat ce ai NIE.',
     disclaimer: 'Ghid comunitar. Neoficial. Datele sunt doar pe mobilul tău.',
+    appointmentLight: {
+      title: 'Semafor Programări',
+      desc: 'Starea actuală la Extranjería Jaén.',
+      updated: 'Actualizat acum 5 min',
+      green: 'Programări disponibile',
+      yellow: 'Puține programări',
+      red: 'Fără programări azi',
+      report: 'Ai văzut programări azi?',
+      thanks: 'Mulțumim pentru raportare!'
+    },
+    currency: {
+      title: 'Convertor Valutar',
+      from: 'De la',
+      to: 'La',
+      result: 'Valoare aprox.'
+    },
+    wifi: {
+      title: 'WiFi Gratuit Jaén',
+      desc: 'Puncte de conexiune publică gratuită.'
+    },
+    learn: {
+      title: 'Învață Limba',
+      desc: 'Fraze utile zi de zi.',
+      flashcards: 'Carduri Memorie',
+      flip: 'Vezi traducere',
+      next: 'Următorul'
+    },
     onboarding: {
       title1: 'Bun venit la Jaén Integra',
       desc1: 'Ghidul tău sigur pentru legalizare și viață în provincia Jaén.',
@@ -687,7 +795,7 @@ export const translations = {
       barcelona: 'Barcelona',
       valencia: 'Valencia',
       jaen: 'Jaén',
-      sevilla: 'Sevilla'
+      sevilla: 'Séville'
     }
   }
 };

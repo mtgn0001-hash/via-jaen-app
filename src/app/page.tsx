@@ -15,6 +15,9 @@ import { IntegrationTab } from "@/components/integration/IntegrationTab";
 import { TransportTab } from "@/components/transport/TransportTab";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { Onboarding } from "@/components/onboarding/Onboarding";
+import { DocumentChecklist } from "@/components/procedures/DocumentChecklist";
+import { WifiPoints } from "@/components/directory/WifiPoints";
+import { Flashcards } from "@/components/integration/Flashcards";
 import { Language, translations } from "@/lib/translations";
 import { AlertCircle, ShieldAlert } from "lucide-react";
 
@@ -43,7 +46,7 @@ export default function Home() {
 
   return (
     <div 
-      className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-24 overflow-x-hidden"
+      className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-32 overflow-x-hidden"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       {!progress.onboardingCompleted && (
@@ -63,31 +66,36 @@ export default function Home() {
         {activeTab === 'dashboard' && (
           <Dashboard lang={lang} setActiveTab={setActiveTab} />
         )}
+        
         {activeTab === 'procedures' && (
-          <ProcedureList 
-            lang={lang} 
-            toggleProcedure={toggleProcedure} 
-            completedProcedures={progress.procedures} 
-          />
+          <div className="space-y-8">
+            <DocumentChecklist lang={lang} />
+            <ProcedureList 
+              lang={lang} 
+              toggleProcedure={toggleProcedure} 
+              completedProcedures={progress.procedures} 
+            />
+          </div>
         )}
-        {activeTab === 'work' && (
-          <WorkTab lang={lang} />
+
+        {activeTab === 'community' && (
+          <div className="space-y-8">
+            <IntegrationTab lang={lang} />
+            <Flashcards lang={lang} />
+            <StudyUJA lang={lang} />
+            <WorkTab lang={lang} />
+          </div>
         )}
-        {activeTab === 'family' && (
-          <FamilyResources lang={lang} />
-        )}
-        {activeTab === 'study' && (
-          <StudyUJA lang={lang} />
-        )}
-        {activeTab === 'transport' && (
-          <TransportTab lang={lang} />
-        )}
-        {activeTab === 'integration' && (
-          <IntegrationTab lang={lang} />
-        )}
+
         {activeTab === 'directory' && (
-          <ResourceDirectory lang={lang} />
+          <div className="space-y-8">
+            <WifiPoints lang={lang} />
+            <ResourceDirectory lang={lang} />
+            <TransportTab lang={lang} />
+            <FamilyResources lang={lang} />
+          </div>
         )}
+
         {activeTab === 'emergency' && (
           <EmergencyTab lang={lang} />
         )}

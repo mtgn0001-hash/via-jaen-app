@@ -5,11 +5,12 @@ import { Language, translations } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArraigoCalculator } from "@/components/procedures/ArraigoCalculator";
+import { AppointmentStatus } from "./AppointmentStatus";
+import { CurrencyConverter } from "@/components/economy/CurrencyConverter";
 import { 
   Building2, 
   CreditCard, 
   Stethoscope, 
-  Briefcase, 
   ShieldCheck,
   ArrowRight,
   Info,
@@ -57,7 +58,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
               </div>
               <button 
                 onClick={() => setActiveTab('procedures')}
-                className="mt-6 flex items-center gap-2 text-sm font-bold bg-white text-primary px-4 py-2 rounded-full"
+                className="mt-6 flex items-center gap-2 text-sm font-bold bg-white text-primary px-4 py-2 rounded-full shadow-md"
               >
                 Trámites <ArrowRight className="h-4 w-4" />
               </button>
@@ -66,21 +67,27 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </div>
       </section>
 
-      {/* Arraigo Calculator Integrated into Dashboard */}
+      {/* Appointment Traffic Light Widget */}
+      <AppointmentStatus lang={lang} />
+
+      {/* Arraigo Calculator */}
       <ArraigoCalculator lang={lang} />
+
+      {/* Currency Converter Utility */}
+      <CurrencyConverter lang={lang} />
 
       <section className="grid grid-cols-1 gap-3">
         <Card 
-          className="bg-secondary/10 border-2 border-secondary/30 cursor-pointer hover:bg-secondary/20 transition-all"
-          onClick={() => setActiveTab('family')}
+          className="bg-secondary/10 border-2 border-secondary/30 cursor-pointer hover:bg-secondary/20 transition-all rounded-3xl"
+          onClick={() => setActiveTab('community')}
         >
           <CardContent className="p-4 flex items-center gap-4">
             <div className="bg-secondary p-3 rounded-xl">
               <Users className="h-6 w-6 text-white" />
             </div>
             <div className="flex-1">
-              <h4 className="font-bold text-sm text-secondary-foreground">{t.familyResources.title}</h4>
-              <p className="text-xs text-muted-foreground mt-1">Colegios, ayudas y salud infantil en Jaén.</p>
+              <h4 className="font-bold text-sm text-secondary-foreground">Cultura y Comunidad</h4>
+              <p className="text-xs text-muted-foreground mt-1">Glosario, tapas y vida en Jaén.</p>
             </div>
             <ArrowRight className="h-5 w-5 text-secondary" />
           </CardContent>
@@ -89,13 +96,13 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
 
       <section>
         <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1">
-          {t.procedures} Destacados
+          Guías Destacadas
         </h3>
         <div className="grid grid-cols-1 gap-3">
           {quickLinks.map((link) => (
             <Card 
               key={link.id} 
-              className="group hover:border-secondary transition-colors cursor-pointer border-none shadow-sm"
+              className="group hover:border-secondary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-white"
               onClick={() => setActiveTab('procedures')}
             >
               <CardContent className="p-4 flex items-center gap-4">
