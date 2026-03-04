@@ -3,6 +3,7 @@ export type UniversityInfo = {
   url: string;
   internationalUrl: string;
   phone: string;
+  campuses: { name: string; location: string }[];
 };
 
 export type ResourceInfo = {
@@ -55,7 +56,11 @@ export const provincesData: Record<string, ProvinceData> = {
       name: 'Universidad de Jaén (UJA)',
       url: 'https://www.ujaen.es',
       internationalUrl: 'https://www.ujaen.es/internacional',
-      phone: '+34 953 21 21 21'
+      phone: '+34 953 21 21 21',
+      campuses: [
+        { name: 'Campus Las Lagunillas', location: 'Jaén Capital' },
+        { name: 'Campus Científico-Tecnológico', location: 'Linares' }
+      ]
     },
     transport: {
       name: 'Consorcio de Transporte Metropolitano de Jaén',

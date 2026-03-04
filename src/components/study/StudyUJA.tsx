@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   GraduationCap, 
-  Map, 
   Languages, 
   Home, 
   Bus, 
@@ -13,11 +12,15 @@ import {
   Phone,
   FileCheck,
   MapPin,
-  Building2
+  Building2,
+  BookOpen,
+  Info,
+  Globe
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocalStorage } from "@/lib/store";
 import { provincesData } from "@/lib/provinces";
+import { SpeechButton } from "@/components/ui/SpeechButton";
 
 type StudyUJAProps = {
   lang: Language;
@@ -33,68 +36,83 @@ export function StudyUJA({ lang }: StudyUJAProps) {
   return (
     <div className="space-y-6 pb-20">
       <div className="space-y-2">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-primary">
-            <GraduationCap className="h-6 w-6 text-white" />
+        <div className="flex justify-between items-start">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-2xl bg-primary shadow-lg shadow-primary/20">
+              <GraduationCap className="h-7 w-7 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-black tracking-tight text-primary uppercase">{uni.name}</h2>
+              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Educación Superior en Jaén</p>
+            </div>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-primary">{uni.name}</h2>
+          <SpeechButton text={`${uni.name}. ${s.subtitle}`} language={lang} />
         </div>
-        <p className="text-muted-foreground text-sm">{s.subtitle}</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
-        <Button 
-          className="rounded-2xl h-14 flex items-center justify-between px-6 shadow-lg bg-primary text-white"
-          asChild
-        >
-          <a href={`tel:${uni.phone.replace(/\s/g, '')}`}>
+      <div className="grid grid-cols-1 gap-3">
+        <Card className="border-none bg-primary/5 rounded-3xl overflow-hidden shadow-sm">
+          <CardContent className="p-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Phone className="h-5 w-5" />
-              <span className="font-bold">{s.contactSecretariat}</span>
+              <div className="bg-white p-2.5 rounded-xl shadow-sm">
+                <Building2 className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm">Relaciones Internacionales</h4>
+                <p className="text-[10px] text-muted-foreground">Edificio C2 - Campus Las Lagunillas</p>
+              </div>
             </div>
-            <span className="text-[10px] font-mono opacity-80">{uni.phone}</span>
-          </a>
-        </Button>
+            <Button size="sm" className="rounded-xl h-10 px-4 font-bold" asChild>
+              <a href={`tel:${uni.phone.replace(/\s/g, '')}`}>
+                <Phone className="h-4 w-4 mr-2" /> Llamar
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
 
       <Tabs defaultValue="access" className="w-full">
-        <TabsList className="grid grid-cols-5 w-full h-12 bg-muted/50 p-1 rounded-2xl">
-          <TabsTrigger value="access" className="rounded-xl"><Building2 className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="homologation" className="rounded-xl"><FileCheck className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="housing" className="rounded-xl"><Home className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="transport" className="rounded-xl"><Bus className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="languages" className="rounded-xl"><Languages className="h-4 w-4" /></TabsTrigger>
+        <TabsList className="grid grid-cols-5 w-full h-14 bg-muted/50 p-1.5 rounded-[20px]">
+          <TabsTrigger value="access" className="rounded-[14px]"><BookOpen className="h-4 w-4" /></TabsTrigger>
+          <TabsTrigger value="homologation" className="rounded-[14px]"><FileCheck className="h-4 w-4" /></TabsTrigger>
+          <TabsTrigger value="languages" className="rounded-[14px]"><Languages className="h-4 w-4" /></TabsTrigger>
+          <TabsTrigger value="housing" className="rounded-[14px]"><Home className="h-4 w-4" /></TabsTrigger>
+          <TabsTrigger value="transport" className="rounded-[14px]"><Bus className="h-4 w-4" /></TabsTrigger>
         </TabsList>
 
         <TabsContent value="access" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white overflow-hidden">
+          <Card className="border-none shadow-sm bg-white overflow-hidden rounded-3xl">
             <CardHeader className="bg-primary/5 pb-4">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Building2 className="h-5 w-5" />
-                <CardTitle className="text-lg">{s.access}</CardTitle>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2 font-bold text-primary">
+                  <Building2 className="h-5 w-5" />
+                  <CardTitle className="text-lg">{s.access}</CardTitle>
+                </div>
+                <SpeechButton text={`${s.access}. ${s.accessDesc}`} language={lang} />
               </div>
-              <CardDescription>{s.accessDesc}</CardDescription>
+              <CardDescription className="text-xs font-medium">{s.accessDesc}</CardDescription>
             </CardHeader>
             <CardContent className="pt-4 space-y-4">
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <h4 className="font-bold text-sm mb-1">Preinscripción DUA</h4>
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
+                <h4 className="font-bold text-sm">Distrito Único Andaluz (DUA)</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Todo el acceso universitario en Andalucía se gestiona a través del Distrito Único Andaluz.
+                  Para estudiar en la UJA, debes solicitar plaza a través del portal de la Junta de Andalucía.
                 </p>
-                <Button variant="link" className="p-0 h-auto text-xs font-bold mt-2 text-primary" asChild>
+                <Button variant="outline" className="w-full rounded-xl h-11 font-bold text-primary border-primary/20 bg-white" asChild>
                   <a href="https://www.juntadeandalucia.es/economiaconocimientoempresasyuniversidad/sguit/" target="_blank">
-                    Ir al Distrito Único Andaluz <ExternalLink className="h-3 w-3 ml-1" />
+                    Ir al Portal DUA <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
               </div>
+
               <div className="grid grid-cols-2 gap-2">
-                <div className="flex items-center gap-2 p-2 px-3 rounded-lg border text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-white">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  {s.degree}
+                <div className="p-3 rounded-xl border-2 border-primary/5 bg-white text-center">
+                  <p className="text-[10px] font-black uppercase text-muted-foreground mb-1">Grados</p>
+                  <span className="text-sm font-bold text-primary">Preinscripción Junio/Julio</span>
                 </div>
-                <div className="flex items-center gap-2 p-2 px-3 rounded-lg border text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-white">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  {s.master}
+                <div className="p-3 rounded-xl border-2 border-primary/5 bg-white text-center">
+                  <p className="text-[10px] font-black uppercase text-muted-foreground mb-1">Máster</p>
+                  <span className="text-sm font-bold text-primary">Varias Fases</span>
                 </div>
               </div>
             </CardContent>
@@ -102,22 +120,59 @@ export function StudyUJA({ lang }: StudyUJAProps) {
         </TabsContent>
 
         <TabsContent value="homologation" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white">
-            <CardContent className="p-4 space-y-4">
+          <Card className="border-none shadow-sm bg-white rounded-3xl">
+            <CardContent className="p-6 space-y-4">
               <div className="flex gap-4 items-start">
-                <div className="bg-amber-50 p-3 rounded-2xl">
-                  <FileCheck className="h-6 w-6 text-amber-600" />
+                <div className="bg-amber-50 p-3.5 rounded-2xl shadow-inner">
+                  <FileCheck className="h-7 w-7 text-amber-600" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-sm">{s.homologation}</h4>
-                  <p className="text-xs text-muted-foreground mt-1">
+                <div className="space-y-1">
+                  <h4 className="font-bold text-lg leading-tight">{s.homologation}</h4>
+                  <p className="text-xs text-muted-foreground">
                     {s.homologationDesc}
                   </p>
                 </div>
               </div>
-              <Button className="w-full rounded-xl gap-2 h-11 bg-slate-800" asChild>
+
+              <div className="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Info className="h-4 w-4 text-primary" />
+                  <span className="text-xs font-bold">Documentos necesarios:</span>
+                </div>
+                <ul className="text-[10px] space-y-1 text-muted-foreground font-medium">
+                  <li>• Título oficial con Apostilla de la Haya.</li>
+                  <li>• Certificado de calificaciones (notas).</li>
+                  <li>• Traducción jurada (si no está en español).</li>
+                </ul>
+              </div>
+
+              <Button className="w-full rounded-2xl h-12 gap-2 bg-slate-900" asChild>
                 <a href="https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/catalogo/gestion-titulos/estudios-universitarios/titulos-extranjeros/equivalencia-notas-medias.html" target="_blank">
-                  {s.equivalence} <ExternalLink className="h-4 w-4" />
+                  Web de Equivalencias <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="languages" className="space-y-4 pt-4">
+          <Card className="border-none shadow-sm bg-white rounded-3xl overflow-hidden">
+            <CardHeader className="bg-green-50/50 pb-4">
+              <div className="flex items-center gap-2 font-bold text-green-700">
+                <Globe className="h-5 w-5" />
+                <CardTitle className="text-lg">{s.languages}</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+              <div className="space-y-2">
+                <h4 className="font-bold text-sm">Centro de Estudios Avanzados en Lenguas Modernas (CEALM)</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Ofrecen cursos específicos de español para extranjeros y otros idiomas para la comunidad universitaria.
+                </p>
+              </div>
+              <Button className="w-full rounded-2xl h-12 gap-2" variant="secondary" asChild>
+                <a href="https://www.ujaen.es/servicios/cealm/" target="_blank">
+                  Ver Cursos de Idiomas <ExternalLink className="h-4 w-4 ml-1" />
                 </a>
               </Button>
             </CardContent>
@@ -126,44 +181,71 @@ export function StudyUJA({ lang }: StudyUJAProps) {
 
         <TabsContent value="housing" className="space-y-4 pt-4">
           <div className="grid gap-3">
-            <Card className="border-none shadow-sm bg-white">
-              <CardContent className="p-4 flex gap-4">
-                <MapPin className="h-5 w-5 text-primary shrink-0" />
+            <Card className="border-none shadow-sm bg-white rounded-3xl">
+              <CardContent className="p-5 flex gap-4">
+                <div className="bg-primary/10 p-3 rounded-2xl h-fit">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
                 <div className="space-y-1">
-                  <h4 className="text-sm font-bold">Residencias Universitarias</h4>
-                  <p className="text-xs text-muted-foreground">Consulta las opciones oficiales de alojamiento de la {uni.name}.</p>
+                  <h4 className="text-sm font-bold">Residencias Universitarias UJA</h4>
+                  <p className="text-xs text-muted-foreground">Domingo Savio y Apartamentos Universitarios en el propio campus.</p>
                 </div>
               </CardContent>
             </Card>
-            <Button variant="outline" size="sm" className="w-full rounded-xl h-12" asChild>
-              <a href={uni.url} target="_blank">Web de la Universidad <ExternalLink className="h-3 w-3 ml-1" /></a>
-            </Button>
+            
+            <div className="p-4 bg-muted/30 rounded-2xl border-2 border-dashed flex flex-col items-center text-center gap-2">
+              <Home className="h-6 w-6 text-muted-foreground" />
+              <p className="text-xs font-bold">Buscador de Alojamiento Externo</p>
+              <p className="text-[10px] text-muted-foreground">La UJA dispone de una bolsa de pisos para estudiantes en los barrios de El Valle y El Bulevar.</p>
+              <Button variant="link" className="h-auto p-0 text-primary font-black uppercase text-[10px] tracking-widest" asChild>
+                <a href={uni.url} target="_blank">Consultar Bolsa</a>
+              </Button>
+            </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="languages" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white">
-            <CardContent className="p-4 space-y-4">
-              <div className="flex gap-4 items-start">
-                <div className="bg-green-50 p-3 rounded-2xl">
-                  <Languages className="h-6 w-6 text-green-600" />
+        <TabsContent value="transport" className="space-y-4 pt-4">
+          <Card className="border-none shadow-sm bg-white rounded-3xl overflow-hidden">
+            <CardContent className="p-6 space-y-4">
+              <div className="flex gap-4 items-center">
+                <div className="bg-slate-100 p-4 rounded-2xl">
+                  <Bus className="h-7 w-7 text-slate-700" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">Español para Extranjeros</h4>
+                  <h4 className="font-bold text-sm">{s.transport}</h4>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Cursos de lengua española para estudiantes internacionales.
+                    Usa la tarjeta del Consorcio o el carnet UJA para descuentos en los buses urbanos (Línea 4, 7, 12, 14, 17).
                   </p>
                 </div>
               </div>
-              <Button className="w-full rounded-xl h-11" variant="secondary" asChild>
-                <a href={uni.internationalUrl} target="_blank">
-                  Relaciones Internacionales <ExternalLink className="h-4 w-4 ml-2" />
-                </a>
-              </Button>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2 border rounded-xl text-center">
+                  <p className="text-[10px] font-black uppercase text-muted-foreground">Línea 4</p>
+                  <p className="text-xs font-bold">UJA - Centro</p>
+                </div>
+                <div className="p-2 border rounded-xl text-center">
+                  <p className="text-[10px] font-black uppercase text-muted-foreground">Línea 7</p>
+                  <p className="text-xs font-bold">UJA - Bulevar</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
+
+      <section className="bg-primary p-6 rounded-[32px] text-white shadow-xl shadow-primary/20">
+        <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
+          <Globe className="h-5 w-5" /> ¿Eres estudiante internacional?
+        </h3>
+        <p className="text-xs text-white/80 leading-relaxed mb-4">
+          El Edificio C2 del Campus Las Lagunillas es tu punto de referencia para cualquier duda sobre movilidad, visados de estudios y becas.
+        </p>
+        <Button className="w-full bg-white text-primary hover:bg-white/90 rounded-2xl h-12 font-bold" asChild>
+          <a href={uni.internationalUrl} target="_blank">
+            Web de Internacionalización <ExternalLink className="h-4 w-4 ml-2" />
+          </a>
+        </Button>
+      </section>
     </div>
   );
 }
