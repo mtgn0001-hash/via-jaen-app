@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bus, CreditCard, ExternalLink, Info, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SpeechButton } from "@/components/ui/SpeechButton";
+import { useLocalStorage } from "@/lib/store";
+import { provincesData } from "@/lib/provinces";
 
 type TransportTabProps = {
   lang: Language;
@@ -13,16 +15,18 @@ type TransportTabProps = {
 
 export function TransportTab({ lang }: TransportTabProps) {
   const t = translations[lang];
-  const tr = t.transport;
+  const { progress } = useLocalStorage();
+  const currentProvince = provincesData[progress.province] || provincesData.jaen;
+  const transport = currentProvince.transport;
 
   return (
     <div className="space-y-6 pb-20">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <h2 className="text-2xl font-bold">{tr.title}</h2>
-          <p className="text-sm text-muted-foreground">{tr.subtitle}</p>
+          <h2 className="text-2xl font-bold">{t.transport.title}</h2>
+          <p className="text-sm text-muted-foreground">{t.transport.subtitle} en <span className="font-black text-primary">{currentProvince.name}</span></p>
         </div>
-        <SpeechButton text={`${tr.title}. ${tr.subtitle}`} language={lang} />
+        <SpeechButton text={`${t.transport.title}. ${currentProvince.name}`} language={lang} />
       </div>
 
       <Card className="border-none shadow-md overflow-hidden bg-white">
@@ -30,18 +34,18 @@ export function TransportTab({ lang }: TransportTabProps) {
           <div className="flex justify-between items-center">
             <CardTitle className="text-lg flex items-center gap-2">
               <Bus className="h-5 w-5 text-primary" />
-              {tr.consortiumTitle}
+              {transport.name}
             </CardTitle>
-            <SpeechButton text={tr.consortiumDesc} language={lang} />
+            <SpeechButton text={transport.desc} language={lang} />
           </div>
         </CardHeader>
         <CardContent className="pt-4 space-y-4">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {tr.consortiumDesc}
+            {transport.desc}
           </p>
           <Button className="w-full rounded-xl h-12 gap-2" asChild>
-            <a href="https://jaen.ctas.cti.es/" target="_blank" rel="noopener noreferrer">
-              {tr.webLink} <ExternalLink className="h-4 w-4" />
+            <a href={transport.url} target="_blank" rel="noopener noreferrer">
+              {t.transport.webLink} <ExternalLink className="h-4 w-4" />
             </a>
           </Button>
         </CardContent>
@@ -55,11 +59,11 @@ export function TransportTab({ lang }: TransportTabProps) {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <h4 className="font-bold text-sm text-blue-900">{tr.cardTitle}</h4>
-                <SpeechButton text={tr.cardDesc} language={lang} />
+                <h4 className="font-bold text-sm text-blue-900">{t.transport.cardTitle}</h4>
+                <SpeechButton text={t.transport.cardDesc} language={lang} />
               </div>
               <p className="text-xs text-blue-800/70 leading-relaxed">
-                {tr.cardDesc}
+                {t.transport.cardDesc}
               </p>
             </div>
           </CardContent>
@@ -72,11 +76,11 @@ export function TransportTab({ lang }: TransportTabProps) {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <h4 className="font-bold text-sm text-slate-900">{tr.pointsTitle}</h4>
-                <SpeechButton text={tr.pointsDesc} language={lang} />
+                <h4 className="font-bold text-sm text-slate-900">{t.transport.pointsTitle}</h4>
+                <SpeechButton text={t.transport.pointsDesc} language={lang} />
               </div>
               <p className="text-xs text-slate-800/70 leading-relaxed">
-                {tr.pointsDesc}
+                {t.transport.pointsDesc}
               </p>
             </div>
           </CardContent>
@@ -86,7 +90,7 @@ export function TransportTab({ lang }: TransportTabProps) {
       <section className="bg-amber-50 p-4 rounded-2xl border border-amber-200 flex gap-3">
         <Info className="h-5 w-5 text-amber-500 shrink-0" />
         <p className="text-[10px] text-amber-700 font-medium">
-          {tr.transportTip}
+          {t.transport.transportTip}
         </p>
       </section>
     </div>
