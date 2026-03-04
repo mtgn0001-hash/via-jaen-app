@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* TEMA VIBRANTE LAVANDA Y CREMA - MORADO PRO 2026 */
+    /* TEMA MORADO (DEFAULT) */
     --background: 260 30% 98%;
     --foreground: 263 50% 15%;
     --card: 260 30% 99%;
@@ -37,12 +36,73 @@
     --sidebar-ring: 262 83% 58%;
   }
 
+  [data-theme='purple'] {
+    --primary: 262 83% 58%;
+    --ring: 262 83% 58%;
+  }
+
+  [data-theme='olive'] {
+    --primary: 84 31% 24%;
+    --ring: 84 31% 24%;
+    --sidebar-primary: 84 31% 24%;
+  }
+
+  [data-theme='red'] {
+    --primary: 346 84% 50%;
+    --ring: 346 84% 50%;
+    --sidebar-primary: 346 84% 50%;
+  }
+
+  [data-theme='ocean'] {
+    --primary: 221 83% 53%;
+    --ring: 221 83% 53%;
+    --sidebar-primary: 221 83% 53%;
+  }
+
   [data-theme='night'] {
     --background: 260 25% 8%;
     --foreground: 260 10% 90%;
     --card: 260 25% 12%;
+    --card-foreground: 260 10% 90%;
+    --popover: 260 25% 12%;
+    --popover-foreground: 260 10% 90%;
     --primary: 262 80% 65%;
+    --secondary: 260 25% 18%;
+    --secondary-foreground: 260 10% 95%;
+    --muted: 260 25% 15%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 260 25% 18%;
+    --accent-foreground: 260 10% 95%;
     --border: 260 20% 20%;
+    --input: 260 20% 20%;
+    --ring: 262 80% 65%;
+    
+    --sidebar-background: 260 25% 10% / 0.9;
+    --sidebar-foreground: 260 10% 90%;
+    --sidebar-primary: 262 80% 65%;
+    --sidebar-border: 260 20% 20%;
+  }
+
+  [data-theme='contrast'] {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 20%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
   }
 }
 

@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from "react";
@@ -41,12 +40,12 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
         className={cn("relative z-10 transition-all duration-500 group-hover:scale-110", fillColors[variant])}
         style={{ width: size * 0.6, height: size * 0.6 }}
       >
-        {/* Silueta Rectilínea de la Catedral de Jaén (Arquitectónica) */}
+        {/* Silueta Rectilínea de la Catedral de Jaén */}
         <path 
           d="M10 85h80V35H75V15h-12v20H55v5H45v-5h-7V15H26v20H10v50zM42 75h16v10H42V75z" 
           fill="currentColor"
         />
-        {/* Detalles de ventanales negativos para realismo minimalista */}
+        {/* Detalles negativos */}
         <rect x="18" y="45" width="6" height="4" fill="white" fillOpacity="0.4" />
         <rect x="76" y="45" width="6" height="4" fill="white" fillOpacity="0.4" />
         <rect x="18" y="55" width="6" height="4" fill="white" fillOpacity="0.3" />
