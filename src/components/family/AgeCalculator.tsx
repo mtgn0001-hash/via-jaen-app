@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Baby, GraduationCap, Calendar, Info } from "lucide-react";
 
 type AgeCalculatorProps = {
@@ -17,7 +16,7 @@ export function AgeCalculator({ lang }: AgeCalculatorProps) {
   const [age, setAge] = useState<string>("");
 
   const getStage = (ageNum: number) => {
-    if (ageNum < 0) return null;
+    if (isNaN(ageNum) || ageNum < 0) return null;
     if (ageNum < 3) return { stage: "Primer Ciclo Infantil (Guardería)", action: "Solicitud en Abril/Mayo", icon: Baby, color: "bg-blue-500" };
     if (ageNum >= 3 && ageNum <= 5) return { stage: "Educación Infantil", action: "Matriculación en MARZO", icon: GraduationCap, color: "bg-green-500" };
     if (ageNum >= 6 && ageNum <= 11) return { stage: "Educación Primaria (Obligatoria)", action: "Matriculación en MARZO", icon: GraduationCap, color: "bg-primary" };

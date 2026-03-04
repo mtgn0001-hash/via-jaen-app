@@ -10,7 +10,8 @@ import {
   Briefcase, 
   ShieldCheck,
   ArrowRight,
-  Info
+  Info,
+  Users
 } from "lucide-react";
 
 type DashboardProps = {
@@ -63,6 +64,24 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </div>
       </section>
 
+      <section className="grid grid-cols-1 gap-3">
+        <Card 
+          className="bg-secondary/10 border-2 border-secondary/30 cursor-pointer hover:bg-secondary/20 transition-all"
+          onClick={() => setActiveTab('family')}
+        >
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="bg-secondary p-3 rounded-xl">
+              <Users className="h-6 w-6 text-white" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-bold text-sm text-secondary-foreground">{t.familyResources.title}</h4>
+              <p className="text-xs text-muted-foreground mt-1">Colegios, ayudas y salud infantil en Jaén.</p>
+            </div>
+            <ArrowRight className="h-5 w-5 text-secondary" />
+          </CardContent>
+        </Card>
+      </section>
+
       <section>
         <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2">
           {t.procedures} Destacados
@@ -93,11 +112,11 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </div>
       </section>
 
-      <section className="bg-secondary/10 p-4 rounded-2xl border border-secondary/20">
-        <h3 className="font-bold text-secondary mb-2 flex items-center gap-2">
+      <section className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        <h3 className="font-bold text-slate-700 mb-2 flex items-center gap-2">
           <Info className="h-4 w-4" /> {t.tipsTitle}
         </h3>
-        <p className="text-sm text-foreground/80 leading-relaxed">
+        <p className="text-sm text-slate-600 leading-relaxed">
           {t.tipsDesc}
         </p>
       </section>
