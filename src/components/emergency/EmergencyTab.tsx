@@ -17,7 +17,7 @@ export function EmergencyTab({ lang }: EmergencyTabProps) {
 
   const contacts = [
     { title: 'Emergencias 112', number: '112', icon: ShieldAlert, color: 'bg-destructive' },
-    { title: 'Cruz Roja Española', number: '900 221 122', icon: HeartHandshake, color: 'bg-red-500' },
+    { title: 'Cruz Roja Española', number: '953 251 540', icon: HeartHandshake, color: 'bg-red-500' },
     { title: 'Asistencia Legal CEAR', number: '915 980 535', icon: Gavel, color: 'bg-primary' },
   ];
 
@@ -49,12 +49,12 @@ export function EmergencyTab({ lang }: EmergencyTabProps) {
                 </div>
                 <div className="text-left">
                   <p className="font-black text-xl leading-none text-slate-900 uppercase tracking-tight">{contact.title}</p>
-                  <p className="text-2xl font-black text-primary mt-2 tracking-tighter flex items-center gap-2">
-                    <span className="bg-primary/10 px-2 py-0.5 rounded-lg">{contact.number}</span>
+                  <p className="text-2xl font-black text-emerald-600 mt-2 tracking-tighter flex items-center gap-2">
+                    <span className="bg-emerald-50 px-3 py-1 rounded-xl border border-emerald-100">{contact.number}</span>
                   </p>
                 </div>
               </div>
-              <div className="bg-primary p-2 rounded-full shadow-md">
+              <div className="bg-emerald-600 p-3 rounded-full shadow-lg">
                 <Phone className="h-6 w-6 text-white" />
               </div>
             </a>

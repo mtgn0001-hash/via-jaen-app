@@ -212,23 +212,23 @@ export function AppSidebar({
         </SidebarContent>
 
         <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-4">
-          <div className="flex flex-col gap-2 px-2">
+          <div className="flex flex-col gap-2 px-2 w-full">
             <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
-              <Palette className="h-3 w-3" /> Personalización
+              <Palette className="h-3 w-3" /> Tema de Color
             </p>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between w-full px-1">
               {themes.map((theme) => (
                 <button
                   key={theme.id}
                   onClick={() => setTheme(theme.id)}
                   className={cn(
-                    "h-7 w-7 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95 shadow-sm",
+                    "h-8 w-8 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95 shadow-lg",
                     theme.color,
-                    currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2 scale-110" : "opacity-70"
+                    currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2 scale-110 z-10" : "opacity-80 grayscale-[0.3]"
                   )}
                   title={theme.label}
                 >
-                  {currentTheme === theme.id && <Check className={cn("h-3.5 w-3.5", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
+                  {currentTheme === theme.id && <Check className={cn("h-4 w-4", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
                 </button>
               ))}
             </div>

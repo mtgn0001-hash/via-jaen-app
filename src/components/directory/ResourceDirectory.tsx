@@ -121,7 +121,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
               </p>
               
               <div className="flex gap-4">
-                <Button asChild size="lg" className="flex-1 rounded-[1.5rem] h-16 gap-3 font-black text-lg shadow-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all">
+                <Button asChild size="lg" className="flex-1 rounded-[1.5rem] h-16 gap-3 font-black text-lg shadow-xl bg-emerald-600 hover:bg-emerald-700 text-white active:scale-95 transition-all">
                   <a href={`tel:${res.phone.replace(/\s/g, '')}`}>
                     <Phone className="h-6 w-6" /> {res.phone}
                   </a>

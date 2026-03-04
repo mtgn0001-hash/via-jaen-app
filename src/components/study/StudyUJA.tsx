@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -62,7 +63,7 @@ export function StudyUJA({ lang }: StudyUJAProps) {
                 <p className="text-[10px] text-muted-foreground">Edificio C2 - Campus Las Lagunillas</p>
               </div>
             </div>
-            <Button size="sm" className="rounded-xl h-10 px-4 font-bold" asChild>
+            <Button size="sm" className="rounded-xl h-10 px-4 font-black bg-emerald-600 hover:bg-emerald-700 text-white shadow-md active:scale-95" asChild>
               <a href={`tel:${uni.phone.replace(/\s/g, '')}`}>
                 <Phone className="h-4 w-4 mr-2" /> Llamar
               </a>

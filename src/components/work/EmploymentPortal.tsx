@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -138,7 +139,7 @@ ${cvData.skills}
                           </div>
                           <a 
                             href={`tel:${s.phone.replace(/\s/g, '')}`}
-                            className="bg-primary text-primary-foreground px-4 py-2 rounded-xl text-[11px] font-black flex items-center gap-2 shadow-sm active:scale-95 transition-transform"
+                            className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-[11px] font-black flex items-center gap-2 shadow-lg active:scale-95 transition-transform"
                           >
                             <Phone className="h-3 w-3" /> {s.phone}
                           </a>
