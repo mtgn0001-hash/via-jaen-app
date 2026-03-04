@@ -9,7 +9,9 @@ import { ProcedureList } from "@/components/procedures/ProcedureList";
 import { FormDownloader } from "@/components/forms/FormDownloader";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
-import { Language } from "@/lib/translations";
+import { FamilyResources } from "@/components/family/FamilyResources";
+import { Language, translations } from "@/lib/translations";
+import { AlertCircle } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -25,6 +27,7 @@ export default function Home() {
 
   const setLang = (lang: Language) => updateProgress({ language: lang });
   const lang = (progress.language as Language) || 'es';
+  const t = translations[lang];
 
   return (
     <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-20 overflow-x-hidden">
@@ -45,6 +48,9 @@ export default function Home() {
             completedProcedures={progress.procedures} 
           />
         )}
+        {activeTab === 'family' && (
+          <FamilyResources lang={lang} />
+        )}
         {activeTab === 'forms' && (
           <FormDownloader lang={lang} />
         )}
@@ -54,6 +60,15 @@ export default function Home() {
         {activeTab === 'emergency' && (
           <EmergencyTab lang={lang} />
         )}
+
+        <section className="mt-8 mb-4 px-2">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex gap-3">
+            <AlertCircle className="h-5 w-5 text-slate-400 shrink-0" />
+            <p className="text-[10px] text-slate-500 leading-normal">
+              {t.disclaimer}
+            </p>
+          </div>
+        </section>
       </main>
 
       <Navbar 

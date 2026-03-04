@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, ClipboardList, FileText, MapPin, ShieldAlert } from "lucide-react";
+import { Home, ClipboardList, FileText, MapPin, ShieldAlert, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Language, translations } from "@/lib/translations";
 
@@ -16,6 +16,7 @@ export function Navbar({ activeTab, setActiveTab, lang }: NavbarProps) {
   const items = [
     { id: 'dashboard', icon: Home, label: t.dashboard },
     { id: 'procedures', icon: ClipboardList, label: t.procedures },
+    { id: 'family', icon: Users, label: t.family },
     { id: 'forms', icon: FileText, label: t.forms },
     { id: 'directory', icon: MapPin, label: t.directory },
     { id: 'emergency', icon: ShieldAlert, label: t.emergency, color: 'text-destructive' },
@@ -32,13 +33,13 @@ export function Navbar({ activeTab, setActiveTab, lang }: NavbarProps) {
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               className={cn(
-                "flex flex-col items-center justify-center w-full h-full transition-all gap-1",
+                "flex flex-col items-center justify-center w-full h-full transition-all gap-1 relative",
                 isActive ? "text-primary scale-105" : "text-muted-foreground",
                 item.color
               )}
             >
               <Icon className={cn("h-6 w-6", isActive && "stroke-[2.5px]")} />
-              <span className="text-[10px] font-medium leading-none">{item.label}</span>
+              <span className="text-[9px] font-medium leading-none">{item.label}</span>
               {isActive && (
                 <div className="absolute top-0 w-8 h-1 bg-primary rounded-full transition-all" />
               )}
