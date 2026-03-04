@@ -38,11 +38,12 @@ export function Header({ lang, setLang, completion }: HeaderProps) {
               <Globe className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="max-h-[300px] overflow-y-auto">
             <DropdownMenuItem onClick={() => setLang('es')}>Español</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLang('fr')}>Français</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('ro')}>Română</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

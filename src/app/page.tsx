@@ -10,6 +10,7 @@ import { FormDownloader } from "@/components/forms/FormDownloader";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
 import { FamilyResources } from "@/components/family/FamilyResources";
+import { StudyUJA } from "@/components/study/StudyUJA";
 import { Language, translations } from "@/lib/translations";
 import { AlertCircle } from "lucide-react";
 
@@ -50,6 +51,9 @@ export default function Home() {
         )}
         {activeTab === 'family' && (
           <FamilyResources lang={lang} />
+        )}
+        {activeTab === 'study' && (
+          <StudyUJA lang={lang} />
         )}
         {activeTab === 'forms' && (
           <FormDownloader lang={lang} />
