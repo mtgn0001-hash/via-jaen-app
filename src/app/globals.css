@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,29 +25,27 @@
     --border: 262 20% 90%;
     --input: 262 20% 90%;
     --ring: 262 83% 58%;
-    --radius: 1.25rem;
+    --radius: 1.5rem;
 
-    --sidebar-background: 260 20% 99%;
+    --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 263 40% 15%;
     --sidebar-primary: 262 83% 58%;
     --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 262 20% 94%;
+    --sidebar-accent: 262 20% 96%;
     --sidebar-accent-foreground: 262 83% 58%;
-    --sidebar-border: 262 10% 90%;
+    --sidebar-border: 262 10% 92%;
     --sidebar-ring: 262 83% 58%;
   }
 
   [data-theme='olive'] {
     --background: 45 30% 98%;
     --foreground: 85 40% 10%;
-    --primary: 85 28% 25%; /* Olive #3D5229 */
+    --primary: 85 28% 25%;
     --primary-foreground: 45 30% 98%;
     --secondary: 85 20% 90%;
     --accent: 85 30% 85%;
     --border: 85 10% 85%;
     --ring: 85 28% 25%;
-    --sidebar-background: 45 20% 99%;
-    --sidebar-primary: 85 28% 25%;
   }
 
   [data-theme='night'] {
@@ -71,15 +70,14 @@
     --ring: 262 70% 60%;
     --sidebar-background: 240 10% 5%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-border: 240 10% 12%;
   }
 
   [data-theme='contrast'] {
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
-    --primary: 220 100% 50%; /* High contrast blue */
+    --primary: 220 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 50 100% 50%; /* High contrast yellow */
+    --secondary: 50 100% 50%;
     --secondary-foreground: 0 0% 0%;
     --border: 0 0% 0%;
     --input: 0 0% 0%;
@@ -95,21 +93,17 @@
     --secondary: 210 40% 94%;
     --accent: 214 32% 91%;
     --ring: 221 83% 53%;
-    --sidebar-background: 210 40% 99%;
-    --sidebar-primary: 221 83% 53%;
   }
 
   [data-theme='red'] {
     --background: 0 20% 98%;
     --foreground: 0 40% 10%;
-    --primary: 0 72% 51%; /* Red #E11D48 */
+    --primary: 0 72% 51%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 20% 94%;
     --accent: 0 30% 92%;
     --border: 0 20% 90%;
     --ring: 0 72% 51%;
-    --sidebar-background: 0 20% 99%;
-    --sidebar-primary: 0 72% 51%;
   }
 }
 
@@ -118,21 +112,17 @@
     @apply border-border transition-colors duration-300;
   }
   body {
-    @apply bg-background text-foreground font-body;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-headline;
+    @apply bg-background text-foreground font-body antialiased;
   }
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-[dir="rtl"] {
-  text-align: right;
+[dir="rtl"] { text-align: right; }
+
+@media print {
+  .print\:hidden { display: none !important; }
+  .print\:p-0 { padding: 0 !important; }
+  body { background: white !important; }
 }
