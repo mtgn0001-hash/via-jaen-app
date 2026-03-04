@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArraigoCalculator } from "@/components/procedures/ArraigoCalculator";
 import { AppointmentStatus } from "./AppointmentStatus";
+import { AppointmentBanner } from "./AppointmentBanner";
 import { CurrencyConverter } from "@/components/economy/CurrencyConverter";
 import { 
   Building2, 
@@ -67,6 +68,9 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           </CardContent>
         </Card>
       </section>
+
+      {/* Smart Appointment Banner */}
+      <AppointmentBanner lang={lang} />
 
       {/* Main Navigation Grid */}
       <section>

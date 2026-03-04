@@ -1,15 +1,17 @@
+
 "use client"
 
-import { Share2, Info, Mic, MapPin } from "lucide-react";
+import { Share2, Info, Mic, MapPin, WifiOff, Cloud } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { QRCodeShare } from "@/components/ui/QRCodeShare";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocalStorage } from "@/lib/store";
 import { provincesData } from "@/lib/provinces";
+import { Badge } from "@/components/ui/badge";
 
 type HeaderProps = {
   lang: Language;
@@ -20,7 +22,19 @@ export function Header({ lang, completion }: HeaderProps) {
   const t = translations[lang];
   const { progress } = useLocalStorage();
   const [showQR, setShowQR] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const handleStatus = () => setIsOffline(!navigator.onLine);
+    window.addEventListener('online', handleStatus);
+    window.addEventListener('offline', handleStatus);
+    handleStatus();
+    return () => {
+      window.removeEventListener('online', handleStatus);
+      window.removeEventListener('offline', handleStatus);
+    };
+  }, []);
 
   const handleVoiceCommand = () => {
     toast({
@@ -46,10 +60,15 @@ export function Header({ lang, completion }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="h-10 rounded-xl px-3 flex items-center gap-2 border border-primary/10 bg-primary/5">
-            <MapPin className="h-4 w-4 text-primary" />
-            <span className="text-xs font-bold text-primary">{currentProvince.name}</span>
-          </div>
+          {isOffline ? (
+            <Badge variant="outline" className="h-10 rounded-xl px-3 flex items-center gap-2 border-orange-200 bg-orange-50 text-orange-700 font-bold text-[10px]">
+              <WifiOff className="h-3 w-3" /> OFFLINE
+            </Badge>
+          ) : (
+            <Badge variant="outline" className="h-10 rounded-xl px-3 flex items-center gap-2 border-emerald-200 bg-emerald-50 text-emerald-700 font-bold text-[10px]">
+              <Cloud className="h-3 w-3" /> ONLINE
+            </Badge>
+          )}
 
           <Button 
             variant="ghost" 

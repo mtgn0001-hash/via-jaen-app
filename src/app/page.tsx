@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -16,12 +17,14 @@ import { TransportTab } from "@/components/transport/TransportTab";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { Onboarding } from "@/components/onboarding/Onboarding";
 import { DocumentChecklist } from "@/components/procedures/DocumentChecklist";
+import { FormVisualGuide } from "@/components/procedures/FormVisualGuide";
 import { WifiPoints } from "@/components/directory/WifiPoints";
 import { Flashcards } from "@/components/integration/Flashcards";
 import { Language, translations } from "@/lib/translations";
 import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { AlertCircle, ShieldAlert } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -53,7 +56,7 @@ export default function Home() {
   return (
     <SidebarProvider>
       <div 
-        className="flex min-h-screen bg-background w-full"
+        className="flex min-h-screen bg-background w-full relative"
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         <AppSidebar 
@@ -86,6 +89,7 @@ export default function Home() {
             {activeTab === 'procedures' && (
               <div className="space-y-8">
                 <DocumentChecklist lang={lang} />
+                <FormVisualGuide lang={lang} />
                 <ProcedureList 
                   lang={lang} 
                   toggleProcedure={toggleProcedure} 
@@ -153,6 +157,8 @@ export default function Home() {
             </section>
           </main>
         </SidebarInset>
+
+        <EmergencyFAB lang={lang} />
       </div>
     </SidebarProvider>
   );
