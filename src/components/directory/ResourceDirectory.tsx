@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useMemo } from "react";
@@ -43,8 +42,8 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
     );
   }, [currentProvince, selectedType, filter]);
 
-  const openInMaps = (name: string, city: string) => {
-    const query = encodeURIComponent(`${name} ${city}`);
+  const openInMaps = (address: string) => {
+    const query = encodeURIComponent(address);
     window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
   };
 
@@ -53,7 +52,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
       <div className="space-y-1">
         <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight text-primary" : "text-2xl font-black uppercase text-primary tracking-tight"}>{t.directory}</h2>
         <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.2em]">
-          Recursos en <span className="text-primary">{currentProvince.name}</span>
+          Ayuda real en <span className="text-primary">{currentProvince.name}</span>
         </p>
       </div>
 
@@ -62,7 +61,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
             <Input 
-              placeholder="Buscar organización o ayuda..." 
+              placeholder="Ej: Cruz Roja, Salud, NIE..." 
               className="pl-12 h-14 rounded-2xl bg-white border-none shadow-sm font-bold text-lg"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
@@ -70,7 +69,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
           </div>
 
           <div className="space-y-3">
-            <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground ml-1">Tipo de Recurso</p>
+            <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground ml-1">Filtrar por tipo</p>
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               {types.map(type => (
                 <Badge 
@@ -102,7 +101,8 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
                 </div>}
               </div>
               
-              <h4 className={`font-black mb-6 leading-tight text-slate-900 ${isEasy ? 'text-3xl uppercase tracking-tighter' : 'text-xl'}`}>{res.name}</h4>
+              <h4 className={`font-black mb-1 leading-tight text-slate-900 ${isEasy ? 'text-3xl uppercase tracking-tighter' : 'text-xl'}`}>{res.name}</h4>
+              <p className="text-[10px] font-bold text-muted-foreground mb-6 uppercase tracking-tight">{res.address}</p>
               
               <div className="flex gap-4">
                 <Button asChild size={isEasy ? "lg" : "default"} className={`flex-1 rounded-2xl h-16 gap-3 font-black text-lg shadow-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-transform`}>
@@ -111,7 +111,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
                   </a>
                 </Button>
                 <Button 
-                  onClick={() => openInMaps(res.name, res.city)}
+                  onClick={() => openInMaps(`${res.name}, ${res.address}, ${res.city}`)}
                   size={isEasy ? "lg" : "default"} 
                   variant="outline"
                   className={`flex-1 rounded-2xl h-16 gap-3 border-2 border-slate-200 font-black text-lg active:scale-95 transition-transform`}

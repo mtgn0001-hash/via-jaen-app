@@ -22,7 +22,7 @@ const defaultProgress: UserProgress = {
   checklist: {},
   language: 'es',
   onboardingCompleted: false,
-  theme: 'purple',
+  theme: 'olive',
   province: 'jaen',
   easyReading: false,
 };

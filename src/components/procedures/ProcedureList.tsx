@@ -1,11 +1,10 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileCheck, MapPin, BadgeInfo, CheckCircle2 } from "lucide-react";
+import { FileCheck, MapPin, BadgeInfo, CheckCircle2, Clock } from "lucide-react";
 import { useLocalStorage } from "@/lib/store";
 
 type ProcedureListProps = {
@@ -21,29 +20,28 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
   const flows = [
     {
       id: 'empadronamiento',
-      title: 'Empadronamiento',
+      title: 'Empadronamiento (Padrón)',
       icon: MapPin,
       steps: [
-        { id: 'e1', label: 'Pedir Cita Ayuntamiento', desc: 'En Jaén se solicita online o presencial.' },
-        { id: 'e2', label: 'Llevar Pasaporte', desc: 'Original y fotocopia.' },
-        { id: 'e3', label: 'Contrato Alquiler', desc: 'O permiso del dueño.' },
-        { id: 'e4', label: 'Recoger Papel', desc: 'Es gratis y te acredita.' },
+        { id: 'e1', label: 'Pedir Cita Ayuntamiento', desc: 'En Jaén se solicita en sede.aytojaen.es o llamando al 010.' },
+        { id: 'e2', label: 'Llevar Pasaporte Original', desc: 'Obligatorio pasaporte en vigor y fotocopia.' },
+        { id: 'e3', label: 'Documento de Vivienda', desc: 'Contrato de alquiler o autorización firmada del dueño.' },
+        { id: 'e4', label: 'Recoger el Volante', desc: 'Te servirá para médico, colegio y trámites de extranjería.' },
       ]
     },
     {
       id: 'nie_tie',
-      title: 'NIE / TIE',
+      title: 'NIE / TIE (Tarjeta)',
       icon: FileCheck,
       steps: [
-        { id: 'n1', label: 'Solicitud EX-15', desc: 'Usa el botón de Descargar PDF.' },
-        { id: 'n2', label: 'Pagar Tasa', desc: 'Ve al banco antes de tu cita.' },
-        { id: 'n3', label: 'Cita en Policía', desc: 'Prueba los viernes a las 9 AM.' },
-        { id: 'n4', label: 'Llevar Foto', desc: 'Fondo blanco y sin gafas.' },
+        { id: 'n1', label: 'Formulario EX-15/EX-17', desc: 'Descárgalo en la sección de Formularios de esta app.' },
+        { id: 'n2', label: 'Pagar Tasa 790-012', desc: 'Imprescindible pagar en el banco ANTES de ir a la cita.' },
+        { id: 'n3', label: 'Cita en Comisaría', desc: 'Plaza de las Batallas. Recuerda: prueba los viernes a las 9 AM.' },
+        { id: 'n4', label: 'Foto de Carné', desc: 'Reciente, fondo blanco, sin gafas ni gorra.' },
       ]
     }
   ];
 
-  // VISTA LECTURA FÁCIL
   if (progress.easyReading) {
     return (
       <div className="space-y-8 pb-20">
@@ -51,7 +49,7 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
         <div className="grid gap-10">
           {flows.map(flow => (
             <section key={flow.id} className="space-y-6">
-              <div className="flex items-center gap-4 bg-primary/5 p-4 rounded-3xl">
+              <div className="flex items-center gap-4 bg-primary/5 p-4 rounded-3xl border border-primary/10">
                 <flow.icon className="h-10 w-10 text-primary" />
                 <h3 className="text-3xl font-black uppercase text-slate-800">{flow.title}</h3>
               </div>
@@ -77,10 +75,12 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
     );
   }
 
-  // VISTA ESTÁNDAR
   return (
     <div className="space-y-4 pb-20">
-      <h2 className="text-2xl font-bold mb-4">{t.procedures}</h2>
+      <div className="flex items-center gap-2 mb-4">
+        <Clock className="h-5 w-5 text-primary" />
+        <h2 className="text-2xl font-bold">{t.procedures} en Jaén</h2>
+      </div>
       
       <Accordion type="single" collapsible className="w-full space-y-3">
         {flows.map((flow) => (
@@ -96,7 +96,7 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
             <AccordionContent className="pb-4">
               <div className="space-y-4 mt-2">
                 {flow.steps.map((step) => (
-                  <div key={step.id} className="flex gap-4 items-start p-2 rounded-xl hover:bg-muted/50 transition-colors">
+                  <div key={step.id} className="flex gap-4 items-start p-3 rounded-xl hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
                     <Checkbox 
                       id={step.id} 
                       checked={completedProcedures[step.id] || false}
@@ -119,11 +119,11 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
         ))}
       </Accordion>
 
-      <Card className="bg-blue-50 border-blue-100">
+      <Card className="bg-blue-50 border-blue-100 mt-6">
         <CardContent className="p-4 flex gap-3">
           <BadgeInfo className="h-5 w-5 text-primary shrink-0" />
-          <p className="text-xs text-primary/80 font-medium">
-            {t.claveNote}
+          <p className="text-xs text-primary/80 font-bold leading-relaxed">
+            Truco para Jaén: Las citas en la Comisaría de Plaza de las Batallas suelen liberarse los viernes entre las 8:30 y las 9:30 de la mañana. ¡Estate atento!
           </p>
         </CardContent>
       </Card>
