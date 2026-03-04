@@ -120,7 +120,7 @@ export function AppSidebar({
       <Sidebar variant="floating" className="border-none shadow-none">
         <SidebarHeader className="p-6">
           <div 
-            className="flex items-center gap-3 cursor-pointer hover:bg-primary/5 p-2 rounded-2xl transition-colors"
+            className="flex items-center gap-3 cursor-pointer hover:bg-primary/10 p-2 rounded-2xl transition-all"
             onClick={() => handleNav('profile')}
           >
             <Avatar className="h-10 w-10 border-2 border-primary/20 shadow-md">
@@ -129,7 +129,7 @@ export function AppSidebar({
                 {progress.profile.name?.charAt(0) || <User className="h-5 w-5" />}
               </AvatarFallback>
             </Avatar>
-            <div className="flex flex-col overflow-hidden">
+            <div className="flex flex-col overflow-hidden text-left">
               <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
                 {progress.profile.name || t.title}
               </h2>
@@ -141,7 +141,7 @@ export function AppSidebar({
         </SidebarHeader>
 
         <SidebarContent className="px-2 scrollbar-hide">
-          <div className="px-4 py-2 mb-4 bg-primary/5 rounded-2xl mx-2 border border-primary/10 flex items-center justify-between">
+          <div className="px-4 py-2 mb-4 bg-primary/10 backdrop-blur-md rounded-2xl mx-2 border border-primary/20 flex items-center justify-between">
             <div className="space-y-0.5">
               <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary">{t.easyReading}</Label>
               <p className="text-[8px] text-muted-foreground font-bold">{t.easyReadingDesc}</p>
@@ -168,8 +168,8 @@ export function AppSidebar({
                         className={cn(
                           "h-11 px-4 rounded-xl transition-all duration-300 group",
                           activeTab === item.id 
-                            ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                            : "hover:bg-primary/5 hover:text-primary",
+                            ? "bg-primary/20 text-primary font-bold shadow-sm backdrop-blur-md" 
+                            : "hover:bg-primary/10 hover:text-primary",
                           item.className
                         )}
                       >
@@ -193,7 +193,7 @@ export function AppSidebar({
             <Button 
               onClick={() => setShowQR(true)} 
               variant="outline" 
-              className="w-full rounded-2xl gap-3 h-12 border-2 hover:bg-primary/5 hover:text-primary transition-all font-bold"
+              className="w-full rounded-2xl gap-3 h-12 border-2 border-primary/20 hover:bg-primary/10 hover:text-primary transition-all font-bold backdrop-blur-md"
             >
               <Share2 className="h-5 w-5" /> Compartir App
             </Button>
@@ -225,7 +225,7 @@ export function AppSidebar({
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/10">
+              <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
                 <Globe className="h-5 w-5 text-primary" />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold text-primary">Idioma / Language</span>
@@ -238,16 +238,16 @@ export function AppSidebar({
                 </div>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" side="top" className="w-64 rounded-3xl shadow-2xl p-2 backdrop-blur-xl bg-white/90 border-none">
+            <DropdownMenuContent align="start" side="top" className="w-64 rounded-3xl shadow-2xl p-2 backdrop-blur-2xl bg-white/40 border border-white/20">
               <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] px-3 py-3">
                 Seleccionar Idioma
               </DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-muted/50" />
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/10 focus:text-primary" onClick={() => setLang('es')}>Español</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/10 focus:text-primary" onClick={() => setLang('en')}>English</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/10 focus:text-primary" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/10 focus:text-primary text-right" onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/10 focus:text-primary" onClick={() => setLang('ro')}>Română</DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-white/20" />
+              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('es')}>Español</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('en')}>English</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all text-right" onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('ro')}>Română</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </SidebarFooter>
