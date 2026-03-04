@@ -7,16 +7,16 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import { ProcedureList } from "@/components/procedures/ProcedureList";
-import { FormDownloader } from "@/components/forms/FormDownloader";
-import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
 import { FamilyResources } from "@/components/family/FamilyResources";
 import { StudyUJA } from "@/components/study/StudyUJA";
 import { WorkTab } from "@/components/work/WorkTab";
 import { IntegrationTab } from "@/components/integration/IntegrationTab";
 import { TransportTab } from "@/components/transport/TransportTab";
+import { EmergencyTab } from "@/components/emergency/EmergencyTab";
+import { Onboarding } from "@/components/onboarding/Onboarding";
 import { Language, translations } from "@/lib/translations";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ShieldAlert } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -46,6 +46,13 @@ export default function Home() {
       className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-24 overflow-x-hidden"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
+      {!progress.onboardingCompleted && (
+        <Onboarding 
+          lang={lang} 
+          onComplete={() => updateProgress({ onboardingCompleted: true })} 
+        />
+      )}
+
       <Header 
         lang={lang} 
         setLang={setLang} 
@@ -85,11 +92,17 @@ export default function Home() {
           <EmergencyTab lang={lang} />
         )}
 
-        <section className="mt-8 mb-4 px-2">
+        <section className="mt-8 mb-4 px-2 space-y-3">
           <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
             <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
-            <p className="text-[10px] text-muted-foreground leading-normal">
+            <p className="text-[10px] text-muted-foreground leading-normal font-medium">
               {t.disclaimer}
+            </p>
+          </div>
+          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex gap-3">
+            <ShieldAlert className="h-5 w-5 text-blue-400 shrink-0" />
+            <p className="text-[10px] text-blue-700 leading-normal font-bold">
+              {t.privacyNotice}
             </p>
           </div>
         </section>
