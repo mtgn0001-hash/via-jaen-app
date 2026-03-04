@@ -3,11 +3,14 @@
 
 import { useState, useEffect } from 'react';
 
+export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean';
+
 export type UserProgress = {
   procedures: { [key: string]: boolean };
   checklist: { [key: string]: boolean };
   language: string;
   onboardingCompleted: boolean;
+  theme: ThemeType;
 };
 
 const STORAGE_KEY = 'jaen_integra_storage';
@@ -17,6 +20,7 @@ const defaultProgress: UserProgress = {
   checklist: {},
   language: 'es',
   onboardingCompleted: false,
+  theme: 'purple',
 };
 
 export function useLocalStorage() {
@@ -28,7 +32,7 @@ export function useLocalStorage() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Merge with defaults to handle new keys like onboardingCompleted
+        // Merge with defaults to handle new keys
         setProgress({ ...defaultProgress, ...parsed });
       } catch (e) {
         console.error("Failed to parse local storage", e);
@@ -56,7 +60,7 @@ export function useLocalStorage() {
   };
 
   const calculateCompletion = () => {
-    const totalItems = 15; // Arbitrary target
+    const totalItems = 15;
     const completedItems = 
       Object.values(progress.procedures).filter(Boolean).length +
       Object.values(progress.checklist).filter(Boolean).length;

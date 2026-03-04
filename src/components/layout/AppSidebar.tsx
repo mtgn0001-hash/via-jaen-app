@@ -15,9 +15,11 @@ import {
   User,
   ChevronRight,
   FileText,
-  Rocket
+  Palette,
+  Check
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
+import { ThemeType } from "@/lib/store"
 import {
   Sidebar,
   SidebarContent,
@@ -36,6 +38,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -45,9 +49,18 @@ type AppSidebarProps = {
   setLang: (lang: Language) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  currentTheme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
 };
 
-export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSidebarProps) {
+export function AppSidebar({ 
+  lang, 
+  setLang, 
+  activeTab, 
+  setActiveTab, 
+  currentTheme, 
+  setTheme 
+}: AppSidebarProps) {
   const t = translations[lang];
   const { setOpenMobile } = useSidebar();
 
@@ -61,7 +74,7 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
     { id: 'procedures', icon: Gavel, label: t.procedures, category: 'legal' },
     { id: 'family', icon: HeartPulse, label: t.familyResources.title, category: 'social' },
     { id: 'study', icon: GraduationCap, label: t.studyUJA.title, category: 'education' },
-    { id: 'employment', icon: FileText, label: t.employment.title, category: 'economy' },
+    { id: 'employment_portal', icon: FileText, label: t.employment.title, category: 'economy' },
     { id: 'work', icon: Briefcase, label: t.work.title, category: 'economy' },
     { id: 'community', icon: Languages, label: t.community, category: 'culture' },
     { id: 'directory', icon: MapPin, label: t.directory, category: 'help' },
@@ -77,6 +90,14 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
     { id: 'culture', label: 'Integración', items: navItems.filter(i => i.category === 'culture') },
     { id: 'help', label: 'Directorio', items: navItems.filter(i => i.category === 'help') },
     { id: 'emergency', label: 'Urgencias', items: navItems.filter(i => i.category === 'emergency') },
+  ];
+
+  const themes: { id: ThemeType, label: string, color: string }[] = [
+    { id: 'purple', label: 'Morado', color: 'bg-[#7C3AED]' },
+    { id: 'olive', label: 'Olivo', color: 'bg-[#3D5229]' },
+    { id: 'night', label: 'Noche', color: 'bg-[#121212]' },
+    { id: 'contrast', label: 'Alto Contraste', color: 'bg-white border-2 border-black' },
+    { id: 'ocean', label: 'Océano', color: 'bg-[#3B82F6]' },
   ];
 
   return (
@@ -135,7 +156,29 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
         ))}
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t border-sidebar-border/30">
+      <SidebarFooter className="p-4 border-t border-sidebar-border/30 gap-2">
+        <div className="flex flex-col gap-1 px-2">
+          <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/60 mb-1 flex items-center gap-2">
+            <Palette className="h-3 w-3" /> Personalización
+          </p>
+          <div className="flex items-center gap-2">
+            {themes.map((theme) => (
+              <button
+                key={theme.id}
+                onClick={() => setTheme(theme.id)}
+                className={cn(
+                  "h-6 w-6 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95",
+                  theme.color,
+                  currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2" : "opacity-70"
+                )}
+                title={theme.label}
+              >
+                {currentTheme === theme.id && <Check className={cn("h-3 w-3", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-full justify-start gap-3 h-12 rounded-xl hover:bg-primary/10 transition-colors">
@@ -152,6 +195,10 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" side="top" className="w-56 rounded-2xl shadow-xl p-1 backdrop-blur-md bg-white/90">
+            <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground tracking-widest px-3 py-2">
+              Seleccionar Idioma
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('es')}>Español</DropdownMenuItem>
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('en')}>English</DropdownMenuItem>
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('fr')}>Français</DropdownMenuItem>

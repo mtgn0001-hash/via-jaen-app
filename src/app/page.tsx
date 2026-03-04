@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage } from "@/lib/store";
+import { useLocalStorage, Language as LanguageType } from "@/lib/store";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -37,13 +37,17 @@ export default function Home() {
   const isRTL = lang === 'ar';
 
   useEffect(() => {
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-  }, [lang, isRTL]);
+    if (isLoaded) {
+      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+      document.documentElement.setAttribute('data-theme', progress.theme);
+    }
+  }, [lang, isRTL, progress.theme, isLoaded]);
 
   if (!isLoaded) return null;
 
   const setLang = (newLang: Language) => updateProgress({ language: newLang });
+  const setTheme = (newTheme: any) => updateProgress({ theme: newTheme });
   const t = translations[lang];
 
   return (
@@ -56,7 +60,9 @@ export default function Home() {
           lang={lang} 
           setLang={setLang} 
           activeTab={activeTab} 
-          setActiveTab={setActiveTab} 
+          setActiveTab={setActiveTab}
+          currentTheme={progress.theme}
+          setTheme={setTheme}
         />
 
         <SidebarInset className="flex-1 overflow-x-hidden">
@@ -121,6 +127,10 @@ export default function Home() {
 
             {activeTab === 'emergency' && (
               <EmergencyTab lang={lang} />
+            )}
+
+            {activeTab === 'employment_portal' && (
+              <EmploymentPortal lang={lang} />
             )}
 
             <section className="mt-8 mb-4 px-2 space-y-3">
