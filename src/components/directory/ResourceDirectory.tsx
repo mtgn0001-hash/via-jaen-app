@@ -51,32 +51,32 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
   return (
     <div className="space-y-6 pb-20">
       <div className="space-y-1">
-        <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight" : "text-2xl font-bold"}>{t.directory}</h2>
-        <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
-          Recursos en <span className="text-primary font-black">{currentProvince.name}</span>
+        <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight text-primary" : "text-2xl font-black uppercase text-primary tracking-tight"}>{t.directory}</h2>
+        <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.2em]">
+          Recursos en <span className="text-primary">{currentProvince.name}</span>
         </p>
       </div>
 
       {!isEasy && (
         <div className="space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
             <Input 
               placeholder="Buscar organización o ayuda..." 
-              className="pl-10 h-12 rounded-2xl bg-white border-none shadow-sm"
+              className="pl-12 h-14 rounded-2xl bg-white border-none shadow-sm font-bold text-lg"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground ml-1">Tipo de Recurso</p>
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               {types.map(type => (
                 <Badge 
                   key={type}
                   variant={selectedType === type ? 'secondary' : 'outline'}
-                  className={`cursor-pointer px-4 py-2 rounded-full whitespace-nowrap text-sm font-bold transition-all flex items-center gap-2 border-none shadow-sm ${selectedType === type ? 'bg-secondary/20 text-secondary-foreground' : 'bg-white'}`}
+                  className={`cursor-pointer px-5 py-2.5 rounded-xl whitespace-nowrap text-xs font-black transition-all flex items-center gap-2 border-2 shadow-sm ${selectedType === type ? 'bg-primary text-white border-primary' : 'bg-white border-primary/5 text-primary hover:border-primary/20'}`}
                   onClick={() => setSelectedType(type)}
                 >
                   {type === "Todos" ? "Todos" : getIcon(type)}
@@ -88,35 +88,35 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
         </div>
       )}
 
-      <div className="grid gap-3">
+      <div className="grid gap-4">
         {filtered.map((res, i) => (
-          <Card key={i} className={`overflow-hidden border-none shadow-sm bg-white ${isEasy ? 'rounded-[30px] border-4 border-primary/5' : ''}`}>
-            <CardContent className={isEasy ? "p-6" : "p-4"}>
-              <div className="flex justify-between items-start mb-2">
-                <Badge className="bg-secondary/10 text-secondary border-none font-bold">
+          <Card key={i} className={`overflow-hidden border-none shadow-lg bg-white transition-all active:scale-[0.98] ${isEasy ? 'rounded-[2.5rem] border-[6px] border-primary/5' : 'rounded-3xl'}`}>
+            <CardContent className={isEasy ? "p-8" : "p-6"}>
+              <div className="flex justify-between items-start mb-4">
+                <Badge className="bg-primary/10 text-primary border-none font-black text-[10px] px-3 py-1 rounded-lg uppercase tracking-wider">
                   {getIcon(res.type)}
-                  {res.type}
+                  <span className="ml-2">{res.type}</span>
                 </Badge>
-                {!isEasy && <div className="flex items-center gap-1 text-[10px] font-black text-muted-foreground uppercase tracking-widest">
-                  <MapPin className="h-3 w-3" /> {res.city}
+                {!isEasy && <div className="flex items-center gap-1.5 text-[10px] font-black text-muted-foreground uppercase tracking-widest bg-slate-50 px-2 py-1 rounded-lg">
+                  <MapPin className="h-3 w-3 text-primary" /> {res.city}
                 </div>}
               </div>
               
-              <h4 className={`font-black mb-4 leading-tight ${isEasy ? 'text-2xl uppercase tracking-tight' : 'text-lg'}`}>{res.name}</h4>
+              <h4 className={`font-black mb-6 leading-tight text-slate-900 ${isEasy ? 'text-3xl uppercase tracking-tighter' : 'text-xl'}`}>{res.name}</h4>
               
-              <div className="flex gap-3">
-                <Button asChild size={isEasy ? "lg" : "sm"} variant="outline" className={`flex-1 rounded-xl h-14 gap-2 border-2 active:bg-muted font-bold ${isEasy ? 'text-lg' : ''}`}>
+              <div className="flex gap-4">
+                <Button asChild size={isEasy ? "lg" : "default"} className={`flex-1 rounded-2xl h-16 gap-3 font-black text-lg shadow-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-transform`}>
                   <a href={`tel:${res.phone.replace(/\s/g, '')}`}>
-                    <Phone className="h-5 w-5" /> Llamar
+                    <Phone className="h-6 w-6" /> {res.phone}
                   </a>
                 </Button>
                 <Button 
                   onClick={() => openInMaps(res.name, res.city)}
-                  size={isEasy ? "lg" : "sm"} 
-                  variant="secondary" 
-                  className={`flex-1 rounded-xl h-14 gap-2 border shadow-sm font-bold ${isEasy ? 'text-lg' : ''}`}
+                  size={isEasy ? "lg" : "default"} 
+                  variant="outline"
+                  className={`flex-1 rounded-2xl h-16 gap-3 border-2 border-slate-200 font-black text-lg active:scale-95 transition-transform`}
                 >
-                  <Navigation className="h-5 w-5" /> Mapa
+                  <Navigation className="h-6 w-6 text-primary" /> Mapa
                 </Button>
               </div>
             </CardContent>

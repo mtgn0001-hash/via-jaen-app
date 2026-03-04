@@ -97,7 +97,7 @@ ${cvData.skills}
           <Card className="border-none bg-primary/5 rounded-3xl overflow-hidden shadow-sm">
             <CardHeader className="pb-2">
               <div className="flex justify-between items-center">
-                <CardTitle className="text-lg flex items-center gap-2">
+                <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
                   <Briefcase className="h-5 w-5 text-primary" />
                   {workData.campaign}
                 </CardTitle>
@@ -105,39 +105,41 @@ ${cvData.skills}
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm leading-relaxed text-muted-foreground">{workData.desc}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground font-medium">{workData.desc}</p>
               
-              <div className="bg-white p-4 rounded-2xl border space-y-2">
+              <div className="bg-white p-5 rounded-3xl border shadow-sm space-y-2">
                 <div className="flex justify-between items-center">
-                  <h4 className="font-bold text-sm text-primary flex items-center gap-2">
+                  <h4 className="font-black text-sm text-primary flex items-center gap-2 uppercase">
                     <Scale className="h-4 w-4" /> {t.work.rights}
                   </h4>
                   <SpeechButton text={t.work.rightsText} language={lang} />
                 </div>
-                <p className="text-xs text-muted-foreground leading-normal">
+                <p className="text-xs text-muted-foreground leading-normal font-medium">
                   {t.work.rightsText}
                 </p>
               </div>
 
               {workData.shelters.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h3 className="font-bold text-sm flex items-center gap-2">
+                  <h3 className="font-black text-sm flex items-center gap-2 uppercase text-slate-800">
                     <Home className="h-4 w-4 text-secondary" /> {t.work.shelterTitle}
                   </h3>
                   <div className="grid gap-2">
                     {workData.shelters.map((s) => (
-                      <Card key={s.city} className="border-none shadow-none bg-white overflow-hidden">
+                      <Card key={s.city} className="border-none shadow-none bg-white overflow-hidden rounded-2xl">
                         <CardContent className="p-3 flex items-center justify-between">
                           <div className="flex gap-3 items-center">
-                            <MapPin className="h-4 w-4 text-secondary/60" />
+                            <div className="bg-secondary/10 p-2 rounded-xl">
+                              <MapPin className="h-4 w-4 text-secondary" />
+                            </div>
                             <div>
-                              <h4 className="font-bold text-xs">{s.city}</h4>
+                              <h4 className="font-black text-xs text-slate-900">{s.city}</h4>
                               <p className="text-[9px] text-muted-foreground uppercase font-black">{s.open}</p>
                             </div>
                           </div>
                           <a 
                             href={`tel:${s.phone.replace(/\s/g, '')}`}
-                            className="bg-secondary/10 text-secondary px-3 py-1.5 rounded-xl text-[10px] font-bold flex items-center gap-2"
+                            className="bg-primary text-white px-4 py-2 rounded-xl text-[11px] font-black flex items-center gap-2 shadow-sm active:scale-95 transition-transform"
                           >
                             <Phone className="h-3 w-3" /> {s.phone}
                           </a>
@@ -152,27 +154,27 @@ ${cvData.skills}
         </TabsContent>
 
         <TabsContent value="search" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white overflow-hidden">
+          <Card className="border-none shadow-sm bg-white overflow-hidden rounded-3xl">
             <CardHeader className="bg-primary/5">
-              <CardTitle className="text-lg flex items-center gap-2">
+              <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
                 <Building2 className="h-5 w-5 text-primary" /> {e.activeSearch}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-4 space-y-4">
-              <div className="p-3 rounded-xl bg-slate-50 border space-y-2">
-                <h4 className="font-bold text-sm">SAE (Servicio Andaluz de Empleo)</h4>
-                <p className="text-xs text-muted-foreground">{e.saeDesc}</p>
-                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2" asChild>
+              <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
+                <h4 className="font-black text-sm">SAE (Servicio Andaluz de Empleo)</h4>
+                <p className="text-xs text-muted-foreground font-medium">{e.saeDesc}</p>
+                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
                   <a href="https://www.juntadeandalucia.es/organismos/empleoformacionytrabajoautonomo/sae.html" target="_blank">
                     Web SAE <ExternalLink className="h-3 w-3" />
                   </a>
                 </Button>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 border space-y-2">
-                <h4 className="font-bold text-sm">Jaén Emplea</h4>
-                <p className="text-xs text-muted-foreground">Portal de empleo municipal del Ayuntamiento de Jaén.</p>
-                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2" asChild>
+              <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
+                <h4 className="font-black text-sm">Jaén Emplea</h4>
+                <p className="text-xs text-muted-foreground font-medium">Portal de empleo municipal del Ayuntamiento de Jaén.</p>
+                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
                   <a href="https://empleo.aytojaen.es/" target="_blank">
                     Web Jaén Emplea <ExternalLink className="h-3 w-3" />
                   </a>
@@ -180,7 +182,7 @@ ${cvData.skills}
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-bold text-xs uppercase text-muted-foreground ml-1">{e.ettTitle}</h4>
+                <h4 className="font-black text-[10px] uppercase text-muted-foreground ml-1 tracking-widest">{e.ettTitle}</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <ETTCard name="Adecco Jaén" />
                   <ETTCard name="Randstad Martos" />
@@ -193,12 +195,12 @@ ${cvData.skills}
         </TabsContent>
 
         <TabsContent value="cv" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white">
+          <Card className="border-none shadow-sm bg-white rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
+              <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
                 <FileText className="h-5 w-5 text-primary" /> {e.cvTools}
               </CardTitle>
-              <CardDescription>{e.cvAdvice}</CardDescription>
+              <CardDescription className="font-medium">{e.cvAdvice}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
@@ -206,42 +208,42 @@ ${cvData.skills}
                   placeholder="Nombre completo" 
                   value={cvData.name}
                   onChange={e => setCvData({...cvData, name: e.target.value})}
-                  className="rounded-xl"
+                  className="rounded-2xl h-12 font-bold"
                 />
                 <div className="grid grid-cols-2 gap-2">
                   <Input 
                     placeholder="Email" 
                     value={cvData.email}
                     onChange={e => setCvData({...cvData, email: e.target.value})}
-                    className="rounded-xl"
+                    className="rounded-2xl h-12 font-bold"
                   />
                   <Input 
                     placeholder="Teléfono" 
                     value={cvData.phone}
                     onChange={e => setCvData({...cvData, phone: e.target.value})}
-                    className="rounded-xl"
+                    className="rounded-2xl h-12 font-bold"
                   />
                 </div>
                 <Textarea 
-                  placeholder="Experiencia (Deseas poner lo que has hecho antes)" 
+                  placeholder="Experiencia (Qué has hecho antes)" 
                   value={cvData.experience}
                   onChange={e => setCvData({...cvData, experience: e.target.value})}
-                  className="rounded-xl min-h-[100px]"
+                  className="rounded-2xl min-h-[100px] font-medium"
                 />
                 <Textarea 
-                  placeholder="Habilidades (Idiomas, carnet de conducir, etc.)" 
+                  placeholder="Habilidades (Idiomas, carnet, etc.)" 
                   value={cvData.skills}
                   onChange={e => setCvData({...cvData, skills: e.target.value})}
-                  className="rounded-xl min-h-[80px]"
+                  className="rounded-2xl min-h-[80px] font-medium"
                 />
               </div>
 
               <Button 
                 onClick={handleCopyCV} 
-                className="w-full rounded-xl h-12 gap-2"
+                className="w-full rounded-2xl h-14 gap-2 font-black text-lg shadow-lg active:scale-95 transition-transform"
                 variant={copied ? "secondary" : "default"}
               >
-                {copied ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                {copied ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
                 {copied ? "Copiado" : "Copiar Texto del CV"}
               </Button>
             </CardContent>
@@ -249,41 +251,41 @@ ${cvData.skills}
         </TabsContent>
 
         <TabsContent value="rights" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-white">
-            <CardContent className="p-4 space-y-4">
+          <Card className="border-none shadow-sm bg-white rounded-3xl">
+            <CardContent className="p-6 space-y-4">
               <div className="flex justify-between items-center">
-                <h4 className="font-bold text-sm flex items-center gap-2">
+                <h4 className="font-black text-sm flex items-center gap-2 uppercase text-slate-800">
                   <Scale className="h-5 w-5 text-primary" /> {e.rights}
                 </h4>
-                < breakthroughButton text={`${e.rights}. ${e.smiInfo}`} language={lang} />
+                <SpeechButton text={`${e.rights}. ${e.smiInfo}`} language={lang} />
               </div>
               
-              <div className="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200">
-                <h5 className="font-bold text-sm mb-2">{e.smiInfo}</h5>
-                <p className="text-2xl font-black text-primary">1.134€ <span className="text-xs text-muted-foreground font-normal">/ mes (aprox)</span></p>
-                <p className="text-[10px] text-muted-foreground mt-2 italic">
+              <div className="bg-slate-50 p-6 rounded-3xl border-2 border-dashed border-slate-200">
+                <h5 className="font-black text-xs mb-2 uppercase text-muted-foreground">{e.smiInfo}</h5>
+                <p className="text-3xl font-black text-primary">1.134€ <span className="text-sm text-muted-foreground font-bold">/ mes (aprox)</span></p>
+                <p className="text-[10px] text-muted-foreground mt-2 italic font-medium">
                   * Basado en jornada completa de 40h semanales.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <div className="p-3 bg-red-50 rounded-xl border border-red-100">
-                  <h5 className="font-bold text-xs text-red-900 mb-1">{e.inspection}</h5>
-                  <p className="text-[10px] text-red-800 leading-relaxed">
+                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
+                  <h5 className="font-black text-xs text-red-900 mb-1 uppercase tracking-wider">{e.inspection}</h5>
+                  <p className="text-xs text-red-800 leading-relaxed font-medium">
                     Si sufres abusos o trabajas sin contrato, puedes denunciar de forma anónima.
                   </p>
-                  < breakthroughButton variant="link" size="sm" className="p-0 h-auto text-red-700 font-bold mt-2" asChild>
+                  <Button variant="link" size="sm" className="p-0 h-auto text-red-700 font-black mt-2 uppercase text-[10px]" asChild>
                     <a href="http://www.mites.gob.es/itss/web/atencion_al_ciudadano/comunicacion_irregularidades/index.html" target="_blank">
                       Ir a Inspección de Trabajo <ExternalLink className="h-3 w-3 ml-1" />
                     </a>
-                  </ breakthroughButton>
+                  </Button>
                 </div>
 
-                <div className="p-4 bg-primary/5 rounded-2xl space-y-2">
-                  <h5 className="font-bold text-sm text-primary">{e.faqLawyer}</h5>
+                <div className="p-5 bg-primary/5 rounded-3xl space-y-3 border border-primary/10">
+                  <h5 className="font-black text-sm text-primary uppercase">{e.faqLawyer}</h5>
                   <div className="space-y-2">
-                    <p className="text-xs font-bold">¿Qué pasa si tengo un accidente y no tengo papeles?</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
+                    <p className="text-xs font-black text-slate-800">¿Qué pasa si tengo un accidente y no tengo papeles?</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed font-medium">
                       Tienes derecho a asistencia médica y protección legal inmediata. El estatus migratorio no anula tus derechos humanos básicos en el trabajo.
                     </p>
                   </div>
@@ -295,18 +297,18 @@ ${cvData.skills}
 
         <TabsContent value="startup" className="space-y-4 pt-4">
           <div className="grid gap-4">
-            <Card className="border-none shadow-sm bg-white">
-              <CardContent className="p-4 space-y-4">
+            <Card className="border-none shadow-sm bg-white rounded-3xl overflow-hidden">
+              <CardContent className="p-5 space-y-4">
                 <div className="flex gap-4 items-start">
                   <div className="bg-purple-50 p-3 rounded-2xl">
                     <Rocket className="h-6 w-6 text-purple-600" />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="font-bold text-sm">{e.startup}</h4>
-                    <p className="text-xs text-muted-foreground">{e.cadeInfo}</p>
+                    <h4 className="font-black text-sm uppercase text-slate-900">{e.startup}</h4>
+                    <p className="text-xs text-muted-foreground font-medium">{e.cadeInfo}</p>
                   </div>
                 </div>
-                <Button className="w-full rounded-xl h-11" variant="outline" asChild>
+                <Button className="w-full rounded-xl h-12 gap-2 border-2 font-bold" variant="outline" asChild>
                   <a href="https://www.andaluciaemprende.es/" target="_blank">
                     Buscar Centro CADE <ExternalLink className="h-4 w-4" />
                   </a>
@@ -314,14 +316,14 @@ ${cvData.skills}
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-sm bg-white">
+            <Card className="border-none shadow-sm bg-white rounded-2xl">
               <CardContent className="p-4 flex gap-4 items-center">
                 <div className="bg-green-50 p-2 rounded-xl">
-                  <Plus className="h-4 w-4 text-green-600" />
+                  <Plus className="h-5 w-5 text-green-600" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-bold text-xs">{e.autonomous}</h4>
-                  <p className="text-[10px] text-muted-foreground">Ayudas de la Junta de Andalucía para nuevos autónomos.</p>
+                  <h4 className="font-black text-xs uppercase text-slate-900">{e.autonomous}</h4>
+                  <p className="text-[10px] text-muted-foreground font-medium">Ayudas de la Junta de Andalucía para nuevos autónomos.</p>
                 </div>
               </CardContent>
             </Card>
@@ -334,7 +336,7 @@ ${cvData.skills}
 
 function ETTCard({ name }: { name: string }) {
   return (
-    <div className="p-2 px-3 rounded-lg border bg-white text-[10px] font-bold text-slate-700 flex items-center justify-between group hover:border-primary transition-colors">
+    <div className="p-3 px-4 rounded-xl border bg-white text-[10px] font-black text-slate-700 flex items-center justify-between group hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">
       {name}
       <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>

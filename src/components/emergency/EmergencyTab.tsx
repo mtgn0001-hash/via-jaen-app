@@ -40,51 +40,55 @@ export function EmergencyTab({ lang }: EmergencyTabProps) {
             key={contact.number}
             asChild
             variant="outline"
-            className="h-auto p-4 flex justify-between items-center rounded-2xl border-2 hover:bg-muted"
+            className="h-auto p-5 flex justify-between items-center rounded-[2rem] border-2 border-primary/10 hover:border-primary hover:bg-primary/5 transition-all shadow-sm"
           >
             <a href={`tel:${contact.number.replace(/\s/g, '')}`}>
-              <div className="flex items-center gap-4">
-                <div className={`${contact.color} p-3 rounded-xl shadow-lg`}>
-                  <contact.icon className="h-6 w-6 text-white" />
+              <div className="flex items-center gap-5">
+                <div className={`${contact.color} p-3 rounded-2xl shadow-lg ring-4 ring-white`}>
+                  <contact.icon className="h-7 w-7 text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="font-bold text-lg leading-none">{contact.title}</p>
-                  <p className="text-sm font-mono text-muted-foreground mt-1">{contact.number}</p>
+                  <p className="font-black text-xl leading-none text-slate-900 uppercase tracking-tight">{contact.title}</p>
+                  <p className="text-2xl font-black text-primary mt-2 tracking-tighter flex items-center gap-2">
+                    <span className="bg-primary/10 px-2 py-0.5 rounded-lg">{contact.number}</span>
+                  </p>
                 </div>
               </div>
-              <Phone className="h-6 w-6 text-muted-foreground" />
+              <div className="bg-primary p-2 rounded-full shadow-md">
+                <Phone className="h-6 w-6 text-white" />
+              </div>
             </a>
           </Button>
         ))}
       </div>
 
-      <Card className="border-2 border-primary/20 bg-primary/5 rounded-3xl overflow-hidden shadow-none">
+      <Card className="border-2 border-primary/20 bg-primary/5 rounded-[2.5rem] overflow-hidden shadow-none">
         <CardHeader className="pb-2">
           <div className="flex justify-between items-center">
-            <CardTitle className="text-lg flex items-center gap-2 text-primary">
+            <CardTitle className="text-lg flex items-center gap-2 text-primary uppercase font-black">
               <Scale className="h-5 w-5" /> {l.title}
             </CardTitle>
             <SpeechButton text={`${l.title}. ${l.whatToDoTitle}. ${l.whatToDoDesc}`} language={lang} />
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-white p-4 rounded-2xl border space-y-2">
-            <h4 className="font-bold text-sm flex items-center gap-2">
+          <div className="bg-white p-5 rounded-3xl border shadow-sm space-y-2">
+            <h4 className="font-black text-sm flex items-center gap-2 text-slate-800">
               <ShieldCheck className="h-4 w-4 text-green-600" /> {l.whatToDoTitle}
             </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs text-muted-foreground leading-relaxed font-medium">
               {l.whatToDoDesc}
             </p>
           </div>
           
-          <div className="bg-white p-4 rounded-2xl border space-y-2">
-            <h4 className="font-bold text-sm flex items-center gap-2">
+          <div className="bg-white p-5 rounded-3xl border shadow-sm space-y-2">
+            <h4 className="font-black text-sm flex items-center gap-2 text-slate-800">
               <Gavel className="h-4 w-4 text-primary" /> {l.lawyerTitle}
             </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs text-muted-foreground leading-relaxed font-medium">
               {l.lawyerDesc}
             </p>
-            <Button variant="link" asChild className="p-0 h-auto text-primary font-bold text-xs">
+            <Button variant="link" asChild className="p-0 h-auto text-primary font-black text-xs uppercase tracking-widest">
               <a href="https://www.icajaen.es/" target="_blank" rel="noopener noreferrer">
                 Web Colegio de Abogados Jaén <ExternalLink className="h-3 w-3 ml-1" />
               </a>
@@ -93,9 +97,9 @@ export function EmergencyTab({ lang }: EmergencyTabProps) {
         </CardContent>
       </Card>
 
-      <Card className="border-none bg-slate-100">
-        <CardContent className="p-4 text-center">
-          <p className="text-xs text-slate-500 font-medium italic">
+      <Card className="border-none bg-slate-900 text-white rounded-[2.5rem]">
+        <CardContent className="p-6 text-center">
+          <p className="text-xs font-bold italic leading-relaxed opacity-80">
             "En caso de peligro inmediato, siempre llame al 112. No tenga miedo de su estatus migratorio, su salud y seguridad son lo primero."
           </p>
         </CardContent>
