@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
         <meta name="theme-color" content="#7C3AED" />
       </head>
-      <body className="font-body antialiased bg-white selection:bg-secondary selection:text-white">
+      <body className="font-body antialiased bg-background text-foreground selection:bg-primary selection:text-white">
         {children}
       </body>
     </html>

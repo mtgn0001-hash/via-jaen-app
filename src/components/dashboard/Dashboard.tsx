@@ -34,11 +34,11 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
   const { progress } = useLocalStorage();
 
   const mainCategories = [
-    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
-    { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50' },
-    { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-50' },
-    { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-100' },
+    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-100' },
+    { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-100' },
+    { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-100' },
+    { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-100' },
     { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Urgencias', icon: ShieldAlert, color: 'text-destructive', bg: 'bg-destructive/10' },
   ];
 
@@ -46,7 +46,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
   if (progress.easyReading) {
     return (
       <div className="space-y-6 pt-4">
-        <div className="bg-primary p-8 rounded-[40px] text-white shadow-xl shadow-primary/20 flex flex-col items-center text-center gap-4">
+        <div className="bg-primary p-8 rounded-[40px] text-primary-foreground shadow-xl shadow-primary/20 flex flex-col items-center text-center gap-4">
           <Zap className="h-16 w-16 text-yellow-300 animate-bounce" />
           <div className="space-y-1">
             <h2 className="text-4xl font-black uppercase tracking-tight">MODO FÁCIL</h2>
@@ -59,7 +59,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
              <Button 
                key={cat.id} 
                onClick={() => setActiveTab(cat.tab)}
-               className="h-28 rounded-[35px] bg-white border-[6px] border-primary/10 text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all"
+               className="h-28 rounded-[35px] bg-card border-[6px] border-primary/10 text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all"
              >
                <div className="flex items-center gap-6">
                  <div className="p-3 bg-primary/5 rounded-2xl">
@@ -75,7 +75,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           ))}
         </div>
 
-        <section className="bg-slate-900 text-white p-8 rounded-[40px] space-y-4">
+        <section className="bg-foreground text-background p-8 rounded-[40px] space-y-4">
            <div className="flex items-center gap-4">
              <ShieldCheck className="h-10 w-10 text-green-400" />
              <h3 className="text-xl font-black uppercase">Seguro y Privado</h3>
@@ -99,12 +99,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           </p>
         </div>
         
-        <Card className="bg-primary text-white overflow-hidden border-none shadow-lg mb-6">
+        <Card className="bg-primary text-primary-foreground overflow-hidden border-none shadow-lg mb-6">
           <CardContent className="p-6">
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold mb-2">Vía Jaén</h2>
-                <p className="text-white/80 text-xs max-w-[200px] leading-relaxed">
+                <p className="text-primary-foreground/80 text-xs max-w-[200px] leading-relaxed">
                   Tu guía segura y privada para la vida en Jaén. Todo funciona sin internet.
                 </p>
               </div>
@@ -117,9 +117,9 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       </section>
 
       {/* Security Banner */}
-      <section className="bg-emerald-50 border border-emerald-100 p-4 rounded-3xl flex gap-4 items-center">
-         <ShieldCheck className="h-8 w-8 text-emerald-600 shrink-0" />
-         <p className="text-[10px] text-emerald-800 font-bold leading-tight">
+      <section className="bg-secondary border border-primary/10 p-4 rounded-3xl flex gap-4 items-center">
+         <ShieldCheck className="h-8 w-8 text-primary shrink-0" />
+         <p className="text-[10px] text-foreground font-bold leading-tight">
             {t.privacyBanner}
          </p>
       </section>
@@ -136,7 +136,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           {mainCategories.map((cat) => (
             <Card 
               key={cat.id} 
-              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-white overflow-hidden"
+              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-card overflow-hidden"
               onClick={() => setActiveTab(cat.tab)}
             >
               <CardContent className="p-4 flex flex-col items-center text-center gap-2">
@@ -173,7 +173,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           ].map((link) => (
             <Card 
               key={link.id} 
-              className="group hover:border-primary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-white"
+              className="group hover:border-primary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-card"
               onClick={() => setActiveTab('procedures')}
             >
               <CardContent className="p-4 flex items-center gap-4">

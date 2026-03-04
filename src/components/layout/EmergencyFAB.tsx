@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react";
@@ -27,7 +26,7 @@ export function EmergencyFAB({ lang }: EmergencyFABProps) {
         <div className="flex flex-col items-end gap-3 animate-in slide-in-from-bottom-4 fade-in duration-300">
           {emergencyActions.map((action, i) => (
             <div key={action.number} className="flex items-center gap-3">
-              <span className="bg-white px-3 py-1.5 rounded-xl shadow-lg text-xs font-black uppercase tracking-tight border">
+              <span className="bg-card px-3 py-1.5 rounded-xl shadow-lg text-xs font-black uppercase tracking-tight border text-foreground">
                 {action.label}
               </span>
               <Button
@@ -49,7 +48,7 @@ export function EmergencyFAB({ lang }: EmergencyFABProps) {
         size="icon"
         className={cn(
           "h-14 w-14 rounded-3xl shadow-2xl transition-all duration-500",
-          isOpen ? "bg-slate-800 rotate-90" : "bg-destructive hover:bg-destructive/90 scale-110"
+          isOpen ? "bg-foreground rotate-90 text-background" : "bg-destructive hover:bg-destructive/90 scale-110"
         )}
       >
         {isOpen ? <X className="h-6 w-6" /> : <ShieldAlert className="h-7 w-7" />}

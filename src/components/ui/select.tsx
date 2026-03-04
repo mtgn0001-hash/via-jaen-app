@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-14 w-full items-center justify-between rounded-[1.25rem] border-2 border-input bg-white px-4 py-2 text-base font-bold ring-offset-background transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg]:text-primary",
+      "flex h-14 w-full items-center justify-between rounded-[1.25rem] border-2 border-input bg-card px-4 py-2 text-base font-bold text-foreground ring-offset-background transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg]:text-primary",
       className
     )}
     {...props}
@@ -75,7 +75,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-[2rem] border-none bg-white/80 backdrop-blur-xl text-popover-foreground shadow-2xl animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-4 data-[side=top]:slide-in-from-bottom-4",
+        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-[2rem] border-none bg-card/80 backdrop-blur-xl text-card-foreground shadow-2xl animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-4 data-[side=top]:slide-in-from-bottom-4",
         position === "popper" &&
           "data-[side=bottom]:translate-y-2 data-[side=left]:-translate-x-2 data-[side=right]:translate-x-2 data-[side=top]:-translate-y-2",
         className

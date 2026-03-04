@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Share2, Info, Mic, MapPin, WifiOff, Cloud, Zap } from "lucide-react";
@@ -50,7 +49,7 @@ export function Header({ lang, completion }: HeaderProps) {
   const isEasy = progress.easyReading;
 
   return (
-    <header className={`sticky top-0 bg-white/80 backdrop-blur-xl z-40 px-4 border-b border-border/50 ${isEasy ? 'py-5' : 'py-3'}`}>
+    <header className={`sticky top-0 bg-background/80 backdrop-blur-xl z-40 px-4 border-b border-border/50 ${isEasy ? 'py-5' : 'py-3'}`}>
       <div className="flex justify-between items-center max-w-lg mx-auto mb-2">
         <div className="flex items-center gap-2">
           <SidebarTrigger className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`} />
