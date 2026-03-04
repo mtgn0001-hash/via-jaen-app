@@ -79,6 +79,9 @@ export const provincesData: Record<string, ProvinceData> = {
       ]
     },
     resources: [
+      { name: 'Centro de Acogida Municipal (Albergue)', city: 'Jaén', type: 'Albergue', phone: '953 219 100', url: '#', address: 'Calle Carretera de Madrid, s/n' },
+      { name: 'Comedor Social San Roque', city: 'Jaén', type: 'Comedor', phone: '953 234 445', url: '#', address: 'Plaza de San Roque, 4' },
+      { name: 'Comedor Santa Clara (Cáritas)', city: 'Jaén', type: 'Comedor', phone: '953 234 445', url: '#', address: 'Calle Santa Clara, 12' },
       { name: 'Cruz Roja Jaén', city: 'Jaén', type: 'ONG', phone: '953 251 540', url: 'https://www.cruzroja.es', address: 'Avenida de Madrid, 24' },
       { name: 'Cáritas Diocesana Jaén', city: 'Jaén', type: 'ONG', phone: '953 234 445', url: 'https://www.caritas.es/jaen/', address: 'Calle Maestro Bartolomé Espadero, 7' },
       { name: 'Jaén Acoge', city: 'Jaén', type: 'ONG', phone: '953 261 453', url: 'http://jaenacoge.org/', address: 'Calle de la Luna, 9' },
