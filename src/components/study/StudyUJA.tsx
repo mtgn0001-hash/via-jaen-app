@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -26,33 +27,54 @@ export function StudyUJA({ lang }: StudyUJAProps) {
   const t = translations[lang];
   const s = t.studyUJA;
 
+  // Real Google Maps search queries for UJA locations
   const campusLocations = [
-    { name: 'Secretaría / Relaciones Int. (C2)', url: 'https://maps.app.goo.gl/jaen_campus_c2' },
-    { name: 'Biblioteca Central (R1)', url: 'https://maps.app.goo.gl/jaen_campus_r1' },
-    { name: 'Comedor Universitario', url: 'https://maps.app.goo.gl/jaen_campus_comedor' },
-    { name: 'Campus de Linares', url: 'https://maps.app.goo.gl/linares_campus' },
+    { 
+      name: 'Relaciones Internacionales (Edificio C2)', 
+      url: 'https://www.google.com/maps/search/?api=1&query=Universidad+de+Jaén+Edificio+C2+Relaciones+Internacionales' 
+    },
+    { 
+      name: 'Biblioteca Central (Edificio R1)', 
+      url: 'https://www.google.com/maps/search/?api=1&query=Biblioteca+Universidad+de+Jaén+Edificio+R1' 
+    },
+    { 
+      name: 'Comedor Universitario', 
+      url: 'https://www.google.com/maps/search/?api=1&query=Comedor+Universitario+Universidad+de+Jaén' 
+    },
+    { 
+      name: 'Campus Científico-Tecnológico (Linares)', 
+      url: 'https://www.google.com/maps/search/?api=1&query=Campus+Científico-Tecnológico+de+Linares+UJA' 
+    },
+    { 
+      name: 'Secretaría de Alumnos (Edificio B1)', 
+      url: 'https://www.google.com/maps/search/?api=1&query=Secretaría+de+Alumnos+Universidad+de+Jaén+Edificio+B1' 
+    }
   ];
+
+  const ujaPurple = "#612d8a";
+  const ujaGold = "#c5a059";
 
   return (
     <div className="space-y-6 pb-20">
       <div className="space-y-2">
         <div className="flex items-center gap-3">
-          <div className="bg-[#612d8a] p-2 rounded-xl">
-            <GraduationCap className="h-6 w-6 text-[#c5a059]" />
+          <div className="p-2 rounded-xl" style={{ backgroundColor: ujaPurple }}>
+            <GraduationCap className="h-6 w-6" style={{ color: ujaGold }} />
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-[#612d8a]">{s.title}</h2>
+          <h2 className="text-2xl font-bold tracking-tight" style={{ color: ujaPurple }}>{s.title}</h2>
         </div>
         <p className="text-muted-foreground text-sm">{s.subtitle}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
         <Button 
-          className="bg-[#612d8a] hover:bg-[#4d246e] text-white rounded-2xl h-14 flex items-center justify-between px-6 shadow-lg transition-all active:scale-95"
+          className="rounded-2xl h-14 flex items-center justify-between px-6 shadow-lg transition-all active:scale-95 text-white"
+          style={{ backgroundColor: ujaPurple }}
           asChild
         >
           <a href="tel:+34953212121">
             <div className="flex items-center gap-3">
-              <Phone className="h-5 w-5 text-[#c5a059]" />
+              <Phone className="h-5 w-5" style={{ color: ujaGold }} />
               <span className="font-bold">{s.contactSecretariat}</span>
             </div>
             <span className="text-[10px] font-mono opacity-80">+34 953 21 21 21</span>
@@ -71,12 +93,12 @@ export function StudyUJA({ lang }: StudyUJAProps) {
 
         <TabsContent value="access" className="space-y-4 pt-4">
           <Card className="border-none shadow-sm bg-white overflow-hidden">
-            <CardHeader className="bg-[#612d8a]/5 pb-4">
-              <div className="flex items-center gap-2 text-[#612d8a] font-bold">
+            <CardHeader className="pb-4" style={{ backgroundColor: `${ujaPurple}10` }}>
+              <div className="flex items-center gap-2 font-bold" style={{ color: ujaPurple }}>
                 <Building2 className="h-5 w-5" />
                 <CardTitle className="text-lg">{s.access}</CardTitle>
               </div>
-              <CardDescription className="text-[#612d8a]/70">{s.accessDesc}</CardDescription>
+              <CardDescription style={{ color: `${ujaPurple}CC` }}>{s.accessDesc}</CardDescription>
             </CardHeader>
             <CardContent className="pt-4 space-y-4">
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
@@ -84,17 +106,17 @@ export function StudyUJA({ lang }: StudyUJAProps) {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Todo el acceso universitario en Andalucía se gestiona a través del Distrito Único Andaluz.
                 </p>
-                <Button variant="link" className="p-0 h-auto text-xs font-bold text-[#612d8a] mt-2" asChild>
+                <Button variant="link" className="p-0 h-auto text-xs font-bold mt-2" style={{ color: ujaPurple }} asChild>
                   <a href="https://www.juntadeandalucia.es/economiaconocimientoempresasyuniversidad/sguit/" target="_blank">
                     Ir al Distrito Único Andaluz <ExternalLink className="h-3 w-3 ml-1" />
                   </a>
                 </Button>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <BadgeItem label={s.degree} />
-                <BadgeItem label={s.master} />
-                <BadgeItem label={s.scholarships} />
-                <BadgeItem label="Erasmus+" />
+                <BadgeItem label={s.degree} color={ujaGold} />
+                <BadgeItem label={s.master} color={ujaGold} />
+                <BadgeItem label={s.scholarships} color={ujaGold} />
+                <BadgeItem label="Erasmus+" color={ujaGold} />
               </div>
             </CardContent>
           </Card>
@@ -133,18 +155,18 @@ export function StudyUJA({ lang }: StudyUJAProps) {
           <div className="grid gap-3">
             <Card className="border-none shadow-sm bg-white">
               <CardContent className="p-4 flex gap-4">
-                <MapPin className="h-5 w-5 text-[#612d8a] shrink-0" />
+                <MapPin className="h-5 w-5 shrink-0" style={{ color: ujaPurple }} />
                 <div className="space-y-1">
                   <h4 className="text-sm font-bold">Barrios en Jaén</h4>
                   <p className="text-xs text-muted-foreground">Av. de Andalucía (El Gran Eje), El Valle (cerca UJA), Bulevar.</p>
                 </div>
               </CardContent>
             </Card>
-            <Card className="border-none shadow-sm bg-white border-2 border-[#612d8a]/10">
+            <Card className="border-none shadow-sm bg-white border-2" style={{ borderColor: `${ujaPurple}20` }}>
               <CardContent className="p-4">
                 <h4 className="text-sm font-bold mb-2">Alojamiento UJA</h4>
                 <p className="text-xs text-muted-foreground mb-3">Plataforma oficial para buscar pisos y residencias.</p>
-                <Button variant="outline" size="sm" className="w-full rounded-xl text-[#612d8a] border-[#612d8a]" asChild>
+                <Button variant="outline" size="sm" className="w-full rounded-xl" style={{ color: ujaPurple, borderColor: ujaPurple }} asChild>
                   <a href="https://www.ujaen.es/servicios/alojamiento" target="_blank">Ver Plataforma <ExternalLink className="h-3 w-3 ml-1" /></a>
                 </Button>
               </CardContent>
@@ -166,8 +188,8 @@ export function StudyUJA({ lang }: StudyUJAProps) {
                   </p>
                 </div>
               </div>
-              <div className="bg-[#612d8a]/5 p-3 rounded-xl">
-                <h5 className="font-bold text-xs text-[#612d8a]">Campus Linares</h5>
+              <div className="p-3 rounded-xl" style={{ backgroundColor: `${ujaPurple}0D` }}>
+                <h5 className="font-bold text-xs" style={{ color: ujaPurple }}>Campus Linares</h5>
                 <p className="text-xs text-muted-foreground">Conexión directa en bus desde la Estación de Autobuses de Jaén (45 min).</p>
               </div>
             </CardContent>
@@ -199,7 +221,7 @@ export function StudyUJA({ lang }: StudyUJAProps) {
       </Tabs>
 
       <section className="bg-white p-6 rounded-3xl border border-slate-200 space-y-4">
-        <h3 className="font-bold text-lg flex items-center gap-2 text-[#612d8a]">
+        <h3 className="font-bold text-lg flex items-center gap-2" style={{ color: ujaPurple }}>
           <Map className="h-5 w-5" /> {s.mapTitle}
         </h3>
         <div className="grid grid-cols-1 gap-2">
@@ -212,19 +234,22 @@ export function StudyUJA({ lang }: StudyUJAProps) {
               className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors group"
             >
               <span className="text-xs font-bold text-slate-700">{loc.name}</span>
-              <MapPin className="h-4 w-4 text-[#c5a059] group-hover:scale-110 transition-transform" />
+              <MapPin className="h-4 w-4 transition-transform group-hover:scale-110" style={{ color: ujaGold }} />
             </a>
           ))}
         </div>
+        <p className="text-[10px] text-muted-foreground italic text-center">
+          * Los enlaces abrirán Google Maps con la ubicación exacta de cada servicio.
+        </p>
       </section>
     </div>
   );
 }
 
-function BadgeItem({ label }: { label: string }) {
+function BadgeItem({ label, color }: { label: string; color: string }) {
   return (
     <div className="flex items-center gap-2 p-2 px-3 rounded-lg border text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-white">
-      <div className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
       {label}
     </div>
   );
