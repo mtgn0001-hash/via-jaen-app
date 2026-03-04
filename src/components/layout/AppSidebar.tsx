@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -12,7 +13,9 @@ import {
   ShieldAlert,
   Globe,
   User,
-  ChevronRight
+  ChevronRight,
+  FileText,
+  Rocket
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import {
@@ -58,6 +61,7 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
     { id: 'procedures', icon: Gavel, label: t.procedures, category: 'legal' },
     { id: 'family', icon: HeartPulse, label: t.familyResources.title, category: 'social' },
     { id: 'study', icon: GraduationCap, label: t.studyUJA.title, category: 'education' },
+    { id: 'employment', icon: FileText, label: t.employment.title, category: 'economy' },
     { id: 'work', icon: Briefcase, label: t.work.title, category: 'economy' },
     { id: 'community', icon: Languages, label: t.community, category: 'culture' },
     { id: 'directory', icon: MapPin, label: t.directory, category: 'help' },
@@ -69,7 +73,7 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
     { id: 'legal', label: 'Trámites Legales', items: navItems.filter(i => i.category === 'legal') },
     { id: 'social', label: 'Salud y Familia', items: navItems.filter(i => i.category === 'social') },
     { id: 'education', label: 'Universidad (UJA)', items: navItems.filter(i => i.category === 'education') },
-    { id: 'economy', label: 'Trabajo y Campo', items: navItems.filter(i => i.category === 'economy') },
+    { id: 'economy', label: 'Trabajo y Empleo', items: navItems.filter(i => i.category === 'economy') },
     { id: 'culture', label: 'Integración', items: navItems.filter(i => i.category === 'culture') },
     { id: 'help', label: 'Directorio', items: navItems.filter(i => i.category === 'help') },
     { id: 'emergency', label: 'Urgencias', items: navItems.filter(i => i.category === 'emergency') },

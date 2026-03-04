@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -10,6 +11,7 @@ import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
 import { FamilyResources } from "@/components/family/FamilyResources";
 import { StudyUJA } from "@/components/study/StudyUJA";
 import { WorkTab } from "@/components/work/WorkTab";
+import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 import { IntegrationTab } from "@/components/integration/IntegrationTab";
 import { TransportTab } from "@/components/transport/TransportTab";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
@@ -92,6 +94,10 @@ export default function Home() {
 
             {activeTab === 'study' && (
               <StudyUJA lang={lang} />
+            )}
+
+            {activeTab === 'employment' && (
+              <EmploymentPortal lang={lang} />
             )}
 
             {activeTab === 'work' && (
