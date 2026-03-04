@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -19,7 +20,10 @@ import {
   Share2,
   Library,
   UserCircle,
-  Scan
+  Scan,
+  MessageSquare,
+  Lock,
+  Bot
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -74,6 +78,7 @@ export function AppSidebar({
   const [showQR, setShowQR] = React.useState(false);
 
   const handleNav = (tab: string) => {
+    if ('vibrate' in navigator) navigator.vibrate(10);
     setActiveTab(tab);
     setOpenMobile(false);
   };
@@ -81,10 +86,12 @@ export function AppSidebar({
   const categories = [
     { id: 'general', label: 'Inicio', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard },
-      { id: 'profile', icon: UserCircle, label: 'Mis Datos / Perfil' },
+      { id: 'profile', icon: UserCircle, label: 'Mis Datos' },
     ]},
-    { id: 'tools', label: 'Herramientas IA', items: [
+    { id: 'tools', label: 'Inteligencia Proactiva', items: [
+      { id: 'bot', icon: Bot, label: t.bot.title },
       { id: 'scanner', icon: Scan, label: t.scanner.title },
+      { id: 'vault', icon: Lock, label: t.vault.title },
     ]},
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
@@ -138,7 +145,7 @@ export function AppSidebar({
                 {progress.profile.name || t.title}
               </h2>
               <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">
-                {progress.profile.nie || 'Ver Perfil'}
+                {progress.profile.nie || 'Configurar Perfil'}
               </span>
             </div>
           </div>
@@ -207,7 +214,7 @@ export function AppSidebar({
         <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-4">
           <div className="flex flex-col gap-2 px-2">
             <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
-              <Palette className="h-3 w-3" /> Tema
+              <Palette className="h-3 w-3" /> Personalización
             </p>
             <div className="flex items-center justify-between">
               {themes.map((theme) => (

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -25,6 +26,8 @@ import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { TransportTab } from "@/components/transport/TransportTab";
 import { DocumentScanner } from "@/components/tools/DocumentScanner";
+import { JaenBot } from "@/components/tools/JaenBot";
+import { DocumentVault } from "@/components/profile/DocumentVault";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -92,6 +95,14 @@ export default function Home() {
               <UserProfile lang={lang} />
             )}
 
+            {activeTab === 'bot' && (
+              <JaenBot lang={lang} />
+            )}
+
+            {activeTab === 'vault' && (
+              <DocumentVault lang={lang} />
+            )}
+
             {activeTab === 'scanner' && (
               <DocumentScanner lang={lang} />
             )}
@@ -149,12 +160,6 @@ export default function Home() {
                   <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
                   <p className="text-[10px] text-muted-foreground leading-normal font-medium">
                     {t.disclaimer}
-                  </p>
-                </div>
-                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex gap-3">
-                  <ShieldAlert className="h-5 w-5 text-blue-400 shrink-0" />
-                  <p className="text-[10px] text-blue-700 leading-normal font-bold">
-                    {t.privacyNotice}
                   </p>
                 </div>
               </section>

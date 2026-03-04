@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -24,7 +25,9 @@ import {
   ShieldCheck,
   Zap,
   CheckCircle2,
-  Scan
+  Scan,
+  MessageSquare,
+  Lock
 } from "lucide-react";
 
 type DashboardProps = {
@@ -38,6 +41,24 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
 
   const mainCategories = [
     { 
+      id: 'bot', 
+      tab: 'bot', 
+      title: 'Jaén-Bot', 
+      desc: 'Asistente IA', 
+      icon: MessageSquare,
+      color: 'text-primary',
+      bgColor: 'bg-primary/10'
+    },
+    { 
+      id: 'vault', 
+      tab: 'vault', 
+      title: 'Bóveda', 
+      desc: 'Doc Seguros', 
+      icon: Lock,
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10'
+    },
+    { 
       id: 'procedures', 
       tab: 'procedures', 
       title: t.procedures, 
@@ -49,7 +70,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
     { 
       id: 'employment', 
       tab: 'employment_portal', 
-      title: t.employment.title, 
+      title: 'Empleo', 
       desc: 'Trabajo y CV', 
       icon: Briefcase,
       color: 'text-emerald-500',
@@ -65,15 +86,6 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       bgColor: 'bg-amber-500/10'
     },
     { 
-      id: 'family', 
-      tab: 'family', 
-      title: 'Familia', 
-      desc: 'Niños y Ayudas', 
-      icon: Baby,
-      color: 'text-rose-500',
-      bgColor: 'bg-rose-500/10'
-    },
-    { 
       id: 'help', 
       tab: 'directory', 
       title: 'Ayuda', 
@@ -82,19 +94,8 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       color: 'text-cyan-500',
       bgColor: 'bg-cyan-500/10'
     },
-    { 
-      id: 'emergency', 
-      tab: 'emergency', 
-      title: 'S.O.S', 
-      desc: 'Urgencias', 
-      icon: ShieldAlert, 
-      isEmergency: true,
-      color: 'text-destructive',
-      bgColor: 'bg-destructive/10'
-    },
   ];
 
-  // VISTA DE LECTURA FÁCIL (Simplificada al máximo)
   if (progress.easyReading) {
     return (
       <div className="space-y-6 pt-4">
@@ -111,7 +112,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
              <Button 
                key={cat.id} 
                onClick={() => setActiveTab(cat.tab)}
-               className={`h-28 rounded-[35px] bg-card border-[6px] text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all ${cat.isEmergency ? 'border-destructive/20 text-destructive' : 'border-primary/10'}`}
+               className={`h-28 rounded-[35px] bg-card border-[6px] text-primary shadow-xl flex items-center justify-between px-8 group active:scale-90 transition-all border-primary/10`}
              >
                <div className="flex items-center gap-6">
                  <div className={`p-3 rounded-2xl ${cat.bgColor}`}>
@@ -126,21 +127,10 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
              </Button>
           ))}
         </div>
-
-        <section className="bg-foreground text-background p-8 rounded-[40px] space-y-4">
-           <div className="flex items-center gap-4">
-             <ShieldCheck className="h-10 w-10 text-green-400" />
-             <h3 className="text-xl font-black uppercase">Seguro y Privado</h3>
-           </div>
-           <p className="text-sm font-medium opacity-70 leading-relaxed">
-             Tus datos se quedan en este móvil. Nadie puede ver tus papeles.
-           </p>
-        </section>
       </div>
     );
   }
 
-  // VISTA ESTÁNDAR (Versión "Pro")
   return (
     <div className="space-y-6">
       <section>
@@ -151,56 +141,55 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           </p>
         </div>
         
-        <Card className="bg-primary text-primary-foreground overflow-hidden border-none shadow-lg mb-6">
-          <CardContent className="p-6">
+        <Card className="bg-primary text-primary-foreground overflow-hidden border-none shadow-lg mb-6 group relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
+          <CardContent className="p-6 relative">
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-2xl font-bold mb-2">Vía Jaén</h2>
-                <p className="text-primary-foreground/80 text-xs max-w-[200px] leading-relaxed">
-                  Tu guía segura y privada para la vida en Jaén. Todo funciona sin internet.
+                <h2 className="text-3xl font-black mb-2 tracking-tighter uppercase">Vía Jaén</h2>
+                <p className="text-primary-foreground/80 text-[10px] max-w-[200px] leading-relaxed font-bold uppercase tracking-wider">
+                  Guía comunitaria segura • 2026 Edition
                 </p>
               </div>
-              <div className="bg-white/20 p-3 rounded-2xl">
-                <LayoutGrid className="h-8 w-8" />
+              <div className="bg-white/20 p-4 rounded-[2rem] animate-pulse">
+                <ShieldCheck className="h-10 w-10" />
               </div>
             </div>
           </CardContent>
         </Card>
       </section>
 
+      {/* Modern Traffic Light Widget */}
+      <AppointmentStatus lang={lang} />
+
       {/* Gamification: First Steps */}
       <FirstStepsProgress lang={lang} setActiveTab={setActiveTab} />
 
-      {/* Smart Appointment Banner */}
+      {/* Smart Appointment Banner (Time-based Proactive) */}
       <AppointmentBanner lang={lang} />
 
-      {/* Security Banner */}
-      <section className="bg-secondary border border-primary/10 p-4 rounded-3xl flex gap-4 items-center">
-         <ShieldCheck className="h-8 w-8 text-primary shrink-0" />
-         <p className="text-[10px] text-foreground font-bold leading-tight">
-            {t.privacyBanner}
-         </p>
-      </section>
-
-      {/* Main Navigation Grid */}
+      {/* Quick Navigation Cards (iOS Style) */}
       <section>
-        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1 uppercase tracking-tighter">
-          Categorías
+        <h3 className="font-headline font-black text-xs mb-4 flex items-center gap-2 px-1 uppercase tracking-widest text-muted-foreground">
+          Herramientas y Ayuda
         </h3>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {mainCategories.map((cat) => (
             <Card 
               key={cat.id} 
-              className="border-none shadow-sm cursor-pointer active:scale-95 transition-transform bg-card overflow-hidden group hover:shadow-md"
-              onClick={() => setActiveTab(cat.tab)}
+              className="border-none shadow-lg cursor-pointer active:scale-95 transition-all bg-white overflow-hidden group hover:shadow-primary/10 rounded-[2.5rem]"
+              onClick={() => {
+                if ('vibrate' in navigator) navigator.vibrate(20);
+                setActiveTab(cat.tab);
+              }}
             >
-              <CardContent className="p-4 flex flex-col items-center text-center gap-2">
-                <div className={`p-3 rounded-2xl transition-transform group-hover:scale-110 ${cat.bgColor}`}>
-                  <cat.icon className={`h-6 w-6 ${cat.color}`} />
+              <CardContent className="p-5 flex flex-col items-center text-center gap-3">
+                <div className={`p-4 rounded-3xl transition-transform group-hover:scale-110 group-hover:rotate-6 ${cat.bgColor}`}>
+                  <cat.icon className={`h-8 w-8 ${cat.color}`} />
                 </div>
-                <div className="space-y-0.5">
-                  <h4 className="font-bold text-xs uppercase tracking-tight">{cat.title}</h4>
-                  <p className="text-[9px] text-muted-foreground line-clamp-1 font-bold uppercase">{cat.desc}</p>
+                <div className="space-y-1">
+                  <h4 className="font-black text-xs uppercase tracking-tighter">{cat.title}</h4>
+                  <p className="text-[9px] text-muted-foreground line-clamp-1 font-bold uppercase tracking-widest">{cat.desc}</p>
                 </div>
               </CardContent>
             </Card>
@@ -208,43 +197,47 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </div>
       </section>
 
-      {/* Legal Timeline Calculator */}
+      {/* Security Banner Premium */}
+      <section className="bg-slate-900 text-white p-6 rounded-[3rem] flex gap-5 items-center shadow-xl">
+         <div className="bg-white/10 p-3 rounded-2xl">
+            <ShieldCheck className="h-8 w-8 text-primary" />
+         </div>
+         <p className="text-[11px] font-bold leading-snug tracking-tight">
+            Tus datos están blindados. No usamos servidores externos para tus fotos ni documentos. Privacidad total por diseño.
+         </p>
+      </section>
+
       <LegalTimeline lang={lang} />
-
-      {/* Appointment Traffic Light Widget */}
-      <AppointmentStatus lang={lang} />
-
-      {/* Currency Converter Utility */}
       <CurrencyConverter lang={lang} />
 
       <section className="pb-10">
-        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1 uppercase tracking-tighter">
+        <h3 className="font-headline font-black text-xs mb-4 flex items-center gap-2 px-1 uppercase tracking-widest text-muted-foreground">
           Guías Destacadas
         </h3>
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 gap-4">
           {[
             { id: 'empadronamiento', title: 'Empadronamiento', desc: 'Registro en el Ayuntamiento', icon: Building2 },
             { id: 'nie', title: 'NIE / TIE', desc: 'Identificación oficial', icon: CreditCard },
           ].map((link) => (
             <Card 
               key={link.id} 
-              className="group hover:border-primary transition-colors cursor-pointer border-none shadow-sm rounded-2xl bg-card"
+              className="group hover:border-primary transition-all cursor-pointer border-none shadow-md rounded-[2.5rem] bg-white active:scale-[0.98]"
               onClick={() => setActiveTab('procedures')}
             >
-              <CardContent className="p-4 flex items-center gap-4">
-                <div className="bg-muted p-3 rounded-xl group-hover:bg-primary/10 transition-colors">
-                  <link.icon className="h-6 w-6 text-primary" />
+              <CardContent className="p-6 flex items-center gap-4">
+                <div className="bg-slate-50 p-4 rounded-2xl group-hover:bg-primary/10 transition-colors">
+                  <link.icon className="h-7 w-7 text-primary" />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-bold text-sm leading-tight uppercase tracking-tight">{link.title}</h4>
-                    <Badge variant="outline" className="text-[10px] uppercase font-black tracking-widest text-muted-foreground">
-                      Guía
+                    <h4 className="font-black text-sm leading-tight uppercase tracking-tighter">{link.title}</h4>
+                    <Badge variant="outline" className="text-[9px] uppercase font-black tracking-[0.2em] text-primary border-primary/20 bg-primary/5">
+                      Pro
                     </Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1 font-medium">{link.desc}</p>
+                  <p className="text-[10px] text-muted-foreground mt-1 font-bold uppercase">{link.desc}</p>
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground opacity-30" />
+                <ArrowRight className="h-5 w-5 text-primary opacity-20 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
               </CardContent>
             </Card>
           ))}

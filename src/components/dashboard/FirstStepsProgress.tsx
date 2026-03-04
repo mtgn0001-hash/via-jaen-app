@@ -26,8 +26,13 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
   const completedCount = Object.values(progress.firstSteps).filter(Boolean).length;
   const percentage = (completedCount / steps.length) * 100;
 
+  const handleToggle = (id: string) => {
+    if ('vibrate' in navigator) navigator.vibrate(50);
+    toggleFirstStep(id);
+  };
+
   return (
-    <Card className="border-none bg-card shadow-sm mb-6 overflow-hidden">
+    <Card className="border-none bg-card shadow-sm mb-6 overflow-hidden rounded-[2.5rem]">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="space-y-1">
@@ -35,7 +40,6 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
             <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">{t.subtitle}</p>
           </div>
           
-          {/* Circular Progress Bar */}
           <div className="relative h-16 w-16 flex items-center justify-center">
             <svg className="h-full w-full transform -rotate-90">
               <circle
@@ -43,7 +47,7 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
                 cy="32"
                 r="28"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="6"
                 fill="transparent"
                 className="text-primary/10"
               />
@@ -52,12 +56,12 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
                 cy="32"
                 r="28"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="6"
                 fill="transparent"
                 strokeDasharray={175.9}
                 strokeDashoffset={175.9 - (175.9 * percentage) / 100}
                 strokeLinecap="round"
-                className="text-primary transition-all duration-1000"
+                className="text-primary transition-all duration-1000 ease-out"
               />
             </svg>
             <span className="absolute text-xs font-black text-primary">{Math.round(percentage)}%</span>
@@ -68,14 +72,14 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
           {steps.map((step) => (
             <div 
               key={step.id} 
-              className={`flex items-center justify-between p-3 rounded-2xl border-2 transition-all ${progress.firstSteps[step.id] ? 'bg-primary/5 border-primary/20' : 'bg-slate-50 border-transparent'}`}
+              className={`flex items-center justify-between p-4 rounded-3xl border-2 transition-all ${progress.firstSteps[step.id] ? 'bg-primary/5 border-primary/20' : 'bg-slate-50 border-transparent'}`}
             >
               <div className="flex items-center gap-3">
                 <Checkbox 
                   id={`step-${step.id}`}
                   checked={progress.firstSteps[step.id]}
-                  onCheckedChange={() => toggleFirstStep(step.id)}
-                  className="h-5 w-5 rounded-lg"
+                  onCheckedChange={() => handleToggle(step.id)}
+                  className="h-6 w-6 rounded-xl border-2"
                 />
                 <label 
                   htmlFor={`step-${step.id}`}
@@ -87,10 +91,10 @@ export function FirstStepsProgress({ lang, setActiveTab }: FirstStepsProgressPro
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-8 px-2 text-[10px] font-black uppercase tracking-widest gap-1 hover:bg-primary/10 hover:text-primary"
+                className="h-9 px-3 text-[10px] font-black uppercase tracking-widest gap-2 hover:bg-primary/10 hover:text-primary rounded-xl"
                 onClick={() => setActiveTab(step.tab)}
               >
-                {t.howTo} <ArrowRight className="h-3 w-3" />
+                {t.howTo} <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
           ))}

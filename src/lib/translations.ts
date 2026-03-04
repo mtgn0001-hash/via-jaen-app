@@ -26,6 +26,21 @@ export const translations = {
     tipsDesc: 'Comisaría (Plaza Batallas): Prueba los viernes a las 9:00 AM.',
     claveNote: 'Importante: Saca tu Cl@ve en cuanto tengas el NIE.',
     disclaimer: 'Guía comunitaria. No oficial. Los datos se guardan solo en tu móvil.',
+    bot: {
+      title: 'Jaén-Bot',
+      subtitle: 'Asistente 3-clics',
+      welcome: '¡Hola! Soy tu asistente para Jaén. ¿En qué te puedo ayudar hoy?',
+      back: 'Volver atrás',
+      reset: 'Nueva consulta'
+    },
+    vault: {
+      title: 'Bóveda Segura',
+      subtitle: 'Tus fotos protegidas',
+      addDoc: 'Añadir Documento',
+      emergencyMode: 'Modo Emergencia',
+      emergencyDesc: 'Muestra el documento a brillo máximo para lectura rápida.',
+      empty: 'No hay documentos guardados aún.'
+    },
     firstSteps: {
       title: 'Mis Primeros Pasos',
       subtitle: 'Completa tu integración en Jaén',
@@ -214,6 +229,21 @@ export const translations = {
     downloadForm: 'Download PDF',
     fillOnline: 'Fill Online',
     pdfNote: 'Note: Use Adobe Acrobat to fill out PDF forms.',
+    bot: {
+      title: 'Jaén-Bot',
+      subtitle: '3-click Assistant',
+      welcome: 'Hello! I am your Jaén assistant. How can I help you today?',
+      back: 'Go back',
+      reset: 'New search'
+    },
+    vault: {
+      title: 'Safe Vault',
+      subtitle: 'Protected photos',
+      addDoc: 'Add Document',
+      emergencyMode: 'Emergency Mode',
+      emergencyDesc: 'Show document at max brightness for quick reading.',
+      empty: 'No documents saved yet.'
+    },
     firstSteps: {
       title: 'My First Steps',
       subtitle: 'Complete your integration in Jaen',
