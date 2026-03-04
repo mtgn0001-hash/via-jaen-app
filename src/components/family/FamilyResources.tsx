@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -13,7 +14,8 @@ import {
   Calendar,
   MapPin,
   Stethoscope,
-  TreePine
+  TreePine,
+  Ticket
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AgeCalculator } from "./AgeCalculator";
@@ -86,6 +88,12 @@ export function FamilyResources({ lang }: FamilyResourcesProps) {
         <TabsContent value="aids" className="space-y-4 pt-4">
           <div className="grid gap-4">
             <AidCard 
+              title="Carné Joven Andaluz" 
+              desc="Descuentos en transporte, cultura y comercios para jóvenes de 14 a 30 años." 
+              link="https://www.patiojoven.es/carne-joven"
+              icon={<Ticket className="h-4 w-4" />}
+            />
+            <AidCard 
               title={f.imv} 
               desc="Ayuda estatal para hogares con bajos ingresos." 
               link="https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/PrestacionesPensionesTrabajadores/65850d1a-6d06-4551-91e7-bc74a613703a"
@@ -153,11 +161,14 @@ export function FamilyResources({ lang }: FamilyResourcesProps) {
   );
 }
 
-function AidCard({ title, desc, link }: { title: string; desc: string; link: string }) {
+function AidCard({ title, desc, link, icon }: { title: string; desc: string; link: string; icon?: React.ReactNode }) {
   return (
     <Card className="border-none shadow-sm bg-white overflow-hidden">
       <CardContent className="p-4">
-        <h4 className="font-bold text-sm mb-1">{title}</h4>
+        <div className="flex items-center gap-2 mb-2">
+          {icon && <div className="text-primary">{icon}</div>}
+          <h4 className="font-bold text-sm">{title}</h4>
+        </div>
         <p className="text-xs text-muted-foreground mb-3">{desc}</p>
         <Button variant="secondary" size="sm" className="w-full rounded-lg text-[10px] h-8 font-bold" asChild>
           <a href={link} target="_blank">Ver Requisitos <ExternalLink className="h-3 w-3 ml-1" /></a>

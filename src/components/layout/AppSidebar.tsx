@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -17,8 +18,7 @@ import {
   Palette,
   Check,
   Share2,
-  Library,
-  Ticket
+  Library
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -83,7 +83,6 @@ export function AppSidebar({
     { id: 'regional', label: 'Trámites Autonómicos', items: [
       { id: 'employment_portal', icon: FileText, label: t.employment.title },
       { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
-      { id: 'carnet_joven', icon: Ticket, label: 'Carné Joven Andaluz' },
     ]},
     { id: 'social', label: 'Salud y Familia', items: [
       { id: 'family', icon: HeartPulse, label: t.familyResources.title },
