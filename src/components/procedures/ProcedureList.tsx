@@ -43,29 +43,28 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
     }
   ];
 
+  // VISTA LECTURA FÁCIL
   if (progress.easyReading) {
     return (
-      <div className="space-y-6 pb-20">
-        <h2 className="text-3xl font-black text-primary uppercase tracking-tight">{t.procedures}</h2>
-        <div className="grid gap-6">
+      <div className="space-y-8 pb-20">
+        <h2 className="text-4xl font-black text-primary uppercase tracking-tight">{t.procedures}</h2>
+        <div className="grid gap-10">
           {flows.map(flow => (
-            <section key={flow.id} className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="bg-primary p-4 rounded-3xl shadow-lg">
-                  <flow.icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-black uppercase text-slate-800">{flow.title}</h3>
+            <section key={flow.id} className="space-y-6">
+              <div className="flex items-center gap-4 bg-primary/5 p-4 rounded-3xl">
+                <flow.icon className="h-10 w-10 text-primary" />
+                <h3 className="text-3xl font-black uppercase text-slate-800">{flow.title}</h3>
               </div>
-              <div className="grid gap-3">
+              <div className="grid gap-4">
                 {flow.steps.map(step => (
-                  <Card key={step.id} className="border-[4px] border-primary/10 rounded-[30px] shadow-none">
-                    <CardContent className="p-6 flex items-start gap-4">
-                      <div className="bg-green-100 p-2 rounded-xl">
-                        <CheckCircle2 className="h-6 w-6 text-green-600" />
+                  <Card key={step.id} className="border-[6px] border-primary/5 rounded-[40px] shadow-lg bg-white">
+                    <CardContent className="p-8 flex items-start gap-6">
+                      <div className="bg-green-100 p-3 rounded-2xl">
+                        <CheckCircle2 className="h-8 w-8 text-green-600" />
                       </div>
-                      <div>
-                        <p className="text-xl font-black leading-tight mb-1">{step.label}</p>
-                        <p className="text-sm font-bold text-muted-foreground">{step.desc}</p>
+                      <div className="flex-1">
+                        <p className="text-2xl font-black leading-tight mb-2 uppercase tracking-tight">{step.label}</p>
+                        <p className="text-lg font-bold text-muted-foreground leading-snug">{step.desc}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -78,6 +77,7 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
     );
   }
 
+  // VISTA ESTÁNDAR
   return (
     <div className="space-y-4 pb-20">
       <h2 className="text-2xl font-bold mb-4">{t.procedures}</h2>

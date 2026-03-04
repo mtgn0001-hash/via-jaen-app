@@ -110,7 +110,7 @@ export function Header({ lang, completion }: HeaderProps) {
       {isEasy && (
         <div className="max-w-lg mx-auto flex items-center gap-2 mt-2">
            <Zap className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-           <p className="text-xs font-black text-primary uppercase tracking-tighter">Todo es más sencillo ahora</p>
+           <p className="text-xs font-black text-primary uppercase tracking-tighter">Interfaz simplificada para ti</p>
         </div>
       )}
 

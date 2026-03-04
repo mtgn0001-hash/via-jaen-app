@@ -17,8 +17,6 @@ import {
   GraduationCap,
   Baby,
   MapPin,
-  Bus,
-  Heart,
   ShieldAlert,
   ArrowRight,
   Info,
@@ -45,6 +43,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
     { id: 'emergency', tab: 'emergency', title: 'S.O.S', desc: 'Urgencias', icon: ShieldAlert, color: 'text-destructive', bg: 'bg-destructive/10' },
   ];
 
+  // VISTA DE LECTURA FÁCIL (Simplificada al máximo)
   if (progress.easyReading) {
     return (
       <div className="space-y-6 pt-4">
@@ -80,16 +79,17 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         <section className="bg-slate-900 text-white p-8 rounded-[40px] space-y-4">
            <div className="flex items-center gap-4">
              <ShieldCheck className="h-10 w-10 text-green-400" />
-             <h3 className="text-xl font-black uppercase">Tus datos están seguros</h3>
+             <h3 className="text-xl font-black uppercase">Seguro y Privado</h3>
            </div>
            <p className="text-sm font-medium opacity-70 leading-relaxed">
-             Nada sale de este móvil. Nadie puede ver tus papeles aquí.
+             Tus datos se quedan en este móvil. Nadie puede ver tus papeles.
            </p>
         </section>
       </div>
     );
   }
 
+  // VISTA ESTÁNDAR (Versión "Pro")
   return (
     <div className="space-y-6">
       <section>
