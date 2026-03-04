@@ -119,7 +119,7 @@ export function AppSidebar({
             </div>
             <div className="flex flex-col">
               <h2 className="font-headline font-black text-lg tracking-tight text-primary uppercase">
-                Jaén Integra
+                Vía Jaén
               </h2>
               <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                 Guía Comunitaria

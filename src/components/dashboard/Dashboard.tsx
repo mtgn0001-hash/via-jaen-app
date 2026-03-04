@@ -55,7 +55,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
           <CardContent className="p-6">
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-2xl font-bold mb-2">Jaén Integra</h2>
+                <h2 className="text-2xl font-bold mb-2">Vía Jaén</h2>
                 <p className="text-white/80 text-xs max-w-[200px] leading-relaxed">
                   Tu guía segura y privada para la vida en Jaén. Todo funciona sin internet.
                 </p>

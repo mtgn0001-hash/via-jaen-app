@@ -1,7 +1,7 @@
 
 export const translations = {
   es: {
-    title: 'Jaén Integra',
+    title: 'Vía Jaén',
     dashboard: 'Inicio',
     procedures: 'Trámites',
     backpack: 'Mochila',
@@ -51,7 +51,7 @@ export const translations = {
       next: 'Siguiente'
     },
     onboarding: {
-      title1: 'Bienvenido a Jaén Integra',
+      title1: 'Bienvenido a Vía Jaén',
       desc1: 'Tu guía segura para la regularización y vida en la provincia de Jaén.',
       title2: 'Instala la App',
       desc2: 'Añádela a tu pantalla de inicio para usarla sin internet (Modo Offline).',
@@ -184,7 +184,7 @@ export const translations = {
     }
   },
   en: {
-    title: 'Jaén Integra',
+    title: 'Vía Jaén',
     dashboard: 'Home',
     procedures: 'Steps',
     backpack: 'Backpack',
@@ -228,7 +228,7 @@ export const translations = {
       next: 'Next'
     },
     onboarding: {
-      title1: 'Welcome to Jaén Integra',
+      title1: 'Welcome to Vía Jaén',
       desc1: 'Your safe guide for legalization and life in the Jaén province.',
       title2: 'Install the App',
       desc2: 'Add it to your home screen to use it without internet (Offline Mode).',
@@ -361,7 +361,7 @@ export const translations = {
     }
   },
   fr: {
-    title: 'Jaén Integra',
+    title: 'Vía Jaén',
     dashboard: 'Accueil',
     procedures: 'Démarches',
     backpack: 'Sac à Dos',
@@ -404,7 +404,7 @@ export const translations = {
       next: 'Suivant'
     },
     onboarding: {
-      title1: 'Bienvenue sur Jaén Integra',
+      title1: 'Bienvenue sur Vía Jaén',
       desc1: 'Votre guide sûr pour la régularisation et la vie à Jaén.',
       title2: 'Installez l\'App',
       desc2: 'Ajoutez-la à l\'écran d\'accueil pour l\'utiliser sans internet.',
@@ -537,7 +537,7 @@ export const translations = {
     }
   },
   ar: {
-    title: 'خاين إنتيغرا',
+    title: 'فيا خاين',
     dashboard: 'الرئيسية',
     procedures: 'الإجراءات',
     backpack: 'حقيبتي',
@@ -580,7 +580,7 @@ export const translations = {
       next: 'التالي'
     },
     onboarding: {
-      title1: 'مرحباً بك في خاين إنتيغرا',
+      title1: 'مرحباً بك في فيا خاين',
       desc1: 'دليلك الآمن للتسوية والحياة في مقاطعة خاين.',
       title2: 'تثبيت التطبيق',
       desc2: 'أضفه إلى شاشتك الرئيسية لاستخدامه بدون إنترنت (وضع عدم الاتصال).',
@@ -713,7 +713,7 @@ export const translations = {
     }
   },
   ro: {
-    title: 'Jaén Integra',
+    title: 'Vía Jaén',
     dashboard: 'Acasă',
     procedures: 'Proceduri',
     backpack: 'Rucsac',
@@ -757,7 +757,7 @@ export const translations = {
       next: 'Următorul'
     },
     onboarding: {
-      title1: 'Bun venit la Jaén Integra',
+      title1: 'Bun venit la Vía Jaén',
       desc1: 'Ghidul tău sigur pentru legalizare și viață în provincia Jaén.',
       title2: 'Instalează App',
       desc2: 'Adaugă pe ecranul principal pentru folosire fără internet (Mod Offline).',
@@ -806,7 +806,7 @@ export const translations = {
       cvAdvice: 'Adaptează CV-ul pentru piața spaniolă.',
       smiInfo: 'SMI 2026: Salariul Minim.',
       inspection: 'Inspecția Muncii',
-      legalWarning: 'Nu uita că pentru a lucra legal ai nevoie de TIE sau rezoluția de azil.',
+      legalWarning: 'Nu uita că para a lucra legal ai nevoie de TIE sau rezoluția de azil.',
       faqLawyer: 'Întrebări Juridice',
       cadeInfo: 'Ajutor pentru a-ți deschide propria afacere.',
       autonomous: 'Ajutoare Liber-profesioniști',

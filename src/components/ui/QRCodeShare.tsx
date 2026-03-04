@@ -40,7 +40,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
   };
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(`Hola! Te comparto Jaén Integra, una guía segura y privada para trámites en Jaén: ${url}`);
+    const text = encodeURIComponent(`Hola! Te comparto Vía Jaén, una guía segura y privada para trámites en Jaén: ${url}`);
     window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
@@ -57,7 +57,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
         <DialogContent className="sm:max-w-[800px] h-[90vh] overflow-y-auto p-0 border-none bg-white">
           <div className="p-8 flex flex-col items-center text-center space-y-8 print:p-0">
             <div className="space-y-2">
-              <h1 className="text-5xl font-black text-primary tracking-tighter uppercase">Jaén Integra</h1>
+              <h1 className="text-5xl font-black text-primary tracking-tighter uppercase">Vía Jaén</h1>
               <p className="text-xl font-bold text-muted-foreground uppercase tracking-widest">Guía Comunitaria Segura</p>
             </div>
 
