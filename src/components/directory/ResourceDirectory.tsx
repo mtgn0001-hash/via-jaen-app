@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -12,7 +13,7 @@ type ResourceDirectoryProps = {
   lang: Language;
 };
 
-type ResourceType = 'NGO' | 'Salud' | 'Albergue' | 'Comedor' | 'Administración';
+type ResourceType = 'ONG' | 'Salud' | 'Albergue' | 'Comedor' | 'Administración';
 
 export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
   const t = translations[lang];
@@ -22,45 +23,45 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
 
   const resources = [
     // JAEN
-    { name: 'Cruz Roja Española Jaén', city: 'Jaén', type: 'NGO', phone: '953 251 540', url: 'https://www.cruzroja.es' },
-    { name: 'Cáritas Interparroquial', city: 'Jaén', type: 'NGO', phone: '953 234 445', url: 'https://www.caritas.es/jaen/' },
+    { name: 'Cruz Roja Española Jaén', city: 'Jaén', type: 'ONG', phone: '953 251 540', url: 'https://www.cruzroja.es' },
+    { name: 'Cáritas Interparroquial', city: 'Jaén', type: 'ONG', phone: '953 234 445', url: 'https://www.caritas.es/jaen/' },
     { name: 'Albergue Municipal (Transeúntes)', city: 'Jaén', type: 'Albergue', phone: '953 219 100', url: '#' },
     { name: 'Comedor Social San Roque', city: 'Jaén', type: 'Comedor', phone: '953 241 122', url: '#' },
     { name: 'Centro de Salud Bulevar', city: 'Jaén', type: 'Salud', phone: '953 013 100', url: 'https://www.sspa.juntadeandalucia.es' },
     
     // MADRID
-    { name: 'CEAR Madrid', city: 'Madrid', type: 'NGO', phone: '915 550 698', url: 'https://www.cear.es' },
+    { name: 'CEAR Madrid', city: 'Madrid', type: 'ONG', phone: '915 550 698', url: 'https://www.cear.es' },
     { name: 'Centro de Acogida San Isidro', city: 'Madrid', type: 'Albergue', phone: '913 656 461', url: '#' },
     { name: 'Comedor Social María Inmaculada', city: 'Madrid', type: 'Comedor', phone: '915 413 543', url: '#' },
     { name: 'Centro de Salud Segovia', city: 'Madrid', type: 'Salud', phone: '914 367 700', url: '#' },
-    { name: 'ACCEM Madrid', city: 'Madrid', type: 'NGO', phone: '915 327 478', url: 'https://www.accem.es' },
+    { name: 'ACCEM Madrid', city: 'Madrid', type: 'ONG', phone: '915 327 478', url: 'https://www.accem.es' },
 
     // BARCELONA
-    { name: 'Cruz Roja Barcelona', city: 'Barcelona', type: 'NGO', phone: '933 002 020', url: '#' },
+    { name: 'Cruz Roja Barcelona', city: 'Barcelona', type: 'ONG', phone: '933 002 020', url: '#' },
     { name: 'CAP Drassanes (Salud)', city: 'Barcelona', type: 'Salud', phone: '933 294 495', url: '#' },
     { name: 'Centro de Acogida Convive', city: 'Barcelona', type: 'Albergue', phone: '934 121 212', url: '#' },
     { name: 'Menjador Social Canpedró', city: 'Barcelona', type: 'Comedor', phone: '934 265 110', url: '#' },
-    { name: 'Arrels Fundació', city: 'Barcelona', type: 'NGO', phone: '934 412 990', url: 'https://www.arrelsfundacio.org' },
+    { name: 'Arrels Fundació', city: 'Barcelona', type: 'ONG', phone: '934 412 990', url: 'https://www.arrelsfundacio.org' },
 
     // VALENCIA
     { name: 'Centro de Salud Guillem de Castro', city: 'Valencia', type: 'Salud', phone: '963 862 000', url: '#' },
     { name: 'Albergue Municipal San Juan de Dios', city: 'Valencia', type: 'Albergue', phone: '963 655 425', url: '#' },
     { name: 'Comedor Social San José', city: 'Valencia', type: 'Comedor', phone: '963 916 430', url: '#' },
-    { name: 'ACCEM Valencia', city: 'Valencia', type: 'NGO', phone: '963 154 340', url: '#' },
+    { name: 'ACCEM Valencia', city: 'Valencia', type: 'ONG', phone: '963 154 340', url: '#' },
 
     // SEVILLA
     { name: 'Comedor Social San Juan de Dios', city: 'Sevilla', type: 'Comedor', phone: '954 221 212', url: '#' },
     { name: 'Centro de Salud Alameda', city: 'Sevilla', type: 'Salud', phone: '954 919 191', url: '#' },
-    { name: 'Ateneo de Sevilla (Ayuda)', city: 'Sevilla', type: 'NGO', phone: '954 214 561', url: '#' },
+    { name: 'Ateneo de Sevilla (Ayuda)', city: 'Sevilla', type: 'ONG', phone: '954 214 561', url: '#' },
     { name: 'Albergue Municipal Sevilla', city: 'Sevilla', type: 'Albergue', phone: '955 470 200', url: '#' },
   ];
 
   const cities = ["Todas", t.cities.jaen, t.cities.madrid, t.cities.barcelona, t.cities.valencia, t.cities.sevilla];
-  const types = ["Todos", "NGO", "Salud", "Albergue", "Comedor", "Administración"];
+  const types = ["Todos", "ONG", "Salud", "Albergue", "Comedor", "Administración"];
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'NGO': return <Heart className="h-4 w-4" />;
+      case 'ONG': return <Heart className="h-4 w-4" />;
       case 'Salud': return <Stethoscope className="h-4 w-4" />;
       case 'Albergue': return <Home className="h-4 w-4" />;
       case 'Comedor': return <Utensils className="h-4 w-4" />;

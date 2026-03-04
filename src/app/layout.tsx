@@ -2,13 +2,13 @@ import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Guía España - Ayuda Inmigración',
-  description: 'Gestión de recursos y trámites legales para inmigrantes en España. PWA móvil, segura y offline.',
+  title: 'Jaén Integra - Ayuda Inmigración',
+  description: 'Gestión de recursos y trámites legales para inmigrantes en Jaén. PWA móvil, segura y offline.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Guía España',
+    title: 'Jaén Integra',
   },
   formatDetection: {
     telephone: true,

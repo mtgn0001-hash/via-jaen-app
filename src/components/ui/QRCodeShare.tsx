@@ -41,7 +41,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md rounded-3xl">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl font-bold">Compartir Guía España</DialogTitle>
+          <DialogTitle className="text-center text-xl font-bold">Compartir Jaén Integra</DialogTitle>
           <DialogDescription className="text-center">
             Escanea el código para llevar la guía en tu móvil o compártelo con otros.
           </DialogDescription>

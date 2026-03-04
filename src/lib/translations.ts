@@ -1,7 +1,7 @@
 
 export const translations = {
   es: {
-    title: 'Guía España',
+    title: 'Jaén Integra',
     dashboard: 'Panel',
     procedures: 'Trámites',
     forms: 'Papeles',
@@ -112,7 +112,7 @@ export const translations = {
     }
   },
   en: {
-    title: 'Spain Guide',
+    title: 'Jaén Integra',
     dashboard: 'Panel',
     procedures: 'Procedures',
     forms: 'Papers',
@@ -223,7 +223,7 @@ export const translations = {
     }
   },
   fr: {
-    title: 'Guide Espagne',
+    title: 'Jaén Integra',
     dashboard: 'Tableau',
     procedures: 'Démarches',
     forms: 'Papiers',
@@ -305,7 +305,7 @@ export const translations = {
       equivalence: 'Équiv. Notes'
     },
     familyResources: {
-      title: 'Pour Familles',
+      title: 'Pour Familias',
       subtitle: 'Écoles et aides à Jaén.',
       education: 'Écoles',
       aids: 'Aides Argent',
@@ -334,7 +334,7 @@ export const translations = {
     }
   },
   ar: {
-    title: 'دليل إسبانيا',
+    title: 'خاين إنتيغرا',
     dashboard: 'الرئيسية',
     procedures: 'الإجراءات',
     forms: 'الأوراق',
@@ -445,7 +445,7 @@ export const translations = {
     }
   },
   ro: {
-    title: 'Ghid Spania',
+    title: 'Jaén Integra',
     dashboard: 'Panou',
     procedures: 'Proceduri',
     forms: 'Acte',
@@ -503,7 +503,7 @@ export const translations = {
       cardDesc: 'Mai ieftin ca în numerar. Reîncărcabil.',
       pointsTitle: 'De unde cumperi',
       pointsDesc: 'Tutungerii și magazine autorizate.',
-      transportTip: 'Folosește cardul pentru a economisi mult.',
+      transportTip: 'Folosește cardul para a economisi mult.',
     },
     studyUJA: {
       title: 'Studii UJA',
