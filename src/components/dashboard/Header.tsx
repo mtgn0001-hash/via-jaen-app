@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Share2, Info, Mic, MapPin, WifiOff, Cloud, Zap } from "lucide-react";
@@ -9,8 +10,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocalStorage } from "@/lib/store";
-import { provincesData } from "@/lib/provinces";
 import { Badge } from "@/components/ui/badge";
+import { AppLogo } from "@/components/ui/AppLogo";
 
 type HeaderProps = {
   lang: Language;
@@ -51,19 +52,22 @@ export function Header({ lang, completion }: HeaderProps) {
   return (
     <header className={`sticky top-0 bg-background/80 backdrop-blur-xl z-40 px-4 border-b border-border/50 ${isEasy ? 'py-5' : 'py-3'}`}>
       <div className="flex justify-between items-center max-w-lg mx-auto mb-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <SidebarTrigger className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`} />
-          <div className="flex flex-col">
-            <h1 className={`font-headline font-black tracking-tighter text-primary uppercase leading-none ${isEasy ? 'text-2xl' : 'text-xl'}`}>
-              {t.title}
-            </h1>
-            {isEasy && <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Modo Fácil Activado</span>}
+          <div className="flex items-center gap-3">
+            <AppLogo size={isEasy ? 48 : 40} className="shadow-md border border-primary/5" />
+            <div className="flex flex-col">
+              <h1 className={`font-headline font-black tracking-tighter text-primary uppercase leading-none ${isEasy ? 'text-2xl' : 'text-xl'}`}>
+                {t.title}
+              </h1>
+              {isEasy && <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Modo Fácil</span>}
+            </div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           {!isEasy && (
-            <>
+            <div className="hidden sm:flex items-center gap-2">
               {isOffline ? (
                 <Badge variant="outline" className="h-10 rounded-xl px-3 flex items-center gap-2 border-orange-200 bg-orange-50 text-orange-700 font-bold text-[10px]">
                   <WifiOff className="h-3 w-3" /> OFFLINE
@@ -73,7 +77,7 @@ export function Header({ lang, completion }: HeaderProps) {
                   <Cloud className="h-3 w-3" /> ONLINE
                 </Badge>
               )}
-            </>
+            </div>
           )}
 
           <Button 
@@ -99,7 +103,7 @@ export function Header({ lang, completion }: HeaderProps) {
           <div className="px-1">
             <div className="flex justify-between items-end mb-1 text-[9px] font-black text-muted-foreground uppercase tracking-widest">
               <span>{t.progress}</span>
-              <span className="text-primary">{completion}%</span>
+              <span className="text-primary font-black">{completion}%</span>
             </div>
             <Progress value={completion} className="h-1.5 rounded-full bg-primary/10" />
           </div>
@@ -109,7 +113,7 @@ export function Header({ lang, completion }: HeaderProps) {
       {isEasy && (
         <div className="max-w-lg mx-auto flex items-center gap-2 mt-2">
            <Zap className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-           <p className="text-xs font-black text-primary uppercase tracking-tighter">Interfaz simplificada para ti</p>
+           <p className="text-xs font-black text-primary uppercase tracking-tighter">Interfaz simplificada</p>
         </div>
       )}
 

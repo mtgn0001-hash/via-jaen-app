@@ -14,14 +14,12 @@ import {
   Globe,
   User,
   ChevronRight,
-  FileText,
   Palette,
   Check,
   Share2,
   Library,
   UserCircle,
   Scan,
-  MessageSquare,
   Lock,
   Bot
 } from "lucide-react"
@@ -54,6 +52,7 @@ import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { QRCodeShare } from "@/components/ui/QRCodeShare"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { AppLogo } from "@/components/ui/AppLogo"
 
 type AppSidebarProps = {
   lang: Language;
@@ -130,23 +129,37 @@ export function AppSidebar({
     <>
       <Sidebar variant="floating" className="border-none shadow-none">
         <SidebarHeader className="p-6">
-          <div 
-            className="flex items-center gap-3 cursor-pointer hover:bg-primary/10 p-2 rounded-2xl transition-all"
-            onClick={() => handleNav('profile')}
-          >
-            <Avatar className="h-10 w-10 border-2 border-primary/20 shadow-md">
-              <AvatarImage src={progress.profile.photo} className="object-cover" />
-              <AvatarFallback className="bg-primary text-white font-black">
-                {progress.profile.name?.charAt(0) || <User className="h-5 w-5" />}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col overflow-hidden text-left">
-              <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
-                {progress.profile.name || t.title}
-              </h2>
-              <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">
-                {progress.profile.nie || 'Configurar Perfil'}
-              </span>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3 px-2">
+              <AppLogo size={44} className="shadow-lg border border-primary/10" />
+              <div className="flex flex-col">
+                <span className="font-headline font-black text-lg tracking-tight text-primary uppercase leading-none">
+                  Vía Jaén
+                </span>
+                <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">
+                  Comunidad Segura
+                </span>
+              </div>
+            </div>
+
+            <div 
+              className="flex items-center gap-3 cursor-pointer bg-primary/5 hover:bg-primary/10 p-3 rounded-3xl transition-all border border-primary/5"
+              onClick={() => handleNav('profile')}
+            >
+              <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
+                <AvatarImage src={progress.profile.photo} className="object-cover" />
+                <AvatarFallback className="bg-primary text-white font-black">
+                  {progress.profile.name?.charAt(0) || <User className="h-5 w-5" />}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col overflow-hidden text-left">
+                <h2 className="font-headline font-black text-xs tracking-tight text-primary uppercase truncate">
+                  {progress.profile.name || "Invitado"}
+                </h2>
+                <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">
+                  {progress.profile.nie || 'Ver Perfil'}
+                </span>
+              </div>
             </div>
           </div>
         </SidebarHeader>
@@ -155,7 +168,7 @@ export function AppSidebar({
           <div className="px-4 py-2 mb-4 bg-primary/10 backdrop-blur-md rounded-2xl mx-2 border border-primary/20 flex items-center justify-between">
             <div className="space-y-0.5">
               <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary">{t.easyReading}</Label>
-              <p className="text-[8px] text-muted-foreground font-bold">{t.easyReadingDesc}</p>
+              <p className="text-[8px] text-muted-foreground font-bold leading-none">Modo Simplificado</p>
             </div>
             <Switch 
               id="easy-reading" 
@@ -212,13 +225,12 @@ export function AppSidebar({
         </SidebarContent>
 
         <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-2">
-          {/* Theme Selector Hidden behind a Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
                 <Palette className="h-5 w-5 text-primary" />
                 <div className="flex flex-col items-start text-left">
-                  <span className="text-xs font-bold text-primary">Apariencia / Theme</span>
+                  <span className="text-xs font-bold text-primary">Apariencia</span>
                   <span className="text-[9px] text-muted-foreground uppercase font-black tracking-tight">
                     {themes.find(t => t.id === currentTheme)?.label || 'Personalizar'}
                   </span>
@@ -254,7 +266,7 @@ export function AppSidebar({
               <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
                 <Globe className="h-5 w-5 text-primary" />
                 <div className="flex flex-col items-start text-left">
-                  <span className="text-xs font-bold text-primary">Idioma / Language</span>
+                  <span className="text-xs font-bold text-primary">Idioma</span>
                   <span className="text-[9px] text-muted-foreground uppercase font-black tracking-tight">
                     {lang === 'es' ? 'Español' : 
                      lang === 'en' ? 'English' : 
