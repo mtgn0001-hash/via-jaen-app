@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -17,8 +18,7 @@ import {
   Palette,
   Check,
   Share2,
-  Library,
-  Zap
+  Library
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -84,8 +84,7 @@ export function AppSidebar({
       { id: 'procedures', icon: Gavel, label: t.procedures },
     ]},
     { id: 'employment', label: 'Trabajo y Empleo', items: [
-      { id: 'employment_portal', icon: FileText, label: t.employment.title },
-      { id: 'work', icon: Briefcase, label: t.work.title },
+      { id: 'employment_portal', icon: Briefcase, label: t.employment.title },
     ]},
     { id: 'social', label: 'Salud y Familia', items: [
       { id: 'family', icon: HeartPulse, label: t.familyResources.title },

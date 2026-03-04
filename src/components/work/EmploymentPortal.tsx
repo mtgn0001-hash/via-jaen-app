@@ -17,12 +17,16 @@ import {
   Scale,
   Plus,
   Copy,
-  Check
+  Check,
+  Home,
+  Phone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SpeechButton } from "@/components/ui/SpeechButton";
+import { useLocalStorage } from "@/lib/store";
+import { provincesData } from "@/lib/provinces";
 
 type EmploymentPortalProps = {
   lang: Language;
@@ -31,6 +35,9 @@ type EmploymentPortalProps = {
 export function EmploymentPortal({ lang }: EmploymentPortalProps) {
   const t = translations[lang];
   const e = t.employment;
+  const { progress } = useLocalStorage();
+  const currentProvince = provincesData[progress.province] || provincesData.jaen;
+  const workData = currentProvince.work;
 
   const [cvData, setCvData] = useState({
     name: "",
@@ -77,13 +84,72 @@ ${cvData.skills}
         </p>
       </section>
 
-      <Tabs defaultValue="search" className="w-full">
-        <TabsList className="grid grid-cols-4 w-full h-12 bg-muted/50 p-1 rounded-2xl">
+      <Tabs defaultValue="olive" className="w-full">
+        <TabsList className="grid grid-cols-5 w-full h-12 bg-muted/50 p-1 rounded-2xl">
+          <TabsTrigger value="olive" className="rounded-xl"><Briefcase className="h-4 w-4" /></TabsTrigger>
           <TabsTrigger value="search" className="rounded-xl"><MapPin className="h-4 w-4" /></TabsTrigger>
           <TabsTrigger value="cv" className="rounded-xl"><FileText className="h-4 w-4" /></TabsTrigger>
           <TabsTrigger value="rights" className="rounded-xl"><ShieldCheck className="h-4 w-4" /></TabsTrigger>
           <TabsTrigger value="startup" className="rounded-xl"><Rocket className="h-4 w-4" /></TabsTrigger>
         </TabsList>
+
+        <TabsContent value="olive" className="space-y-4 pt-4">
+          <Card className="border-none bg-primary/5 rounded-3xl overflow-hidden shadow-sm">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Briefcase className="h-5 w-5 text-primary" />
+                  {workData.campaign}
+                </CardTitle>
+                <SpeechButton text={`${workData.campaign}. ${workData.desc}`} language={lang} />
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm leading-relaxed text-muted-foreground">{workData.desc}</p>
+              
+              <div className="bg-white p-4 rounded-2xl border space-y-2">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-sm text-primary flex items-center gap-2">
+                    <Scale className="h-4 w-4" /> {t.work.rights}
+                  </h4>
+                  <SpeechButton text={t.work.rightsText} language={lang} />
+                </div>
+                <p className="text-xs text-muted-foreground leading-normal">
+                  {t.work.rightsText}
+                </p>
+              </div>
+
+              {workData.shelters.length > 0 && (
+                <div className="space-y-3 pt-2">
+                  <h3 className="font-bold text-sm flex items-center gap-2">
+                    <Home className="h-4 w-4 text-secondary" /> {t.work.shelterTitle}
+                  </h3>
+                  <div className="grid gap-2">
+                    {workData.shelters.map((s) => (
+                      <Card key={s.city} className="border-none shadow-none bg-white overflow-hidden">
+                        <CardContent className="p-3 flex items-center justify-between">
+                          <div className="flex gap-3 items-center">
+                            <MapPin className="h-4 w-4 text-secondary/60" />
+                            <div>
+                              <h4 className="font-bold text-xs">{s.city}</h4>
+                              <p className="text-[9px] text-muted-foreground uppercase font-black">{s.open}</p>
+                            </div>
+                          </div>
+                          <a 
+                            href={`tel:${s.phone.replace(/\s/g, '')}`}
+                            className="bg-secondary/10 text-secondary px-3 py-1.5 rounded-xl text-[10px] font-bold flex items-center gap-2"
+                          >
+                            <Phone className="h-3 w-3" /> {s.phone}
+                          </a>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="search" className="space-y-4 pt-4">
           <Card className="border-none shadow-sm bg-white overflow-hidden">
@@ -189,7 +255,7 @@ ${cvData.skills}
                 <h4 className="font-bold text-sm flex items-center gap-2">
                   <Scale className="h-5 w-5 text-primary" /> {e.rights}
                 </h4>
-                <SpeechButton text={`${e.rights}. ${e.smiInfo}`} language={lang} />
+                < breakthroughButton text={`${e.rights}. ${e.smiInfo}`} language={lang} />
               </div>
               
               <div className="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200">
@@ -206,11 +272,11 @@ ${cvData.skills}
                   <p className="text-[10px] text-red-800 leading-relaxed">
                     Si sufres abusos o trabajas sin contrato, puedes denunciar de forma anónima.
                   </p>
-                  <Button variant="link" size="sm" className="p-0 h-auto text-red-700 font-bold mt-2" asChild>
+                  < breakthroughButton variant="link" size="sm" className="p-0 h-auto text-red-700 font-bold mt-2" asChild>
                     <a href="http://www.mites.gob.es/itss/web/atencion_al_ciudadano/comunicacion_irregularidades/index.html" target="_blank">
                       Ir a Inspección de Trabajo <ExternalLink className="h-3 w-3 ml-1" />
                     </a>
-                  </Button>
+                  </ breakthroughButton>
                 </div>
 
                 <div className="p-4 bg-primary/5 rounded-2xl space-y-2">
