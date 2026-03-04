@@ -84,7 +84,8 @@ export const provincesData: Record<string, ProvinceData> = {
       { name: 'Jaén Acoge', city: 'Jaén', type: 'ONG', phone: '953 261 453', url: 'http://jaenacoge.org/', address: 'Calle de la Luna, 9' },
       { name: 'Comisaría de Policía (TIE)', city: 'Jaén', type: 'Administración', phone: '953 295 100', url: '#', address: 'Plaza de las Batallas, 1' },
       { name: 'Oficina de Extranjería', city: 'Jaén', type: 'Administración', phone: '953 999 000', url: '#', address: 'Calle Hurtado, 6' },
-      { name: 'Hospital Neurotraumatológico', city: 'Jaén', type: 'Salud', phone: '953 008 000', url: '#', address: 'Ctra. de Madrid, s/n' }
+      { name: 'Hospital Neurotraumatológico', city: 'Jaén', type: 'Salud', phone: '953 008 000', url: '#', address: 'Ctra. de Madrid, s/n' },
+      { name: 'Hospital General (Princesa de España)', city: 'Jaén', type: 'Salud', phone: '953 008 000', url: '#', address: 'Avda. de Madrid, s/n' }
     ],
     color: '#3D5229'
   }
