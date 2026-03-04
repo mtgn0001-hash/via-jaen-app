@@ -29,7 +29,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 2000);
+    const timer = setTimeout(() => setShowSplash(false), 2200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,7 +37,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
     {
       title: t.title1,
       desc: t.desc1,
-      icon: <AppLogo size={120} />,
+      icon: <AppLogo size={140} />,
       bg: "bg-primary/5"
     },
     {
@@ -69,11 +69,11 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-lg p-0 border-none bg-white rounded-[40px] overflow-hidden max-h-[95vh] outline-none">
         {showSplash ? (
-          <div className="flex flex-col items-center justify-center p-20 min-h-[500px] animate-in fade-in duration-700">
-            <AppLogo size={140} className="mb-8 animate-bounce" />
+          <div className="flex flex-col items-center justify-center p-20 min-h-[500px] animate-in fade-in duration-1000">
+            <AppLogo size={160} className="mb-10 animate-bounce" />
             <h1 className="text-4xl font-black text-primary tracking-tighter uppercase">Vía Jaén</h1>
-            <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-2 opacity-60">
-              Comunidad Segura
+            <p className="text-sm font-bold text-slate-700 uppercase tracking-widest mt-3 opacity-80">
+              Guía Comunitaria
             </p>
           </div>
         ) : (
@@ -108,7 +108,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
             <div className="w-full space-y-4 pt-4 border-t">
               <Button 
                 onClick={handleClose}
-                className="w-full h-16 rounded-[24px] text-xl font-black uppercase tracking-tight shadow-xl shadow-primary/20 animate-pulse hover:animate-none"
+                className="w-full h-16 rounded-[24px] text-xl font-black uppercase tracking-tight shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform"
               >
                 {t.getStarted}
               </Button>
