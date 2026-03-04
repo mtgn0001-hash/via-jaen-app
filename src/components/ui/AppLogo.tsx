@@ -17,10 +17,10 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
     minimal: "bg-transparent border-transparent",
   };
 
-  const strokeColors = {
-    default: "text-primary",
-    white: "text-white",
-    minimal: "text-primary",
+  const fillColors = {
+    default: "fill-primary",
+    white: "fill-white",
+    minimal: "fill-primary",
   };
 
   return (
@@ -32,44 +32,27 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
       )}
       style={{ width: size, height: size }}
     >
-      {/* Efecto de brillo de fondo para hacerlo "llamativo" */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+      {/* Efecto de brillo de fondo */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
       
       <svg 
         viewBox="0 0 100 100" 
-        fill="none" 
         xmlns="http://www.w3.org/2000/svg"
-        className={cn("relative z-10 transition-all duration-500 group-hover:scale-110", strokeColors[variant])}
+        className={cn("relative z-10 transition-all duration-500 group-hover:scale-110", fillColors[variant])}
         style={{ width: size * 0.7, height: size * 0.7 }}
       >
-        {/* Silueta Técnica de la Catedral de Jaén */}
-        
-        {/* Estructura Base y Fachada */}
+        {/* Silueta Sólida de la Catedral de Jaén */}
         <path 
-          d="M20 85V30H32V15H42V30H48V85M80 85V30H68V15H58V30H52V85M48 85V40H52V85" 
-          stroke="currentColor" 
-          strokeWidth="3.5" 
-          strokeLinecap="square" 
-          strokeLinejoin="miter"
+          d="M15 85H85V30H72V15H62V30H55V35H45V30H38V15H28V30H15V85ZM45 80H55V70H45V80Z" 
+          fill="currentColor"
         />
         
-        {/* Detalles Geométricos de las Torres (Arquitectura Recta) */}
-        <path d="M24 40H28M72 40H76" stroke="currentColor" strokeWidth="2" strokeLinecap="square" opacity="0.6" />
-        <path d="M24 50H28M72 50H76" stroke="currentColor" strokeWidth="2" strokeLinecap="square" opacity="0.4" />
-        <path d="M24 60H28M72 60H76" stroke="currentColor" strokeWidth="2" strokeLinecap="square" opacity="0.2" />
-        
-        {/* Frontón Central y Puerta */}
-        <path d="M42 45H58" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" opacity="0.5" />
-        <path d="M45 85V75H55V85" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
-        
-        {/* Línea de tierra con degradado de opacidad */}
-        <path 
-          d="M10 85H90" 
-          stroke="currentColor" 
-          strokeWidth="1" 
-          strokeLinecap="square"
-          opacity="0.2"
-        />
+        {/* Detalles de Ventanales Estilizados (Negativo) */}
+        <rect x="23" y="40" width="8" height="4" fill="white" fillOpacity="0.3" />
+        <rect x="69" y="40" width="8" height="4" fill="white" fillOpacity="0.3" />
+        <rect x="23" y="50" width="8" height="4" fill="white" fillOpacity="0.2" />
+        <rect x="69" y="50" width="8" height="4" fill="white" fillOpacity="0.2" />
+        <rect x="42" y="45" width="16" height="2" fill="white" fillOpacity="0.2" />
       </svg>
     </div>
   );
