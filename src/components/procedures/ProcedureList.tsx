@@ -1,10 +1,12 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileCheck, MapPin, BadgeInfo } from "lucide-react";
+import { FileCheck, MapPin, BadgeInfo, CheckCircle2 } from "lucide-react";
+import { useLocalStorage } from "@/lib/store";
 
 type ProcedureListProps = {
   lang: Language;
@@ -14,6 +16,7 @@ type ProcedureListProps = {
 
 export function ProcedureList({ lang, toggleProcedure, completedProcedures }: ProcedureListProps) {
   const t = translations[lang];
+  const { progress } = useLocalStorage();
 
   const flows = [
     {
@@ -21,35 +24,59 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
       title: 'Empadronamiento',
       icon: MapPin,
       steps: [
-        { id: 'e1', label: 'Pedir Cita en el Ayuntamiento', desc: 'En Jaén se solicita en la Sede Electrónica o presencialmente.' },
-        { id: 'e2', label: 'Documento de Identidad', desc: 'Pasaporte original y copia.' },
-        { id: 'e3', label: 'Contrato de Alquiler', desc: 'O autorización del dueño de la vivienda.' },
-        { id: 'e4', label: 'Recoger el Volante', desc: 'Es gratuito y acredita tu residencia legal en el municipio.' },
+        { id: 'e1', label: 'Pedir Cita Ayuntamiento', desc: 'En Jaén se solicita online o presencial.' },
+        { id: 'e2', label: 'Llevar Pasaporte', desc: 'Original y fotocopia.' },
+        { id: 'e3', label: 'Contrato Alquiler', desc: 'O permiso del dueño.' },
+        { id: 'e4', label: 'Recoger Papel', desc: 'Es gratis y te acredita.' },
       ]
     },
     {
       id: 'nie_tie',
-      title: 'Asignación de NIE / TIE',
+      title: 'NIE / TIE',
       icon: FileCheck,
       steps: [
-        { id: 'n1', label: 'Solicitud EX-15', desc: 'Descarga el formulario oficial en la sección de Formularios.' },
-        { id: 'n2', label: 'Pago de Tasa 790-012', desc: 'Paga en el banco antes de ir a la cita.' },
-        { id: 'n3', label: 'Cita en Policía / Extranjería', desc: 'Suele ser difícil conseguir cita; prueba los viernes a las 9 AM.' },
-        { id: 'n4', label: 'Foto Carnet', desc: 'Fondo blanco, sin gafas de sol ni gorros.' },
-      ]
-    },
-    {
-      id: 'arraigo',
-      title: 'Arraigo Social / Laboral',
-      icon: BadgeInfo,
-      steps: [
-        { id: 'a1', label: 'Acreditar permanencia', desc: 'Debes demostrar 2 años (Laboral) o 3 años (Social) en España.' },
-        { id: 'a2', label: 'Informe de Inserción', desc: 'Solicitado en Servicios Sociales de tu Ayuntamiento.' },
-        { id: 'a3', label: 'Contrato de Trabajo', desc: 'Mínimo de 30 horas semanales o salario mínimo interprofesional.' },
-        { id: 'a4', label: 'Antecedentes Penales', desc: 'Certificado de tu país de origen, legalizado y traducido.' },
+        { id: 'n1', label: 'Solicitud EX-15', desc: 'Usa el botón de Descargar PDF.' },
+        { id: 'n2', label: 'Pagar Tasa', desc: 'Ve al banco antes de tu cita.' },
+        { id: 'n3', label: 'Cita en Policía', desc: 'Prueba los viernes a las 9 AM.' },
+        { id: 'n4', label: 'Llevar Foto', desc: 'Fondo blanco y sin gafas.' },
       ]
     }
   ];
+
+  if (progress.easyReading) {
+    return (
+      <div className="space-y-6 pb-20">
+        <h2 className="text-3xl font-black text-primary uppercase tracking-tight">{t.procedures}</h2>
+        <div className="grid gap-6">
+          {flows.map(flow => (
+            <section key={flow.id} className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="bg-primary p-4 rounded-3xl shadow-lg">
+                  <flow.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-black uppercase text-slate-800">{flow.title}</h3>
+              </div>
+              <div className="grid gap-3">
+                {flow.steps.map(step => (
+                  <Card key={step.id} className="border-[4px] border-primary/10 rounded-[30px] shadow-none">
+                    <CardContent className="p-6 flex items-start gap-4">
+                      <div className="bg-green-100 p-2 rounded-xl">
+                        <CheckCircle2 className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div>
+                        <p className="text-xl font-black leading-tight mb-1">{step.label}</p>
+                        <p className="text-sm font-bold text-muted-foreground">{step.desc}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4 pb-20">

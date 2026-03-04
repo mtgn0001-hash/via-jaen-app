@@ -38,14 +38,16 @@ export default function Home() {
 
   const lang = (progress.language as Language) || 'es';
   const isRTL = lang === 'ar';
+  const isEasy = progress.easyReading;
 
   useEffect(() => {
     if (isLoaded) {
       document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
       document.documentElement.lang = lang;
       document.documentElement.setAttribute('data-theme', progress.theme);
+      document.documentElement.setAttribute('data-easy-reading', String(isEasy));
     }
-  }, [lang, isRTL, progress.theme, isLoaded]);
+  }, [lang, isRTL, progress.theme, isLoaded, isEasy]);
 
   if (!isLoaded) return null;
 
@@ -56,7 +58,7 @@ export default function Home() {
   return (
     <SidebarProvider>
       <div 
-        className="flex min-h-screen bg-background w-full relative"
+        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''}`}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         <AppSidebar 
@@ -81,15 +83,15 @@ export default function Home() {
             completion={calculateCompletion()} 
           />
 
-          <main className="flex-1 p-4 pb-20 max-w-lg mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <main className={`flex-1 pb-20 max-w-lg mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500 ${isEasy ? 'p-6' : 'p-4'}`}>
             {activeTab === 'dashboard' && (
               <Dashboard lang={lang} setActiveTab={setActiveTab} />
             )}
             
             {activeTab === 'procedures' && (
               <div className="space-y-8">
-                <DocumentChecklist lang={lang} />
-                <FormVisualGuide lang={lang} />
+                {!isEasy && <DocumentChecklist lang={lang} />}
+                {!isEasy && <FormVisualGuide lang={lang} />}
                 <ProcedureList 
                   lang={lang} 
                   toggleProcedure={toggleProcedure} 
@@ -127,9 +129,9 @@ export default function Home() {
 
             {activeTab === 'directory' && (
               <div className="space-y-8">
-                <WifiPoints lang={lang} />
+                {!isEasy && <WifiPoints lang={lang} />}
                 <ResourceDirectory lang={lang} />
-                <TransportTab lang={lang} />
+                {!isEasy && <TransportTab lang={lang} />}
               </div>
             )}
 
@@ -141,20 +143,22 @@ export default function Home() {
               <EmploymentPortal lang={lang} />
             )}
 
-            <section className="mt-8 mb-4 px-2 space-y-3">
-              <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
-                <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
-                <p className="text-[10px] text-muted-foreground leading-normal font-medium">
-                  {t.disclaimer}
-                </p>
-              </div>
-              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex gap-3">
-                <ShieldAlert className="h-5 w-5 text-blue-400 shrink-0" />
-                <p className="text-[10px] text-blue-700 leading-normal font-bold">
-                  {t.privacyNotice}
-                </p>
-              </div>
-            </section>
+            {!isEasy && (
+              <section className="mt-8 mb-4 px-2 space-y-3">
+                <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
+                  <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
+                  <p className="text-[10px] text-muted-foreground leading-normal font-medium">
+                    {t.disclaimer}
+                  </p>
+                </div>
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex gap-3">
+                  <ShieldAlert className="h-5 w-5 text-blue-400 shrink-0" />
+                  <p className="text-[10px] text-blue-700 leading-normal font-bold">
+                    {t.privacyNotice}
+                  </p>
+                </div>
+              </section>
+            )}
           </main>
         </SidebarInset>
 
