@@ -32,9 +32,9 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
 
   const mainCategories = [
     { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'NIE, Padrón, Arraigo', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { id: 'work', tab: 'community', title: t.work.title, desc: t.work.oliveCampaign, icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
-    { id: 'study', tab: 'community', title: 'Estudios UJA', desc: 'Universidad e Idiomas', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50' },
-    { id: 'family', tab: 'directory', title: t.familyResources.title, desc: 'Colegios y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-50' },
+    { id: 'work', tab: 'work', title: t.work.title, desc: t.work.oliveCampaign, icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { id: 'study', tab: 'study', title: 'Estudios UJA', desc: 'Universidad e Idiomas', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50' },
+    { id: 'family', tab: 'family', title: t.familyResources.title, desc: 'Colegios y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-50' },
     { id: 'help', tab: 'directory', title: t.directory, desc: 'ONGs y Comedores', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { id: 'transport', tab: 'directory', title: t.transport.title, desc: 'Buses y Horarios', icon: Bus, color: 'text-slate-600', bg: 'bg-slate-50' },
     { id: 'integration', tab: 'community', title: 'Integración', desc: 'Tapas y Glosario', icon: Heart, color: 'text-red-600', bg: 'bg-red-50' },
