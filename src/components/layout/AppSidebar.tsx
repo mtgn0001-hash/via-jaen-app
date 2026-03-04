@@ -17,7 +17,8 @@ import {
   Palette,
   Check,
   Share2,
-  Library
+  Library,
+  Zap
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -43,6 +44,8 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { QRCodeShare } from "@/components/ui/QRCodeShare"
 
@@ -64,6 +67,7 @@ export function AppSidebar({
   setTheme 
 }: AppSidebarProps) {
   const t = translations[lang];
+  const { progress, updateProgress } = useLocalStorage();
   const { setOpenMobile } = useSidebar();
   const [showQR, setShowQR] = React.useState(false);
 
@@ -130,6 +134,18 @@ export function AppSidebar({
         </SidebarHeader>
 
         <SidebarContent className="px-2 scrollbar-hide">
+          <div className="px-4 py-2 mb-4 bg-primary/5 rounded-2xl mx-2 border border-primary/10 flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary">{t.easyReading}</Label>
+              <p className="text-[8px] text-muted-foreground font-bold">{t.easyReadingDesc}</p>
+            </div>
+            <Switch 
+              id="easy-reading" 
+              checked={progress.easyReading} 
+              onCheckedChange={(val) => updateProgress({ easyReading: val })}
+            />
+          </div>
+
           {categories.map((cat) => (
             <SidebarGroup key={cat.id} className="py-1">
               <SidebarGroupLabel className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 px-4 mb-1">

@@ -12,6 +12,7 @@ export type UserProgress = {
   onboardingCompleted: boolean;
   theme: ThemeType;
   province: ProvinceType;
+  easyReading: boolean;
 };
 
 const STORAGE_KEY = 'jaen_integra_storage';
@@ -23,6 +24,7 @@ const defaultProgress: UserProgress = {
   onboardingCompleted: false,
   theme: 'purple',
   province: 'jaen',
+  easyReading: false,
 };
 
 export function useLocalStorage() {

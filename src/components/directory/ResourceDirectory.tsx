@@ -1,11 +1,10 @@
-
 "use client"
 
 import { useState, useMemo } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Search, Phone, ExternalLink, Heart, Home, Utensils, Stethoscope, Building } from "lucide-react";
+import { MapPin, Search, Phone, ExternalLink, Heart, Home, Utensils, Stethoscope, Building, Navigation } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLocalStorage } from "@/lib/store";
@@ -41,6 +40,11 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
       (r.name.toLowerCase().includes(filter.toLowerCase()) || r.type.toLowerCase().includes(filter.toLowerCase()))
     );
   }, [currentProvince, selectedType, filter]);
+
+  const openInMaps = (name: string, city: string) => {
+    const query = encodeURIComponent(`${name} ${city}`);
+    window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+  };
 
   return (
     <div className="space-y-6 pb-20">
@@ -102,6 +106,14 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
                     <a href={`tel:${res.phone.replace(/\s/g, '')}`}>
                       <Phone className="h-4 w-4" /> Llamar
                     </a>
+                  </Button>
+                  <Button 
+                    onClick={() => openInMaps(res.name, res.city)}
+                    size="sm" 
+                    variant="secondary" 
+                    className="flex-1 rounded-xl h-11 gap-2 border shadow-sm"
+                  >
+                    <Navigation className="h-4 w-4" /> Mapa
                   </Button>
                   {res.url !== '#' && (
                     <Button asChild size="sm" variant="ghost" className="rounded-xl h-11 border-2 w-14 active:bg-muted">
