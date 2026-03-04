@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -80,18 +79,16 @@ export function AppSidebar({
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
     ]},
-    { id: 'regional', label: 'Trámites Autonómicos', items: [
+    { id: 'employment', label: 'Trabajo y Empleo', items: [
       { id: 'employment_portal', icon: FileText, label: t.employment.title },
-      { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
+      { id: 'work', icon: Briefcase, label: t.work.title },
     ]},
     { id: 'social', label: 'Salud y Familia', items: [
       { id: 'family', icon: HeartPulse, label: t.familyResources.title },
+      { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
     ]},
     { id: 'education', label: 'Universidad', items: [
       { id: 'study', icon: GraduationCap, label: t.studyUJA.title },
-    ]},
-    { id: 'economy', label: 'Trabajo y Empleo', items: [
-      { id: 'work', icon: Briefcase, label: t.work.title },
     ]},
     { id: 'culture', label: 'Integración', items: [
       { id: 'community', icon: Languages, label: t.community },
@@ -126,7 +123,7 @@ export function AppSidebar({
                 {t.title}
               </h2>
               <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Guía Regional
+                Guía Jaén
               </span>
             </div>
           </div>

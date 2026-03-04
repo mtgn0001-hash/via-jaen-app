@@ -8,13 +8,7 @@ import { QRCodeShare } from "@/components/ui/QRCodeShare";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { useLocalStorage, ProvinceType } from "@/lib/store";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { useLocalStorage } from "@/lib/store";
 import { provincesData } from "@/lib/provinces";
 
 type HeaderProps = {
@@ -24,7 +18,7 @@ type HeaderProps = {
 
 export function Header({ lang, completion }: HeaderProps) {
   const t = translations[lang];
-  const { progress, updateProgress } = useLocalStorage();
+  const { progress } = useLocalStorage();
   const [showQR, setShowQR] = useState(false);
   const { toast } = useToast();
 
@@ -52,25 +46,10 @@ export function Header({ lang, completion }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-10 rounded-xl px-3 flex items-center gap-2 border border-primary/10 hover:bg-primary/5">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span className="text-xs font-bold text-primary">{currentProvince.name}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 rounded-2xl border-none shadow-2xl p-2 bg-white/95 backdrop-blur-xl">
-              {Object.values(provincesData).map((p) => (
-                <DropdownMenuItem 
-                  key={p.id}
-                  onClick={() => updateProgress({ province: p.id as ProvinceType })}
-                  className="rounded-xl font-bold p-3 focus:bg-primary/10 focus:text-primary cursor-pointer"
-                >
-                  {p.name}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="h-10 rounded-xl px-3 flex items-center gap-2 border border-primary/10 bg-primary/5">
+            <MapPin className="h-4 w-4 text-primary" />
+            <span className="text-xs font-bold text-primary">{currentProvince.name}</span>
+          </div>
 
           <Button 
             variant="ghost" 

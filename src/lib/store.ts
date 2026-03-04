@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
-export type ProvinceType = 'almeria' | 'cadiz' | 'cordoba' | 'granada' | 'huelva' | 'jaen' | 'malaga' | 'sevilla';
+export type ProvinceType = 'jaen';
 
 export type UserProgress = {
   procedures: { [key: string]: boolean };
