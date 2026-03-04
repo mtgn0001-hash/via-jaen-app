@@ -36,30 +36,33 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
         className={cn("transition-all duration-300", strokeColors[variant])}
-        style={{ width: size * 0.7, height: size * 0.7 }}
+        style={{ width: size * 0.75, height: size * 0.75 }}
       >
-        {/* Silueta de la Catedral de Jaén: Trazos suaves y reconocibles */}
+        {/* Silueta de la Catedral de Jaén: Trazos que definen las torres y el frontón real */}
         <path 
-          d="M20 80V35C20 32.2386 22.2386 30 25 30H35V80M65 80V30C65 27.2386 67.2386 25 70 25H80V80M35 80V45C35 36.7157 41.7157 30 50 30C58.2843 30 65 36.7157 65 45V80" 
+          d="M18 80V35C18 32 20 30 23 30H32V25C32 22 34 20 37 20H43V80M82 80V35C82 32 80 30 77 30H68V25C68 22 66 20 63 20H57V80M32 80V45C32 38 38 32 50 32C62 32 68 38 68 45V80" 
           stroke="currentColor" 
-          strokeWidth="4.5" 
+          strokeWidth="3.5" 
           strokeLinecap="round" 
           strokeLinejoin="round"
         />
-        {/* Detalle del frontón central/arco característico */}
+        {/* Cúpula central estilizada */}
         <path 
-          d="M42 30C42 24.4772 45.5817 20 50 20C54.4183 20 58 24.4772 58 30" 
+          d="M42 32C42 27 45 24 50 24C55 24 58 27 58 32" 
           stroke="currentColor" 
-          strokeWidth="3.5" 
+          strokeWidth="2.5" 
           strokeLinecap="round"
         />
-        {/* Línea de base suave */}
+        {/* Detalles de balcones/ventanas (toque arquitectónico sutil) */}
+        <path d="M22 40H28M72 40H78M45 45H55" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+        
+        {/* Línea de suelo decorativa */}
         <path 
-          d="M15 80H85" 
+          d="M10 80H90" 
           stroke="currentColor" 
-          strokeWidth="3" 
+          strokeWidth="2" 
           strokeLinecap="round"
-          opacity="0.3"
+          opacity="0.2"
         />
       </svg>
     </div>
