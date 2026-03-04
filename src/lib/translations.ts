@@ -115,10 +115,10 @@ export const translations = {
     integration: {
       title: 'Vivir en Jaén',
       subtitle: 'Costumbres y gente de la tierra.',
-      tapasTitle: 'Tapas Gratis',
-      tapasSubtitle: 'Comer en Jaén',
-      tapasDesc: 'Pides una bebida y te dan comida gratis. Es tradición en Jaén.',
-      tapasTip: 'Pregunta: "¿Qué tapa hay hoy?"',
+      tapasTitle: 'Comida Típica',
+      tapasSubtitle: 'Gastronomía de Jaén',
+      tapasDesc: 'El "Ochío" es un pan tradicional con pimentón y sal. También debes probar la "Pipirrana", una ensalada fresca esencial en verano.',
+      tapasTip: 'Consejo: No olvides probar el Aceite de Oliva (AOVE), ¡es el mejor del mundo!',
       glossaryTitle: 'Hablar de Jaén',
     },
     transport: {
@@ -292,10 +292,10 @@ export const translations = {
     integration: {
       title: 'Living in Jaen',
       subtitle: 'Local customs and people.',
-      tapasTitle: 'Free Tapas',
+      tapasTitle: 'Typical Food',
       tapasSubtitle: 'Eating in Jaen',
-      tapasDesc: 'Order a drink, get free food. It is Jaen tradition.',
-      tapasTip: 'Ask: "What tapa is there today?"',
+      tapasDesc: '"Ochío" is a traditional bread with paprika and salt. You must also try "Pipirrana", a fresh salad essential in summer.',
+      tapasTip: 'Tip: Don\'t forget to try the Olive Oil (AOVE), it\'s the best in the world!',
       glossaryTitle: 'Jaen Talk',
     },
     transport: {
@@ -468,10 +468,10 @@ export const translations = {
     integration: {
       title: 'Vivre à Jaén',
       subtitle: 'Coutumes et gens du pays.',
-      tapasTitle: 'Tapas Gratuites',
+      tapasTitle: 'Nourriture Typique',
       tapasSubtitle: 'Manger à Jaén',
-      tapasDesc: 'Commandez une boisson, nourriture gratuite. Tradition à Jaén.',
-      tapasTip: 'Demandez: "Quelles tapas aujourd\'hui ?"',
+      tapasDesc: 'L\'"Ochío" est un pain traditionnel au paprika et au sel. Vous devez aussi goûter la "Pipirrana", une salade fraîche indispensable en été.',
+      tapasTip: 'Conseil: N\'oubliez pas de goûter l\'Huile d\'Olive (AOVE), c\'est la meilleure du monde!',
       glossaryTitle: 'Parler Jaén',
     },
     transport: {
@@ -580,7 +580,7 @@ export const translations = {
       next: 'التالي'
     },
     onboarding: {
-      title1: 'مرحباً بك في فيا خاين',
+      title: 'مرحباً بك في فيا خاين',
       desc1: 'دليلك الآمن للتسوية والحياة في مقاطعة خاين.',
       title2: 'تثبيت التطبيق',
       desc2: 'أضفه إلى شاشتك الرئيسية لاستخدامه بدون إنترنت (وضع عدم الاتصال).',
@@ -644,10 +644,10 @@ export const translations = {
     integration: {
       title: 'العيش في خاين',
       subtitle: 'عادات وأهل البلد.',
-      tapasTitle: 'تاباس مجاني',
+      tapasTitle: 'أكل شعبي',
       tapasSubtitle: 'الأكل في خاين',
-      tapasDesc: 'تطلب مشروباً وتحصل على أكل مجاني. تقليد في خاين.',
-      tapasTip: 'اسأل: "ما هو التاباس اليوم؟"',
+      tapasDesc: 'خبز "الأوشيو" هو خبز تقليدي بالفلفل والملح. يجب عليك أيضاً تجربة "بيبيرانا"، وهي سلطة طازجة أساسية في الصيف.',
+      tapasTip: 'نصيحة: لا تنسَ تذوق زيت الزيتون (AOVE)، فهو الأفضل في العالم!',
       glossaryTitle: 'كلام خاين',
     },
     transport: {
@@ -821,10 +821,10 @@ export const translations = {
     integration: {
       title: 'Viața în Jaén',
       subtitle: 'Obiceiuri și oameni locali.',
-      tapasTitle: 'Tapas Gratis',
+      tapasTitle: 'Mâncare Tipică',
       tapasSubtitle: 'Mâncare în Jaén',
-      tapasDesc: 'Comanzi o băutură, primești mâncare gratis. Tradiție în Jaén.',
-      tapasTip: 'Întreabă: "Ce tapas aveți azi?"',
+      tapasDesc: '"Ochío" este o pâine tradițională cu boia și sare. De asemenea, trebuie să încerci "Pipirrana", o salată proaspătă esențială vara.',
+      tapasTip: 'Sfat: Nu uita să încerci Uleiul de Măsline (AOVE), este cel mai bun din lume!',
       glossaryTitle: 'Vorbă Jaén',
     },
     transport: {

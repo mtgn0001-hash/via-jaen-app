@@ -4,7 +4,7 @@
 import { Language, translations } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Utensils, MessageCircle, Heart, Info, Star } from "lucide-react";
+import { Utensils, MessageCircle, Heart, Star, Soup } from "lucide-react";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 
 type IntegrationTabProps = {
@@ -32,17 +32,17 @@ export function IntegrationTab({ lang }: IntegrationTabProps) {
         <SpeechButton text={`${i.title}. ${i.subtitle}`} language={lang} />
       </div>
 
-      <Tabs defaultValue="tapas" className="w-full">
+      <Tabs defaultValue="gastronomy" className="w-full">
         <TabsList className="grid grid-cols-2 w-full h-12 bg-muted/50 p-1 rounded-2xl">
-          <TabsTrigger value="tapas" className="rounded-xl flex gap-2">
-            <Utensils className="h-4 w-4" /> {i.tapasTitle}
+          <TabsTrigger value="gastronomy" className="rounded-xl flex gap-2">
+            <Soup className="h-4 w-4" /> {i.tapasTitle}
           </TabsTrigger>
           <TabsTrigger value="glossary" className="rounded-xl flex gap-2">
             <MessageCircle className="h-4 w-4" /> {i.glossaryTitle}
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="tapas" className="space-y-4 pt-4">
+        <TabsContent value="gastronomy" className="space-y-4 pt-4">
           <Card className="border-none bg-orange-50 border-orange-100">
             <CardContent className="p-6 space-y-4">
               <div className="flex justify-between items-start">
@@ -72,7 +72,9 @@ export function IntegrationTab({ lang }: IntegrationTabProps) {
                 <CardContent className="p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-black text-primary">"{item.word}"</span>
-                    <SpeechButton text={`${item.word}. ${item.meaning}`} language={lang} />
+                    <span className="flex items-center gap-2">
+                       <SpeechButton text={`${item.word}. ${item.meaning}`} language={lang} />
+                    </span>
                   </div>
                   <p className="text-sm text-muted-foreground italic">
                     {item.meaning}
