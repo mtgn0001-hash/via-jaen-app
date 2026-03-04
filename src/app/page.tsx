@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocalStorage } from "@/lib/store";
 import { Navbar } from "@/components/layout/Navbar";
 import { Header } from "@/components/dashboard/Header";
@@ -28,14 +28,24 @@ export default function Home() {
     isLoaded
   } = useLocalStorage();
 
+  const lang = (progress.language as Language) || 'es';
+  const isRTL = lang === 'ar';
+
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+  }, [lang, isRTL]);
+
   if (!isLoaded) return null;
 
-  const setLang = (lang: Language) => updateProgress({ language: lang });
-  const lang = (progress.language as Language) || 'es';
+  const setLang = (newLang: Language) => updateProgress({ language: newLang });
   const t = translations[lang];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-20 overflow-x-hidden">
+    <div 
+      className="min-h-screen bg-background flex flex-col max-w-lg mx-auto pb-24 overflow-x-hidden"
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       <Header 
         lang={lang} 
         setLang={setLang} 
@@ -76,9 +86,9 @@ export default function Home() {
         )}
 
         <section className="mt-8 mb-4 px-2">
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex gap-3">
-            <AlertCircle className="h-5 w-5 text-slate-400 shrink-0" />
-            <p className="text-[10px] text-slate-500 leading-normal">
+          <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
+            <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
+            <p className="text-[10px] text-muted-foreground leading-normal">
               {t.disclaimer}
             </p>
           </div>
