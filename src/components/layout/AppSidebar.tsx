@@ -76,7 +76,7 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
   ];
 
   return (
-    <Sidebar className="border-r border-sidebar-border bg-sidebar">
+    <Sidebar variant="floating" className="border-none shadow-none">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-3">
           <div className="bg-primary p-2 rounded-xl shadow-lg">
@@ -109,8 +109,8 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
                       className={cn(
                         "h-11 px-4 rounded-xl transition-all duration-200 group",
                         activeTab === item.id 
-                          ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                          : "hover:bg-accent hover:text-accent-foreground",
+                          ? "bg-primary/20 text-primary font-bold shadow-sm" 
+                          : "hover:bg-primary/5 hover:text-primary",
                         item.className
                       )}
                     >
@@ -131,13 +131,13 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
         ))}
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t border-sidebar-border bg-sidebar/50">
+      <SidebarFooter className="p-4 border-t border-sidebar-border/30">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-full justify-start gap-3 h-12 rounded-xl hover:bg-primary/10 transition-colors">
               <Globe className="h-5 w-5 text-primary" />
               <div className="flex flex-col items-start text-left">
-                <span className="text-xs font-bold text-primary">Seleccionar Idioma</span>
+                <span className="text-xs font-bold text-primary">Idioma</span>
                 <span className="text-[10px] text-muted-foreground uppercase font-black">
                   {lang === 'es' ? 'Español' : 
                    lang === 'en' ? 'English' : 
@@ -147,7 +147,7 @@ export function AppSidebar({ lang, setLang, activeTab, setActiveTab }: AppSideba
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" side="top" className="w-56 rounded-2xl shadow-xl p-1">
+          <DropdownMenuContent align="start" side="top" className="w-56 rounded-2xl shadow-xl p-1 backdrop-blur-md bg-white/90">
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('es')}>Español</DropdownMenuItem>
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('en')}>English</DropdownMenuItem>
             <DropdownMenuItem className="rounded-lg font-medium p-3" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
