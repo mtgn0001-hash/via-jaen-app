@@ -37,7 +37,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
     {
       title: t.title1,
       desc: t.desc1,
-      icon: <AppLogo size={120} className="shadow-2xl ring-8 ring-primary/5" />,
+      icon: <AppLogo size={120} />,
       bg: "bg-primary/5"
     },
     {
@@ -70,7 +70,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
       <DialogContent className="sm:max-w-lg p-0 border-none bg-white rounded-[40px] overflow-hidden max-h-[95vh] outline-none">
         {showSplash ? (
           <div className="flex flex-col items-center justify-center p-20 min-h-[500px] animate-in fade-in duration-700">
-            <AppLogo size={140} className="shadow-2xl shadow-primary/20 mb-8 animate-bounce" />
+            <AppLogo size={140} className="mb-8 animate-bounce" />
             <h1 className="text-4xl font-black text-primary tracking-tighter uppercase">Vía Jaén</h1>
             <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-2 opacity-60">
               Comunidad Segura

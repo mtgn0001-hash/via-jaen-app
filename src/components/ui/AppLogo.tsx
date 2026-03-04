@@ -1,4 +1,6 @@
 
+"use client"
+
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -16,27 +18,18 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
   };
 
   return (
-    <div 
-      className={cn(
-        "relative flex items-center justify-center rounded-full bg-white shadow-sm overflow-hidden",
-        variant === "white" ? "bg-white/10" : "bg-white",
-        className
-      )}
+    <svg 
+      viewBox="0 0 100 100" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("transition-all duration-300", colors[variant], className)}
       style={{ width: size, height: size }}
     >
-      <svg 
-        viewBox="0 0 100 100" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn("w-2/3 h-2/3", colors[variant])}
-      >
-        {/* Silueta ultra-minimalista de la Catedral de Jaén */}
-        {/* Un diseño de tres bloques esenciales: dos torres y arco central */}
-        <path 
-          d="M20 80V30H35V80H20Z M65 80V30H80V80H65Z M35 80V45C35 37 42 32 50 32C58 32 65 37 65 45V80H35Z" 
-          fill="currentColor" 
-        />
-      </svg>
-    </div>
+      {/* Silueta minimalista pura de la Catedral de Jaén */}
+      <path 
+        d="M20 85V25H35V85H20ZM65 85V25H80V85H65ZM35 85V40C35 30 42 25 50 25C58 25 65 30 65 40V85H35Z" 
+        fill="currentColor" 
+      />
+    </svg>
   );
 }

@@ -55,7 +55,7 @@ export function Header({ lang, completion }: HeaderProps) {
         <div className="flex items-center gap-3">
           <SidebarTrigger className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`} />
           <div className="flex items-center gap-3">
-            <AppLogo size={isEasy ? 48 : 40} className="shadow-md border border-primary/5" />
+            <AppLogo size={isEasy ? 48 : 40} />
             <div className="flex flex-col">
               <h1 className={`font-headline font-black tracking-tighter text-primary uppercase leading-none ${isEasy ? 'text-2xl' : 'text-xl'}`}>
                 {t.title}

@@ -131,7 +131,7 @@ export function AppSidebar({
         <SidebarHeader className="p-6">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3 px-2">
-              <AppLogo size={44} className="shadow-lg border border-primary/10" />
+              <AppLogo size={44} />
               <div className="flex flex-col">
                 <span className="font-headline font-black text-lg tracking-tight text-primary uppercase leading-none">
                   Vía Jaén
