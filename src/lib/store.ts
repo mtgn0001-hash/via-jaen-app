@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -15,6 +16,7 @@ export type UserProfile = {
 export type UserProgress = {
   procedures: { [key: string]: boolean };
   checklist: { [key: string]: boolean };
+  firstSteps: { [key: string]: boolean };
   language: string;
   onboardingCompleted: boolean;
   theme: ThemeType;
@@ -28,6 +30,11 @@ const STORAGE_KEY = 'jaen_integra_storage';
 const defaultProgress: UserProgress = {
   procedures: {},
   checklist: {},
+  firstSteps: {
+    empadronamiento: false,
+    health: false,
+    transport: false,
+  },
   language: 'es',
   onboardingCompleted: false,
   theme: 'olive',
@@ -81,11 +88,17 @@ export function useLocalStorage() {
     updateProgress({ checklist: newChecklist });
   };
 
+  const toggleFirstStep = (id: string) => {
+    const newFirstSteps = { ...progress.firstSteps, [id]: !progress.firstSteps[id] };
+    updateProgress({ firstSteps: newFirstSteps });
+  };
+
   const calculateCompletion = () => {
     const totalItems = 15;
     const completedItems = 
       Object.values(progress.procedures).filter(Boolean).length +
-      Object.values(progress.checklist).filter(Boolean).length;
+      Object.values(progress.checklist).filter(Boolean).length +
+      Object.values(progress.firstSteps).filter(Boolean).length;
     return Math.min(Math.round((completedItems / totalItems) * 100), 100);
   };
 
@@ -95,6 +108,7 @@ export function useLocalStorage() {
     updateProfile,
     toggleProcedure,
     toggleChecklist,
+    toggleFirstStep,
     calculateCompletion,
     isLoaded
   };

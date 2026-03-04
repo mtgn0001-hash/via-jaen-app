@@ -1,10 +1,11 @@
+
 "use client"
 
 import { useState, useMemo } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Search, Phone, ExternalLink, Heart, Home, Utensils, Stethoscope, Building, Navigation } from "lucide-react";
+import { MapPin, Search, Phone, ExternalLink, Heart, Home, Utensils, Stethoscope, Building, Navigation, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLocalStorage } from "@/lib/store";
@@ -56,6 +57,16 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
         </p>
       </div>
 
+      {/* Help Heatmap Info */}
+      <section className="bg-primary/5 p-4 rounded-3xl border border-primary/10 flex gap-4 items-center">
+         <div className="bg-primary p-3 rounded-2xl shadow-lg shadow-primary/20 animate-pulse">
+            <Zap className="h-6 w-6 text-white" />
+         </div>
+         <p className="text-[10px] text-foreground font-bold uppercase leading-tight">
+            Mapa de ayuda actualizado: Los iconos morados brillantes indican puntos críticos de asistencia.
+         </p>
+      </section>
+
       {!isEasy && (
         <div className="space-y-4">
           <div className="relative">
@@ -89,14 +100,14 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
 
       <div className="grid gap-4">
         {filtered.map((res, i) => (
-          <Card key={i} className={`overflow-hidden border-none shadow-lg bg-white transition-all active:scale-[0.98] ${isEasy ? 'rounded-[2.5rem] border-[6px] border-primary/5' : 'rounded-3xl'}`}>
+          <Card key={i} className={`overflow-hidden border-none shadow-lg bg-white transition-all active:scale-[0.98] ${isEasy ? 'rounded-[2.5rem] border-[6px] border-primary/5' : 'rounded-3xl hover:border-primary/20'}`}>
             <CardContent className={isEasy ? "p-8" : "p-6"}>
               <div className="flex justify-between items-start mb-4">
-                <Badge className="bg-primary/10 text-primary border-none font-black text-[10px] px-3 py-1 rounded-lg uppercase tracking-wider">
+                <Badge className="bg-primary text-white border-none font-black text-[10px] px-3 py-1 rounded-lg uppercase tracking-wider shadow-md shadow-primary/20">
                   {getIcon(res.type)}
                   <span className="ml-2">{res.type}</span>
                 </Badge>
-                {!isEasy && <div className="flex items-center gap-1.5 text-[10px] font-black text-muted-foreground uppercase tracking-widest bg-slate-50 px-2 py-1 rounded-lg">
+                {!isEasy && <div className="flex items-center gap-1.5 text-[10px] font-black text-muted-foreground uppercase tracking-widest bg-slate-50 px-2 py-1 rounded-lg border border-primary/5">
                   <MapPin className="h-3 w-3 text-primary" /> {res.city}
                 </div>}
               </div>
@@ -114,9 +125,9 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
                   onClick={() => openInMaps(`${res.name}, ${res.address}, ${res.city}`)}
                   size={isEasy ? "lg" : "default"} 
                   variant="outline"
-                  className={`flex-1 rounded-2xl h-16 gap-3 border-2 border-slate-200 font-black text-lg active:scale-95 transition-transform`}
+                  className={`flex-1 rounded-2xl h-16 gap-3 border-2 border-slate-200 font-black text-lg active:scale-95 transition-transform hover:border-primary hover:text-primary group`}
                 >
-                  <Navigation className="h-6 w-6 text-primary" /> Mapa
+                  <Navigation className="h-6 w-6 text-primary group-hover:animate-bounce" /> Mapa
                 </Button>
               </div>
             </CardContent>

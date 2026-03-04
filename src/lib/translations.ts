@@ -26,6 +26,22 @@ export const translations = {
     tipsDesc: 'Comisaría (Plaza Batallas): Prueba los viernes a las 9:00 AM.',
     claveNote: 'Importante: Saca tu Cl@ve en cuanto tengas el NIE.',
     disclaimer: 'Guía comunitaria. No oficial. Los datos se guardan solo en tu móvil.',
+    firstSteps: {
+      title: 'Mis Primeros Pasos',
+      subtitle: 'Completa tu integración en Jaén',
+      empadronamiento: 'Empadronamiento',
+      health: 'Tarjeta Sanitaria',
+      transport: 'Tarjeta de Autobús',
+      howTo: '¿Cómo hacerlo?'
+    },
+    scanner: {
+      title: 'Escanear Carta',
+      subtitle: 'Analiza tus documentos con IA',
+      scanBtn: 'Escanear Documento',
+      analyzing: 'Analizando contenido...',
+      resultTitle: 'Resumen Simplificado',
+      resultDesc: 'Esta carta parece ser una notificación oficial. Te recomendamos llevarla a Jaén Acoge para una revisión detallada.'
+    },
     appointmentLight: {
       title: 'Semáforo de Citas',
       desc: 'Estado actual en Extranjería Jaén.',
@@ -198,8 +214,22 @@ export const translations = {
     downloadForm: 'Download PDF',
     fillOnline: 'Fill Online',
     pdfNote: 'Note: Use Adobe Acrobat to fill out PDF forms.',
-    tipsDesc: 'Police (Plaza Batallas): Try Fridays at 9:00 AM.',
-    disclaimer: 'Community guide. Unofficial. Data stays only on your mobile.',
+    firstSteps: {
+      title: 'My First Steps',
+      subtitle: 'Complete your integration in Jaen',
+      empadronamiento: 'Town Hall Registration',
+      health: 'Health Card',
+      transport: 'Bus Card',
+      howTo: 'How to do it?'
+    },
+    scanner: {
+      title: 'Scan Letter',
+      subtitle: 'Analyze your docs with AI',
+      scanBtn: 'Scan Document',
+      analyzing: 'Analyzing content...',
+      resultTitle: 'Simplified Summary',
+      resultDesc: 'This letter seems to be an official notification. We recommend taking it to Jaen Acoge for a detailed review.'
+    },
     appointmentLight: {
       title: 'Appt. Traffic Light',
       desc: 'Current status in Extranjería Jaén.',

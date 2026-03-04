@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -9,6 +10,8 @@ import { AppointmentBanner } from "./AppointmentBanner";
 import { CurrencyConverter } from "@/components/economy/CurrencyConverter";
 import { useLocalStorage } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { FirstStepsProgress } from "./FirstStepsProgress";
+import { DocumentScanner } from "@/components/tools/DocumentScanner";
 import { 
   Building2, 
   CreditCard, 
@@ -21,7 +24,9 @@ import {
   Info,
   LayoutGrid,
   ShieldCheck,
-  Zap
+  Zap,
+  CheckCircle2,
+  Scan
 } from "lucide-react";
 
 type DashboardProps = {
@@ -116,6 +121,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </Card>
       </section>
 
+      {/* Gamification: First Steps */}
+      <FirstStepsProgress lang={lang} setActiveTab={setActiveTab} />
+
+      {/* Smart Appointment Banner */}
+      <AppointmentBanner lang={lang} />
+
       {/* Security Banner */}
       <section className="bg-secondary border border-primary/10 p-4 rounded-3xl flex gap-4 items-center">
          <ShieldCheck className="h-8 w-8 text-primary shrink-0" />
@@ -124,12 +135,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
          </p>
       </section>
 
-      {/* Smart Appointment Banner */}
-      <AppointmentBanner lang={lang} />
+      {/* Document Scanner Tool */}
+      <DocumentScanner lang={lang} />
 
       {/* Main Navigation Grid */}
       <section>
-        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1">
+        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1 uppercase tracking-tighter">
           Categorías
         </h3>
         <div className="grid grid-cols-2 gap-3">
@@ -144,8 +155,8 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
                   <cat.icon className={`h-6 w-6 ${cat.isEmergency ? 'text-destructive' : 'text-primary'}`} />
                 </div>
                 <div className="space-y-0.5">
-                  <h4 className="font-bold text-xs">{cat.title}</h4>
-                  <p className="text-[9px] text-muted-foreground line-clamp-1">{cat.desc}</p>
+                  <h4 className="font-bold text-xs uppercase tracking-tight">{cat.title}</h4>
+                  <p className="text-[9px] text-muted-foreground line-clamp-1 font-bold uppercase">{cat.desc}</p>
                 </div>
               </CardContent>
             </Card>
@@ -163,7 +174,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       <CurrencyConverter lang={lang} />
 
       <section className="pb-10">
-        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1">
+        <h3 className="font-headline font-bold text-lg mb-4 flex items-center gap-2 px-1 uppercase tracking-tighter">
           Guías Destacadas
         </h3>
         <div className="grid grid-cols-1 gap-3">
@@ -182,12 +193,12 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-bold text-sm leading-tight">{link.title}</h4>
+                    <h4 className="font-bold text-sm leading-tight uppercase tracking-tight">{link.title}</h4>
                     <Badge variant="outline" className="text-[10px] uppercase font-black tracking-widest text-muted-foreground">
                       Guía
                     </Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">{link.desc}</p>
+                  <p className="text-xs text-muted-foreground mt-1 font-medium">{link.desc}</p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground opacity-30" />
               </CardContent>
