@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -36,7 +35,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
 
   const mainCategories = [
     { id: 'procedures', tab: 'procedures', title: t.procedures, desc: 'Papeles y NIE', icon: CreditCard, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { id: 'work', tab: 'work', title: t.work.title, desc: 'Trabajo Oliva', icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { id: 'employment', tab: 'employment_portal', title: t.employment.title, desc: 'Trabajo y CV', icon: Briefcase, color: 'text-orange-600', bg: 'bg-orange-50' },
     { id: 'study', tab: 'study', title: 'Estudios', desc: 'Aprender', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50' },
     { id: 'family', tab: 'family', title: 'Familia', desc: 'Niños y Ayudas', icon: Baby, color: 'text-pink-600', bg: 'bg-pink-50' },
     { id: 'help', tab: 'directory', title: 'Ayuda', desc: 'ONGs y Comida', icon: MapPin, color: 'text-emerald-600', bg: 'bg-emerald-50' },
