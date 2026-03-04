@@ -211,28 +211,43 @@ export function AppSidebar({
           </div>
         </SidebarContent>
 
-        <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-4">
-          <div className="flex flex-col gap-2 px-2 w-full">
-            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
-              <Palette className="h-3 w-3" /> Tema de Color
-            </p>
-            <div className="flex items-center justify-between w-full px-1">
-              {themes.map((theme) => (
-                <button
-                  key={theme.id}
-                  onClick={() => setTheme(theme.id)}
-                  className={cn(
-                    "h-8 w-8 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95 shadow-lg",
-                    theme.color,
-                    currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2 scale-110 z-10" : "opacity-80 grayscale-[0.3]"
-                  )}
-                  title={theme.label}
-                >
-                  {currentTheme === theme.id && <Check className={cn("h-4 w-4", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
-                </button>
-              ))}
-            </div>
-          </div>
+        <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-2">
+          {/* Theme Selector Hidden behind a Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
+                <Palette className="h-5 w-5 text-primary" />
+                <div className="flex flex-col items-start text-left">
+                  <span className="text-xs font-bold text-primary">Apariencia / Theme</span>
+                  <span className="text-[9px] text-muted-foreground uppercase font-black tracking-tight">
+                    {themes.find(t => t.id === currentTheme)?.label || 'Personalizar'}
+                  </span>
+                </div>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-2xl bg-white/40 border border-white/20">
+              <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] px-1 py-2 text-center">
+                Seleccionar Color
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-white/20" />
+              <div className="grid grid-cols-3 gap-4 py-4">
+                {themes.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => setTheme(theme.id)}
+                    className={cn(
+                      "h-12 w-12 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95 shadow-lg mx-auto",
+                      theme.color,
+                      currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2 scale-110 z-10" : "opacity-80 grayscale-[0.3]"
+                    )}
+                    title={theme.label}
+                  >
+                    {currentTheme === theme.id && <Check className={cn("h-6 w-6", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
+                  </button>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
