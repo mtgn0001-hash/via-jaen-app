@@ -24,6 +24,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { TransportTab } from "@/components/transport/TransportTab";
+import { DocumentScanner } from "@/components/tools/DocumentScanner";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -89,6 +90,10 @@ export default function Home() {
             
             {activeTab === 'profile' && (
               <UserProfile lang={lang} />
+            )}
+
+            {activeTab === 'scanner' && (
+              <DocumentScanner lang={lang} />
             )}
 
             {activeTab === 'procedures' && (

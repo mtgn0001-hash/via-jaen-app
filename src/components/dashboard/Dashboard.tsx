@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -11,7 +10,6 @@ import { CurrencyConverter } from "@/components/economy/CurrencyConverter";
 import { useLocalStorage } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { FirstStepsProgress } from "./FirstStepsProgress";
-import { DocumentScanner } from "@/components/tools/DocumentScanner";
 import { 
   Building2, 
   CreditCard, 
@@ -134,9 +132,6 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
             {t.privacyBanner}
          </p>
       </section>
-
-      {/* Document Scanner Tool */}
-      <DocumentScanner lang={lang} />
 
       {/* Main Navigation Grid */}
       <section>

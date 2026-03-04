@@ -18,7 +18,8 @@ import {
   Check,
   Share2,
   Library,
-  UserCircle
+  UserCircle,
+  Scan
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -81,6 +82,9 @@ export function AppSidebar({
     { id: 'general', label: 'Inicio', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard },
       { id: 'profile', icon: UserCircle, label: 'Mis Datos / Perfil' },
+    ]},
+    { id: 'tools', label: 'Herramientas IA', items: [
+      { id: 'scanner', icon: Scan, label: t.scanner.title },
     ]},
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
