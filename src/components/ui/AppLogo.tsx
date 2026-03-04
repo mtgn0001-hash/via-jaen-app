@@ -25,7 +25,7 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
   return (
     <div 
       className={cn(
-        "relative flex items-center justify-center rounded-[1.25rem] transition-all duration-500",
+        "relative flex items-center justify-center rounded-2xl transition-all duration-500",
         containerColors[variant],
         className
       )}
@@ -38,31 +38,26 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
         className={cn("transition-all duration-300", strokeColors[variant])}
         style={{ width: size * 0.75, height: size * 0.75 }}
       >
-        {/* Silueta de la Catedral de Jaén: Trazos que definen las torres y el frontón real */}
+        {/* Silueta Rectilínea de la Catedral de Jaén (Sin formas redondeadas) */}
+        {/* Cuerpo y Torres con líneas arquitectónicas más fieles */}
         <path 
-          d="M18 80V35C18 32 20 30 23 30H32V25C32 22 34 20 37 20H43V80M82 80V35C82 32 80 30 77 30H68V25C68 22 66 20 63 20H57V80M32 80V45C32 38 38 32 50 32C62 32 68 38 68 45V80" 
+          d="M15 85V35H25V20H35V35H40V85M85 85V35H75V20H65V35H60V85M40 85V45H45V40H55V45H60V85" 
           stroke="currentColor" 
-          strokeWidth="3.5" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
+          strokeWidth="3" 
+          strokeLinecap="square" 
+          strokeLinejoin="miter"
         />
-        {/* Cúpula central estilizada */}
-        <path 
-          d="M42 32C42 27 45 24 50 24C55 24 58 27 58 32" 
-          stroke="currentColor" 
-          strokeWidth="2.5" 
-          strokeLinecap="round"
-        />
-        {/* Detalles de balcones/ventanas (toque arquitectónico sutil) */}
-        <path d="M22 40H28M72 40H78M45 45H55" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
         
-        {/* Línea de suelo decorativa */}
+        {/* Detalles de la fachada (ventanales y cornisas) en líneas rectas */}
+        <path d="M19 45H21M79 45H81M47 55H53M47 65H53" stroke="currentColor" strokeWidth="2" strokeLinecap="square" opacity="0.4" />
+        
+        {/* Línea de base sólida */}
         <path 
-          d="M10 80H90" 
+          d="M10 85H90" 
           stroke="currentColor" 
           strokeWidth="2" 
-          strokeLinecap="round"
-          opacity="0.2"
+          strokeLinecap="square"
+          opacity="0.3"
         />
       </svg>
     </div>
