@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -174,7 +175,7 @@ const Sidebar = React.forwardRef<
       return (
         <div
           className={cn(
-            "flex h-full w-[--sidebar-width] flex-col bg-primary/5 backdrop-blur-2xl text-sidebar-foreground shadow-2xl",
+            "flex h-full w-[--sidebar-width] flex-col bg-slate-900/60 backdrop-blur-3xl text-sidebar-foreground shadow-2xl",
             className
           )}
           ref={ref}
@@ -191,7 +192,7 @@ const Sidebar = React.forwardRef<
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            className="w-[--sidebar-width] bg-primary/10 backdrop-blur-[40px] p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden rounded-r-[3rem]"
+            className="w-[--sidebar-width] bg-slate-900/80 backdrop-blur-[40px] p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden rounded-r-[3rem]"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -240,8 +241,8 @@ const Sidebar = React.forwardRef<
           <div
             data-sidebar="sidebar"
             className={cn(
-              "flex h-full w-full flex-col bg-primary/5 backdrop-blur-[60px] transition-all duration-700 shadow-[0_10px_50px_rgba(0,0,0,0.1)]",
-              variant === "floating" && "rounded-[3.5rem] border border-primary/20 m-2 shadow-2xl",
+              "flex h-full w-full flex-col bg-slate-900/60 backdrop-blur-[60px] transition-all duration-700 shadow-[0_10px_50px_rgba(0,0,0,0.3)]",
+              variant === "floating" && "rounded-[3.5rem] border border-white/20 m-2 shadow-2xl",
               variant === "inset" && "rounded-xl border border-sidebar-border"
             )}
           >
