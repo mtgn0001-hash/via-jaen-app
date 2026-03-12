@@ -1,0 +1,10 @@
+{
+  "mcpServers": {}
+}{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "RUTA_DE_TU_PROYECTO"]
+    }
+  }
+}
