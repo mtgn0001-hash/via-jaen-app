@@ -22,7 +22,7 @@ import {
   Share2
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
-import { ThemeType, useLocalStorage } from "@/lib/store"
+import { ThemeType, UserProgress } from "@/lib/store"
 import {
   Sidebar,
   SidebarContent,
@@ -57,6 +57,8 @@ type AppSidebarProps = {
   setActiveTab: (tab: string) => void;
   currentTheme: ThemeType;
   setTheme: (theme: ThemeType) => void;
+  progress: UserProgress;
+  updateProgress: (updates: Partial<UserProgress>) => void;
 };
 
 export function AppSidebar({ 
@@ -64,9 +66,10 @@ export function AppSidebar({
   setLang, 
   activeTab, 
   setActiveTab, 
+  progress,
+  updateProgress
 }: AppSidebarProps) {
   const t = translations[lang] || translations.es;
-  const { progress, updateProgress } = useLocalStorage();
   const { setOpenMobile } = useSidebar();
   const [showQR, setShowQR] = React.useState(false);
 

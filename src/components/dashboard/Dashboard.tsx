@@ -5,7 +5,7 @@ import { Language, translations } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AppointmentStatus } from "./AppointmentStatus";
-import { useLocalStorage } from "@/lib/store";
+import { UserProgress } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { 
   Building2, 
@@ -27,11 +27,11 @@ import { cn } from "@/lib/utils";
 type DashboardProps = {
   lang: Language;
   setActiveTab: (tab: string) => void;
+  progress: UserProgress;
 };
 
-export function Dashboard({ lang, setActiveTab }: DashboardProps) {
+export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
   const langPack = translations[lang] || translations.es;
-  const { progress } = useLocalStorage();
   const t = langPack;
 
   const cardClass = "border-none shadow-xl bg-white/80 backdrop-blur-xl transition-all active:scale-[0.98] group overflow-hidden flex flex-col justify-between";

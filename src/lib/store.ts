@@ -59,6 +59,7 @@ export function useLocalStorage() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        // Mezclamos con el default para asegurar que si faltan llaves nuevas no explote
         setProgress({ ...defaultProgress, ...parsed });
       } catch (e) {
         console.error("Failed to parse local storage", e);
@@ -70,7 +71,9 @@ export function useLocalStorage() {
   const updateProgress = (updates: Partial<UserProgress>) => {
     setProgress(prev => {
       const newProgress = { ...prev, ...updates };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+      }
       return newProgress;
     });
   };
@@ -97,7 +100,7 @@ export function useLocalStorage() {
   };
 
   const calculateCompletion = () => {
-    const totalItems = 15;
+    const totalItems = 12; // Ajustado a los items reales
     const completedItems = 
       Object.values(progress.procedures).filter(Boolean).length +
       Object.values(progress.checklist).filter(Boolean).length +

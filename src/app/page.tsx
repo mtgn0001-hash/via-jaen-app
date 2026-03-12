@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage } from "@/lib/store";
+import { useLocalStorage, UserProgress, Language as LangType } from "@/lib/store";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -32,7 +32,10 @@ export default function Home() {
   const { 
     progress, 
     updateProgress, 
+    updateProfile,
     toggleProcedure, 
+    toggleChecklist,
+    toggleFirstStep,
     calculateCompletion,
     isLoaded
   } = useLocalStorage();
@@ -62,7 +65,7 @@ export default function Home() {
   return (
     <SidebarProvider>
       <div 
-        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''} ${accMode === 'visual' ? 'animate-flash-visual' : ''}`}
+        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''} ${accMode === 'accessible' ? 'animate-flash-visual' : ''}`}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         <AppSidebar 
@@ -72,6 +75,8 @@ export default function Home() {
           setActiveTab={setActiveTab}
           currentTheme={progress.theme}
           setTheme={setTheme}
+          progress={progress}
+          updateProgress={updateProgress}
         />
 
         <SidebarInset className="flex-1 overflow-x-hidden">
@@ -85,6 +90,7 @@ export default function Home() {
           <Header 
             lang={lang} 
             completion={calculateCompletion()} 
+            progress={progress}
           />
 
           <main 
@@ -92,15 +98,23 @@ export default function Home() {
             aria-live="polite"
           >
             {activeTab === 'dashboard' && (
-              <Dashboard lang={lang} setActiveTab={setActiveTab} />
+              <Dashboard 
+                lang={lang} 
+                setActiveTab={setActiveTab} 
+                progress={progress} 
+              />
             )}
             
             {activeTab === 'profile' && (
-              <UserProfile lang={lang} />
+              <UserProfile 
+                lang={lang} 
+                progress={progress} 
+                updateProfile={updateProfile} 
+              />
             )}
 
             {activeTab === 'bot' && (
-              <JaenBot lang={lang} />
+              <JaenBot lang={lang} progress={progress} />
             )}
 
             {activeTab === 'vault' && (
@@ -113,12 +127,19 @@ export default function Home() {
 
             {activeTab === 'procedures' && (
               <div className="space-y-8">
-                {accMode !== 'auditory' && !isEasy && <DocumentChecklist lang={lang} />}
+                {accMode !== 'auditory' && !isEasy && (
+                  <DocumentChecklist 
+                    lang={lang} 
+                    progress={progress} 
+                    toggleChecklist={toggleChecklist} 
+                  />
+                )}
                 {accMode !== 'auditory' && !isEasy && <FormVisualGuide lang={lang} />}
                 <ProcedureList 
                   lang={lang} 
                   toggleProcedure={toggleProcedure} 
                   completedProcedures={progress.procedures} 
+                  progress={progress}
                 />
               </div>
             )}
@@ -132,18 +153,18 @@ export default function Home() {
             )}
 
             {activeTab === 'study' && (
-              <StudyUJA lang={lang} />
+              <StudyUJA lang={lang} progress={progress} />
             )}
 
             {activeTab === 'employment_portal' && (
-              <EmploymentPortal lang={lang} />
+              <EmploymentPortal lang={lang} progress={progress} />
             )}
 
             {activeTab === 'directory' && (
               <div className="space-y-8">
                 {accMode === 'standard' && <WifiPoints lang={lang} />}
-                <ResourceDirectory lang={lang} />
-                {!isEasy && <TransportTab lang={lang} />}
+                <ResourceDirectory lang={lang} progress={progress} />
+                {!isEasy && <TransportTab lang={lang} progress={progress} />}
               </div>
             )}
 

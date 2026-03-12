@@ -28,10 +28,10 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Obtenemos la URL base de la aplicación
+      // Obtenemos la URL base de la aplicación de forma segura en el cliente
       setUrl(window.location.origin);
     }
-  }, []);
+  }, [open]);
 
   const handleCopy = () => {
     if (!url) return;
@@ -41,7 +41,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
   };
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(`¡Hola! Te comparto Vía Jaén, una guía segura y privada para trámites en Jaén: ${url}`);
+    const text = encodeURIComponent(`¡Hola! Te comparto Vía Jaén, una guía segura y privada para trámites en Jaén: ${url || "https://viajaen.es"}`);
     window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
