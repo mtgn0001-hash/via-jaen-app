@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -21,7 +22,9 @@ import {
   Scan,
   Lock,
   Bot,
-  Sparkles
+  Sparkles,
+  BookOpen,
+  Search
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -107,11 +110,11 @@ export function AppSidebar({
       { id: 'scanner', icon: Scan, label: getSafeLabel('scanner.title', 'Escáner') },
       { id: 'vault', icon: Lock, label: getSafeLabel('vault.title', 'Bóveda') },
     ]},
-    { id: 'legal', label: 'Legalidad', items: [
+    { id: 'guides', label: 'Guías y Servicios', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },
-    ]},
-    { id: 'employment', label: 'Oportunidades', items: [
       { id: 'employment_portal', icon: Briefcase, label: getSafeLabel('employment.title', 'Empleo') },
+      { id: 'study', icon: GraduationCap, label: getSafeLabel('studyUJA.title', 'Estudios') },
+      { id: 'directory', icon: MapPin, label: t.directory || 'Ayuda y Mapas' },
     ]},
     { id: 'social', label: 'Vida y Salud', items: [
       { id: 'family', icon: HeartPulse, label: getSafeLabel('familyResources.title', 'Familia') },

@@ -67,45 +67,6 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
     },
   ];
 
-  const services = [
-    { 
-      id: 'procedures', 
-      tab: 'procedures', 
-      title: t.procedures || 'Trámites', 
-      desc: 'Papeles y NIE', 
-      icon: CreditCard,
-      color: 'text-indigo-500',
-      bgColor: 'bg-indigo-50'
-    },
-    { 
-      id: 'employment', 
-      tab: 'employment_portal', 
-      title: 'Empleo', 
-      desc: 'Trabajo y CV', 
-      icon: Briefcase,
-      color: 'text-emerald-500',
-      bgColor: 'bg-emerald-50'
-    },
-    { 
-      id: 'study', 
-      tab: 'study', 
-      title: 'Estudios', 
-      desc: 'UJA y Becas', 
-      icon: GraduationCap,
-      color: 'text-amber-500',
-      bgColor: 'bg-amber-50'
-    },
-    { 
-      id: 'help', 
-      tab: 'directory', 
-      title: 'Ayuda', 
-      desc: 'ONGs y Mapas', 
-      icon: MapPin,
-      color: 'text-cyan-500',
-      bgColor: 'bg-cyan-50'
-    },
-  ];
-
   if (progress.easyReading) {
     return (
       <div className="space-y-6 pt-4">
@@ -118,7 +79,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
         </div>
 
         <div className="grid grid-cols-1 gap-4">
-          {[...smartTools, ...services].map((cat) => (
+          {smartTools.map((cat) => (
              <Button 
                key={cat.id} 
                onClick={() => setActiveTab(cat.tab)}
@@ -209,35 +170,6 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
       {/* Smart Appointment Banner (Time-based Proactive) */}
       <AppointmentBanner lang={lang} />
 
-      {/* SERVICES GRID */}
-      <section>
-        <h3 className="font-black text-[10px] mb-4 flex items-center gap-2 px-1 uppercase tracking-[0.2em] text-muted-foreground">
-          Guías y Servicios
-        </h3>
-        <div className="grid grid-cols-2 gap-4">
-          {services.map((cat) => (
-            <Card 
-              key={cat.id} 
-              className="border-none shadow-md cursor-pointer active:scale-95 transition-all bg-white overflow-hidden group hover:shadow-primary/5 rounded-[2.5rem]"
-              onClick={() => {
-                if ('vibrate' in navigator) navigator.vibrate(20);
-                setActiveTab(cat.tab);
-              }}
-            >
-              <CardContent className="p-5 flex items-center gap-4">
-                <div className={`p-3 rounded-2xl transition-transform group-hover:rotate-6 ${cat.bgColor} ${cat.color}`}>
-                  <cat.icon className="h-6 w-6" />
-                </div>
-                <div className="space-y-0.5 text-left flex-1 min-w-0">
-                  <h4 className="font-black text-[10px] uppercase tracking-tighter leading-none truncate">{cat.title}</h4>
-                  <p className="text-[8px] text-muted-foreground font-bold uppercase tracking-widest opacity-80 truncate">{cat.desc}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Security Banner Premium */}
       <section className="bg-slate-900 text-white p-6 rounded-[3rem] flex gap-5 items-center shadow-2xl relative overflow-hidden group">
          <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -254,7 +186,7 @@ export function Dashboard({ lang, setActiveTab }: DashboardProps) {
 
       <section className="pb-16">
         <h3 className="font-black text-[10px] mb-4 flex items-center gap-2 px-1 uppercase tracking-[0.2em] text-muted-foreground">
-          Trámites Directos
+          Acceso Rápido a Guías
         </h3>
         <div className="grid grid-cols-1 gap-4">
           {[
