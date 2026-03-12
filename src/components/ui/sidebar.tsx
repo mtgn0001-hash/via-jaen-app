@@ -241,12 +241,16 @@ const Sidebar = React.forwardRef<
           <div
             data-sidebar="sidebar"
             className={cn(
-              "flex h-full w-full flex-col bg-slate-900/60 backdrop-blur-[60px] transition-all duration-700 shadow-[0_10px_50px_rgba(0,0,0,0.3)]",
-              variant === "floating" && "rounded-[3.5rem] border border-white/20 m-2 shadow-2xl",
+              "flex h-full w-full flex-col bg-slate-900/60 backdrop-blur-[60px] transition-all duration-700 shadow-2xl border border-white/10 relative overflow-hidden",
+              variant === "floating" && "rounded-[3rem] shadow-[0_10px_50px_rgba(0,0,0,0.4)]",
               variant === "inset" && "rounded-xl border border-sidebar-border"
             )}
           >
-            {children}
+            {/* Capa de tinte adaptativa */}
+            <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
+            <div className="relative z-10 flex h-full w-full flex-col">
+              {children}
+            </div>
           </div>
         </div>
       </div>
