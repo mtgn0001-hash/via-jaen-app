@@ -43,6 +43,9 @@ export default function Home() {
   const isRTL = lang === 'ar';
   const isEasy = progress.easyReading;
 
+  // Safeguard: Ensure t is never undefined to prevent crashes
+  const t = translations[lang] || translations.es;
+
   useEffect(() => {
     if (isLoaded) {
       document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
@@ -56,7 +59,6 @@ export default function Home() {
 
   const setLang = (newLang: Language) => updateProgress({ language: newLang });
   const setTheme = (newTheme: any) => updateProgress({ theme: newTheme });
-  const t = translations[lang];
 
   return (
     <SidebarProvider>
