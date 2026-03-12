@@ -13,7 +13,8 @@ type AppointmentStatusProps = {
 
 export function AppointmentStatus({ lang }: AppointmentStatusProps) {
   const langPack = translations[lang] || translations.es;
-  const t = langPack.appointmentLight || translations.es.appointmentLight;
+  // Fallback to Spanish if appointmentLight is missing in the current language
+  const t = (langPack as any).appointmentLight || translations.es.appointmentLight;
   
   const [reported, setReported] = useState(false);
   const [status, setStatus] = useState<'green' | 'yellow' | 'red'>('yellow');
@@ -35,12 +36,14 @@ export function AppointmentStatus({ lang }: AppointmentStatusProps) {
     red: "text-destructive bg-destructive/10 border-destructive/20"
   }[status];
 
+  if (!t) return null;
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <div className="space-y-0.5">
-          <p className="text-[8px] text-muted-foreground uppercase font-black tracking-[0.2em]">Situación Citas</p>
-          <p className="text-[7px] text-muted-foreground uppercase font-bold opacity-60">Actualizado hace 5 min</p>
+          <p className="text-[8px] text-muted-foreground uppercase font-black tracking-[0.2em]">{t.title}</p>
+          <p className="text-[7px] text-muted-foreground uppercase font-bold opacity-60">{t.updated}</p>
         </div>
         <Badge variant="outline" className={`rounded-xl px-3 py-1 border-2 flex items-center gap-1.5 ${StatusColor}`}>
           <StatusIcon className="h-3 w-3" />

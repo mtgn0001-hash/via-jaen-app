@@ -15,11 +15,15 @@ type ArraigoCalculatorProps = {
 };
 
 export function ArraigoCalculator({ lang }: ArraigoCalculatorProps) {
-  const t = translations[lang].arraigo;
+  const langPack = translations[lang] || translations.es;
+  const t = (langPack as any).arraigo || (translations.es as any).arraigo;
+  
   const [time, setTime] = useState<string>("");
   const [work, setWork] = useState<string>("");
   const [family, setFamily] = useState<string>("");
   const [result, setResult] = useState<string | null>(null);
+
+  if (!t) return null;
 
   const calculate = () => {
     if (family === "yes") {
