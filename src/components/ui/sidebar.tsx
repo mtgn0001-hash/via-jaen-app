@@ -175,7 +175,7 @@ const Sidebar = React.forwardRef<
       return (
         <div
           className={cn(
-            "flex h-full w-[--sidebar-width] flex-col bg-slate-900/60 backdrop-blur-3xl text-sidebar-foreground shadow-2xl",
+            "flex h-full w-[--sidebar-width] flex-col bg-white/40 backdrop-blur-3xl text-sidebar-foreground shadow-2xl",
             className
           )}
           ref={ref}
@@ -192,7 +192,7 @@ const Sidebar = React.forwardRef<
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            className="w-[--sidebar-width] bg-slate-900/80 backdrop-blur-[40px] p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden rounded-r-[3rem]"
+            className="w-[--sidebar-width] bg-white/60 backdrop-blur-[40px] p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden rounded-r-[3rem]"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -241,12 +241,12 @@ const Sidebar = React.forwardRef<
           <div
             data-sidebar="sidebar"
             className={cn(
-              "flex h-full w-full flex-col bg-slate-900/60 backdrop-blur-[60px] transition-all duration-700 shadow-2xl border border-white/10 relative overflow-hidden",
-              variant === "floating" && "rounded-[3rem] shadow-[0_10px_50px_rgba(0,0,0,0.4)]",
+              "flex h-full w-full flex-col bg-white/40 backdrop-blur-[60px] transition-all duration-700 shadow-2xl border border-white/40 relative overflow-hidden",
+              variant === "floating" && "rounded-[3rem] shadow-[0_10px_50px_rgba(0,0,0,0.05)]",
               variant === "inset" && "rounded-xl border border-sidebar-border"
             )}
           >
-            {/* Capa de tinte adaptativa */}
+            {/* Capa de tinte adaptativa clara */}
             <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
             <div className="relative z-10 flex h-full w-full flex-col">
               {children}
@@ -388,7 +388,7 @@ const SidebarSeparator = React.forwardRef<
     <Separator
       ref={ref}
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border/20", className)}
+      className={cn("mx-2 w-auto bg-sidebar-border/10", className)}
       {...props}
     />
   )
@@ -439,7 +439,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={cn(
-        "duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/50 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       )}
@@ -515,7 +515,7 @@ const sidebarMenuButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        default: "hover:bg-primary/10 hover:text-primary",
         outline:
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
       },
