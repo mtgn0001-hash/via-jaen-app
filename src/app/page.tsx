@@ -42,8 +42,8 @@ export default function Home() {
   const lang = (progress.language as Language) || 'es';
   const isRTL = lang === 'ar';
   const isEasy = progress.easyReading;
+  const accMode = progress.accessibilityMode || 'standard';
 
-  // Safe access to translations with fallback to Spanish
   const t = translations[lang] || translations.es;
 
   useEffect(() => {
@@ -52,8 +52,9 @@ export default function Home() {
       document.documentElement.lang = lang;
       document.documentElement.setAttribute('data-theme', progress.theme);
       document.documentElement.setAttribute('data-easy-reading', String(isEasy));
+      document.documentElement.setAttribute('data-accessibility', accMode);
     }
-  }, [lang, isRTL, progress.theme, isLoaded, isEasy]);
+  }, [lang, isRTL, progress.theme, isLoaded, isEasy, accMode]);
 
   if (!isLoaded) return null;
 
@@ -63,7 +64,7 @@ export default function Home() {
   return (
     <SidebarProvider>
       <div 
-        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''}`}
+        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''} ${accMode === 'visual' ? 'animate-flash-visual' : ''}`}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         <AppSidebar 
@@ -88,7 +89,10 @@ export default function Home() {
             completion={calculateCompletion()} 
           />
 
-          <main className={`flex-1 pb-20 max-w-lg mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500 ${isEasy ? 'p-6' : 'p-4'}`}>
+          <main 
+            className={`flex-1 pb-20 max-w-lg mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500 ${isEasy ? 'p-6' : 'p-4'}`}
+            aria-live="polite"
+          >
             {activeTab === 'dashboard' && (
               <Dashboard lang={lang} setActiveTab={setActiveTab} />
             )}
@@ -111,8 +115,8 @@ export default function Home() {
 
             {activeTab === 'procedures' && (
               <div className="space-y-8">
-                {!isEasy && <DocumentChecklist lang={lang} />}
-                {!isEasy && <FormVisualGuide lang={lang} />}
+                {accMode !== 'auditory' && !isEasy && <DocumentChecklist lang={lang} />}
+                {accMode !== 'auditory' && !isEasy && <FormVisualGuide lang={lang} />}
                 <ProcedureList 
                   lang={lang} 
                   toggleProcedure={toggleProcedure} 
@@ -137,16 +141,9 @@ export default function Home() {
               <EmploymentPortal lang={lang} />
             )}
 
-            {activeTab === 'community' && (
-              <div className="space-y-8">
-                <IntegrationTab lang={lang} />
-                <Flashcards lang={lang} />
-              </div>
-            )}
-
             {activeTab === 'directory' && (
               <div className="space-y-8">
-                {!isEasy && <WifiPoints lang={lang} />}
+                {accMode === 'standard' && <WifiPoints lang={lang} />}
                 <ResourceDirectory lang={lang} />
                 {!isEasy && <TransportTab lang={lang} />}
               </div>
@@ -156,7 +153,7 @@ export default function Home() {
               <EmergencyTab lang={lang} />
             )}
 
-            {!isEasy && (
+            {!isEasy && accMode === 'standard' && (
               <section className="mt-8 mb-4 px-2 space-y-3">
                 <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
                   <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />

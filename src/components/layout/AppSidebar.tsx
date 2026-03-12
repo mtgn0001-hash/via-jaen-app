@@ -23,11 +23,13 @@ import {
   Lock,
   Bot,
   Sparkles,
-  BookOpen,
-  Search
+  Accessibility,
+  Eye,
+  Ear,
+  EyeOff
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
-import { ThemeType, useLocalStorage } from "@/lib/store"
+import { ThemeType, AccessibilityMode, useLocalStorage } from "@/lib/store"
 import {
   Sidebar,
   SidebarContent,
@@ -74,28 +76,13 @@ export function AppSidebar({
   currentTheme, 
   setTheme 
 }: AppSidebarProps) {
-  const getSafeLabel = (path: string, defaultLabel: string) => {
-    try {
-      const parts = path.split('.');
-      const currentPack = translations[lang] || translations.es;
-      let current: any = currentPack;
-      for (const part of parts) {
-        if (current[part] === undefined) return defaultLabel;
-        current = current[part];
-      }
-      return current;
-    } catch {
-      return defaultLabel;
-    }
-  };
-
   const t = translations[lang] || translations.es;
   const { progress, updateProgress } = useLocalStorage();
   const { setOpenMobile } = useSidebar();
   const [showQR, setShowQR] = React.useState(false);
 
   const handleNav = (tab: string) => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    if ('vibrate' in navigator) navigator.vibrate(50);
     setActiveTab(tab);
     setOpenMobile(false);
   };
@@ -106,18 +93,18 @@ export function AppSidebar({
       { id: 'profile', icon: UserCircle, label: 'Mis Datos' },
     ]},
     { id: 'tools', label: 'Inteligencia Proactiva', items: [
-      { id: 'bot', icon: Bot, label: getSafeLabel('bot.title', 'Jaén-Bot') },
-      { id: 'scanner', icon: Scan, label: getSafeLabel('scanner.title', 'Escáner') },
-      { id: 'vault', icon: Lock, label: getSafeLabel('vault.title', 'Bóveda') },
+      { id: 'bot', icon: Bot, label: t.bot?.title || 'Jaén-Bot' },
+      { id: 'scanner', icon: Scan, label: t.scanner?.title || 'Escáner' },
+      { id: 'vault', icon: Lock, label: t.vault?.title || 'Bóveda' },
     ]},
     { id: 'guides', label: 'Guías y Servicios', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },
-      { id: 'employment_portal', icon: Briefcase, label: getSafeLabel('employment.title', 'Empleo') },
-      { id: 'study', icon: GraduationCap, label: getSafeLabel('studyUJA.title', 'Estudios') },
-      { id: 'directory', icon: MapPin, label: t.directory || 'Ayuda y Mapas' },
+      { id: 'employment_portal', icon: Briefcase, label: 'Portal Empleo' },
+      { id: 'study', icon: GraduationCap, label: 'Estudiar UJA' },
+      { id: 'directory', icon: MapPin, label: t.directory || 'Ayuda Local' },
     ]},
     { id: 'social', label: 'Vida y Salud', items: [
-      { id: 'family', icon: HeartPulse, label: getSafeLabel('familyResources.title', 'Familia') },
+      { id: 'family', icon: HeartPulse, label: 'Para Familias' },
       { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta' },
     ]},
     { id: 'emergency', label: 'Atención Inmediata', items: [
@@ -125,13 +112,10 @@ export function AppSidebar({
     ]},
   ];
 
-  const themes: { id: ThemeType, label: string, color: string }[] = [
-    { id: 'purple', label: 'Morado', color: 'bg-[#7C3AED]' },
-    { id: 'olive', label: 'Olivo', color: 'bg-[#3D5229]' },
-    { id: 'red', label: 'Rojo', color: 'bg-[#E11D48]' },
-    { id: 'night', label: 'Noche', color: 'bg-[#121212]' },
-    { id: 'contrast', label: 'Contraste', color: 'bg-white border-2 border-black' },
-    { id: 'ocean', label: 'Océano', color: 'bg-[#3B82F6]' },
+  const accessibilityModes: { id: AccessibilityMode, label: string, icon: any }[] = [
+    { id: 'standard', label: t.accessibility.standard, icon: Sparkles },
+    { id: 'visual', label: t.accessibility.visual, icon: Ear },
+    { id: 'auditory', label: t.accessibility.auditory, icon: EyeOff },
   ];
 
   return (
@@ -146,7 +130,7 @@ export function AppSidebar({
                   Vía Jaén
                 </span>
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mt-1 opacity-60">
-                  Edición Pro 2026
+                  Universal 2026
                 </span>
               </div>
             </div>
@@ -154,46 +138,51 @@ export function AppSidebar({
             <div 
               className="group flex items-center gap-4 cursor-pointer bg-white/50 hover:bg-white/70 p-4 rounded-[2rem] transition-all border border-white/40 shadow-sm backdrop-blur-md"
               onClick={() => handleNav('profile')}
+              aria-label="Ir a mi perfil"
             >
-              <Avatar className="h-12 w-12 border-2 border-white shadow-md transition-transform group-hover:scale-105">
-                <AvatarImage src={progress.profile.photo} className="object-cover" />
-                <AvatarFallback className="bg-primary text-white font-black text-lg">
+              <Avatar className="h-12 w-12 border-2 border-white shadow-md">
+                <AvatarImage src={progress.profile.photo} />
+                <AvatarFallback className="bg-primary text-white font-black">
                   {progress.profile.name?.charAt(0) || <User className="h-6 w-6" />}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col overflow-hidden text-left">
-                <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate leading-tight">
+                <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
                   {progress.profile.name || "Invitado"}
                 </h2>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] uppercase font-black text-muted-foreground tracking-widest opacity-60">
-                    {progress.profile.nie || 'Ver Perfil'}
-                  </span>
-                  <ChevronRight className="h-3 w-3 text-primary opacity-40 group-hover:translate-x-0.5 transition-transform" />
-                </div>
+                <span className="text-[9px] uppercase font-black text-muted-foreground opacity-60">Ver Perfil</span>
               </div>
             </div>
           </div>
         </SidebarHeader>
 
-        <SidebarContent className="px-3 scrollbar-hide py-4">
-          <div className="px-4 py-3 mb-6 bg-primary/10 backdrop-blur-xl rounded-[2rem] mx-2 border border-primary/20 flex items-center justify-between shadow-inner">
-            <div className="flex items-center gap-3">
-              <div className="bg-primary/20 p-2 rounded-xl">
-                <Sparkles className="h-4 w-4 text-primary" />
-              </div>
-              <div className="space-y-0.5">
-                <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary tracking-tight">{t.easyReading || 'Modo Fácil'}</Label>
-                <p className="text-[8px] text-muted-foreground font-black uppercase tracking-widest opacity-60">Lectura Pro</p>
-              </div>
-            </div>
-            <Switch 
-              id="easy-reading" 
-              checked={progress.easyReading} 
-              onCheckedChange={(val) => updateProgress({ easyReading: val })}
-              className="data-[state=checked]:bg-primary"
-            />
+        <SidebarContent className="px-3 py-4 scrollbar-hide">
+          {/* CONTROL DE ACCESIBILIDAD */}
+          <div className="px-2 mb-6 space-y-3">
+             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility.title}</Label>
+             <div className="grid gap-1.5">
+                {accessibilityModes.map((mode) => (
+                  <Button
+                    key={mode.id}
+                    variant={progress.accessibilityMode === mode.id ? 'default' : 'ghost'}
+                    onClick={() => {
+                      if ('vibrate' in navigator) navigator.vibrate(mode.id === 'standard' ? 10 : 100);
+                      updateProgress({ accessibilityMode: mode.id });
+                    }}
+                    className={cn(
+                      "justify-start h-12 rounded-2xl gap-3 px-5 transition-all",
+                      progress.accessibilityMode === mode.id ? "shadow-lg shadow-primary/20" : "hover:bg-primary/5"
+                    )}
+                    aria-label={`Activar ${mode.label}`}
+                  >
+                    <mode.icon className="h-4 w-4" />
+                    <span className="text-[11px] font-bold tracking-tight uppercase">{mode.label}</span>
+                  </Button>
+                ))}
+             </div>
           </div>
+
+          <SidebarSeparator className="mb-4" />
 
           {categories.map((cat) => (
             <SidebarGroup key={cat.id} className="py-2">
@@ -208,21 +197,13 @@ export function AppSidebar({
                         onClick={() => handleNav(item.id)}
                         isActive={activeTab === item.id}
                         className={cn(
-                          "h-12 px-5 rounded-2xl transition-all duration-300 group relative overflow-hidden",
-                          activeTab === item.id 
-                            ? "bg-primary text-white font-black shadow-lg shadow-primary/20" 
-                            : "hover:bg-primary/5 hover:text-primary",
+                          "h-12 px-5 rounded-2xl transition-all",
+                          activeTab === item.id ? "bg-primary text-white font-black shadow-lg" : "hover:bg-primary/5",
                           item.className
                         )}
                       >
-                        <item.icon className={cn(
-                          "h-5 w-5 mr-3 transition-transform group-hover:scale-110 relative z-10",
-                          activeTab === item.id ? "text-white" : "text-primary/60"
-                        )} />
-                        <span className="text-[13px] font-bold relative z-10 tracking-tight">{item.label}</span>
-                        {activeTab === item.id && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 to-white/10" />
-                        )}
+                        <item.icon className="h-5 w-5 mr-3" />
+                        <span className="text-[13px] font-bold tracking-tight">{item.label}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
@@ -230,77 +211,31 @@ export function AppSidebar({
               </SidebarGroupContent>
             </SidebarGroup>
           ))}
-          
-          <div className="px-4 py-6 mt-2">
-            <Button 
-              onClick={() => setShowQR(true)} 
-              variant="outline" 
-              className="w-full rounded-[2rem] gap-3 h-14 border-2 border-primary/10 hover:border-primary/30 hover:bg-white/50 transition-all font-black uppercase text-[11px] tracking-widest shadow-sm backdrop-blur-md"
-            >
-              <Share2 className="h-5 w-5 text-primary" /> Compartir App
-            </Button>
-          </div>
         </SidebarContent>
 
-        <SidebarFooter className="p-5 border-t border-sidebar-border/10 gap-3 bg-white/30 backdrop-blur-3xl">
+        <SidebarFooter className="p-5 border-t border-sidebar-border/10 bg-white/30 backdrop-blur-3xl gap-3">
           <div className="grid grid-cols-2 gap-2">
-            <DropdownMenu>
+             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/50 border border-white/40 bg-white/20 shadow-sm transition-all">
-                  <Palette className="h-4 w-4 text-primary" />
-                  <span className="text-[10px] font-black uppercase tracking-tighter">Estilo</span>
+                <Button variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-sm">
+                  <Globe className="h-4 w-4 text-primary" />
+                  <span className="text-[10px] font-black uppercase">Idioma</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-3xl bg-white/85 border border-white/30">
-                <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-1 py-2 text-center">
-                  Color del Sistema
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-primary/10" />
-                <div className="grid grid-cols-3 gap-4 py-4">
-                  {themes.map((theme) => (
-                    <button
-                      key={theme.id}
-                      onClick={() => setTheme(theme.id)}
-                      className={cn(
-                        "h-12 w-12 rounded-full transition-all flex items-center justify-center relative hover:scale-115 active:scale-95 shadow-lg mx-auto",
-                        theme.color,
-                        currentTheme === theme.id ? "ring-4 ring-primary ring-offset-2 scale-110 z-10 shadow-primary/20" : "opacity-70 grayscale-[0.2]"
-                      )}
-                      title={theme.label}
-                    >
-                      {currentTheme === theme.id && <Check className={cn("h-6 w-6", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
-                    </button>
-                  ))}
-                </div>
+              <DropdownMenuContent align="start" side="top" className="rounded-[2rem] w-56">
+                <DropdownMenuItem onClick={() => setLang('es')}>Español</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('fr')}>Français</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('ro')}>Română</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/50 border border-white/40 bg-white/20 shadow-sm transition-all">
-                  <Globe className="h-4 w-4 text-primary" />
-                  <span className="text-[10px] font-black uppercase tracking-tighter">Idioma</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-2 backdrop-blur-3xl bg-white/85 border border-white/30">
-                <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-4 py-4">
-                  Seleccionar Idioma
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-primary/10" />
-                <div className="grid gap-1 p-1">
-                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('es')}>Español</DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('en')}>English</DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase text-right" onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('ro')}>Română</DropdownMenuItem>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button onClick={() => setShowQR(true)} variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-sm">
+              <Share2 className="h-4 w-4 text-primary" />
+              <span className="text-[10px] font-black uppercase">App</span>
+            </Button>
           </div>
-          
-          <p className="text-[8px] text-center text-muted-foreground font-black uppercase tracking-[0.3em] mt-2 opacity-40">
-            Jaén Integra &copy; 2026
-          </p>
         </SidebarFooter>
       </Sidebar>
       <QRCodeShare open={showQR} onOpenChange={setShowQR} lang={lang} />

@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,6 +35,21 @@
     --sidebar-accent-foreground: 262 83% 58%;
     --sidebar-border: 262 20% 92%;
     --sidebar-ring: 262 83% 58%;
+  }
+
+  [data-accessibility='auditory'] {
+    --background: 0 0% 0%;
+    --foreground: 60 100% 50%; /* Amarillo Neón */
+    --card: 0 0% 0%;
+    --card-foreground: 60 100% 50%;
+    --primary: 60 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --border: 60 100% 50%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 60 100% 50%;
+    --accent: 262 83% 58%; /* Mantener acento morado */
+    --accent-foreground: 0 0% 100%;
+    --radius: 0;
   }
 
   [data-theme='purple'] {
@@ -117,3 +133,13 @@
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes flash-purple {
+  0% { box-shadow: inset 0 0 0 0 rgba(124, 58, 237, 0); }
+  50% { box-shadow: inset 0 0 100px 20px rgba(124, 58, 237, 0.4); }
+  100% { box-shadow: inset 0 0 0 0 rgba(124, 58, 237, 0); }
+}
+
+.animate-flash-visual {
+  animation: flash-purple 2s infinite;
+}

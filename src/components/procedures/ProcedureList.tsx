@@ -1,13 +1,15 @@
 
 "use client"
 
+import { useState } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileCheck, MapPin, BadgeInfo, CheckCircle2, Clock, AlertTriangle } from "lucide-react";
+import { FileCheck, MapPin, BadgeInfo, CheckCircle2, Clock, AlertTriangle, Play, X } from "lucide-react";
 import { useLocalStorage } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type ProcedureListProps = {
   lang: Language;
@@ -19,6 +21,8 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
   const langPack = translations[lang] || translations.es;
   const t = langPack;
   const { progress } = useLocalStorage();
+  const accMode = progress.accessibilityMode;
+  const [showLSE, setShowLSE] = useState(false);
 
   const flows = [
     {
@@ -45,69 +49,23 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
     }
   ];
 
-  if (progress.easyReading) {
-    return (
-      <div className="space-y-8 pb-20">
-        <h2 className="text-4xl font-black text-primary uppercase tracking-tight">{t.procedures}</h2>
-        <div className="grid gap-10">
-          {flows.map(flow => (
-            <section key={flow.id} className="space-y-6">
-              <div className="flex items-center gap-4 bg-primary/5 p-4 rounded-3xl border border-primary/10">
-                <flow.icon className="h-10 w-10 text-primary" />
-                <h3 className="text-3xl font-black uppercase text-slate-800">{flow.title}</h3>
-              </div>
-              <div className="grid gap-4">
-                {flow.steps.map(step => (
-                  <Card key={step.id} className="border-[6px] border-primary/5 rounded-[40px] shadow-lg bg-white">
-                    <CardContent className="p-8 flex items-start gap-6">
-                      <div className="bg-green-100 p-3 rounded-2xl">
-                        <CheckCircle2 className="h-8 w-8 text-green-600" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-2xl font-black leading-tight mb-2 uppercase tracking-tight">{step.label}</p>
-                        <p className="text-lg font-bold text-muted-foreground leading-snug">{step.desc}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-              {flow.id === 'nie_tie' && (
-                <Card className="border-[6px] border-amber-500/10 rounded-[40px] shadow-lg bg-amber-50">
-                  <CardContent className="p-8 space-y-6">
-                    <div className="flex items-start gap-6">
-                       <div className="bg-amber-100 p-3 rounded-2xl h-fit">
-                        <AlertTriangle className="h-8 w-8 text-amber-600" />
-                       </div>
-                       <div className="space-y-2">
-                         <h4 className="text-2xl font-black text-amber-900 uppercase tracking-tight">{t.nieAlertTitle}</h4>
-                         <p className="text-lg font-bold text-amber-800 leading-snug">
-                           {t.nieAlertDesc}
-                         </p>
-                       </div>
-                    </div>
-                    <Button 
-                      asChild 
-                      className="w-full h-16 rounded-[24px] bg-amber-600 hover:bg-amber-700 text-white font-black text-xl shadow-xl shadow-amber-600/20"
-                    >
-                      <a href="https://www.google.com/maps/search/?api=1&query=Plaza+de+las+Batallas+Jaen" target="_blank">
-                        <MapPin className="h-6 w-6 mr-2" /> {t.goToPolice}
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
-            </section>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-4 pb-20">
-      <div className="flex items-center gap-2 mb-4">
-        <Clock className="h-5 w-5 text-primary" />
-        <h2 className="text-2xl font-bold">{t.procedures} en Jaén</h2>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-2">
+          <Clock className="h-5 w-5 text-primary" />
+          <h2 className="text-2xl font-bold">{t.procedures} en Jaén</h2>
+        </div>
+        {accMode === 'visual' && (
+          <Button 
+            onClick={() => setShowLSE(true)}
+            variant="secondary" 
+            className="rounded-full gap-2 h-10 border-2 border-primary/20 bg-white/50 animate-pulse"
+          >
+            <Play className="h-4 w-4 text-primary" />
+            <span className="text-[10px] font-black uppercase">{t.accessibility.lseBtn}</span>
+          </Button>
+        )}
       </div>
       
       <Accordion type="single" collapsible className="w-full space-y-3">
@@ -130,6 +88,7 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
                       checked={completedProcedures[step.id] || false}
                       onCheckedChange={() => toggleProcedure(step.id)}
                       className="mt-1 h-5 w-5 rounded-md"
+                      aria-label={`Marcar paso: ${step.label}`}
                     />
                     <div className="grid gap-1">
                       <label htmlFor={step.id} className="text-sm font-bold leading-none cursor-pointer">
@@ -143,24 +102,24 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
                 ))}
 
                 {flow.id === 'nie_tie' && (
-                  <div className="mt-6 p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="mt-6 p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl space-y-4">
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
                       <div className="space-y-1">
-                        <h4 className="font-black text-xs uppercase text-amber-900">{t.nieAlertTitle}</h4>
+                        <h4 className="font-black text-xs uppercase text-amber-900">¡IMPORTANTE!</h4>
                         <p className="text-[10px] text-amber-800 leading-normal font-bold">
-                          {t.nieAlertDesc}
+                          Si no encuentras citas disponibles en el sistema online, te recomendamos acudir presencialmente a la Comisaría (Plaza de las Batallas).
                         </p>
                       </div>
                     </div>
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="w-full h-10 rounded-xl border-amber-200 bg-white text-amber-700 font-bold text-[10px] gap-2 hover:bg-amber-100 hover:border-amber-300 transition-all shadow-sm"
+                      className="w-full h-10 rounded-xl border-amber-200 bg-white text-amber-700 font-bold text-[10px] gap-2 shadow-sm"
                       asChild
                     >
                       <a href="https://www.google.com/maps/search/?api=1&query=Plaza+de+las+Batallas+Jaen" target="_blank">
-                        <MapPin className="h-3 w-3" /> {t.goToPolice}
+                        <MapPin className="h-3 w-3" /> Cómo llegar a la Comisaría
                       </a>
                     </Button>
                   </div>
@@ -171,14 +130,31 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
         ))}
       </Accordion>
 
-      <Card className="bg-blue-50 border-blue-100 mt-6">
-        <CardContent className="p-4 flex gap-3">
-          <BadgeInfo className="h-5 w-5 text-primary shrink-0" />
-          <p className="text-xs text-primary/80 font-bold leading-relaxed">
-            Truco para Jaén: Las citas en la Comisaría de Plaza de las Batallas suelen liberarse los viernes entre las 8:30 y las 9:30 de la mañana. ¡Estate atento!
-          </p>
-        </CardContent>
-      </Card>
+      <Dialog open={showLSE} onOpenChange={setShowLSE}>
+        <DialogContent className="rounded-[2.5rem] bg-white p-0 overflow-hidden border-none max-w-lg">
+          <div className="relative aspect-video bg-slate-900 flex items-center justify-center">
+             <div className="text-center space-y-4">
+                <div className="bg-primary p-4 rounded-full inline-block animate-bounce">
+                  <Play className="h-8 w-8 text-white" />
+                </div>
+                <p className="text-white font-black uppercase text-xs tracking-widest">Guía en Lengua de Signos (LSE)</p>
+                <p className="text-white/60 text-[10px] px-8 italic">Simulación: Aquí se reproduciría el video explicativo de los trámites de Jaén.</p>
+             </div>
+             <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setShowLSE(false)}
+              className="absolute top-4 right-4 text-white hover:bg-white/10"
+             >
+               <X className="h-6 w-6" />
+             </Button>
+          </div>
+          <div className="p-8 text-center space-y-2">
+            <h3 className="text-xl font-black text-primary uppercase">Guía Visual</h3>
+            <p className="text-sm text-muted-foreground">Vídeos explicativos para facilitar la comprensión de los trámites en la provincia de Jaén.</p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

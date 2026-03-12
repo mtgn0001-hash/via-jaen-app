@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
 export type ProvinceType = 'jaen';
+export type AccessibilityMode = 'standard' | 'visual' | 'auditory';
 
 export type UserProfile = {
   name: string;
@@ -22,6 +23,7 @@ export type UserProgress = {
   theme: ThemeType;
   province: ProvinceType;
   easyReading: boolean;
+  accessibilityMode: AccessibilityMode;
   profile: UserProfile;
 };
 
@@ -40,6 +42,7 @@ const defaultProgress: UserProgress = {
   theme: 'olive',
   province: 'jaen',
   easyReading: false,
+  accessibilityMode: 'standard',
   profile: {
     name: '',
     nie: '',
