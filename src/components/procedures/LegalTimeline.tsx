@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -13,7 +14,10 @@ type LegalTimelineProps = {
 };
 
 export function LegalTimeline({ lang }: LegalTimelineProps) {
-  const t = translations[lang].arraigo;
+  // Safe access to translations with fallback to Spanish
+  const langPack = translations[lang] || translations.es;
+  const t = langPack.arraigo || translations.es.arraigo;
+  
   const [nationality, setNationality] = useState<string>("");
   const [entryDate, setEntryDate] = useState<string>("");
   const [calculated, setCalculated] = useState(false);

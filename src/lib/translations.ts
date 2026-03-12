@@ -443,6 +443,7 @@ export const translations = {
     currency: { title: 'Convertisseur', from: 'De', to: 'À', result: 'Valeur' },
     wifi: { title: 'WiFi Gratuit', desc: 'Points d\'accès publics.' },
     learn: { title: 'Apprendre', desc: 'Phrases utiles.', flashcards: 'Cartes', flip: 'Traduire', next: 'Suivant' },
+    arraigo: { title: 'Calculateur', subtitle: 'Délais légaux', q1: 'Nationalité', q2: 'Date d\'entrée', less2: '< 2 ans', twoToThree: '2-3 ans', moreThree: '> 3 ans', yes: 'Oui', no: 'Non', result: 'Jalons:', reset: 'Nouveau' },
     employment: { title: 'Emploi' },
     familyResources: { title: 'Famille' },
     studyUJA: { title: 'Études' }
@@ -468,6 +469,7 @@ export const translations = {
     currency: { title: 'محول العملات', from: 'من', to: 'إلى', result: 'القيمة' },
     wifi: { title: 'واي فاي مجاني', desc: 'نقاط اتصال عامة.' },
     learn: { title: 'تعلم اللغة', desc: 'جمل مفيدة.', flashcards: 'بطاقات', flip: 'ترجمة', next: 'التالي' },
+    arraigo: { title: 'حاسبة المواعيد', subtitle: 'المواعيد القانونية', q1: 'الجنسية', q2: 'تاريخ الدخول', less2: 'أقل من سنتين', twoToThree: 'بين 2 و 3 سنوات', moreThree: 'أكثر من 3 سنوات', yes: 'نعم', no: 'لا', result: 'المراحل:', reset: 'جديد' },
     employment: { title: 'العمل' },
     familyResources: { title: 'العائلة' },
     studyUJA: { title: 'الدراسة' }
@@ -493,6 +495,7 @@ export const translations = {
     currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Valoare' },
     wifi: { title: 'WiFi Gratuit', desc: 'Puncte publice.' },
     learn: { title: 'Învață Limba', desc: 'Fraze utile.', flashcards: 'Carduri', flip: 'Traducere', next: 'Următorul' },
+    arraigo: { title: 'Calculator Termene', subtitle: 'Perioade legale', q1: 'Naționalitate', q2: 'Data intrării', less2: '< 2 ani', twoToThree: '2-3 ani', moreThree: '> 3 ani', yes: 'Da', no: 'Nu', result: 'Etape legale:', reset: 'Nou' },
     employment: { title: 'Loc de muncă' },
     familyResources: { title: 'Familie' },
     studyUJA: { title: 'Studii' }
