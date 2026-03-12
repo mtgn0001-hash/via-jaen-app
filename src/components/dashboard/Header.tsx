@@ -1,7 +1,7 @@
 
 "use client"
 
-import { Share2, Info, Mic, MapPin, WifiOff, Cloud, Zap } from "lucide-react";
+import { Share2, Info, Mic, MapPin, WifiOff, Cloud, Zap, ArrowLeft } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -9,18 +9,20 @@ import { QRCodeShare } from "@/components/ui/QRCodeShare";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { useLocalStorage } from "@/lib/store";
+import { useLocalStorage, UserProgress } from "@/lib/store";
 import { Badge } from "@/components/ui/badge";
 import { AppLogo } from "@/components/ui/AppLogo";
 
 type HeaderProps = {
   lang: Language;
   completion: number;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  progress: UserProgress;
 };
 
-export function Header({ lang, completion }: HeaderProps) {
+export function Header({ lang, completion, activeTab, setActiveTab, progress }: HeaderProps) {
   const t = translations[lang];
-  const { progress } = useLocalStorage();
   const [showQR, setShowQR] = useState(false);
   const [isOffline, setIsOffline] = useState(false);
   const { toast } = useToast();
@@ -52,9 +54,22 @@ export function Header({ lang, completion }: HeaderProps) {
   return (
     <header className={`sticky top-0 bg-background/80 backdrop-blur-xl z-40 px-4 border-b border-border/50 ${isEasy ? 'py-5' : 'py-3'}`}>
       <div className="flex justify-between items-center max-w-lg mx-auto mb-2">
-        <div className="flex items-center gap-3">
-          <SidebarTrigger className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`} />
-          <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {activeTab !== 'dashboard' ? (
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`}
+              onClick={() => setActiveTab('dashboard')}
+              aria-label="Volver al inicio"
+            >
+              <ArrowLeft className={`${isEasy ? 'h-7 w-7' : 'h-6 w-6'}`} />
+            </Button>
+          ) : (
+            <SidebarTrigger className={`h-12 w-12 text-primary hover:bg-primary/10 rounded-2xl ${isEasy ? 'scale-110' : ''}`} />
+          )}
+          
+          <div className="flex items-center gap-3 ml-1">
             <AppLogo size={isEasy ? 48 : 40} />
             <div className="flex flex-col">
               <h1 className={`font-headline font-black tracking-tighter text-primary uppercase leading-none ${isEasy ? 'text-2xl' : 'text-xl'}`}>

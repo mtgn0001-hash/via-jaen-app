@@ -90,6 +90,8 @@ export default function Home() {
           <Header 
             lang={lang} 
             completion={calculateCompletion()} 
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
             progress={progress}
           />
 
