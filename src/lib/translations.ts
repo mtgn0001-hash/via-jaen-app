@@ -43,6 +43,17 @@ export const translations = {
       emergencyMode: 'Modo Emergencia Activo',
       emergencyDesc: 'Este documento se muestra a pantalla completa para facilitar su lectura por autoridades.'
     },
+    testLab: {
+      title: 'Laboratorio',
+      subtitle: 'Espacio Experimental',
+      voiceLab: 'Laboratorio de Voz',
+      hapticLab: 'Prueba Háptica',
+      visualLab: 'Simulador Visual',
+      vibrateShort: 'Corto',
+      vibrateDouble: 'Doble',
+      speakBtn: 'Probar Voz',
+      placeholder: 'Escribe algo para probar...'
+    },
     appointmentLight: {
       title: 'Estado de Citas',
       updated: 'Actualizado hace 5 min',
@@ -219,6 +230,17 @@ export const translations = {
       emergencyMode: 'Emergency Mode Active',
       emergencyDesc: 'This document is shown in full screen for authorities.'
     },
+    testLab: {
+      title: 'Test Lab',
+      subtitle: 'Experimental Space',
+      voiceLab: 'Voice Lab',
+      hapticLab: 'Haptic Test',
+      visualLab: 'Visual Simulator',
+      vibrateShort: 'Short',
+      vibrateDouble: 'Double',
+      speakBtn: 'Test Voice',
+      placeholder: 'Type something to test...'
+    },
     appointmentLight: {
       title: 'Appointment Status',
       updated: 'Updated 5 min ago',
@@ -385,6 +407,17 @@ export const translations = {
       emergencyMode: 'Mode Urgence',
       emergencyDesc: 'Document affiché en plein écran.'
     },
+    testLab: {
+      title: 'Laboratoire',
+      subtitle: 'Espace Experimental',
+      voiceLab: 'Labo de Voix',
+      hapticLab: 'Test Haptique',
+      visualLab: 'Simulateur Visuel',
+      vibrateShort: 'Court',
+      vibrateDouble: 'Double',
+      speakBtn: 'Tester Voix',
+      placeholder: 'Écrivez quelque chose...'
+    },
     appointmentLight: {
       title: 'État des RDV',
       updated: 'Mis à jour il y a 5 min',
@@ -538,6 +571,17 @@ export const translations = {
       empty: 'لا توجد وثائق.',
       emergencyMode: 'وضع الطوارئ نشط',
       emergencyDesc: 'تظهر هذه الوثيقة بملء الشاشة.'
+    },
+    testLab: {
+      title: 'المختبر',
+      subtitle: 'مساحة تجريبية',
+      voiceLab: 'مختبر الصوت',
+      hapticLab: 'اختبار اللمس',
+      visualLab: 'محاكي بصري',
+      vibrateShort: 'قصير',
+      vibrateDouble: 'مزدوج',
+      speakBtn: 'تجربة الصوت',
+      placeholder: 'اكتب شيئاً للتجربة...'
     },
     appointmentLight: {
       title: 'حالة المواعيد',
@@ -693,6 +737,17 @@ export const translations = {
       emergencyMode: 'Mod Urgență Activat',
       emergencyDesc: 'Acest document este afișat pe tot ecranul.'
     },
+    testLab: {
+      title: 'Laborator',
+      subtitle: 'Spațiu Experimental',
+      voiceLab: 'Labo de Voce',
+      hapticLab: 'Test Haptic',
+      visualLab: 'Simulări Vizuale',
+      vibrateShort: 'Scurt',
+      vibrateDouble: 'Dublu',
+      speakBtn: 'Test Voce',
+      placeholder: 'Scrie ceva pentru test...'
+    },
     appointmentLight: {
       title: 'Stare Programări',
       updated: 'Actualizat acum 5 min',
@@ -724,7 +779,7 @@ export const translations = {
       result: 'Rezultat Estimat',
       social: 'Arraigo Social',
       laboral: 'Arraigo Laboral',
-      familiar: 'Arraigo Familiar',
+      familiar: 'Arraigo Familial',
       waiting: 'Trebuie să mai aștepți',
       reset: 'Verificare Nouă'
     },

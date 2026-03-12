@@ -8,29 +8,22 @@ import {
   HeartPulse, 
   GraduationCap, 
   Briefcase, 
-  Languages, 
   MapPin, 
   ShieldAlert,
   Globe,
   User,
-  ChevronRight,
-  Palette,
-  Check,
-  Share2,
-  Library,
   UserCircle,
   Scan,
   Lock,
   Bot,
-  Sparkles,
+  Zap,
   Accessibility,
-  Eye,
-  Ear,
-  EyeOff,
-  Zap
+  Library,
+  Share2,
+  Beaker
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
-import { ThemeType, AccessibilityMode, useLocalStorage } from "@/lib/store"
+import { ThemeType, useLocalStorage } from "@/lib/store"
 import {
   Sidebar,
   SidebarContent,
@@ -50,8 +43,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -74,8 +65,6 @@ export function AppSidebar({
   setLang, 
   activeTab, 
   setActiveTab, 
-  currentTheme, 
-  setTheme 
 }: AppSidebarProps) {
   const t = translations[lang] || translations.es;
   const { progress, updateProgress } = useLocalStorage();
@@ -99,6 +88,7 @@ export function AppSidebar({
       { id: 'bot', icon: Bot, label: t.bot?.title || 'Jaén-Bot' },
       { id: 'scanner', icon: Scan, label: t.scanner?.title || 'Escáner' },
       { id: 'vault', icon: Lock, label: t.vault?.title || 'Bóveda' },
+      { id: 'test_lab', icon: Beaker, label: t.testLab?.title || 'Laboratorio' },
     ]},
     { id: 'guides', label: 'Guías y Servicios', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },
@@ -160,7 +150,6 @@ export function AppSidebar({
         </SidebarHeader>
 
         <SidebarContent className="px-3 py-4 scrollbar-hide">
-          {/* CONTROL DE ACCESIBILIDAD UNIFICADO */}
           <div className="px-2 mb-6 space-y-3">
              <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
              <Button

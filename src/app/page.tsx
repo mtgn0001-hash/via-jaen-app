@@ -11,13 +11,11 @@ import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
 import { FamilyResources } from "@/components/family/FamilyResources";
 import { StudyUJA } from "@/components/study/StudyUJA";
 import { EmploymentPortal } from "@/components/work/EmploymentPortal";
-import { IntegrationTab } from "@/components/integration/IntegrationTab";
 import { EmergencyTab } from "@/components/emergency/EmergencyTab";
 import { Onboarding } from "@/components/onboarding/Onboarding";
 import { DocumentChecklist } from "@/components/procedures/DocumentChecklist";
 import { FormVisualGuide } from "@/components/procedures/FormVisualGuide";
 import { WifiPoints } from "@/components/directory/WifiPoints";
-import { Flashcards } from "@/components/integration/Flashcards";
 import { Language, translations } from "@/lib/translations";
 import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { AlertCircle } from "lucide-react";
@@ -28,6 +26,7 @@ import { TransportTab } from "@/components/transport/TransportTab";
 import { DocumentScanner } from "@/components/tools/DocumentScanner";
 import { JaenBot } from "@/components/tools/JaenBot";
 import { DocumentVault } from "@/components/profile/DocumentVault";
+import { TestLab } from "@/components/tools/TestLab";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -111,6 +110,10 @@ export default function Home() {
 
             {activeTab === 'scanner' && (
               <DocumentScanner lang={lang} />
+            )}
+
+            {activeTab === 'test_lab' && (
+              <TestLab lang={lang} />
             )}
 
             {activeTab === 'procedures' && (
