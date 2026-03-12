@@ -209,7 +209,10 @@ export const translations = {
       imv: 'IMV (Mínimo Vital)',
       rentaMinima: 'Renta Andalucía',
       childAid: 'Ayuda por Hijo'
-    }
+    },
+    nieAlertTitle: '¡IMPORTANTE!',
+    nieAlertDesc: 'Si no encuentras citas disponibles en el sistema online, te recomendamos acudir presencialmente a la Comisaría (Plaza de las Batallas). Allí informan sobre los días y horas específicos en los que se liberan las citas cada semana, ya que los horarios son variables.',
+    goToPolice: 'Cómo llegar a la Comisaría'
   },
   en: {
     title: 'Vía Jaén',
@@ -420,7 +423,10 @@ export const translations = {
       imv: 'IMV (Income)',
       rentaMinima: 'Andalusia Rent',
       childAid: 'Child Support'
-    }
+    },
+    nieAlertTitle: 'IMPORTANT!',
+    nieAlertDesc: 'If you cannot find available appointments in the online system, we recommend going in person to the Police Station (Plaza de las Batallas). They provide information there about the specific days and times when appointments are released each week, as schedules vary.',
+    goToPolice: 'Get Directions'
   },
   fr: {
     title: 'Vía Jaén',
@@ -446,7 +452,10 @@ export const translations = {
     arraigo: { title: 'Calculateur', subtitle: 'Délais légaux', q1: 'Nationalité', q2: 'Date d\'entrée', less2: '< 2 ans', twoToThree: '2-3 ans', moreThree: '> 3 ans', yes: 'Oui', no: 'Non', result: 'Jalons:', reset: 'Nouveau' },
     employment: { title: 'Emploi' },
     familyResources: { title: 'Famille' },
-    studyUJA: { title: 'Études' }
+    studyUJA: { title: 'Études' },
+    nieAlertTitle: 'IMPORTANT!',
+    nieAlertDesc: 'Si vous ne trouvez pas de rendez-vous disponibles dans le système en ligne, nous vous recommandons de vous rendre en personne au commissariat (Plaza de las Batallas). Ils y informent des jours et heures spécifiques de libération des rendez-vous chaque semaine, les horaires étant variables.',
+    goToPolice: 'Itinéraire'
   },
   ar: {
     title: 'Vía Jaén',
@@ -472,7 +481,10 @@ export const translations = {
     arraigo: { title: 'حاسبة المواعيد', subtitle: 'المواعيد القانونية', q1: 'الجنسية', q2: 'تاريخ الدخول', less2: 'أقل من سنتين', twoToThree: 'بين 2 و 3 سنوات', moreThree: 'أكثر من 3 سنوات', yes: 'نعم', no: 'لا', result: 'المراحل:', reset: 'جديد' },
     employment: { title: 'العمل' },
     familyResources: { title: 'العائلة' },
-    studyUJA: { title: 'الدراسة' }
+    studyUJA: { title: 'الدراسة' },
+    nieAlertTitle: 'هام جداً!',
+    nieAlertDesc: 'إذا لم تجد مواعيد متاحة في النظام عبر الإنترنت، فنوصيك بالتوجه شخصياً إلى مركز الشرطة (Plaza de las Batallas). هناك يقدمون معلومات حول الأيام والأوقات المحددة التي يتم فيها إصدار المواعيد كل أسبوع، حيث أن الجداول متغيرة.',
+    goToPolice: 'كيفية الوصول'
   },
   ro: {
     title: 'Vía Jaén',
@@ -498,7 +510,10 @@ export const translations = {
     arraigo: { title: 'Calculator Termene', subtitle: 'Perioade legale', q1: 'Naționalitate', q2: 'Data intrării', less2: '< 2 ani', twoToThree: '2-3 ani', moreThree: '> 3 ani', yes: 'Da', no: 'Nu', result: 'Etape legale:', reset: 'Nou' },
     employment: { title: 'Loc de muncă' },
     familyResources: { title: 'Familie' },
-    studyUJA: { title: 'Studii' }
+    studyUJA: { title: 'Studii' },
+    nieAlertTitle: 'IMPORTANT!',
+    nieAlertDesc: 'Dacă nu găsiți programări disponibile în sistemul online, vă recomandăm să mergeți personal la secția de poliție (Plaza de las Batallas). Acolo oferă informații despre zilele și orele specifice în care sunt eliberate programările în fiecare săptămână, deoarece programul este variabil.',
+    goToPolice: 'Cum ajungi'
   }
 };
 

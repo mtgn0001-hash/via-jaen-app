@@ -1,11 +1,13 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileCheck, MapPin, BadgeInfo, CheckCircle2, Clock } from "lucide-react";
+import { FileCheck, MapPin, BadgeInfo, CheckCircle2, Clock, AlertTriangle } from "lucide-react";
 import { useLocalStorage } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 
 type ProcedureListProps = {
   lang: Language;
@@ -14,7 +16,8 @@ type ProcedureListProps = {
 };
 
 export function ProcedureList({ lang, toggleProcedure, completedProcedures }: ProcedureListProps) {
-  const t = translations[lang];
+  const langPack = translations[lang] || translations.es;
+  const t = langPack;
   const { progress } = useLocalStorage();
 
   const flows = [
@@ -68,6 +71,31 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
                   </Card>
                 ))}
               </div>
+              {flow.id === 'nie_tie' && (
+                <Card className="border-[6px] border-amber-500/10 rounded-[40px] shadow-lg bg-amber-50">
+                  <CardContent className="p-8 space-y-6">
+                    <div className="flex items-start gap-6">
+                       <div className="bg-amber-100 p-3 rounded-2xl h-fit">
+                        <AlertTriangle className="h-8 w-8 text-amber-600" />
+                       </div>
+                       <div className="space-y-2">
+                         <h4 className="text-2xl font-black text-amber-900 uppercase tracking-tight">{t.nieAlertTitle}</h4>
+                         <p className="text-lg font-bold text-amber-800 leading-snug">
+                           {t.nieAlertDesc}
+                         </p>
+                       </div>
+                    </div>
+                    <Button 
+                      asChild 
+                      className="w-full h-16 rounded-[24px] bg-amber-600 hover:bg-amber-700 text-white font-black text-xl shadow-xl shadow-amber-600/20"
+                    >
+                      <a href="https://www.google.com/maps/search/?api=1&query=Plaza+de+las+Batallas+Jaen" target="_blank">
+                        <MapPin className="h-6 w-6 mr-2" /> {t.goToPolice}
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
             </section>
           ))}
         </div>
@@ -113,6 +141,30 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
                     </div>
                   </div>
                 ))}
+
+                {flow.id === 'nie_tie' && (
+                  <div className="mt-6 p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        <h4 className="font-black text-xs uppercase text-amber-900">{t.nieAlertTitle}</h4>
+                        <p className="text-[10px] text-amber-800 leading-normal font-bold">
+                          {t.nieAlertDesc}
+                        </p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full h-10 rounded-xl border-amber-200 bg-white text-amber-700 font-bold text-[10px] gap-2 hover:bg-amber-100 hover:border-amber-300 transition-all shadow-sm"
+                      asChild
+                    >
+                      <a href="https://www.google.com/maps/search/?api=1&query=Plaza+de+las+Batallas+Jaen" target="_blank">
+                        <MapPin className="h-3 w-3" /> {t.goToPolice}
+                      </a>
+                    </Button>
+                  </div>
+                )}
               </div>
             </AccordionContent>
           </AccordionItem>
