@@ -103,7 +103,7 @@ export function AppSidebar({
       { id: 'dashboard', icon: Home, label: t.dashboard || 'Inicio' },
       { id: 'profile', icon: UserCircle, label: 'Mis Datos' },
     ]},
-    { id: 'tools', label: 'Inteligencia Proactiva', items: [
+    { id: 'tools', label: 'Herramientas Inteligentes', items: [
       { id: 'bot', icon: Bot, label: getSafeLabel('bot.title', 'Jaén-Bot') },
       { id: 'scanner', icon: Scan, label: getSafeLabel('scanner.title', 'Escáner') },
       { id: 'vault', icon: Lock, label: getSafeLabel('vault.title', 'Bóveda') },
