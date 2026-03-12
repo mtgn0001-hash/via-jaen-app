@@ -18,8 +18,7 @@ import {
   Zap,
   Accessibility,
   Library,
-  Share2,
-  Palette
+  Share2
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, UserProgress } from "@/lib/store"
@@ -133,7 +132,7 @@ export function AppSidebar({
                 <span className="font-headline font-black text-xl tracking-tight text-primary uppercase leading-none">
                   Vía Jaén
                 </span>
-                <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mt-1 opacity-60">
+                <span className="text-[9px] font-black text-foreground/60 uppercase tracking-[0.2em] mt-1">
                   Glass Edition 2026
                 </span>
               </div>
@@ -146,7 +145,7 @@ export function AppSidebar({
             >
               <Avatar className="h-12 w-12 border-2 border-primary/40 shadow-lg">
                 <AvatarImage src={progress.profile.photo} />
-                <AvatarFallback className="bg-primary text-white font-black">
+                <AvatarFallback className="bg-primary text-primary-foreground font-black">
                   {progress.profile.name?.charAt(0) || <User className="h-6 w-6" />}
                 </AvatarFallback>
               </Avatar>
@@ -154,7 +153,7 @@ export function AppSidebar({
                 <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
                   {progress.profile.name || "Invitado"}
                 </h2>
-                <span className="text-[9px] uppercase font-black text-muted-foreground opacity-60">Mi Espacio</span>
+                <span className="text-[9px] uppercase font-black text-foreground/60">Mi Espacio</span>
               </div>
             </div>
           </div>
@@ -162,19 +161,19 @@ export function AppSidebar({
 
         <SidebarContent className="px-3 py-4 scrollbar-hide">
           <div className="px-2 mb-4 space-y-3">
-             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
+             <Label className="text-[10px] font-black uppercase text-primary/60 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
              <Button
                 variant={isAccessible ? 'default' : 'outline'}
                 onClick={toggleAccessibility}
                 className={cn(
                   "w-full h-14 rounded-[1.8rem] gap-3 px-5 transition-all duration-500 border-2",
                   isAccessible 
-                    ? "bg-primary text-white shadow-2xl shadow-primary/40 border-primary scale-[1.02]" 
+                    ? "bg-primary text-primary-foreground shadow-2xl shadow-primary/40 border-primary scale-[1.02]" 
                     : "bg-primary/5 hover:bg-primary/10 text-primary border-primary/20 backdrop-blur-md"
                 )}
                 aria-label={isAccessible ? "Desactivar accesibilidad" : "Activar accesibilidad universal"}
               >
-                {isAccessible ? <Zap className="h-5 w-5 fill-white" /> : <Accessibility className="h-5 w-5" />}
+                {isAccessible ? <Zap className="h-5 w-5 fill-current" /> : <Accessibility className="h-5 w-5" />}
                 <span className="text-sm font-black tracking-tight uppercase">
                   {isAccessible ? t.accessibility?.standard : t.accessibility?.makeAccessible}
                 </span>
@@ -182,7 +181,7 @@ export function AppSidebar({
           </div>
 
           <div className="px-2 mb-6 space-y-3">
-             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.themes?.title || 'Personalizar'}</Label>
+             <Label className="text-[10px] font-black uppercase text-primary/60 px-3 tracking-widest">{t.themes?.title || 'Personalizar'}</Label>
              <div className="flex justify-between px-3 py-2 bg-primary/5 rounded-3xl border border-primary/20 backdrop-blur-sm">
                 {themes.map((theme) => (
                   <button
@@ -203,7 +202,7 @@ export function AppSidebar({
 
           {categories.map((cat) => (
             <SidebarGroup key={cat.id} className="py-2">
-              <SidebarGroupLabel className="text-[10px] font-black uppercase tracking-[0.25em] text-primary/40 px-5 mb-2 h-auto">
+              <SidebarGroupLabel className="text-[10px] font-black uppercase tracking-[0.25em] text-primary/60 px-5 mb-2 h-auto">
                 {cat.label}
               </SidebarGroupLabel>
               <SidebarGroupContent>
@@ -216,8 +215,8 @@ export function AppSidebar({
                         className={cn(
                           "h-13 px-5 rounded-[1.5rem] transition-all duration-300 border border-transparent",
                           activeTab === item.id 
-                            ? "bg-primary text-white font-black shadow-xl shadow-primary/30 border-primary/20 scale-[1.02]" 
-                            : "hover:bg-primary/10 hover:border-primary/20 hover:translate-x-1",
+                            ? "bg-primary text-primary-foreground font-black shadow-xl shadow-primary/30 border-primary/20 scale-[1.02]" 
+                            : "text-foreground hover:bg-primary/10 hover:border-primary/20 hover:translate-x-1",
                           item.className
                         )}
                       >
@@ -238,7 +237,7 @@ export function AppSidebar({
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-12 rounded-2xl bg-primary/10 border border-primary/20 shadow-lg hover:bg-primary/20 transition-all duration-300">
                   <Globe className="h-4 w-4 text-primary" />
-                  <span className="text-[10px] font-black uppercase">Idioma</span>
+                  <span className="text-[10px] font-black uppercase text-primary">Idioma</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" side="top" className="rounded-[2rem] w-56 border-primary/20 bg-card/80 backdrop-blur-2xl">
@@ -252,7 +251,7 @@ export function AppSidebar({
 
             <Button onClick={() => setShowQR(true)} variant="ghost" className="h-12 rounded-2xl bg-primary/10 border border-primary/20 shadow-lg hover:bg-primary/20 transition-all duration-300">
               <Share2 className="h-4 w-4 text-primary" />
-              <span className="text-[10px] font-black uppercase">App</span>
+              <span className="text-[10px] font-black uppercase text-primary">App</span>
             </Button>
           </div>
         </SidebarFooter>
