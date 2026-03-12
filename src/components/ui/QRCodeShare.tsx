@@ -22,16 +22,18 @@ type QRCodeShareProps = {
 
 export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
   const [url, setUrl] = useState("");
+  const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showPoster, setShowPoster] = useState(false);
   const t = translations[lang] || translations.es;
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
-      // Obtenemos la URL base de la aplicación de forma segura en el cliente
+      // Capturamos la URL completa actual
       setUrl(window.location.origin);
     }
-  }, [open]);
+  }, []);
 
   const handleCopy = () => {
     if (!url) return;
@@ -49,7 +51,9 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
     window.print();
   };
 
-  // Valor de seguridad para el QR si la URL no está disponible
+  // Evitamos errores de hidratación
+  if (!mounted) return null;
+
   const qrValue = url || "https://viajaen.es";
 
   if (showPoster) {
