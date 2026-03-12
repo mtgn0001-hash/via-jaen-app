@@ -1,8 +1,7 @@
-
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage, UserProgress, ThemeType } from "@/lib/store";
+import { useLocalStorage, ThemeType } from "@/lib/store";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -96,7 +95,7 @@ export default function Home() {
           />
 
           <main 
-            className={`flex-1 pb-20 max-w-lg mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500 ${isEasy ? 'p-6' : 'p-4'}`}
+            className={`flex-1 pb-20 mx-auto w-full transition-all duration-500 ${isEasy ? 'p-6 max-w-4xl' : 'p-4 max-w-5xl'}`}
             aria-live="polite"
           >
             {activeTab === 'dashboard' && (
@@ -128,7 +127,7 @@ export default function Home() {
             )}
 
             {activeTab === 'procedures' && (
-              <div className="space-y-8">
+              <div className="space-y-8 animate-in fade-in duration-700">
                 {accMode !== 'auditory' && !isEasy && (
                   <DocumentChecklist 
                     lang={lang} 
@@ -175,10 +174,10 @@ export default function Home() {
             )}
 
             {!isEasy && accMode === 'standard' && (
-              <section className="mt-8 mb-4 px-2 space-y-3">
-                <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
-                  <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
-                  <p className="text-[10px] text-muted-foreground leading-normal font-medium">
+              <section className="mt-12 mb-4 px-2 space-y-3 border-t pt-8">
+                <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-6 flex gap-4 max-w-2xl mx-auto">
+                  <AlertCircle className="h-6 w-6 text-primary/40 shrink-0" />
+                  <p className="text-[11px] text-muted-foreground leading-normal font-medium italic">
                     {t.disclaimer || translations.es.disclaimer}
                   </p>
                 </div>
