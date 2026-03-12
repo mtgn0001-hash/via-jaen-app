@@ -19,8 +19,7 @@ import {
   Zap,
   Accessibility,
   Library,
-  Share2,
-  Beaker
+  Share2
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -88,7 +87,6 @@ export function AppSidebar({
       { id: 'bot', icon: Bot, label: t.bot?.title || 'Jaén-Bot' },
       { id: 'scanner', icon: Scan, label: t.scanner?.title || 'Escáner' },
       { id: 'vault', icon: Lock, label: t.vault?.title || 'Bóveda' },
-      { id: 'test_lab', icon: Beaker, label: t.testLab?.title || 'Laboratorio' },
     ]},
     { id: 'guides', label: 'Guías y Servicios', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },

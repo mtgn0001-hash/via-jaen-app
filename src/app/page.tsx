@@ -26,7 +26,6 @@ import { TransportTab } from "@/components/transport/TransportTab";
 import { DocumentScanner } from "@/components/tools/DocumentScanner";
 import { JaenBot } from "@/components/tools/JaenBot";
 import { DocumentVault } from "@/components/profile/DocumentVault";
-import { TestLab } from "@/components/tools/TestLab";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -110,10 +109,6 @@ export default function Home() {
 
             {activeTab === 'scanner' && (
               <DocumentScanner lang={lang} />
-            )}
-
-            {activeTab === 'test_lab' && (
-              <TestLab lang={lang} />
             )}
 
             {activeTab === 'procedures' && (
