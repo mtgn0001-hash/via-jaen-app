@@ -9,11 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
-import { Copy, Check, Share2, Printer, MessageCircle } from "lucide-react";
+import { Copy, Check, Share2, Printer, MessageCircle, X } from "lucide-react";
 
 type QRCodeShareProps = {
   open: boolean;
@@ -25,28 +24,33 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
   const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [showPoster, setShowPoster] = useState(false);
-  const t = translations[lang];
+  const t = translations[lang] || translations.es;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // Obtenemos la URL base de la aplicación
       setUrl(window.location.origin);
     }
   }, []);
 
   const handleCopy = () => {
+    if (!url) return;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(`Hola! Te comparto Vía Jaén, una guía segura y privada para trámites en Jaén: ${url}`);
+    const text = encodeURIComponent(`¡Hola! Te comparto Vía Jaén, una guía segura y privada para trámites en Jaén: ${url}`);
     window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
   const handlePrint = () => {
     window.print();
   };
+
+  // Valor de seguridad para el QR si la URL no está disponible
+  const qrValue = url || "https://viajaen.es";
 
   if (showPoster) {
     return (
@@ -62,15 +66,15 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
             </div>
 
             <div className="bg-white p-8 rounded-[40px] shadow-2xl border-[12px] border-primary/5">
-              <QRCodeSVG value={url} size={300} level="H" fgColor="#612d8a" />
+              <QRCodeSVG value={qrValue} size={300} level="H" fgColor="#7c3aed" />
             </div>
 
             <div className="grid grid-cols-2 gap-8 max-w-2xl w-full">
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <p className="font-black text-primary text-sm uppercase">Español</p>
                 <p className="text-xs font-medium">Escanea para ayuda con NIE, trabajo y salud.</p>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <p className="font-black text-primary text-sm uppercase">English</p>
                 <p className="text-xs font-medium">Scan for help with NIE, work, and health.</p>
               </div>
@@ -78,7 +82,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
                 <p className="font-black text-primary text-sm uppercase">العربية</p>
                 <p className="text-xs font-medium">امسح الرمز للحصول على مساعدة في الأوراق والعمل.</p>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <p className="font-black text-primary text-sm uppercase">Français</p>
                 <p className="text-xs font-medium">Scannez pour obtenir de l'aide sur le NIE et le travail.</p>
               </div>
@@ -98,7 +102,7 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md rounded-[32px] p-8">
+      <DialogContent className="sm:max-w-md rounded-[32px] p-8 bg-white/90 backdrop-blur-xl border-none outline-none">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-black text-primary uppercase tracking-tight">Compartir App</DialogTitle>
           <DialogDescription className="text-center text-base font-medium">
@@ -108,14 +112,12 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
         
         <div className="flex flex-col items-center justify-center space-y-8 py-4">
           <div className="bg-white p-6 rounded-[40px] shadow-xl border-8 border-primary/5">
-            {url && (
-              <QRCodeSVG 
-                value={url} 
-                size={220} 
-                level="H"
-                fgColor="#612d8a"
-              />
-            )}
+            <QRCodeSVG 
+              value={qrValue} 
+              size={220} 
+              level="H"
+              fgColor="#7c3aed"
+            />
           </div>
           
           <div className="grid grid-cols-2 gap-3 w-full">
@@ -129,8 +131,8 @@ export function QRCodeShare({ open, onOpenChange, lang }: QRCodeShareProps) {
 
           <div className="flex w-full items-center space-x-2 bg-muted/50 p-3 rounded-2xl border">
             <input
-              className="flex-1 bg-transparent border-none text-xs font-mono outline-none px-2 overflow-hidden text-ellipsis text-muted-foreground"
-              value={url}
+              className="flex-1 bg-transparent border-none text-[10px] font-mono outline-none px-2 overflow-hidden text-ellipsis text-muted-foreground"
+              value={url || "Cargando..."}
               readOnly
             />
             <Button size="sm" onClick={handleCopy} className="rounded-xl h-10 w-10 p-0">
