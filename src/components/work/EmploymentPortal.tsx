@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react";
@@ -35,7 +34,6 @@ type EmploymentPortalProps = {
 export function EmploymentPortal({ lang }: EmploymentPortalProps) {
   const langPack = translations[lang] || translations.es;
   const t = langPack;
-  // Robust fallback for employment translations
   const e = langPack.employment || translations.es.employment;
   const { progress } = useLocalStorage();
   const currentProvince = provincesData[progress.province] || provincesData.jaen;
@@ -169,7 +167,7 @@ ${cvData.skills}
                 <h4 className="font-black text-sm">SAE (Servicio Andaluz de Empleo)</h4>
                 <p className="text-xs text-muted-foreground font-medium">{e.saeDesc}</p>
                 <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
-                  <a href="https://www.juntadeandalucia.es/organismos/empleoformacionytrabajoautonomo/sae.html" target="_blank">
+                  <a href="https://www.juntadeandalucia.es/organismos/empleoformacionytrabajoautonomo/sae.html" target="_blank" rel="noopener noreferrer">
                     Web SAE <ExternalLink className="h-3 w-3" />
                   </a>
                 </Button>
@@ -179,7 +177,7 @@ ${cvData.skills}
                 <h4 className="font-black text-sm">Jaén Emplea</h4>
                 <p className="text-xs text-muted-foreground font-medium">Portal de empleo municipal del Ayuntamiento de Jaén.</p>
                 <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
-                  <a href="https://empleo.aytojaen.es/" target="_blank">
+                  <a href="https://empleo.aytojaen.es/" target="_blank" rel="noopener noreferrer">
                     Web Jaén Emplea <ExternalLink className="h-3 w-3" />
                   </a>
                 </Button>
@@ -188,10 +186,10 @@ ${cvData.skills}
               <div className="space-y-2">
                 <h4 className="font-black text-[10px] uppercase text-muted-foreground ml-1 tracking-widest">{e.ettTitle}</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <ETTCard name="Adecco Jaén" />
-                  <ETTCard name="Randstad Martos" />
-                  <ETTCard name="Manpower" />
-                  <ETTCard name="Synergie" />
+                  <ETTCard name="Adecco Jaén" url="https://www.adecco.es/oficina/adecco-jaen" />
+                  <ETTCard name="Randstad Jaén" url="https://www.randstad.es/oficinas/jaen-457/" />
+                  <ETTCard name="Manpower" url="https://www.manpower.es/" />
+                  <ETTCard name="Synergie" url="https://www.synergie-ett.com/oficinas-ett-jaen/" />
                 </div>
               </div>
             </CardContent>
@@ -279,7 +277,7 @@ ${cvData.skills}
                     Si sufres abusos o trabajas sin contrato, puedes denunciar de forma anónima.
                   </p>
                   <Button variant="link" size="sm" className="p-0 h-auto text-destructive font-black mt-2 uppercase text-[10px]" asChild>
-                    <a href="http://www.mites.gob.es/itss/web/atencion_al_ciudadano/comunicacion_irregularidades/index.html" target="_blank">
+                    <a href="http://www.mites.gob.es/itss/web/atencion_al_ciudadano/comunicacion_irregularidades/index.html" target="_blank" rel="noopener noreferrer">
                       Ir a Inspección de Trabajo <ExternalLink className="h-3 w-3 ml-1" />
                     </a>
                   </Button>
@@ -313,7 +311,7 @@ ${cvData.skills}
                   </div>
                 </div>
                 <Button className="w-full rounded-xl h-12 gap-2 border-2 font-bold" variant="outline" asChild>
-                  <a href="https://www.andaluciaemprende.es/" target="_blank">
+                  <a href="https://www.andaluciaemprende.es/" target="_blank" rel="noopener noreferrer">
                     Buscar Centro CADE <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
@@ -338,11 +336,16 @@ ${cvData.skills}
   );
 }
 
-function ETTCard({ name }: { name: string }) {
+function ETTCard({ name, url }: { name: string; url: string }) {
   return (
-    <div className="p-3 px-4 rounded-xl border bg-card text-[10px] font-black text-foreground flex items-center justify-between group hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">
+    <a 
+      href={url} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="p-3 px-4 rounded-xl border bg-card text-[10px] font-black text-foreground flex items-center justify-between group hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95"
+    >
       {name}
       <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-    </div>
+    </a>
   );
 }
