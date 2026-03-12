@@ -93,6 +93,46 @@ const SidebarProvider = React.forwardRef<
         : setOpen((open) => !open)
     }, [isMobile, setOpen, setOpenMobile])
 
+    // Touch gesture logic for mobile swipe
+    const touchStartX = React.useRef<number>(0)
+    const touchStartY = React.useRef<number>(0)
+
+    React.useEffect(() => {
+      if (!isMobile) return
+
+      const handleTouchStart = (e: TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX
+        touchStartY.current = e.touches[0].clientY
+      }
+
+      const handleTouchEnd = (e: TouchEvent) => {
+        const touchEndX = e.changedTouches[0].clientX
+        const touchEndY = e.changedTouches[0].clientY
+        
+        const deltaX = touchEndX - touchStartX.current
+        const deltaY = touchEndY - touchStartY.current
+
+        // Only trigger if swipe is primarily horizontal and meets threshold
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 70) {
+          if (deltaX > 0 && touchStartX.current < 50) {
+            // Swipe right from left edge: OPEN
+            setOpenMobile(true)
+          } else if (deltaX < 0 && openMobile) {
+            // Swipe left: CLOSE
+            setOpenMobile(false)
+          }
+        }
+      }
+
+      window.addEventListener("touchstart", handleTouchStart)
+      window.addEventListener("touchend", handleTouchEnd)
+
+      return () => {
+        window.removeEventListener("touchstart", handleTouchStart)
+        window.removeEventListener("touchend", handleTouchEnd)
+      }
+    }, [isMobile, openMobile])
+
     React.useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (
