@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage, UserProgress, Language as LangType } from "@/lib/store";
+import { useLocalStorage, UserProgress, ThemeType } from "@/lib/store";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/dashboard/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -60,7 +60,7 @@ export default function Home() {
   if (!isLoaded) return null;
 
   const setLang = (newLang: Language) => updateProgress({ language: newLang });
-  const setTheme = (newTheme: any) => updateProgress({ theme: newTheme });
+  const setTheme = (newTheme: ThemeType) => updateProgress({ theme: newTheme });
 
   return (
     <SidebarProvider>

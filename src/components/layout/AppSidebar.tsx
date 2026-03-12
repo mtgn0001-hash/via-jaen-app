@@ -19,7 +19,8 @@ import {
   Zap,
   Accessibility,
   Library,
-  Share2
+  Share2,
+  Palette
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, UserProgress } from "@/lib/store"
@@ -67,7 +68,8 @@ export function AppSidebar({
   activeTab, 
   setActiveTab, 
   progress,
-  updateProgress
+  updateProgress,
+  setTheme
 }: AppSidebarProps) {
   const t = translations[lang] || translations.es;
   const { setOpenMobile } = useSidebar();
@@ -112,6 +114,15 @@ export function AppSidebar({
     updateProgress({ accessibilityMode: nextMode });
   };
 
+  const themes: { id: ThemeType; color: string; label: string }[] = [
+    { id: 'olive', color: '#3D5229', label: t.themes?.olive || 'Oliva' },
+    { id: 'purple', color: '#7C3AED', label: t.themes?.purple || 'Morado' },
+    { id: 'ocean', color: '#3B82F6', label: t.themes?.ocean || 'Océano' },
+    { id: 'red', color: '#EF4444', label: t.themes?.red || 'Rojo' },
+    { id: 'night', color: '#1E1B4B', label: t.themes?.night || 'Noche' },
+    { id: 'contrast', color: '#000000', label: t.themes?.contrast || 'Contraste' },
+  ];
+
   return (
     <>
       <Sidebar variant="floating" className="border-none shadow-none">
@@ -151,7 +162,7 @@ export function AppSidebar({
         </SidebarHeader>
 
         <SidebarContent className="px-3 py-4 scrollbar-hide">
-          <div className="px-2 mb-6 space-y-3">
+          <div className="px-2 mb-4 space-y-3">
              <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
              <Button
                 variant={isAccessible ? 'default' : 'outline'}
@@ -169,9 +180,24 @@ export function AppSidebar({
                   {isAccessible ? t.accessibility?.standard : t.accessibility?.makeAccessible}
                 </span>
               </Button>
-              <p className="px-3 text-[9px] text-muted-foreground font-medium text-center italic">
-                {t.accessibility?.desc}
-              </p>
+          </div>
+
+          <div className="px-2 mb-6 space-y-3">
+             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.themes?.title || 'Personalizar'}</Label>
+             <div className="flex justify-between px-2">
+                {themes.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => setTheme(theme.id)}
+                    className={cn(
+                      "w-8 h-8 rounded-full border-2 transition-all hover:scale-110",
+                      progress.theme === theme.id ? "ring-2 ring-primary ring-offset-2 border-white" : "border-transparent"
+                    )}
+                    style={{ backgroundColor: theme.color }}
+                    title={theme.label}
+                  />
+                ))}
+             </div>
           </div>
 
           <SidebarSeparator className="mx-2 w-auto bg-sidebar-border/20 mb-4" />

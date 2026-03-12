@@ -183,7 +183,16 @@ export const translations = {
       to: 'Hacia',
       result: 'Resultado'
     },
-    disclaimer: 'Guía comunitaria no oficial. Privacidad 100% local.'
+    disclaimer: 'Guía comunitaria no oficial. Privacidad 100% local.',
+    themes: {
+      title: 'Color de la App',
+      purple: 'Morado',
+      olive: 'Oliva',
+      ocean: 'Océano',
+      red: 'Rojo',
+      night: 'Noche',
+      contrast: 'Contraste'
+    }
   },
   en: {
     title: 'Vía Jaén',
@@ -368,7 +377,16 @@ export const translations = {
       to: 'To',
       result: 'Result'
     },
-    disclaimer: 'Unofficial guide. 100% local privacy.'
+    disclaimer: 'Unofficial guide. 100% local privacy.',
+    themes: {
+      title: 'App Color',
+      purple: 'Purple',
+      olive: 'Olive',
+      ocean: 'Ocean',
+      red: 'Red',
+      night: 'Night',
+      contrast: 'Contrast'
+    }
   },
   fr: {
     title: 'Vía Jaén',
@@ -531,7 +549,16 @@ export const translations = {
     learn: { flashcards: 'Espagnol', flip: 'Traduire', next: 'Suivant' },
     wifi: { title: 'WiFi Gratuit', desc: 'Points WiFi.' },
     currency: { title: 'Convertisseur', from: 'De', to: 'À', result: 'Résultat' },
-    disclaimer: 'Guide non officiel. Privée.'
+    disclaimer: 'Guide non officiel. Privée.',
+    themes: {
+      title: 'Couleur App',
+      purple: 'Violet',
+      olive: 'Olive',
+      ocean: 'Océan',
+      red: 'Rouge',
+      night: 'Nuit',
+      contrast: 'Contraste'
+    }
   },
   ar: {
     title: 'Vía Jaén',
@@ -694,7 +721,16 @@ export const translations = {
     learn: { flashcards: 'تعلم الإسبانية', flip: 'ترجمة', next: 'التالي' },
     wifi: { title: 'واي فاي مجاني', desc: 'نقاط الاتصال.' },
     currency: { title: 'محول العملات', from: 'من', to: 'إلى', result: 'النتيجة' },
-    disclaimer: 'دليل غير رسمي. خصوصية تامة.'
+    disclaimer: 'دليل غير رسمي. خصوصية تامة.',
+    themes: {
+      title: 'لون التطبيق',
+      purple: 'أرجواني',
+      olive: 'زيتوني',
+      ocean: 'محيط',
+      red: 'أحمر',
+      night: 'ليلي',
+      contrast: 'تباين'
+    }
   },
   ro: {
     title: 'Vía Jaén',
@@ -765,7 +801,7 @@ export const translations = {
       twoToThree: 'Între 2 și 3 ani',
       moreThree: 'Mai mult de 3 ani',
       yes: 'Da',
-      no: 'Nu',
+      no: 'No',
       result: 'Rezultat Estimat',
       social: 'Arraigo Social',
       laboral: 'Arraigo Laboral',
@@ -857,7 +893,16 @@ export const translations = {
     learn: { flashcards: 'Espagnol', flip: 'Traducere', next: 'Următorul' },
     wifi: { title: 'WiFi Gratuit', desc: 'Points WiFi.' },
     currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Rezultat' },
-    disclaimer: 'Ghid neoficial. Privată.'
+    disclaimer: 'Ghid neoficial. Privată.',
+    themes: {
+      title: 'Culoare App',
+      purple: 'Violet',
+      olive: 'Măslin',
+      ocean: 'Ocean',
+      red: 'Roșu',
+      night: 'Noapte',
+      contrast: 'Contrast'
+    }
   }
 };
 
