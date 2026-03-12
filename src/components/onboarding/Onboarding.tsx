@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from "react";
@@ -67,7 +66,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-lg p-0 border-none bg-white rounded-[40px] overflow-hidden max-h-[95vh] outline-none">
+      <DialogContent className="sm:max-w-lg p-0 border-none bg-white/90 backdrop-blur-3xl rounded-[3rem] overflow-hidden max-h-[95vh] outline-none shadow-2xl">
         {showSplash ? (
           <div className="flex flex-col items-center justify-center p-20 min-h-[500px] animate-in fade-in duration-1000">
             <AppLogo size={160} className="mb-10 animate-bounce" />
@@ -78,13 +77,6 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
           </div>
         ) : (
           <div className="relative flex flex-col items-center p-8 text-center pt-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <button 
-              onClick={handleClose}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-muted transition-colors z-10"
-            >
-              <X className="h-6 w-6 text-muted-foreground" />
-            </button>
-
             <Carousel className="w-full max-w-sm mb-10">
               <CarouselContent>
                 {slides.map((slide, i) => (
@@ -93,7 +85,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
                       {slide.icon}
                     </div>
                     <div className="space-y-4">
-                      <h2 className="text-3xl font-black text-primary tracking-tighter uppercase">{slide.title}</h2>
+                      <h2 className="text-3xl font-black text-primary tracking-tighter uppercase leading-none">{slide.title}</h2>
                       <p className="text-muted-foreground text-lg px-2 leading-tight font-medium">{slide.desc}</p>
                     </div>
                   </CarouselItem>
@@ -105,7 +97,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
               </div>
             </Carousel>
 
-            <div className="w-full space-y-4 pt-4 border-t">
+            <div className="w-full space-y-4 pt-4 border-t border-black/5">
               <Button 
                 onClick={handleClose}
                 className="w-full h-16 rounded-[24px] text-xl font-black uppercase tracking-tight shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform"
