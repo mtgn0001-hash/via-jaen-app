@@ -13,8 +13,8 @@ type AppointmentStatusProps = {
 
 export function AppointmentStatus({ lang }: AppointmentStatusProps) {
   const langPack = translations[lang] || translations.es;
-  // Fallback to Spanish if appointmentLight is missing in the current language
-  const t = (langPack as any).appointmentLight || translations.es.appointmentLight;
+  // Robust fallback to Spanish if appointmentLight is missing
+  const t = langPack.appointmentLight || translations.es.appointmentLight;
   
   const [reported, setReported] = useState(false);
   const [status, setStatus] = useState<'green' | 'yellow' | 'red'>('yellow');

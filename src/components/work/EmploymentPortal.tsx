@@ -35,6 +35,7 @@ type EmploymentPortalProps = {
 export function EmploymentPortal({ lang }: EmploymentPortalProps) {
   const langPack = translations[lang] || translations.es;
   const t = langPack;
+  // Robust fallback for employment translations
   const e = langPack.employment || translations.es.employment;
   const { progress } = useLocalStorage();
   const currentProvince = provincesData[progress.province] || provincesData.jaen;
@@ -113,19 +114,19 @@ ${cvData.skills}
               <div className="bg-card p-5 rounded-3xl border shadow-sm space-y-2">
                 <div className="flex justify-between items-center">
                   <h4 className="font-black text-sm text-primary flex items-center gap-2 uppercase">
-                    <Scale className="h-4 w-4" /> {t.work.rights}
+                    <Scale className="h-4 w-4" /> {e.rights}
                   </h4>
-                  <SpeechButton text={t.work.rightsText} language={lang} />
+                  <SpeechButton text={e.rightsText || "Derechos laborales"} language={lang} />
                 </div>
                 <p className="text-xs text-muted-foreground leading-normal font-medium">
-                  {t.work.rightsText}
+                  {e.rightsText || "Tienes derecho a condiciones dignas."}
                 </p>
               </div>
 
               {workData.shelters.length > 0 && (
                 <div className="space-y-3 pt-2">
                   <h3 className="font-black text-sm flex items-center gap-2 uppercase text-foreground">
-                    <Home className="h-4 w-4 text-primary" /> {t.work.shelterTitle}
+                    <Home className="h-4 w-4 text-primary" /> {t.work?.shelterTitle || "Albergues"}
                   </h3>
                   <div className="grid gap-2">
                     {workData.shelters.map((s) => (

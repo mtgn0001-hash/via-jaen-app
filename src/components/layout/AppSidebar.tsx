@@ -90,12 +90,12 @@ export function AppSidebar({
     ]},
     { id: 'guides', label: 'Guías y Servicios', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },
-      { id: 'employment_portal', icon: Briefcase, label: 'Portal Empleo' },
-      { id: 'study', icon: GraduationCap, label: 'Estudiar UJA' },
+      { id: 'employment_portal', icon: Briefcase, label: t.employment?.title || 'Portal Empleo' },
+      { id: 'study', icon: GraduationCap, label: t.studyUJA?.title || 'Estudiar UJA' },
       { id: 'directory', icon: MapPin, label: t.directory || 'Ayuda Local' },
     ]},
     { id: 'social', label: 'Vida y Salud', items: [
-      { id: 'family', icon: HeartPulse, label: 'Para Familias' },
+      { id: 'family', icon: HeartPulse, label: t.familyResources?.title || 'Para Familias' },
       { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta' },
     ]},
     { id: 'emergency', label: 'Atención Inmediata', items: [

@@ -809,8 +809,8 @@ export const translations = {
       glossaryTitle: 'Dicționar Jaén',
       accentDesc: 'Cuvinte locale.'
     },
-    learn: { flashcards: 'Spaniolă', flip: 'Traducere', next: 'Următorul' },
-    wifi: { title: 'WiFi Gratuit', desc: 'Puncte WiFi.' },
+    learn: { flashcards: 'Espagnol', flip: 'Traducere', next: 'Următorul' },
+    wifi: { title: 'WiFi Gratuit', desc: 'Points WiFi.' },
     currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Rezultat' },
     disclaimer: 'Ghid neoficial. Privată.'
   }
