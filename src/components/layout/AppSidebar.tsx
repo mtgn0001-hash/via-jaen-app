@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -117,7 +116,7 @@ export function AppSidebar({
   const themes: { id: ThemeType; color: string; label: string }[] = [
     { id: 'purple', color: '#7C3AED', label: t.themes?.purple || 'Morado' },
     { id: 'olive', color: '#3D5229', label: t.themes?.olive || 'Oliva' },
-    { id: 'ocean', color: '#3B82F6', label: 'Azul Eléctrico' }, // Azul Eléctrico solicitado
+    { id: 'ocean', color: '#3B82F6', label: 'Azul Eléctrico' }, 
     { id: 'red', color: '#EF4444', label: t.themes?.red || 'Rojo' },
     { id: 'night', color: '#1E1B4B', label: t.themes?.night || 'Noche' },
     { id: 'contrast', color: '#000000', label: t.themes?.contrast || 'Contraste' },
@@ -217,7 +216,7 @@ export function AppSidebar({
                         className={cn(
                           "h-13 px-5 rounded-[1.5rem] transition-all duration-300 border border-transparent",
                           activeTab === item.id 
-                            ? "bg-primary text-white font-black shadow-xl shadow-primary/30 border-white/20 scale-[1.02]" 
+                            ? "bg-primary text-white font-black shadow-xl shadow-primary/30 border-white/20 scale-[1.02] glass-item-active" 
                             : "hover:bg-white/30 hover:border-white/20 hover:translate-x-1",
                           item.className
                         )}
