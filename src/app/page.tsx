@@ -20,6 +20,7 @@ import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { AlertCircle } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
+import { BackFAB } from "@/components/layout/BackFAB";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { TransportTab } from "@/components/transport/TransportTab";
 import { DocumentScanner } from "@/components/tools/DocumentScanner";
@@ -95,7 +96,7 @@ export default function Home() {
           />
 
           <main 
-            className={`flex-1 pb-20 mx-auto w-full transition-all duration-500 ${isEasy ? 'p-6 max-w-4xl' : 'p-4 max-w-5xl'}`}
+            className={`flex-1 pb-32 mx-auto w-full transition-all duration-500 ${isEasy ? 'p-6 max-w-4xl' : 'p-4 max-w-5xl'}`}
             aria-live="polite"
           >
             {activeTab === 'dashboard' && (
@@ -186,6 +187,7 @@ export default function Home() {
           </main>
         </SidebarInset>
 
+        <BackFAB activeTab={activeTab} setActiveTab={setActiveTab} />
         <EmergencyFAB lang={lang} />
       </div>
     </SidebarProvider>
