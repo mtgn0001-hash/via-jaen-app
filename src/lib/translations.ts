@@ -41,14 +41,6 @@ export const translations = {
       emergencyDesc: 'Muestra el documento a brillo máximo para lectura rápida.',
       empty: 'No hay documentos guardados aún.'
     },
-    firstSteps: {
-      title: 'Mis Primeros Pasos',
-      subtitle: 'Completa tu integración en Jaén',
-      empadronamiento: 'Empadronamiento',
-      health: 'Tarjeta Sanitaria',
-      transport: 'Tarjeta de Autobús',
-      howTo: '¿Cómo hacerlo?'
-    },
     scanner: {
       title: 'Escanear Carta',
       subtitle: 'Analiza tus documentos con IA',
@@ -56,6 +48,14 @@ export const translations = {
       analyzing: 'Analizando contenido...',
       resultTitle: 'Resumen Simplificado',
       resultDesc: 'Esta carta parece ser una notificación oficial. Te recomendamos llevarla a Jaén Acoge para una revisión detallada.'
+    },
+    firstSteps: {
+      title: 'Mis Primeros Pasos',
+      subtitle: 'Completa tu integración en Jaén',
+      empadronamiento: 'Empadronamiento',
+      health: 'Tarjeta Sanitaria',
+      transport: 'Tarjeta de Autobús',
+      howTo: '¿Cómo hacerlo?'
     },
     appointmentLight: {
       title: 'Semáforo de Citas',
@@ -252,14 +252,6 @@ export const translations = {
       emergencyDesc: 'Show document at max brightness for quick reading.',
       empty: 'No documents saved yet.'
     },
-    firstSteps: {
-      title: 'My First Steps',
-      subtitle: 'Complete your integration in Jaen',
-      empadronamiento: 'Town Hall Registration',
-      health: 'Health Card',
-      transport: 'Bus Card',
-      howTo: 'How to do it?'
-    },
     scanner: {
       title: 'Scan Letter',
       subtitle: 'Analyze your docs with AI',
@@ -267,6 +259,14 @@ export const translations = {
       analyzing: 'Analyzing content...',
       resultTitle: 'Simplified Summary',
       resultDesc: 'This letter seems to be an official notification. We recommend professional review.'
+    },
+    firstSteps: {
+      title: 'My First Steps',
+      subtitle: 'Complete your integration in Jaen',
+      empadronamiento: 'Town Hall Registration',
+      health: 'Health Card',
+      transport: 'Bus Card',
+      howTo: 'How to do it?'
     },
     appointmentLight: {
       title: 'Appt. Traffic Light',
@@ -474,6 +474,19 @@ export const translations = {
       transport: 'Transport',
       howTo: 'Comment faire?'
     },
+    appointmentLight: {
+      title: 'Citations Jaén',
+      desc: 'Statut actuel.',
+      updated: 'Mis à jour il y a 5 min',
+      green: 'Disponible',
+      yellow: 'Peu',
+      red: 'Aucun',
+      report: 'Rapport?',
+      thanks: 'Merci!'
+    },
+    currency: { title: 'Convertisseur', from: 'De', to: 'À', result: 'Valeur' },
+    wifi: { title: 'WiFi Gratuit', desc: 'Points d\'accès publics.' },
+    learn: { title: 'Apprendre', desc: 'Phrases utiles.', flashcards: 'Cartes', flip: 'Traduire', next: 'Suivant' },
     employment: { title: 'Emploi' },
     familyResources: { title: 'Famille' },
     studyUJA: { title: 'Études' }
@@ -530,6 +543,19 @@ export const translations = {
       transport: 'بطاقة الحافلة',
       howTo: 'كيف أفعل ذلك؟'
     },
+    appointmentLight: {
+      title: 'حالة المواعيد',
+      desc: 'الوضع الحالي في جيان.',
+      updated: 'تم التحديث منذ 5 دقائق',
+      green: 'متاح',
+      yellow: 'قليل',
+      red: 'غير متاح',
+      report: 'إبلاغ؟',
+      thanks: 'شكراً!'
+    },
+    currency: { title: 'محول العملات', from: 'من', to: 'إلى', result: 'القيمة' },
+    wifi: { title: 'واي فاي مجاني', desc: 'نقاط اتصال عامة.' },
+    learn: { title: 'تعلم اللغة', desc: 'جمل مفيدة.', flashcards: 'بطاقات', flip: 'ترجمة', next: 'التالي' },
     employment: { title: 'العمل' },
     familyResources: { title: 'العائلة' },
     studyUJA: { title: 'الدراسة' }
@@ -586,6 +612,19 @@ export const translations = {
       transport: 'Transport',
       howTo: 'Cum se face?'
     },
+    appointmentLight: {
+      title: 'Stare Programări',
+      desc: 'Status actual în Jaén.',
+      updated: 'Actualizat acum 5 min',
+      green: 'Disponibil',
+      yellow: 'Puține',
+      red: 'Lipsă',
+      report: 'Raportare?',
+      thanks: 'Mulțumim!'
+    },
+    currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Valoare' },
+    wifi: { title: 'WiFi Gratuit', desc: 'Puncte publice.' },
+    learn: { title: 'Învață Limba', desc: 'Fraze utile.', flashcards: 'Carduri', flip: 'Traducere', next: 'Următorul' },
     employment: { title: 'Loc de muncă' },
     familyResources: { title: 'Familie' },
     studyUJA: { title: 'Studii' }

@@ -13,7 +13,10 @@ type AppointmentStatusProps = {
 };
 
 export function AppointmentStatus({ lang }: AppointmentStatusProps) {
-  const t = translations[lang].appointmentLight;
+  // Safe access to translations with fallback to Spanish
+  const langPack = translations[lang] || translations.es;
+  const t = langPack.appointmentLight || translations.es.appointmentLight;
+  
   const [reported, setReported] = useState(false);
   const [status, setStatus] = useState<'green' | 'yellow' | 'red'>('yellow');
 
