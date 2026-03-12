@@ -41,6 +41,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar
 } from "@/components/ui/sidebar"
 import {
@@ -52,7 +53,6 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { QRCodeShare } from "@/components/ui/QRCodeShare"
@@ -113,9 +113,9 @@ export function AppSidebar({
   ];
 
   const accessibilityModes: { id: AccessibilityMode, label: string, icon: any }[] = [
-    { id: 'standard', label: t.accessibility.standard, icon: Sparkles },
-    { id: 'visual', label: t.accessibility.visual, icon: Ear },
-    { id: 'auditory', label: t.accessibility.auditory, icon: EyeOff },
+    { id: 'standard', label: t.accessibility?.standard || 'Estándar', icon: Sparkles },
+    { id: 'visual', label: t.accessibility?.visual || 'Modo Visual', icon: Ear },
+    { id: 'auditory', label: t.accessibility?.auditory || 'Modo Auditivo', icon: EyeOff },
   ];
 
   return (
@@ -159,7 +159,7 @@ export function AppSidebar({
         <SidebarContent className="px-3 py-4 scrollbar-hide">
           {/* CONTROL DE ACCESIBILIDAD */}
           <div className="px-2 mb-6 space-y-3">
-             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility.title}</Label>
+             <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
              <div className="grid gap-1.5">
                 {accessibilityModes.map((mode) => (
                   <Button
