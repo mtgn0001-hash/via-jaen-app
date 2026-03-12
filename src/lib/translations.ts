@@ -24,6 +24,15 @@ export const translations = {
       lseBtn: 'Ver en LSE',
       desc: 'Activa ayudas visuales y auditivas.'
     },
+    onboarding: {
+      title1: 'Bienvenido a Vía Jaén',
+      desc1: 'Tu guía segura para trámites, trabajo y vida en la provincia.',
+      title2: 'Todo en tu Mano',
+      desc2: 'Trámites de extranjería, salud y educación explicados paso a paso.',
+      title3: 'Privacidad Total',
+      desc3: 'Tus datos nunca salen de este teléfono. Sin registros ni nubes.',
+      getStarted: 'Comenzar ahora'
+    },
     bot: {
       title: 'Jaén-Bot',
       subtitle: 'Asistente IA',
@@ -199,6 +208,15 @@ export const translations = {
       makeAccessible: 'Make Accessible',
       lseBtn: 'Watch in LSE',
       desc: 'Enable visual and auditory aids.'
+    },
+    onboarding: {
+      title1: 'Welcome to Vía Jaén',
+      desc1: 'Your secure guide for procedures, work, and life in the province.',
+      title2: 'Everything in Your Hand',
+      desc2: 'Immigration, health, and education procedures explained step by step.',
+      title3: 'Total Privacy',
+      desc3: 'Your data never leaves this phone. No registration, no cloud.',
+      getStarted: 'Start now'
     },
     bot: {
       title: 'Jaén-Bot',
@@ -376,6 +394,15 @@ export const translations = {
       lseBtn: 'Voir en LSE',
       desc: 'Activer les aides visuelles et auditives.'
     },
+    onboarding: {
+      title1: 'Bienvenue à Vía Jaén',
+      desc1: 'Votre guide sécurisé pour les démarches, le travail et la vie dans la province.',
+      title2: 'Tout dans votre main',
+      desc2: 'Procédures d\'immigration, de santé et d\'éducation expliquées étape par étape.',
+      title3: 'Confidentialité totale',
+      desc3: 'Vos données ne quittent jamais ce téléphone. Pas d\'enregistrement, pas de cloud.',
+      getStarted: 'Commencer'
+    },
     bot: { title: 'Jaén-Bot', subtitle: 'Assistant IA', welcome: 'Bonjour!' },
     scanner: { title: 'Scanner', subtitle: 'Analyse IA', scanBtn: 'Scanner', resultTitle: 'Résultat', resultDesc: 'Analyse en cours...' },
     vault: { 
@@ -530,6 +557,15 @@ export const translations = {
       lseBtn: 'شاهد بلغة الإشارة',
       desc: 'تفعيل المساعدات البصرية والسمعية.'
     },
+    onboarding: {
+      title1: 'مرحباً بك في Vía Jaén',
+      desc1: 'دليلك الآمن للإجراءات والعمل والحياة في المحافظة.',
+      title2: 'كل شيء في يدك',
+      desc2: 'إجراءات الهجرة والصحة والتعليم مشروحة خطوة بخطوة.',
+      title3: 'خصوصية تامة',
+      desc3: 'بياناتك لا تغادر هذا الهاتف أبداً. لا تسجيل ولا سحابة.',
+      getStarted: 'ابدأ الآن'
+    },
     bot: { title: 'روبوت جيان', subtitle: 'مساعد ذكي', welcome: 'مرحباً!' },
     scanner: { title: 'ماسح ضوئي', subtitle: 'تحليل ذكي', scanBtn: 'مسح', resultTitle: 'النتيجة', resultDesc: 'تحليل الوثيقة...' },
     vault: { 
@@ -683,6 +719,15 @@ export const translations = {
       makeAccessible: 'Fă Accesibil',
       lseBtn: 'Vezi în LSE',
       desc: 'Activează ajutoarele vizuale și auditive.'
+    },
+    onboarding: {
+      title1: 'Bun venit la Vía Jaén',
+      desc1: 'Ghidul tău sigur pentru proceduri, muncă și viață în provincie.',
+      title2: 'Totul în mâna ta',
+      desc2: 'Proceduri de imigrare, sănătate și educație explicate pas cu pas.',
+      title3: 'Confidențialitate totală',
+      desc3: 'Datele tale nu părăsesc niciodată acest telefon. Fără înregistrare, fără cloud.',
+      getStarted: 'Începe acum'
     },
     bot: { title: 'Jaén-Bot', subtitle: 'Asistent IA', welcome: 'Bună!' },
     scanner: { title: 'Scaner', subtitle: 'Analiză IA', scanBtn: 'Scanare', resultTitle: 'Rezultat', resultDesc: 'Analiză document...' },

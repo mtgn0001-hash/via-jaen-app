@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -34,14 +35,14 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
 
   const slides = [
     {
-      title: t.title1,
-      desc: t.desc1,
+      title: t?.title1 || "Bienvenido",
+      desc: t?.desc1 || "Cargando descripción...",
       icon: <AppLogo size={140} />,
       bg: "bg-primary/5"
     },
     {
-      title: t.title2,
-      desc: t.desc2,
+      title: t?.title2 || "Siguiente paso",
+      desc: t?.desc2 || "",
       icon: <Download className="h-20 w-20 text-secondary" />,
       bg: "bg-secondary/5"
     },
@@ -52,8 +53,8 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
       bg: "bg-orange-50"
     },
     {
-      title: t.title3,
-      desc: t.desc3,
+      title: t?.title3 || "Privacidad Total",
+      desc: t?.desc3 || "Tus datos nunca salen de este teléfono.",
       icon: <ShieldCheck className="h-20 w-20 text-green-500" />,
       bg: "bg-green-50"
     },
@@ -102,7 +103,7 @@ export function Onboarding({ lang, onComplete }: OnboardingProps) {
                 onClick={handleClose}
                 className="w-full h-16 rounded-[24px] text-xl font-black uppercase tracking-tight shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform"
               >
-                {t.getStarted}
+                {t?.getStarted || "Comenzar"}
               </Button>
               
               <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest opacity-40">
