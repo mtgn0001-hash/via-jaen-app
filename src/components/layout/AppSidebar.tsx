@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -150,7 +149,7 @@ export function AppSidebar({
             </div>
 
             <div 
-              className="group flex items-center gap-4 cursor-pointer bg-white/40 hover:bg-white/60 p-4 rounded-[2rem] transition-all border border-white/20 shadow-sm backdrop-blur-md"
+              className="group flex items-center gap-4 cursor-pointer bg-white/50 hover:bg-white/70 p-4 rounded-[2rem] transition-all border border-white/40 shadow-sm backdrop-blur-md"
               onClick={() => handleNav('profile')}
             >
               <Avatar className="h-12 w-12 border-2 border-white shadow-md transition-transform group-hover:scale-105">
@@ -233,23 +232,23 @@ export function AppSidebar({
             <Button 
               onClick={() => setShowQR(true)} 
               variant="outline" 
-              className="w-full rounded-[2rem] gap-3 h-14 border-2 border-primary/10 hover:border-primary/30 hover:bg-white/40 transition-all font-black uppercase text-[11px] tracking-widest shadow-sm backdrop-blur-md"
+              className="w-full rounded-[2rem] gap-3 h-14 border-2 border-primary/10 hover:border-primary/30 hover:bg-white/50 transition-all font-black uppercase text-[11px] tracking-widest shadow-sm backdrop-blur-md"
             >
               <Share2 className="h-5 w-5 text-primary" /> Compartir App
             </Button>
           </div>
         </SidebarContent>
 
-        <SidebarFooter className="p-5 border-t border-sidebar-border/10 gap-3 bg-white/20 backdrop-blur-2xl">
+        <SidebarFooter className="p-5 border-t border-sidebar-border/10 gap-3 bg-white/30 backdrop-blur-3xl">
           <div className="grid grid-cols-2 gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/40 border border-white/40 bg-white/10 shadow-sm transition-all">
+                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/50 border border-white/40 bg-white/20 shadow-sm transition-all">
                   <Palette className="h-4 w-4 text-primary" />
                   <span className="text-[10px] font-black uppercase tracking-tighter">Estilo</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-3xl bg-white/60 border border-white/20">
+              <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-3xl bg-white/85 border border-white/30">
                 <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-1 py-2 text-center">
                   Color del Sistema
                 </DropdownMenuLabel>
@@ -275,12 +274,12 @@ export function AppSidebar({
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/40 border border-white/40 bg-white/10 shadow-sm transition-all">
+                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/50 border border-white/40 bg-white/20 shadow-sm transition-all">
                   <Globe className="h-4 w-4 text-primary" />
                   <span className="text-[10px] font-black uppercase tracking-tighter">Idioma</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-2 backdrop-blur-3xl bg-white/60 border border-white/20">
+              <DropdownMenuContent align="end" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-2 backdrop-blur-3xl bg-white/85 border border-white/30">
                 <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-4 py-4">
                   Seleccionar Idioma
                 </DropdownMenuLabel>
