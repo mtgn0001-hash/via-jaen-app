@@ -70,9 +70,10 @@
   }
 
   [data-theme='ocean'] {
-    --primary: 221 83% 53%;
-    --ring: 221 83% 53%;
-    --sidebar-primary: 221 83% 53%;
+    /* AZUL ELÉCTRICO REFINADO */
+    --primary: 217 91% 60%;
+    --ring: 217 91% 60%;
+    --sidebar-primary: 217 91% 60%;
   }
 
   [data-theme='night'] {
@@ -142,4 +143,13 @@
 
 .animate-flash-visual {
   animation: flash-purple 2s infinite;
+}
+
+/* EFECTOS DE CRISTAL ADICIONALES */
+.glass-panel {
+  @apply bg-white/30 backdrop-blur-2xl border border-white/40 shadow-xl;
+}
+
+.glass-item-active {
+  @apply bg-primary/20 backdrop-blur-md border border-white/20 shadow-lg shadow-primary/10;
 }

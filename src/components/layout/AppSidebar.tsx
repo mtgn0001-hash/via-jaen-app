@@ -104,7 +104,7 @@ export function AppSidebar({
       { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta' },
     ]},
     { id: 'emergency', label: 'Atención Inmediata', items: [
-      { id: 'emergency', icon: ShieldAlert, label: t.emergency || 'S.O.S', className: 'text-destructive bg-destructive/5 hover:bg-destructive/10' },
+      { id: 'emergency', icon: ShieldAlert, label: t.emergency || 'S.O.S', className: 'text-destructive bg-destructive/10 hover:bg-destructive/20 border-destructive/20' },
     ]},
   ];
 
@@ -115,9 +115,9 @@ export function AppSidebar({
   };
 
   const themes: { id: ThemeType; color: string; label: string }[] = [
-    { id: 'olive', color: '#3D5229', label: t.themes?.olive || 'Oliva' },
     { id: 'purple', color: '#7C3AED', label: t.themes?.purple || 'Morado' },
-    { id: 'ocean', color: '#3B82F6', label: t.themes?.ocean || 'Océano' },
+    { id: 'olive', color: '#3D5229', label: t.themes?.olive || 'Oliva' },
+    { id: 'ocean', color: '#3B82F6', label: 'Azul Eléctrico' }, // Azul Eléctrico solicitado
     { id: 'red', color: '#EF4444', label: t.themes?.red || 'Rojo' },
     { id: 'night', color: '#1E1B4B', label: t.themes?.night || 'Noche' },
     { id: 'contrast', color: '#000000', label: t.themes?.contrast || 'Contraste' },
@@ -125,27 +125,27 @@ export function AppSidebar({
 
   return (
     <>
-      <Sidebar variant="floating" className="border-none shadow-none">
+      <Sidebar variant="floating" className="border-none shadow-none bg-transparent">
         <SidebarHeader className="p-6 pb-2">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4 px-2">
-              <AppLogo size={48} className="shadow-lg" />
+              <AppLogo size={48} className="shadow-2xl ring-4 ring-white/20" />
               <div className="flex flex-col">
                 <span className="font-headline font-black text-xl tracking-tight text-primary uppercase leading-none">
                   Vía Jaén
                 </span>
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mt-1 opacity-60">
-                  Universal 2026
+                  Glass Edition 2026
                 </span>
               </div>
             </div>
 
             <div 
-              className="group flex items-center gap-4 cursor-pointer bg-white/50 hover:bg-white/70 p-4 rounded-[2rem] transition-all border border-white/40 shadow-sm backdrop-blur-md"
+              className="group flex items-center gap-4 cursor-pointer bg-white/20 hover:bg-white/40 p-4 rounded-[2rem] transition-all duration-500 border border-white/40 shadow-xl backdrop-blur-3xl"
               onClick={() => handleNav('profile')}
               aria-label="Ir a mi perfil"
             >
-              <Avatar className="h-12 w-12 border-2 border-white shadow-md">
+              <Avatar className="h-12 w-12 border-2 border-white/60 shadow-lg">
                 <AvatarImage src={progress.profile.photo} />
                 <AvatarFallback className="bg-primary text-white font-black">
                   {progress.profile.name?.charAt(0) || <User className="h-6 w-6" />}
@@ -155,7 +155,7 @@ export function AppSidebar({
                 <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate">
                   {progress.profile.name || "Invitado"}
                 </h2>
-                <span className="text-[9px] uppercase font-black text-muted-foreground opacity-60">Ver Perfil</span>
+                <span className="text-[9px] uppercase font-black text-muted-foreground opacity-60">Mi Espacio</span>
               </div>
             </div>
           </div>
@@ -168,10 +168,10 @@ export function AppSidebar({
                 variant={isAccessible ? 'default' : 'outline'}
                 onClick={toggleAccessibility}
                 className={cn(
-                  "w-full h-14 rounded-2xl gap-3 px-5 transition-all border-2",
+                  "w-full h-14 rounded-[1.8rem] gap-3 px-5 transition-all duration-500 border-2",
                   isAccessible 
-                    ? "bg-primary text-white shadow-xl shadow-primary/20 border-primary" 
-                    : "bg-white/50 hover:bg-primary/5 text-primary border-primary/20"
+                    ? "bg-primary text-white shadow-2xl shadow-primary/40 border-primary scale-[1.02]" 
+                    : "bg-white/10 hover:bg-white/30 text-primary border-white/40 backdrop-blur-md"
                 )}
                 aria-label={isAccessible ? "Desactivar accesibilidad" : "Activar accesibilidad universal"}
               >
@@ -184,14 +184,14 @@ export function AppSidebar({
 
           <div className="px-2 mb-6 space-y-3">
              <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.themes?.title || 'Personalizar'}</Label>
-             <div className="flex justify-between px-2">
+             <div className="flex justify-between px-3 py-2 bg-white/10 rounded-3xl border border-white/20 backdrop-blur-sm">
                 {themes.map((theme) => (
                   <button
                     key={theme.id}
                     onClick={() => setTheme(theme.id)}
                     className={cn(
-                      "w-8 h-8 rounded-full border-2 transition-all hover:scale-110",
-                      progress.theme === theme.id ? "ring-2 ring-primary ring-offset-2 border-white" : "border-transparent"
+                      "w-7 h-7 rounded-full border-2 transition-all duration-300 hover:scale-125 hover:rotate-12",
+                      progress.theme === theme.id ? "ring-2 ring-primary ring-offset-2 border-white scale-110 shadow-lg" : "border-transparent opacity-60 hover:opacity-100"
                     )}
                     style={{ backgroundColor: theme.color }}
                     title={theme.label}
@@ -200,7 +200,7 @@ export function AppSidebar({
              </div>
           </div>
 
-          <SidebarSeparator className="mx-2 w-auto bg-sidebar-border/20 mb-4" />
+          <SidebarSeparator className="mx-2 w-auto bg-white/20 mb-4" />
 
           {categories.map((cat) => (
             <SidebarGroup key={cat.id} className="py-2">
@@ -208,19 +208,21 @@ export function AppSidebar({
                 {cat.label}
               </SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu className="gap-1.5">
+                <SidebarMenu className="gap-2">
                   {cat.items.map((item) => (
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
                         onClick={() => handleNav(item.id)}
                         isActive={activeTab === item.id}
                         className={cn(
-                          "h-12 px-5 rounded-2xl transition-all",
-                          activeTab === item.id ? "bg-primary text-white font-black shadow-lg" : "hover:bg-primary/5",
+                          "h-13 px-5 rounded-[1.5rem] transition-all duration-300 border border-transparent",
+                          activeTab === item.id 
+                            ? "bg-primary text-white font-black shadow-xl shadow-primary/30 border-white/20 scale-[1.02]" 
+                            : "hover:bg-white/30 hover:border-white/20 hover:translate-x-1",
                           item.className
                         )}
                       >
-                        <item.icon className="h-5 w-5 mr-3" />
+                        <item.icon className={cn("h-5 w-5 mr-3 transition-transform", activeTab === item.id && "scale-110")} />
                         <span className="text-[13px] font-bold tracking-tight">{item.label}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -231,16 +233,16 @@ export function AppSidebar({
           ))}
         </SidebarContent>
 
-        <SidebarFooter className="p-5 border-t border-sidebar-border/10 bg-white/30 backdrop-blur-3xl gap-3">
+        <SidebarFooter className="p-5 border-t border-white/10 bg-white/20 backdrop-blur-3xl gap-3">
           <div className="grid grid-cols-2 gap-2">
              <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-sm">
+                <Button variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-lg hover:bg-white/40 transition-all duration-300">
                   <Globe className="h-4 w-4 text-primary" />
                   <span className="text-[10px] font-black uppercase">Idioma</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" side="top" className="rounded-[2rem] w-56">
+              <DropdownMenuContent align="start" side="top" className="rounded-[2rem] w-56 border-white/20 bg-white/80 backdrop-blur-2xl">
                 <DropdownMenuItem onClick={() => setLang('es')}>Español</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLang('fr')}>Français</DropdownMenuItem>
@@ -249,7 +251,7 @@ export function AppSidebar({
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button onClick={() => setShowQR(true)} variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-sm">
+            <Button onClick={() => setShowQR(true)} variant="ghost" className="h-12 rounded-2xl bg-white/20 border border-white/40 shadow-lg hover:bg-white/40 transition-all duration-300">
               <Share2 className="h-4 w-4 text-primary" />
               <span className="text-[10px] font-black uppercase">App</span>
             </Button>
