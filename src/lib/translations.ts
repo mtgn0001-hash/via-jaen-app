@@ -434,56 +434,12 @@ export const translations = {
     progress: 'Votre progrès',
     welcome: 'Bonjour, bienvenue',
     disclaimer: 'Guide communautaire. Non officiel.',
-    bot: {
-      title: 'Jaén-Bot',
-      subtitle: 'Assistant',
-      welcome: 'Bonjour!',
-      back: 'Retour',
-      reset: 'Nouveau'
-    },
-    vault: {
-      title: 'Coffre-fort',
-      subtitle: 'Photos protégées',
-      addDoc: 'Ajouter',
-      emergencyMode: 'Urgence',
-      emergencyDesc: 'Luminosité max.',
-      empty: 'Vide.'
-    },
-    scanner: {
-      title: 'Scanner',
-      subtitle: 'Analyse IA',
-      scanBtn: 'Scanner',
-      analyzing: 'Analyse...',
-      resultTitle: 'Résumé',
-      resultDesc: 'Notification officielle.'
-    },
-    onboarding: {
-      title1: 'Bienvenue',
-      desc1: 'Votre guide.',
-      title2: 'Installer',
-      desc2: 'Mode hors ligne.',
-      title3: 'Privée',
-      desc3: 'Sur votre mobile.',
-      getStarted: 'Commencer'
-    },
-    firstSteps: {
-      title: 'Premiers Pas',
-      subtitle: 'Intégration',
-      empadronamiento: 'Recensement',
-      health: 'Santé',
-      transport: 'Transport',
-      howTo: 'Comment faire?'
-    },
-    appointmentLight: {
-      title: 'Citations Jaén',
-      desc: 'Statut actuel.',
-      updated: 'Mis à jour il y a 5 min',
-      green: 'Disponible',
-      yellow: 'Peu',
-      red: 'Aucun',
-      report: 'Rapport?',
-      thanks: 'Merci!'
-    },
+    bot: { title: 'Jaén-Bot', subtitle: 'Assistant', welcome: 'Bonjour!', back: 'Retour', reset: 'Nouveau' },
+    vault: { title: 'Coffre-fort', subtitle: 'Photos protégées', addDoc: 'Ajouter', emergencyMode: 'Urgence', emergencyDesc: 'Luminosité max.', empty: 'Vide.' },
+    scanner: { title: 'Scanner', subtitle: 'Analyse IA', scanBtn: 'Scanner', analyzing: 'Analyse...', resultTitle: 'Résumé', resultDesc: 'Notification officielle.' },
+    onboarding: { title1: 'Bienvenue', desc1: 'Votre guide.', title2: 'Installer', desc2: 'Mode hors ligne.', title3: 'Privée', desc3: 'Sur votre mobile.', getStarted: 'Commencer' },
+    firstSteps: { title: 'Premiers Pas', subtitle: 'Intégration', empadronamiento: 'Recensement', health: 'Santé', transport: 'Transport', howTo: 'Comment faire?' },
+    appointmentLight: { title: 'Citations Jaén', desc: 'Statut actuel.', updated: 'Mis à jour', green: 'Disponible', yellow: 'Peu', red: 'Aucun', report: 'Rapport?', thanks: 'Merci!' },
     currency: { title: 'Convertisseur', from: 'De', to: 'À', result: 'Valeur' },
     wifi: { title: 'WiFi Gratuit', desc: 'Points d\'accès publics.' },
     learn: { title: 'Apprendre', desc: 'Phrases utiles.', flashcards: 'Cartes', flip: 'Traduire', next: 'Suivant' },
@@ -503,56 +459,12 @@ export const translations = {
     progress: 'تقدمك',
     welcome: 'أهلاً بك',
     disclaimer: 'دليل مجتمعي. غير رسمي.',
-    bot: {
-      title: 'روبوت جيان',
-      subtitle: 'مساعد',
-      welcome: 'مرحباً!',
-      back: 'رجوع',
-      reset: 'جديد'
-    },
-    vault: {
-      title: 'الخزنة الآمنة',
-      subtitle: 'صور محمية',
-      addDoc: 'إضافة',
-      emergencyMode: 'طوارئ',
-      emergencyDesc: 'أقصى سطوع.',
-      empty: 'لا يوجد أوراق.'
-    },
-    scanner: {
-      title: 'ماسح ضوئي',
-      subtitle: 'تحليل الأوراق',
-      scanBtn: 'مسح ضوئي',
-      analyzing: 'جاري التحليل...',
-      resultTitle: 'ملخص',
-      resultDesc: 'هذه رسالة رسمية.'
-    },
-    onboarding: {
-      title1: 'مرحباً بك',
-      desc1: 'دليلك الآمن.',
-      title2: 'تثبيت التطبيق',
-      desc2: 'بدون إنترنت.',
-      title3: 'خصوصية تامة',
-      desc3: 'على هاتفك فقط.',
-      getStarted: 'ابدأ الآن'
-    },
-    firstSteps: {
-      title: 'خطواتي الأولى',
-      subtitle: 'الاندماج في جيان',
-      empadronamiento: 'السكن',
-      health: 'البطاقة الصحية',
-      transport: 'بطاقة الحافلة',
-      howTo: 'كيف أفعل ذلك؟'
-    },
-    appointmentLight: {
-      title: 'حالة المواعيد',
-      desc: 'الوضع الحالي في جيان.',
-      updated: 'تم التحديث منذ 5 دقائق',
-      green: 'متاح',
-      yellow: 'قليل',
-      red: 'غير متاح',
-      report: 'إبلاغ؟',
-      thanks: 'شكراً!'
-    },
+    bot: { title: 'روبوت جيان', subtitle: 'مساعد', welcome: 'مرحباً!', back: 'رجوع', reset: 'جديد' },
+    vault: { title: 'الخزنة الآمنة', subtitle: 'صور محمية', addDoc: 'إضافة', emergencyMode: 'طوارئ', emergencyDesc: 'أقصى سطوع.', empty: 'لا يوجد أوراق.' },
+    scanner: { title: 'ماسح ضوئي', subtitle: 'تحليل الأوراق', scanBtn: 'مسح ضوئي', analyzing: 'جاري التحليل...', resultTitle: 'ملخص', resultDesc: 'هذه رسالة رسمية.' },
+    onboarding: { title1: 'مرحباً بك', desc1: 'دليلك الآمن.', title2: 'تثبيت التطبيق', desc2: 'بدون إنترنت.', title3: 'خصوصية تامة', desc3: 'على هاتفك فقط.', getStarted: 'ابدأ الآن' },
+    firstSteps: { title: 'خطواتي الأولى', subtitle: 'الاندماج في جيان', empadronamiento: 'السكن', health: 'البطاقة الصحية', transport: 'بطاقة الحافلة', howTo: 'كيف أفعل ذلك؟' },
+    appointmentLight: { title: 'حالة المواعيد', desc: 'الوضع الحالي.', updated: 'تم التحديث', green: 'متاح', yellow: 'قليل', red: 'غير متاح', report: 'إبلاغ؟', thanks: 'شكراً!' },
     currency: { title: 'محول العملات', from: 'من', to: 'إلى', result: 'القيمة' },
     wifi: { title: 'واي فاي مجاني', desc: 'نقاط اتصال عامة.' },
     learn: { title: 'تعلم اللغة', desc: 'جمل مفيدة.', flashcards: 'بطاقات', flip: 'ترجمة', next: 'التالي' },
@@ -572,56 +484,12 @@ export const translations = {
     progress: 'Progresul tău',
     welcome: 'Bună, bine ai venit',
     disclaimer: 'Ghid comunitar. Neoficial.',
-    bot: {
-      title: 'Jaén-Bot',
-      subtitle: 'Asistent',
-      welcome: 'Bună!',
-      back: 'Înapoi',
-      reset: 'Nou'
-    },
-    vault: {
-      title: 'Seif Securizat',
-      subtitle: 'Fotografii protejate',
-      addDoc: 'Adaugă',
-      emergencyMode: 'Urgență',
-      emergencyDesc: 'Luminozitate max.',
-      empty: 'Fără documente.'
-    },
-    scanner: {
-      title: 'Scanare',
-      subtitle: 'Analiză IA',
-      scanBtn: 'Scanează',
-      analyzing: 'Analiză...',
-      resultTitle: 'Rezumat',
-      resultDesc: 'Notificare oficială.'
-    },
-    onboarding: {
-      title1: 'Bun venit',
-      desc1: 'Ghidul tău.',
-      title2: 'Instalează',
-      desc2: 'Mod Offline.',
-      title3: 'Confidențialitate',
-      desc3: 'Pe mobilul tău.',
-      getStarted: 'Începe'
-    },
-    firstSteps: {
-      title: 'Primii Pași',
-      subtitle: 'Integrare',
-      empadronamiento: 'Recensământ',
-      health: 'Sănătate',
-      transport: 'Transport',
-      howTo: 'Cum se face?'
-    },
-    appointmentLight: {
-      title: 'Stare Programări',
-      desc: 'Status actual în Jaén.',
-      updated: 'Actualizat acum 5 min',
-      green: 'Disponibil',
-      yellow: 'Puține',
-      red: 'Lipsă',
-      report: 'Raportare?',
-      thanks: 'Mulțumim!'
-    },
+    bot: { title: 'Jaén-Bot', subtitle: 'Asistent', welcome: 'Bună!', back: 'Înapoi', reset: 'Nou' },
+    vault: { title: 'Seif Securizat', subtitle: 'Fotografii protejate', addDoc: 'Adaugă', emergencyMode: 'Urgență', emergencyDesc: 'Luminozitate max.', empty: 'Fără documente.' },
+    scanner: { title: 'Scanare', subtitle: 'Analiză IA', scanBtn: 'Scanează', analyzing: 'Analiză...', resultTitle: 'Rezumat', resultDesc: 'Notificare oficială.' },
+    onboarding: { title1: 'Bun venit', desc1: 'Ghidul tău.', title2: 'Instalează', desc2: 'Mod Offline.', title3: 'Confidențialitate', desc3: 'Pe mobilul tău.', getStarted: 'Începe' },
+    firstSteps: { title: 'Primii Pași', subtitle: 'Integrare', empadronamiento: 'Recensământ', health: 'Sănătate', transport: 'Transport', howTo: 'Cum se face?' },
+    appointmentLight: { title: 'Stare Programări', desc: 'Status actual.', updated: 'Actualizat', green: 'Disponibil', yellow: 'Puține', red: 'Lipsă', report: 'Raportare?', thanks: 'Mulțumim!' },
     currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Valoare' },
     wifi: { title: 'WiFi Gratuit', desc: 'Puncte publice.' },
     learn: { title: 'Învață Limba', desc: 'Fraze utile.', flashcards: 'Carduri', flip: 'Traducere', next: 'Următorul' },

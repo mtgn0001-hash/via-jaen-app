@@ -20,7 +20,7 @@ import { WifiPoints } from "@/components/directory/WifiPoints";
 import { Flashcards } from "@/components/integration/Flashcards";
 import { Language, translations } from "@/lib/translations";
 import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
-import { AlertCircle, ShieldAlert } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
 import { UserProfile } from "@/components/profile/UserProfile";
@@ -43,7 +43,7 @@ export default function Home() {
   const isRTL = lang === 'ar';
   const isEasy = progress.easyReading;
 
-  // Safeguard: Ensure t is never undefined to prevent crashes
+  // Safe access to translations with fallback to Spanish
   const t = translations[lang] || translations.es;
 
   useEffect(() => {
@@ -161,7 +161,7 @@ export default function Home() {
                 <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex gap-3">
                   <AlertCircle className="h-5 w-5 text-primary/40 shrink-0" />
                   <p className="text-[10px] text-muted-foreground leading-normal font-medium">
-                    {t.disclaimer}
+                    {t.disclaimer || translations.es.disclaimer}
                   </p>
                 </div>
               </section>
