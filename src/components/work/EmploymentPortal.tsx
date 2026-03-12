@@ -66,6 +66,8 @@ ${cvData.skills}
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const triggerClass = "rounded-xl transition-all data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg";
+
   return (
     <div className="space-y-6 pb-20">
       <div className="space-y-2">
@@ -78,7 +80,7 @@ ${cvData.skills}
         </div>
       </div>
 
-      <section className="bg-accent/20 p-4 rounded-2xl border border-primary/10 flex gap-3">
+      <section className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex gap-3">
         <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
         <p className="text-xs font-bold text-foreground">
           {e.legalWarning}
@@ -86,12 +88,12 @@ ${cvData.skills}
       </section>
 
       <Tabs defaultValue="olive" className="w-full">
-        <TabsList className="grid grid-cols-5 w-full h-12 bg-muted/50 p-1 rounded-2xl">
-          <TabsTrigger value="olive" className="rounded-xl"><Briefcase className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="search" className="rounded-xl"><MapPin className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="cv" className="rounded-xl"><FileText className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="rights" className="rounded-xl"><ShieldCheck className="h-4 w-4" /></TabsTrigger>
-          <TabsTrigger value="startup" className="rounded-xl"><Rocket className="h-4 w-4" /></TabsTrigger>
+        <TabsList className="grid grid-cols-5 w-full h-14 bg-white/50 backdrop-blur-md p-1.5 rounded-[20px] border border-primary/10 shadow-sm">
+          <TabsTrigger value="olive" className={triggerClass}><Briefcase className="h-5 w-5" /></TabsTrigger>
+          <TabsTrigger value="search" className={triggerClass}><MapPin className="h-5 w-5" /></TabsTrigger>
+          <TabsTrigger value="cv" className={triggerClass}><FileText className="h-5 w-5" /></TabsTrigger>
+          <TabsTrigger value="rights" className={triggerClass}><ShieldCheck className="h-5 w-5" /></TabsTrigger>
+          <TabsTrigger value="startup" className={triggerClass}><Rocket className="h-5 w-5" /></TabsTrigger>
         </TabsList>
 
         <TabsContent value="olive" className="space-y-4 pt-4">
