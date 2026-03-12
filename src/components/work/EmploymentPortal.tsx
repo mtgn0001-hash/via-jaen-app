@@ -33,8 +33,9 @@ type EmploymentPortalProps = {
 };
 
 export function EmploymentPortal({ lang }: EmploymentPortalProps) {
-  const t = translations[lang];
-  const e = t.employment;
+  const langPack = translations[lang] || translations.es;
+  const t = langPack;
+  const e = langPack.employment || translations.es.employment;
   const { progress } = useLocalStorage();
   const currentProvince = provincesData[progress.province] || provincesData.jaen;
   const workData = currentProvince.work;

@@ -12,6 +12,11 @@ export const translations = {
     progress: 'Tu Progreso',
     welcome: 'Hola, bienvenido',
     easyReading: 'Lectura Fácil',
+    forms: 'Formularios',
+    pdfNote: 'Los formularios PDF deben imprimirse y rellenarse con bolígrafo negro.',
+    downloadForm: 'Descargar PDF',
+    fillOnline: 'Rellenar Online',
+    officialSources: 'Fuentes Oficiales',
     accessibility: {
       title: 'Accesibilidad',
       standard: 'Modo Estándar',
@@ -27,7 +32,10 @@ export const translations = {
     },
     scanner: {
       title: 'Escáner',
-      subtitle: 'Análisis IA Offline'
+      subtitle: 'Análisis IA Offline',
+      scanBtn: 'Escanear Documento',
+      resultTitle: 'Resultado del Análisis',
+      resultDesc: 'Este documento parece ser una notificación de la Oficina de Extranjería. Te recomendamos revisar el plazo de 15 días.'
     },
     vault: {
       title: 'Bóveda',
@@ -71,6 +79,102 @@ export const translations = {
       waiting: 'Debes esperar más tiempo',
       reset: 'Nueva Consulta'
     },
+    employment: {
+      title: 'Portal de Empleo',
+      subtitle: 'Ofertas y derechos laborales',
+      legalWarning: 'Tus derechos laborales son independientes de tu situación administrativa.',
+      activeSearch: 'Búsqueda Activa',
+      saeDesc: 'Servicio Andaluz de Empleo. Citas e inscripciones.',
+      ettTitle: 'ETT Locales',
+      cvTools: 'Herramientas de CV',
+      cvAdvice: 'Crea un CV simple y directo.',
+      rights: 'Derechos Laborales',
+      smiInfo: 'Salario Mínimo Interprofesional (SMI)',
+      inspection: 'Inspección de Trabajo',
+      faqLawyer: 'Consulta Legal Gratis',
+      startup: 'Emprender en Jaén',
+      cadeInfo: 'Centros CADE para autónomos.',
+      autonomous: 'Ayudas Autónomos'
+    },
+    familyResources: {
+      title: 'Recursos para Familias',
+      subtitle: 'Colegios, ayudas y salud infantil',
+      calculatorTitle: 'Calculadora Escolar',
+      calculatorDesc: 'Saber qué curso le toca por edad.',
+      education: 'Educación',
+      marchNote: 'Mes de matriculación: Marzo',
+      escolarizacion: 'Escolarización',
+      comeder: 'Comedor Escolar',
+      aulaMatinal: 'Aula Matinal',
+      extraescolares: 'Extraescolares',
+      imv: 'Ingreso Mínimo Vital',
+      rentaMinima: 'Renta Mínima Inserción',
+      childAid: 'Ayuda a la Infancia',
+      healthApp: 'Salud Responde',
+      pediatra: 'Cita Pediatría',
+      summerSchool: 'Escuelas de Verano'
+    },
+    studyUJA: {
+      title: 'Estudiar UJA',
+      subtitle: 'Universidad de Jaén',
+      access: 'Acceso y Grados',
+      accessDesc: 'Cómo entrar en la universidad.',
+      homologation: 'Homologación',
+      homologationDesc: 'Valida tus títulos extranjeros.',
+      languages: 'Idiomas',
+      transport: 'Transporte Campus'
+    },
+    transport: {
+      title: 'Transporte',
+      subtitle: 'Moverse por la provincia',
+      webLink: 'Web Consorcio',
+      cardTitle: 'Tarjeta Consorcio',
+      cardDesc: 'Descuentos en buses interurbanos.',
+      pointsTitle: 'Puntos de Venta',
+      pointsDesc: 'Estancos y quioscos autorizados.',
+      transportTip: 'La tarjeta es válida para toda Andalucía.'
+    },
+    work: {
+      title: 'Olivar y Campaña',
+      campaign: 'Campaña Aceituna',
+      desc: 'Información sobre la recogida.',
+      rights: 'Derechos del Temporero',
+      rightsText: 'Tienes derecho a alojamiento digno y convenio.',
+      shelterTitle: 'Albergues Abiertos',
+      shelterNote: 'Los albergues abren de noviembre a enero.'
+    },
+    legalRights: {
+      title: 'Tus Derechos',
+      whatToDoTitle: 'Qué hacer ante una detención',
+      whatToDoDesc: 'Tienes derecho a guardar silencio y a un abogado.',
+      lawyerTitle: 'Abogado de Oficio',
+      lawyerDesc: 'Si no tienes recursos, el Colegio de Abogados te asigna uno.'
+    },
+    integration: {
+      title: 'Guía de Integración',
+      subtitle: 'Costumbres y acento de Jaén',
+      tapasTitle: 'Ir de Tapas',
+      tapasSubtitle: 'La cultura del tapeo',
+      tapasDesc: 'En Jaén la tapa es gratuita con tu bebida.',
+      tapasTip: 'Prueba el "pipirrana" o los "ochíos".',
+      glossaryTitle: 'Diccionario de Jaén',
+      accentDesc: 'Palabras que solo oirás aquí.'
+    },
+    learn: {
+      flashcards: 'Aprender Español',
+      flip: 'Tocar para ver traducción',
+      next: 'Siguiente palabra'
+    },
+    wifi: {
+      title: 'WiFi Gratis',
+      desc: 'Puntos de conexión en Jaén.'
+    },
+    currency: {
+      title: 'Conversor Divisa',
+      from: 'Desde',
+      to: 'Hacia',
+      result: 'Resultado'
+    },
     disclaimer: 'Guía comunitaria no oficial. Privacidad 100% local.'
   },
   en: {
@@ -85,6 +189,11 @@ export const translations = {
     progress: 'Your Progress',
     welcome: 'Hello, welcome',
     easyReading: 'Easy Reading',
+    forms: 'Forms',
+    pdfNote: 'PDF forms must be printed and filled with black pen.',
+    downloadForm: 'Download PDF',
+    fillOnline: 'Fill Online',
+    officialSources: 'Official Sources',
     accessibility: {
       title: 'Accessibility',
       standard: 'Standard Mode',
@@ -100,14 +209,17 @@ export const translations = {
     },
     scanner: {
       title: 'Scanner',
-      subtitle: 'Offline AI Analysis'
+      subtitle: 'Offline AI Analysis',
+      scanBtn: 'Scan Document',
+      resultTitle: 'Analysis Result',
+      resultDesc: 'This looks like an official notification. We recommend checking the 15-day deadline.'
     },
     vault: {
       title: 'Vault',
       subtitle: 'Secure Documents',
       empty: 'No documents saved.',
       emergencyMode: 'Emergency Mode Active',
-      emergencyDesc: 'This document is shown in full screen for easy reading by authorities.'
+      emergencyDesc: 'This document is shown in full screen for authorities.'
     },
     appointmentLight: {
       title: 'Appointment Status',
@@ -144,6 +256,102 @@ export const translations = {
       waiting: 'You must wait longer',
       reset: 'New Check'
     },
+    employment: {
+      title: 'Employment Portal',
+      subtitle: 'Jobs and labor rights',
+      legalWarning: 'Your labor rights are independent of your legal status.',
+      activeSearch: 'Active Search',
+      saeDesc: 'Andalusian Employment Service.',
+      ettTitle: 'Local Agencies',
+      cvTools: 'CV Tools',
+      cvAdvice: 'Keep your CV simple and direct.',
+      rights: 'Labor Rights',
+      smiInfo: 'Minimum Wage (SMI)',
+      inspection: 'Labor Inspection',
+      faqLawyer: 'Free Legal Advice',
+      startup: 'Startup in Jaén',
+      cadeInfo: 'CADE Centers for self-employed.',
+      autonomous: 'Self-employed Aid'
+    },
+    familyResources: {
+      title: 'Family Resources',
+      subtitle: 'Schools, aid, and child health',
+      calculatorTitle: 'School Calculator',
+      calculatorDesc: 'Course based on age.',
+      education: 'Education',
+      marchNote: 'Registration month: March',
+      escolarizacion: 'Schooling',
+      comeder: 'Dining Hall',
+      aulaMatinal: 'Morning Club',
+      extraescolares: 'Extracurriculars',
+      imv: 'Minimum Vital Income',
+      rentaMinima: 'Minimum Income',
+      childAid: 'Child Aid',
+      healthApp: 'Health Response',
+      pediatra: 'Pediatric Appt',
+      summerSchool: 'Summer Schools'
+    },
+    studyUJA: {
+      title: 'Study UJA',
+      subtitle: 'University of Jaén',
+      access: 'Access & Degrees',
+      accessDesc: 'How to enter university.',
+      homologation: 'Validation',
+      homologationDesc: 'Validate foreign degrees.',
+      languages: 'Languages',
+      transport: 'Campus Transport'
+    },
+    transport: {
+      title: 'Transport',
+      subtitle: 'Moving around the province',
+      webLink: 'Consortium Web',
+      cardTitle: 'Consortium Card',
+      cardDesc: 'Discounts on intercity buses.',
+      pointsTitle: 'Points of Sale',
+      pointsDesc: 'Authorized shops.',
+      transportTip: 'The card is valid in all Andalusia.'
+    },
+    work: {
+      title: 'Olive Harvest',
+      campaign: 'Olive Campaign',
+      desc: 'Picking information.',
+      rights: 'Worker Rights',
+      rightsText: 'You have a right to housing.',
+      shelterTitle: 'Open Shelters',
+      shelterNote: 'Shelters open Nov to Jan.'
+    },
+    legalRights: {
+      title: 'Your Rights',
+      whatToDoTitle: 'What to do if arrested',
+      whatToDoDesc: 'You have the right to remain silent.',
+      lawyerTitle: 'Public Defender',
+      lawyerDesc: 'Free legal aid is available.'
+    },
+    integration: {
+      title: 'Integration Guide',
+      subtitle: 'Customs and Jaén accent',
+      tapasTitle: 'Tapas Culture',
+      tapasSubtitle: 'Free tapas',
+      tapasDesc: 'In Jaén, tapas are free with your drink.',
+      tapasTip: 'Try "pipirrana" or "ochíos".',
+      glossaryTitle: 'Jaén Dictionary',
+      accentDesc: 'Words only heard here.'
+    },
+    learn: {
+      flashcards: 'Learn Spanish',
+      flip: 'Tap to see translation',
+      next: 'Next word'
+    },
+    wifi: {
+      title: 'Free WiFi',
+      desc: 'Connection points in Jaén.'
+    },
+    currency: {
+      title: 'Currency Converter',
+      from: 'From',
+      to: 'To',
+      result: 'Result'
+    },
     disclaimer: 'Unofficial guide. 100% local privacy.'
   },
   fr: {
@@ -158,6 +366,11 @@ export const translations = {
     progress: 'Votre progrès',
     welcome: 'Bonjour, bienvenue',
     easyReading: 'Lecture Facile',
+    forms: 'Formulaires',
+    pdfNote: 'Les formulaires PDF doivent être remplis en noir.',
+    downloadForm: 'Télécharger',
+    fillOnline: 'Remplir en ligne',
+    officialSources: 'Sources Officielles',
     accessibility: {
       title: 'Accessibilité',
       standard: 'Mode Standard',
@@ -167,7 +380,7 @@ export const translations = {
       desc: 'Personnalisez votre expérience.'
     },
     bot: { title: 'Jaén-Bot', subtitle: 'Assistant IA', welcome: 'Bonjour!' },
-    scanner: { title: 'Scanner', subtitle: 'Analyse IA' },
+    scanner: { title: 'Scanner', subtitle: 'Analyse IA', scanBtn: 'Scanner', resultTitle: 'Résultat', resultDesc: 'Analyse en cours...' },
     vault: { 
       title: 'Coffre', 
       subtitle: 'Sécurisé',
@@ -210,6 +423,90 @@ export const translations = {
       waiting: 'Vous devez attendre plus longtemps',
       reset: 'Nouveau Test'
     },
+    employment: {
+      title: 'Portail Emploi',
+      subtitle: 'Offres et droits',
+      legalWarning: 'Vos droits sont indépendants de votre statut.',
+      activeSearch: 'Recherche Active',
+      saeDesc: 'Service d\'Emploi Andalou.',
+      ettTitle: 'Agences Locales',
+      cvTools: 'Outils CV',
+      cvAdvice: 'Créez un CV simple.',
+      rights: 'Droits du Travail',
+      smiInfo: 'Salaire Minimum (SMI)',
+      inspection: 'Inspection',
+      faqLawyer: 'Conseil Juridique',
+      startup: 'Entreprendre',
+      cadeInfo: 'Centres CADE.',
+      autonomous: 'Aides Autonomes'
+    },
+    familyResources: {
+      title: 'Ressources Famille',
+      subtitle: 'Écoles, aides et santé',
+      calculatorTitle: 'Calculatrice Scolaire',
+      calculatorDesc: 'Cours selon l\'âge.',
+      education: 'Éducation',
+      marchNote: 'Inscription: Mars',
+      escolarizacion: 'Scolarisation',
+      comeder: 'Cantine',
+      aulaMatinal: 'Accueil Matin',
+      extraescolares: 'Périscolaire',
+      imv: 'Revenu Minimum Vital',
+      rentaMinima: 'Revenu Minimum',
+      childAid: 'Aide Enfance',
+      healthApp: 'Santé Réponse',
+      pediatra: 'RDV Pédia',
+      summerSchool: 'Écoles d\'Été'
+    },
+    studyUJA: {
+      title: 'Études UJA',
+      subtitle: 'Université de Jaén',
+      access: 'Accès',
+      accessDesc: 'Comment entrer.',
+      homologation: 'Validation',
+      homologationDesc: 'Titres étrangers.',
+      languages: 'Langues',
+      transport: 'Transport'
+    },
+    transport: {
+      title: 'Transport',
+      subtitle: 'Se déplacer',
+      webLink: 'Site Consorcio',
+      cardTitle: 'Carte Consorcio',
+      cardDesc: 'Réductions bus.',
+      pointsTitle: 'Vente',
+      pointsDesc: 'Points agréés.',
+      transportTip: 'Valable en Andalousie.'
+    },
+    work: {
+      title: 'Olives',
+      campaign: 'Campagne Olive',
+      desc: 'Récolte.',
+      rights: 'Droits',
+      rightsText: 'Logement décent.',
+      shelterTitle: 'Abris',
+      shelterNote: 'Nov à Jan.'
+    },
+    legalRights: {
+      title: 'Vos Droits',
+      whatToDoTitle: 'En cas d\'arrestation',
+      whatToDoDesc: 'Droit au silence.',
+      lawyerTitle: 'Avocat',
+      lawyerDesc: 'Aide juridique gratuite.'
+    },
+    integration: {
+      title: 'Intégration',
+      subtitle: 'Coutumes',
+      tapasTitle: 'Tapas',
+      tapasSubtitle: 'Gratuites',
+      tapasDesc: 'Gratuites avec boisson.',
+      tapasTip: 'Goûtez "pipirrana".',
+      glossaryTitle: 'Dictionnaire',
+      accentDesc: 'Mots locaux.'
+    },
+    learn: { flashcards: 'Espagnol', flip: 'Traduire', next: 'Suivant' },
+    wifi: { title: 'WiFi Gratuit', desc: 'Points WiFi.' },
+    currency: { title: 'Convertisseur', from: 'De', to: 'À', result: 'Résultat' },
     disclaimer: 'Guide non officiel. Privée.'
   },
   ar: {
@@ -224,6 +521,11 @@ export const translations = {
     progress: 'تقدمك',
     welcome: 'أهلاً بك',
     easyReading: 'قراءة سهلة',
+    forms: 'النماذج',
+    pdfNote: 'يجب تعبئة النماذج بالقلم الأسود.',
+    downloadForm: 'تحميل',
+    fillOnline: 'تعبئة أونلاين',
+    officialSources: 'المصادر الرسمية',
     accessibility: {
       title: 'إمكانية الوصول',
       standard: 'الوضع القياسي',
@@ -233,13 +535,13 @@ export const translations = {
       desc: 'خصص تجربتك الشاملة.'
     },
     bot: { title: 'روبوت جيان', subtitle: 'مساعد ذكي', welcome: 'مرحباً!' },
-    scanner: { title: 'ماسح ضوئي', subtitle: 'تحليل ذكي' },
+    scanner: { title: 'ماسح ضوئي', subtitle: 'تحليل ذكي', scanBtn: 'مسح', resultTitle: 'النتيجة', resultDesc: 'تحليل الوثيقة...' },
     vault: { 
       title: 'الخزنة', 
       subtitle: 'أوراق محمية',
       empty: 'لا توجد وثائق.',
       emergencyMode: 'وضع الطوارئ نشط',
-      emergencyDesc: 'تظهر هذه الوثيقة بملء الشاشة لتسهيل قراءتها.'
+      emergencyDesc: 'تظهر هذه الوثيقة بملء الشاشة.'
     },
     appointmentLight: {
       title: 'حالة المواعيد',
@@ -276,6 +578,90 @@ export const translations = {
       waiting: 'يجب عليك الانتظار لفترة أطول',
       reset: 'تحقق جديد'
     },
+    employment: {
+      title: 'بوابة العمل',
+      subtitle: 'الوظائف والحقوق',
+      legalWarning: 'حقوقك مستقلة عن وضعك القانوني.',
+      activeSearch: 'البحث عن عمل',
+      saeDesc: 'مصلحة العمل الأندلسية.',
+      ettTitle: 'وكالات التوظيف',
+      cvTools: 'أدوات السيرة الذاتية',
+      cvAdvice: 'أنشئ سيرة ذاتية بسيطة.',
+      rights: 'حقوق العمل',
+      smiInfo: 'الحد الأدنى للأجور',
+      inspection: 'تفتيش العمل',
+      faqLawyer: 'استشارة قانونية مجانية',
+      startup: 'بدء مشروع',
+      cadeInfo: 'مراكز CADE.',
+      autonomous: 'دعم العمل الحر'
+    },
+    familyResources: {
+      title: 'موارد العائلة',
+      subtitle: 'المدارس والصحة',
+      calculatorTitle: 'حاسبة المدارس',
+      calculatorDesc: 'الصف حسب العمر.',
+      education: 'التعليم',
+      marchNote: 'التسجيل: مارس',
+      escolarizacion: 'التمدرس',
+      comeder: 'المطعم المدرسي',
+      aulaMatinal: 'نادي الصباح',
+      extraescolares: 'الأنشطة الموازية',
+      imv: 'الحد الأدنى للمعيشة',
+      rentaMinima: 'الدخل الأدنى',
+      childAid: 'دعم الأطفال',
+      healthApp: 'الاستجابة الصحية',
+      pediatra: 'موعد طبيب أطفال',
+      summerSchool: 'المدارس الصيفية'
+    },
+    studyUJA: {
+      title: 'دراسة UJA',
+      subtitle: 'جامعة جيان',
+      access: 'الولوج والدرجات',
+      accessDesc: 'كيفية دخول الجامعة.',
+      homologation: 'المعادلة',
+      homologationDesc: 'معادلة الشهادات الأجنبية.',
+      languages: 'اللغات',
+      transport: 'النقل الجامعي'
+    },
+    transport: {
+      title: 'النقل',
+      subtitle: 'التنقل في المقاطعة',
+      webLink: 'موقع النقل',
+      cardTitle: 'بطاقة النقل',
+      cardDesc: 'خصومات الحافلات.',
+      pointsTitle: 'نقاط البيع',
+      pointsDesc: 'المحلات المرخصة.',
+      transportTip: 'البطاقة صالحة في الأندلس.'
+    },
+    work: {
+      title: 'الزيتون',
+      campaign: 'موسم الزيتون',
+      desc: 'معلومات الجني.',
+      rights: 'حقوق العمال',
+      rightsText: 'حق السكن اللائق.',
+      shelterTitle: 'الملاجئ',
+      shelterNote: 'من نوفمبر إلى يناير.'
+    },
+    legalRights: {
+      title: 'حقوقك',
+      whatToDoTitle: 'ماذا تفعل عند الاعتقال',
+      whatToDoDesc: 'حق الصمت.',
+      lawyerTitle: 'محامٍ عام',
+      lawyerDesc: 'مساعدة قانونية مجانية.'
+    },
+    integration: {
+      title: 'دليل الاندماج',
+      subtitle: 'العادات والتقاليد',
+      tapasTitle: 'التاباس',
+      tapasSubtitle: 'ثقافة التاباس',
+      tapasDesc: 'التاباس مجاني مع المشروب.',
+      tapasTip: 'جرب "بيبيرانا".',
+      glossaryTitle: 'قاموس جيان',
+      accentDesc: 'كلمات محلية.'
+    },
+    learn: { flashcards: 'تعلم الإسبانية', flip: 'ترجمة', next: 'التالي' },
+    wifi: { title: 'واي فاي مجاني', desc: 'نقاط الاتصال.' },
+    currency: { title: 'محول العملات', from: 'من', to: 'إلى', result: 'النتيجة' },
     disclaimer: 'دليل غير رسمي. خصوصية تامة.'
   },
   ro: {
@@ -290,6 +676,11 @@ export const translations = {
     progress: 'Progresul tău',
     welcome: 'Bună, bine ai venit',
     easyReading: 'Lectură Ușoară',
+    forms: 'Formulare',
+    pdfNote: 'Formularele PDF trebuie completate cu negru.',
+    downloadForm: 'Descărcare',
+    fillOnline: 'Completare online',
+    officialSources: 'Surse Oficiale',
     accessibility: {
       title: 'Accesibilitate',
       standard: 'Mod Standard',
@@ -299,7 +690,7 @@ export const translations = {
       desc: 'Personalizează-ți experiența.'
     },
     bot: { title: 'Jaén-Bot', subtitle: 'Asistent IA', welcome: 'Bună!' },
-    scanner: { title: 'Scaner', subtitle: 'Analiză IA' },
+    scanner: { title: 'Scaner', subtitle: 'Analiză IA', scanBtn: 'Scanare', resultTitle: 'Rezultat', resultDesc: 'Analiză document...' },
     vault: { 
       title: 'Seif', 
       subtitle: 'Documente',
@@ -342,6 +733,90 @@ export const translations = {
       waiting: 'Trebuie să mai aștepți',
       reset: 'Verificare Nouă'
     },
+    employment: {
+      title: 'Portal Angajare',
+      subtitle: 'Locuri de muncă și drepturi',
+      legalWarning: 'Drepturile tale nu depind de statutul tău.',
+      activeSearch: 'Căutare Activă',
+      saeDesc: 'Serviciul de Angajare Andaluz.',
+      ettTitle: 'Agenții Locale',
+      cvTools: 'Instrumente CV',
+      cvAdvice: 'Creează un CV simplu.',
+      rights: 'Drepturi de Muncă',
+      smiInfo: 'Salariul Minim (SMI)',
+      inspection: 'Inspecție',
+      faqLawyer: 'Consiliere Juridică',
+      startup: 'Afacere',
+      cadeInfo: 'Centre CADE.',
+      autonomous: 'Ajutoare Autonomi'
+    },
+    familyResources: {
+      title: 'Resurse Familie',
+      subtitle: 'Școli, ajutoare și sănătate',
+      calculatorTitle: 'Calculator Școlar',
+      calculatorDesc: 'Curs după vârstă.',
+      education: 'Educație',
+      marchNote: 'Înscriere: Martie',
+      escolarizacion: 'Școlarizare',
+      comeder: 'Cantină',
+      aulaMatinal: 'Clubul Dimineții',
+      extraescolares: 'Extrașcolare',
+      imv: 'Venit Minim Vital',
+      rentaMinima: 'Venit Minim',
+      childAid: 'Ajutor Copii',
+      healthApp: 'Răspuns Sănătate',
+      pediatra: 'Programare Pedia',
+      summerSchool: 'Școli de Vară'
+    },
+    studyUJA: {
+      title: 'Studii UJA',
+      subtitle: 'Universitatea din Jaén',
+      access: 'Acces',
+      accessDesc: 'Cum să intri.',
+      homologation: 'Validare',
+      homologationDesc: 'Titluri străine.',
+      languages: 'Limbi',
+      transport: 'Transport'
+    },
+    transport: {
+      title: 'Transport',
+      subtitle: 'Deplasare',
+      webLink: 'Site Consorcio',
+      cardTitle: 'Card Consorcio',
+      cardDesc: 'Reduceri autobuz.',
+      pointsTitle: 'Vânzare',
+      pointsDesc: 'Puncte autorizate.',
+      transportTip: 'Valabil în Andaluzia.'
+    },
+    work: {
+      title: 'Măsline',
+      campaign: 'Campania Măslinelor',
+      desc: 'Recoltare.',
+      rights: 'Drepturi',
+      rightsText: 'Dreptul la locuință.',
+      shelterTitle: 'Adăposturi',
+      shelterNote: 'Nov - Ian.'
+    },
+    legalRights: {
+      title: 'Drepturile Tale',
+      whatToDoTitle: 'În caz de arest',
+      whatToDoDesc: 'Dreptul la tăcere.',
+      lawyerTitle: 'Avocat',
+      lawyerDesc: 'Ajutor juridic gratuit.'
+    },
+    integration: {
+      title: 'Integrare',
+      subtitle: 'Obiceiuri',
+      tapasTitle: 'Tapas',
+      tapasSubtitle: 'Tapas gratuite',
+      tapasDesc: 'Gratuite cu băutura.',
+      tapasTip: 'Gustă "pipirrana".',
+      glossaryTitle: 'Dicționar Jaén',
+      accentDesc: 'Cuvinte locale.'
+    },
+    learn: { flashcards: 'Spaniolă', flip: 'Traducere', next: 'Următorul' },
+    wifi: { title: 'WiFi Gratuit', desc: 'Puncte WiFi.' },
+    currency: { title: 'Convertor', from: 'Din', to: 'În', result: 'Rezultat' },
     disclaimer: 'Ghid neoficial. Privată.'
   }
 };
