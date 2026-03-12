@@ -21,7 +21,8 @@ import {
   UserCircle,
   Scan,
   Lock,
-  Bot
+  Bot,
+  Sparkles
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, useLocalStorage } from "@/lib/store"
@@ -71,7 +72,6 @@ export function AppSidebar({
   currentTheme, 
   setTheme 
 }: AppSidebarProps) {
-  // Safe labels helper to avoid crashing if a translation key is missing
   const getSafeLabel = (path: string, defaultLabel: string) => {
     try {
       const parts = path.split('.');
@@ -99,36 +99,27 @@ export function AppSidebar({
   };
 
   const categories = [
-    { id: 'general', label: 'Inicio', items: [
+    { id: 'general', label: 'Principal', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard || 'Inicio' },
       { id: 'profile', icon: UserCircle, label: 'Mis Datos' },
     ]},
-    { id: 'tools', label: 'Herramientas Inteligentes', items: [
+    { id: 'tools', label: 'Inteligencia Proactiva', items: [
       { id: 'bot', icon: Bot, label: getSafeLabel('bot.title', 'Jaén-Bot') },
       { id: 'scanner', icon: Scan, label: getSafeLabel('scanner.title', 'Escáner') },
       { id: 'vault', icon: Lock, label: getSafeLabel('vault.title', 'Bóveda') },
     ]},
-    { id: 'legal', label: 'Trámites Legales', items: [
+    { id: 'legal', label: 'Legalidad', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures || 'Trámites' },
     ]},
-    { id: 'employment', label: 'Trabajo y Empleo', items: [
+    { id: 'employment', label: 'Oportunidades', items: [
       { id: 'employment_portal', icon: Briefcase, label: getSafeLabel('employment.title', 'Empleo') },
     ]},
-    { id: 'social', label: 'Salud y Familia', items: [
+    { id: 'social', label: 'Vida y Salud', items: [
       { id: 'family', icon: HeartPulse, label: getSafeLabel('familyResources.title', 'Familia') },
-      { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
+      { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta' },
     ]},
-    { id: 'education', label: 'Universidad', items: [
-      { id: 'study', icon: GraduationCap, label: getSafeLabel('studyUJA.title', 'Estudios') },
-    ]},
-    { id: 'culture', label: 'Integración', items: [
-      { id: 'community', icon: Languages, label: t.community || 'Cultura' },
-    ]},
-    { id: 'help', label: 'Directorio', items: [
-      { id: 'directory', icon: MapPin, label: t.directory || 'Directorio' },
-    ]},
-    { id: 'emergency', label: 'Urgencias', items: [
-      { id: 'emergency', icon: ShieldAlert, label: t.emergency || 'S.O.S', className: 'text-destructive hover:text-destructive' },
+    { id: 'emergency', label: 'Atención Inmediata', items: [
+      { id: 'emergency', icon: ShieldAlert, label: t.emergency || 'S.O.S', className: 'text-destructive bg-destructive/5 hover:bg-destructive/10' },
     ]},
   ];
 
@@ -144,82 +135,91 @@ export function AppSidebar({
   return (
     <>
       <Sidebar variant="floating" className="border-none shadow-none">
-        <SidebarHeader className="p-6">
+        <SidebarHeader className="p-6 pb-2">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3 px-2">
-              <AppLogo size={44} />
+            <div className="flex items-center gap-4 px-2">
+              <AppLogo size={48} className="shadow-lg" />
               <div className="flex flex-col">
-                <span className="font-headline font-black text-lg tracking-tight text-primary uppercase leading-none">
+                <span className="font-headline font-black text-xl tracking-tight text-primary uppercase leading-none">
                   Vía Jaén
                 </span>
-                <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">
-                  Comunidad Segura
+                <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mt-1 opacity-60">
+                  Edición Pro 2026
                 </span>
               </div>
             </div>
 
             <div 
-              className="flex items-center gap-3 cursor-pointer bg-primary/5 hover:bg-primary/10 p-3 rounded-3xl transition-all border border-primary/5"
+              className="group flex items-center gap-4 cursor-pointer bg-white/40 hover:bg-white/60 p-4 rounded-[2rem] transition-all border border-white/20 shadow-sm backdrop-blur-md"
               onClick={() => handleNav('profile')}
             >
-              <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
+              <Avatar className="h-12 w-12 border-2 border-white shadow-md transition-transform group-hover:scale-105">
                 <AvatarImage src={progress.profile.photo} className="object-cover" />
-                <AvatarFallback className="bg-primary text-white font-black">
-                  {progress.profile.name?.charAt(0) || <User className="h-5 w-5" />}
+                <AvatarFallback className="bg-primary text-white font-black text-lg">
+                  {progress.profile.name?.charAt(0) || <User className="h-6 w-6" />}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col overflow-hidden text-left">
-                <h2 className="font-headline font-black text-xs tracking-tight text-primary uppercase truncate">
+                <h2 className="font-headline font-black text-sm tracking-tight text-primary uppercase truncate leading-tight">
                   {progress.profile.name || "Invitado"}
                 </h2>
-                <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">
-                  {progress.profile.nie || 'Ver Perfil'}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[9px] uppercase font-black text-muted-foreground tracking-widest opacity-60">
+                    {progress.profile.nie || 'Ver Perfil'}
+                  </span>
+                  <ChevronRight className="h-3 w-3 text-primary opacity-40 group-hover:translate-x-0.5 transition-transform" />
+                </div>
               </div>
             </div>
           </div>
         </SidebarHeader>
 
-        <SidebarContent className="px-2 scrollbar-hide">
-          <div className="px-4 py-2 mb-4 bg-primary/10 backdrop-blur-md rounded-2xl mx-2 border border-primary/20 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary">{t.easyReading || 'Modo Fácil'}</Label>
-              <p className="text-[8px] text-muted-foreground font-bold leading-none">Lectura Facilitada</p>
+        <SidebarContent className="px-3 scrollbar-hide py-4">
+          <div className="px-4 py-3 mb-6 bg-primary/10 backdrop-blur-xl rounded-[2rem] mx-2 border border-primary/20 flex items-center justify-between shadow-inner">
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/20 p-2 rounded-xl">
+                <Sparkles className="h-4 w-4 text-primary" />
+              </div>
+              <div className="space-y-0.5">
+                <Label htmlFor="easy-reading" className="text-[10px] font-black uppercase text-primary tracking-tight">{t.easyReading || 'Modo Fácil'}</Label>
+                <p className="text-[8px] text-muted-foreground font-black uppercase tracking-widest opacity-60">Lectura Pro</p>
+              </div>
             </div>
             <Switch 
               id="easy-reading" 
               checked={progress.easyReading} 
               onCheckedChange={(val) => updateProgress({ easyReading: val })}
+              className="data-[state=checked]:bg-primary"
             />
           </div>
 
           {categories.map((cat) => (
-            <SidebarGroup key={cat.id} className="py-1">
-              <SidebarGroupLabel className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 px-4 mb-1">
+            <SidebarGroup key={cat.id} className="py-2">
+              <SidebarGroupLabel className="text-[10px] font-black uppercase tracking-[0.25em] text-primary/40 px-5 mb-2 h-auto">
                 {cat.label}
               </SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu>
+                <SidebarMenu className="gap-1.5">
                   {cat.items.map((item) => (
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
                         onClick={() => handleNav(item.id)}
                         isActive={activeTab === item.id}
                         className={cn(
-                          "h-11 px-4 rounded-xl transition-all duration-300 group",
+                          "h-12 px-5 rounded-2xl transition-all duration-300 group relative overflow-hidden",
                           activeTab === item.id 
-                            ? "bg-primary/20 text-primary font-bold shadow-sm backdrop-blur-md" 
-                            : "hover:bg-primary/10 hover:text-primary",
+                            ? "bg-primary text-white font-black shadow-lg shadow-primary/20" 
+                            : "hover:bg-primary/5 hover:text-primary",
                           item.className
                         )}
                       >
                         <item.icon className={cn(
-                          "h-5 w-5 mr-3 transition-transform group-hover:scale-110",
-                          activeTab === item.id ? "text-primary stroke-[2.5px]" : "text-primary/60"
+                          "h-5 w-5 mr-3 transition-transform group-hover:scale-110 relative z-10",
+                          activeTab === item.id ? "text-white" : "text-primary/60"
                         )} />
-                        <span className="text-sm">{item.label}</span>
+                        <span className="text-[13px] font-bold relative z-10 tracking-tight">{item.label}</span>
                         {activeTab === item.id && (
-                          <ChevronRight className="ml-auto h-4 w-4 opacity-50" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 to-white/10" />
                         )}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -229,81 +229,76 @@ export function AppSidebar({
             </SidebarGroup>
           ))}
           
-          <div className="px-4 py-4">
+          <div className="px-4 py-6 mt-2">
             <Button 
               onClick={() => setShowQR(true)} 
               variant="outline" 
-              className="w-full rounded-2xl gap-3 h-12 border-2 border-primary/20 hover:bg-primary/10 hover:text-primary transition-all font-bold backdrop-blur-md"
+              className="w-full rounded-[2rem] gap-3 h-14 border-2 border-primary/10 hover:border-primary/30 hover:bg-white/40 transition-all font-black uppercase text-[11px] tracking-widest shadow-sm backdrop-blur-md"
             >
-              <Share2 className="h-5 w-5" /> Compartir App
+              <Share2 className="h-5 w-5 text-primary" /> Compartir App
             </Button>
           </div>
         </SidebarContent>
 
-        <SidebarFooter className="p-4 border-t border-sidebar-border/20 gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
-                <Palette className="h-5 w-5 text-primary" />
-                <div className="flex flex-col items-start text-left">
-                  <span className="text-xs font-bold text-primary">Apariencia</span>
-                  <span className="text-[9px] text-muted-foreground uppercase font-black tracking-tight">
-                    {themes.find(t => t.id === currentTheme)?.label || 'Personalizar'}
-                  </span>
+        <SidebarFooter className="p-5 border-t border-sidebar-border/10 gap-3 bg-white/20 backdrop-blur-2xl">
+          <div className="grid grid-cols-2 gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/40 border border-white/40 bg-white/10 shadow-sm transition-all">
+                  <Palette className="h-4 w-4 text-primary" />
+                  <span className="text-[10px] font-black uppercase tracking-tighter">Estilo</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-3xl bg-white/60 border border-white/20">
+                <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-1 py-2 text-center">
+                  Color del Sistema
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-primary/10" />
+                <div className="grid grid-cols-3 gap-4 py-4">
+                  {themes.map((theme) => (
+                    <button
+                      key={theme.id}
+                      onClick={() => setTheme(theme.id)}
+                      className={cn(
+                        "h-12 w-12 rounded-full transition-all flex items-center justify-center relative hover:scale-115 active:scale-95 shadow-lg mx-auto",
+                        theme.color,
+                        currentTheme === theme.id ? "ring-4 ring-primary ring-offset-2 scale-110 z-10 shadow-primary/20" : "opacity-70 grayscale-[0.2]"
+                      )}
+                      title={theme.label}
+                    >
+                      {currentTheme === theme.id && <Check className={cn("h-6 w-6", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
+                    </button>
+                  ))}
                 </div>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-4 backdrop-blur-2xl bg-white/40 border border-white/20">
-              <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] px-1 py-2 text-center">
-                Seleccionar Color
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-white/20" />
-              <div className="grid grid-cols-3 gap-4 py-4">
-                {themes.map((theme) => (
-                  <button
-                    key={theme.id}
-                    onClick={() => setTheme(theme.id)}
-                    className={cn(
-                      "h-12 w-12 rounded-full transition-all flex items-center justify-center relative hover:scale-110 active:scale-95 shadow-lg mx-auto",
-                      theme.color,
-                      currentTheme === theme.id ? "ring-2 ring-primary ring-offset-2 scale-110 z-10" : "opacity-80 grayscale-[0.3]"
-                    )}
-                    title={theme.label}
-                  >
-                    {currentTheme === theme.id && <Check className={cn("h-6 w-6", theme.id === 'contrast' ? 'text-black' : 'text-white')} />}
-                  </button>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="w-full justify-start gap-3 h-14 rounded-2xl hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20 backdrop-blur-md bg-white/5">
-                <Globe className="h-5 w-5 text-primary" />
-                <div className="flex flex-col items-start text-left">
-                  <span className="text-xs font-bold text-primary">Idioma</span>
-                  <span className="text-[9px] text-muted-foreground uppercase font-black tracking-tight">
-                    {lang === 'es' ? 'Español' : 
-                     lang === 'en' ? 'English' : 
-                     lang === 'fr' ? 'Français' : 
-                     lang === 'ar' ? 'العربية' : 'Română'}
-                  </span>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="w-full justify-center gap-2 h-12 rounded-2xl hover:bg-white/40 border border-white/40 bg-white/10 shadow-sm transition-all">
+                  <Globe className="h-4 w-4 text-primary" />
+                  <span className="text-[10px] font-black uppercase tracking-tighter">Idioma</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" side="top" className="w-64 rounded-[2.5rem] shadow-2xl p-2 backdrop-blur-3xl bg-white/60 border border-white/20">
+                <DropdownMenuLabel className="text-[10px] font-black uppercase text-primary tracking-[0.2em] px-4 py-4">
+                  Seleccionar Idioma
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-primary/10" />
+                <div className="grid gap-1 p-1">
+                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('es')}>Español</DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('en')}>English</DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase text-right" onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-2xl font-black p-4 focus:bg-primary focus:text-white transition-all text-xs uppercase" onClick={() => setLang('ro')}>Română</DropdownMenuItem>
                 </div>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" side="top" className="w-64 rounded-3xl shadow-2xl p-2 backdrop-blur-2xl bg-white/40 border border-white/20">
-              <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] px-3 py-3">
-                Seleccionar Idioma
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-white/20" />
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('es')}>Español</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('en')}>English</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('fr')}>Français</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all text-right" onClick={() => setLang('ar')}>العربية</DropdownMenuItem>
-              <DropdownMenuItem className="rounded-2xl font-bold p-4 focus:bg-primary/20 focus:text-primary transition-all" onClick={() => setLang('ro')}>Română</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          
+          <p className="text-[8px] text-center text-muted-foreground font-black uppercase tracking-[0.3em] mt-2 opacity-40">
+            Jaén Integra &copy; 2026
+          </p>
         </SidebarFooter>
       </Sidebar>
       <QRCodeShare open={showQR} onOpenChange={setShowQR} lang={lang} />

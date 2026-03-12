@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -21,9 +22,9 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
-const SIDEBAR_WIDTH_MOBILE = "18rem"
-const SIDEBAR_WIDTH_ICON = "3rem"
+const SIDEBAR_WIDTH = "17rem"
+const SIDEBAR_WIDTH_MOBILE = "19rem"
+const SIDEBAR_WIDTH_ICON = "3.5rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 type SidebarContext = {
@@ -174,7 +175,7 @@ const Sidebar = React.forwardRef<
       return (
         <div
           className={cn(
-            "flex h-full w-[--sidebar-width] flex-col bg-sidebar/50 backdrop-blur-xl text-sidebar-foreground",
+            "flex h-full w-[--sidebar-width] flex-col bg-sidebar/70 backdrop-blur-2xl text-sidebar-foreground",
             className
           )}
           ref={ref}
@@ -191,7 +192,7 @@ const Sidebar = React.forwardRef<
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar/50 backdrop-blur-2xl p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden"
+            className="w-[--sidebar-width] bg-sidebar/80 backdrop-blur-3xl p-0 text-sidebar-foreground border-none shadow-2xl [&>button]:hidden"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -231,7 +232,7 @@ const Sidebar = React.forwardRef<
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
             variant === "floating" || variant === "inset"
-              ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
+              ? "p-4 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
             className
           )}
@@ -240,8 +241,8 @@ const Sidebar = React.forwardRef<
           <div
             data-sidebar="sidebar"
             className={cn(
-              "flex h-full w-full flex-col bg-sidebar/50 backdrop-blur-xl transition-all duration-300",
-              variant === "floating" && "rounded-3xl border border-sidebar-border/30 shadow-2xl m-2",
+              "flex h-full w-full flex-col bg-sidebar/70 backdrop-blur-2xl transition-all duration-300",
+              variant === "floating" && "rounded-[3rem] border border-white/20 shadow-2xl m-2",
               variant === "inset" && "rounded-xl border border-sidebar-border shadow-lg"
             )}
           >
@@ -383,7 +384,7 @@ const SidebarSeparator = React.forwardRef<
     <Separator
       ref={ref}
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border", className)}
+      className={cn("mx-2 w-auto bg-sidebar-border/20", className)}
       {...props}
     />
   )
