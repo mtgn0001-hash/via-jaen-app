@@ -56,7 +56,7 @@ export function ProcedureList({ lang, toggleProcedure, completedProcedures }: Pr
           <Clock className="h-5 w-5 text-primary" />
           <h2 className="text-2xl font-bold">{t.procedures} en Jaén</h2>
         </div>
-        {accMode === 'visual' && (
+        {accMode === 'accessible' && (
           <Button 
             onClick={() => setShowLSE(true)}
             variant="secondary" 

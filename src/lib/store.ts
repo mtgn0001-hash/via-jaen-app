@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
 export type ProvinceType = 'jaen';
-export type AccessibilityMode = 'standard' | 'visual' | 'auditory';
+export type AccessibilityMode = 'standard' | 'accessible';
 
 export type UserProfile = {
   name: string;

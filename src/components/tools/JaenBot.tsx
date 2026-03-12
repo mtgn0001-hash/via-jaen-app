@@ -81,7 +81,7 @@ export function JaenBot({ lang }: { lang: Language }) {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-    if (accMode === 'auditory') {
+    if (accMode === 'accessible') {
       speakText(node.text);
     }
   }, [history, accMode]);

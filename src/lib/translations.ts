@@ -20,10 +20,9 @@ export const translations = {
     accessibility: {
       title: 'Accesibilidad',
       standard: 'Modo Estándar',
-      visual: 'Modo Visual (Sordos/LSE)',
-      auditory: 'Modo Auditivo (Ciegos)',
+      makeAccessible: 'Hacer Accesible',
       lseBtn: 'Ver en LSE',
-      desc: 'Personaliza tu experiencia universal.'
+      desc: 'Activa ayudas visuales y auditivas.'
     },
     bot: {
       title: 'Jaén-Bot',
@@ -197,10 +196,9 @@ export const translations = {
     accessibility: {
       title: 'Accessibility',
       standard: 'Standard Mode',
-      visual: 'Visual Mode (Deaf)',
-      auditory: 'Auditory Mode (Blind)',
+      makeAccessible: 'Make Accessible',
       lseBtn: 'Watch in LSE',
-      desc: 'Customize your universal experience.'
+      desc: 'Enable visual and auditory aids.'
     },
     bot: {
       title: 'Jaén-Bot',
@@ -374,10 +372,9 @@ export const translations = {
     accessibility: {
       title: 'Accessibilité',
       standard: 'Mode Standard',
-      visual: 'Mode Visuel (Sourd)',
-      auditory: 'Mode Auditif (Aveugle)',
+      makeAccessible: 'Rendre Accessible',
       lseBtn: 'Voir en LSE',
-      desc: 'Personnalisez votre expérience.'
+      desc: 'Activer les aides visuelles et auditives.'
     },
     bot: { title: 'Jaén-Bot', subtitle: 'Assistant IA', welcome: 'Bonjour!' },
     scanner: { title: 'Scanner', subtitle: 'Analyse IA', scanBtn: 'Scanner', resultTitle: 'Résultat', resultDesc: 'Analyse en cours...' },
@@ -529,10 +526,9 @@ export const translations = {
     accessibility: {
       title: 'إمكانية الوصول',
       standard: 'الوضع القياسي',
-      visual: 'الوضع البصري (الصم)',
-      auditory: 'الوضع السمعي (المكفوفين)',
+      makeAccessible: 'اجعلها سهلة الوصول',
       lseBtn: 'شاهد بلغة الإشارة',
-      desc: 'خصص تجربتك الشاملة.'
+      desc: 'تفعيل المساعدات البصرية والسمعية.'
     },
     bot: { title: 'روبوت جيان', subtitle: 'مساعد ذكي', welcome: 'مرحباً!' },
     scanner: { title: 'ماسح ضوئي', subtitle: 'تحليل ذكي', scanBtn: 'مسح', resultTitle: 'النتيجة', resultDesc: 'تحليل الوثيقة...' },
@@ -684,10 +680,9 @@ export const translations = {
     accessibility: {
       title: 'Accesibilitate',
       standard: 'Mod Standard',
-      visual: 'Mod Vizual (Surzi)',
-      auditory: 'Mod Auditivo (Nevăzători)',
+      makeAccessible: 'Fă Accesibil',
       lseBtn: 'Vezi în LSE',
-      desc: 'Personalizează-ți experiența.'
+      desc: 'Activează ajutoarele vizuale și auditive.'
     },
     bot: { title: 'Jaén-Bot', subtitle: 'Asistent IA', welcome: 'Bună!' },
     scanner: { title: 'Scaner', subtitle: 'Analiză IA', scanBtn: 'Scanare', resultTitle: 'Rezultat', resultDesc: 'Analiză document...' },

@@ -26,7 +26,8 @@ import {
   Accessibility,
   Eye,
   Ear,
-  EyeOff
+  EyeOff,
+  Zap
 } from "lucide-react"
 import { Language, translations } from "@/lib/translations"
 import { ThemeType, AccessibilityMode, useLocalStorage } from "@/lib/store"
@@ -87,6 +88,8 @@ export function AppSidebar({
     setOpenMobile(false);
   };
 
+  const isAccessible = progress.accessibilityMode === 'accessible';
+
   const categories = [
     { id: 'general', label: 'Principal', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard || 'Inicio' },
@@ -112,11 +115,11 @@ export function AppSidebar({
     ]},
   ];
 
-  const accessibilityModes: { id: AccessibilityMode, label: string, icon: any }[] = [
-    { id: 'standard', label: t.accessibility?.standard || 'Estándar', icon: Sparkles },
-    { id: 'visual', label: t.accessibility?.visual || 'Modo Visual', icon: Ear },
-    { id: 'auditory', label: t.accessibility?.auditory || 'Modo Auditivo', icon: EyeOff },
-  ];
+  const toggleAccessibility = () => {
+    const nextMode = isAccessible ? 'standard' : 'accessible';
+    if ('vibrate' in navigator) navigator.vibrate(nextMode === 'accessible' ? 100 : 10);
+    updateProgress({ accessibilityMode: nextMode });
+  };
 
   return (
     <>
@@ -157,32 +160,31 @@ export function AppSidebar({
         </SidebarHeader>
 
         <SidebarContent className="px-3 py-4 scrollbar-hide">
-          {/* CONTROL DE ACCESIBILIDAD */}
+          {/* CONTROL DE ACCESIBILIDAD UNIFICADO */}
           <div className="px-2 mb-6 space-y-3">
              <Label className="text-[10px] font-black uppercase text-primary/40 px-3 tracking-widest">{t.accessibility?.title || 'Accesibilidad'}</Label>
-             <div className="grid gap-1.5">
-                {accessibilityModes.map((mode) => (
-                  <Button
-                    key={mode.id}
-                    variant={progress.accessibilityMode === mode.id ? 'default' : 'ghost'}
-                    onClick={() => {
-                      if ('vibrate' in navigator) navigator.vibrate(mode.id === 'standard' ? 10 : 100);
-                      updateProgress({ accessibilityMode: mode.id });
-                    }}
-                    className={cn(
-                      "justify-start h-12 rounded-2xl gap-3 px-5 transition-all",
-                      progress.accessibilityMode === mode.id ? "shadow-lg shadow-primary/20" : "hover:bg-primary/5"
-                    )}
-                    aria-label={`Activar ${mode.label}`}
-                  >
-                    <mode.icon className="h-4 w-4" />
-                    <span className="text-[11px] font-bold tracking-tight uppercase">{mode.label}</span>
-                  </Button>
-                ))}
-             </div>
+             <Button
+                variant={isAccessible ? 'default' : 'outline'}
+                onClick={toggleAccessibility}
+                className={cn(
+                  "w-full h-14 rounded-2xl gap-3 px-5 transition-all border-2",
+                  isAccessible 
+                    ? "bg-primary text-white shadow-xl shadow-primary/20 border-primary" 
+                    : "bg-white/50 hover:bg-primary/5 text-primary border-primary/20"
+                )}
+                aria-label={isAccessible ? "Desactivar accesibilidad" : "Activar accesibilidad universal"}
+              >
+                {isAccessible ? <Zap className="h-5 w-5 fill-white" /> : <Accessibility className="h-5 w-5" />}
+                <span className="text-sm font-black tracking-tight uppercase">
+                  {isAccessible ? t.accessibility?.standard : t.accessibility?.makeAccessible}
+                </span>
+              </Button>
+              <p className="px-3 text-[9px] text-muted-foreground font-medium text-center italic">
+                {t.accessibility?.desc}
+              </p>
           </div>
 
-          <SidebarSeparator className="mb-4" />
+          <SidebarSeparator className="mx-2 w-auto bg-sidebar-border/20 mb-4" />
 
           {categories.map((cat) => (
             <SidebarGroup key={cat.id} className="py-2">

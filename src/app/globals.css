@@ -37,7 +37,7 @@
     --sidebar-ring: 262 83% 58%;
   }
 
-  [data-accessibility='auditory'] {
+  [data-accessibility='accessible'] {
     --background: 0 0% 0%;
     --foreground: 60 100% 50%; /* Amarillo Neón */
     --card: 0 0% 0%;
