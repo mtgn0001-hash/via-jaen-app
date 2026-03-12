@@ -71,7 +71,8 @@ export function AppSidebar({
   currentTheme, 
   setTheme 
 }: AppSidebarProps) {
-  const t = translations[lang];
+  // Use current language or fallback to Spanish if not found
+  const t = translations[lang] || translations.es;
   const { progress, updateProgress } = useLocalStorage();
   const { setOpenMobile } = useSidebar();
   const [showQR, setShowQR] = React.useState(false);
@@ -82,28 +83,43 @@ export function AppSidebar({
     setOpenMobile(false);
   };
 
+  // Safe labels helper to avoid crashing if a translation key is missing in sub-objects
+  const getSafeLabel = (path: string, defaultLabel: string) => {
+    try {
+      const parts = path.split('.');
+      let current: any = t;
+      for (const part of parts) {
+        if (current[part] === undefined) return defaultLabel;
+        current = current[part];
+      }
+      return current;
+    } catch {
+      return defaultLabel;
+    }
+  };
+
   const categories = [
     { id: 'general', label: 'Inicio', items: [
       { id: 'dashboard', icon: Home, label: t.dashboard },
       { id: 'profile', icon: UserCircle, label: 'Mis Datos' },
     ]},
     { id: 'tools', label: 'Inteligencia Proactiva', items: [
-      { id: 'bot', icon: Bot, label: t.bot.title },
-      { id: 'scanner', icon: Scan, label: t.scanner.title },
-      { id: 'vault', icon: Lock, label: t.vault.title },
+      { id: 'bot', icon: Bot, label: getSafeLabel('bot.title', 'Jaén-Bot') },
+      { id: 'scanner', icon: Scan, label: getSafeLabel('scanner.title', 'Escáner') },
+      { id: 'vault', icon: Lock, label: getSafeLabel('vault.title', 'Bóveda') },
     ]},
     { id: 'legal', label: 'Trámites Legales', items: [
       { id: 'procedures', icon: Gavel, label: t.procedures },
     ]},
     { id: 'employment', label: 'Trabajo y Empleo', items: [
-      { id: 'employment_portal', icon: Briefcase, label: t.employment.title },
+      { id: 'employment_portal', icon: Briefcase, label: getSafeLabel('employment.title', 'Empleo') },
     ]},
     { id: 'social', label: 'Salud y Familia', items: [
-      { id: 'family', icon: HeartPulse, label: t.familyResources.title },
+      { id: 'family', icon: HeartPulse, label: getSafeLabel('familyResources.title', 'Familia') },
       { id: 'andalucia_common', icon: Library, label: 'Ayudas Junta de Andalucía' },
     ]},
     { id: 'education', label: 'Universidad', items: [
-      { id: 'study', icon: GraduationCap, label: t.studyUJA.title },
+      { id: 'study', icon: GraduationCap, label: getSafeLabel('studyUJA.title', 'Estudios') },
     ]},
     { id: 'culture', label: 'Integración', items: [
       { id: 'community', icon: Languages, label: t.community },

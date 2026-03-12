@@ -422,9 +422,174 @@ export const translations = {
       childAid: 'Child Support'
     }
   },
-  fr: { title: 'Vía Jaén', dashboard: 'Accueil', procedures: 'Démarches', backpack: 'Sac à dos', backpackDesc: 'Vos documents.', community: 'Culture', directory: 'Aide', emergency: 'S.O.S', progress: 'Votre progrès', welcome: 'Bonjour, bienvenue', disclaimer: 'Guide communautaire. Non officiel.', bot: { title: 'Jaén-Bot', subtitle: 'Assistant', welcome: 'Bonjour!', back: 'Retour', reset: 'Nouveau' }, vault: { title: 'Coffre-fort', subtitle: 'Photos protégées', addDoc: 'Ajouter', emergencyMode: 'Urgence', emergencyDesc: 'Luminosité max.', empty: 'Vide.' }, onboarding: { title1: 'Bienvenue', desc1: 'Votre guide.', title2: 'Installer', desc2: 'Mode hors ligne.', title3: 'Privée', desc3: 'Sur votre mobile.', getStarted: 'Commencer' }, firstSteps: { title: 'Premiers Pas', subtitle: 'Intégration', empadronamiento: 'Recensement', health: 'Santé', transport: 'Transport', howTo: 'Comment faire?' } },
-  ar: { title: 'Vía Jaén', dashboard: 'الرئيسية', procedures: 'الإجراءات', backpack: 'حقيبة الأوراق', backpackDesc: 'أوراقك جاهزة.', community: 'الثقافة', directory: 'المساعدة', emergency: 'الطوارئ', progress: 'تقدمك', welcome: 'أهلاً بك', disclaimer: 'دليل مجتمعي. غير رسمي.', bot: { title: 'روبوت جيان', subtitle: 'مساعد', welcome: 'مرحباً!', back: 'رجوع', reset: 'جديد' }, vault: { title: 'الخزنة الآمنة', subtitle: 'صور محمية', addDoc: 'إضافة', emergencyMode: 'طوارئ', emergencyDesc: 'أقصى سطوع.', empty: 'لا يوجد أوراق.' }, onboarding: { title1: 'مرحباً بك', desc1: 'دليلك الآمن.', title2: 'تثبيت التطبيق', desc2: 'بدون إنترنت.', title3: 'خصوصية تامة', desc3: 'على هاتفك فقط.', getStarted: 'ابدأ الآن' }, firstSteps: { title: 'خطواتي الأولى', subtitle: 'الاندماج في جيان', empadronamiento: 'السكن', health: 'البطاقة الصحية', transport: 'بطاقة الحافلة', howTo: 'كيف أفعل ذلك؟' } },
-  ro: { title: 'Vía Jaén', dashboard: 'Acasă', procedures: 'Demersuri', backpack: 'Rucsac', backpackDesc: 'Documente.', community: 'Cultură', directory: 'Ajutor', emergency: 'S.O.S', progress: 'Progresul tău', welcome: 'Bună, bine ai venit', disclaimer: 'Ghid comunitar. Neoficial.', bot: { title: 'Jaén-Bot', subtitle: 'Asistent', welcome: 'Bună!', back: 'Înapoi', reset: 'Nou' }, vault: { title: 'Seif Securizat', subtitle: 'Fotografii protejate', addDoc: 'Adaugă', emergencyMode: 'Urgență', emergencyDesc: 'Luminozitate max.', empty: 'Fără documente.' }, onboarding: { title1: 'Bun venit', desc1: 'Ghidul tău.', title2: 'Instalează', desc2: 'Mod Offline.', title3: 'Confidențialitate', desc3: 'Pe mobilul tău.', getStarted: 'Începe' }, firstSteps: { title: 'Primii Pași', subtitle: 'Integrare', empadronamiento: 'Recensământ', health: 'Sănătate', transport: 'Transport', howTo: 'Cum se face?' } }
+  fr: {
+    title: 'Vía Jaén',
+    dashboard: 'Accueil',
+    procedures: 'Démarches',
+    backpack: 'Sac à dos',
+    backpackDesc: 'Vos documents.',
+    community: 'Culture',
+    directory: 'Aide',
+    emergency: 'S.O.S',
+    progress: 'Votre progrès',
+    welcome: 'Bonjour, bienvenue',
+    disclaimer: 'Guide communautaire. Non officiel.',
+    bot: {
+      title: 'Jaén-Bot',
+      subtitle: 'Assistant',
+      welcome: 'Bonjour!',
+      back: 'Retour',
+      reset: 'Nouveau'
+    },
+    vault: {
+      title: 'Coffre-fort',
+      subtitle: 'Photos protégées',
+      addDoc: 'Ajouter',
+      emergencyMode: 'Urgence',
+      emergencyDesc: 'Luminosité max.',
+      empty: 'Vide.'
+    },
+    scanner: {
+      title: 'Scanner',
+      subtitle: 'Analyse IA',
+      scanBtn: 'Scanner',
+      analyzing: 'Analyse...',
+      resultTitle: 'Résumé',
+      resultDesc: 'Notification officielle.'
+    },
+    onboarding: {
+      title1: 'Bienvenue',
+      desc1: 'Votre guide.',
+      title2: 'Installer',
+      desc2: 'Mode hors ligne.',
+      title3: 'Privée',
+      desc3: 'Sur votre mobile.',
+      getStarted: 'Commencer'
+    },
+    firstSteps: {
+      title: 'Premiers Pas',
+      subtitle: 'Intégration',
+      empadronamiento: 'Recensement',
+      health: 'Santé',
+      transport: 'Transport',
+      howTo: 'Comment faire?'
+    },
+    employment: { title: 'Emploi' },
+    familyResources: { title: 'Famille' },
+    studyUJA: { title: 'Études' }
+  },
+  ar: {
+    title: 'Vía Jaén',
+    dashboard: 'الرئيسية',
+    procedures: 'الإجراءات',
+    backpack: 'حقيبة الأوراق',
+    backpackDesc: 'أوراقك جاهزة.',
+    community: 'الثقافة',
+    directory: 'المساعدة',
+    emergency: 'الطوارئ',
+    progress: 'تقدمك',
+    welcome: 'أهلاً بك',
+    disclaimer: 'دليل مجتمعي. غير رسمي.',
+    bot: {
+      title: 'روبوت جيان',
+      subtitle: 'مساعد',
+      welcome: 'مرحباً!',
+      back: 'رجوع',
+      reset: 'جديد'
+    },
+    vault: {
+      title: 'الخزنة الآمنة',
+      subtitle: 'صور محمية',
+      addDoc: 'إضافة',
+      emergencyMode: 'طوارئ',
+      emergencyDesc: 'أقصى سطوع.',
+      empty: 'لا يوجد أوراق.'
+    },
+    scanner: {
+      title: 'ماسح ضوئي',
+      subtitle: 'تحليل الأوراق',
+      scanBtn: 'مسح ضوئي',
+      analyzing: 'جاري التحليل...',
+      resultTitle: 'ملخص',
+      resultDesc: 'هذه رسالة رسمية.'
+    },
+    onboarding: {
+      title1: 'مرحباً بك',
+      desc1: 'دليلك الآمن.',
+      title2: 'تثبيت التطبيق',
+      desc2: 'بدون إنترنت.',
+      title3: 'خصوصية تامة',
+      desc3: 'على هاتفك فقط.',
+      getStarted: 'ابدأ الآن'
+    },
+    firstSteps: {
+      title: 'خطواتي الأولى',
+      subtitle: 'الاندماج في جيان',
+      empadronamiento: 'السكن',
+      health: 'البطاقة الصحية',
+      transport: 'بطاقة الحافلة',
+      howTo: 'كيف أفعل ذلك؟'
+    },
+    employment: { title: 'العمل' },
+    familyResources: { title: 'العائلة' },
+    studyUJA: { title: 'الدراسة' }
+  },
+  ro: {
+    title: 'Vía Jaén',
+    dashboard: 'Acasă',
+    procedures: 'Demersuri',
+    backpack: 'Rucsac',
+    backpackDesc: 'Documente.',
+    community: 'Cultură',
+    directory: 'Ajutor',
+    emergency: 'S.O.S',
+    progress: 'Progresul tău',
+    welcome: 'Bună, bine ai venit',
+    disclaimer: 'Ghid comunitar. Neoficial.',
+    bot: {
+      title: 'Jaén-Bot',
+      subtitle: 'Asistent',
+      welcome: 'Bună!',
+      back: 'Înapoi',
+      reset: 'Nou'
+    },
+    vault: {
+      title: 'Seif Securizat',
+      subtitle: 'Fotografii protejate',
+      addDoc: 'Adaugă',
+      emergencyMode: 'Urgență',
+      emergencyDesc: 'Luminozitate max.',
+      empty: 'Fără documente.'
+    },
+    scanner: {
+      title: 'Scanare',
+      subtitle: 'Analiză IA',
+      scanBtn: 'Scanează',
+      analyzing: 'Analiză...',
+      resultTitle: 'Rezumat',
+      resultDesc: 'Notificare oficială.'
+    },
+    onboarding: {
+      title1: 'Bun venit',
+      desc1: 'Ghidul tău.',
+      title2: 'Instalează',
+      desc2: 'Mod Offline.',
+      title3: 'Confidențialitate',
+      desc3: 'Pe mobilul tău.',
+      getStarted: 'Începe'
+    },
+    firstSteps: {
+      title: 'Primii Pași',
+      subtitle: 'Integrare',
+      empadronamiento: 'Recensământ',
+      health: 'Sănătate',
+      transport: 'Transport',
+      howTo: 'Cum se face?'
+    },
+    employment: { title: 'Loc de muncă' },
+    familyResources: { title: 'Familie' },
+    studyUJA: { title: 'Studii' }
+  }
 };
 
 export type Language = keyof typeof translations;
