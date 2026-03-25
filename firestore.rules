@@ -1,0 +1,140 @@
+/**
+ * FIRESTORE SECURITY RULES
+ * 
+ * Core Philosophy:
+ * This ruleset implements a dual-layer security model. The primary application content (Procedures, 
+ * Steps, Document Requirements, etc.) is treated as public, read-only data available to all users. 
+ * User-specific logic, such as form submissions for document generation, follows a strict 
+ * authenticated-ownership model where users can only create and view their own submissions.
+ * 
+ * Data Structure:
+ * - /procedures: Global list of administrative processes.
+ * - /procedures/{id}/steps: Granular actions for a specific procedure.
+ * - /documentRequirements: Definitions of required paperwork.
+ * - /externalResources: Directory of NGOs and public offices.
+ * - /officialFormLinks: Metadata and links for government forms.
+ * - /formSubmissions: User-initiated data entries used to trigger document generation flows.
+ * 
+ * Key Security Decisions:
+ * 1. Read-Only Content: All core educational content is globally readable (get/list) to ensure 
+ *    accessibility but is write-protected to prevent unauthorized modification.
+ * 2. Authenticated Submissions: To support the redirection and document generation workflow, 
+ *    a dedicated 'formSubmissions' collection allows 'create' and 'get' operations strictly 
+ *    for the authenticated user who owns the record.
+ * 3. Local-First Privacy: As per the application's mandate, persistent user profiles and progress 
+ *    tracking are intended for local storage; Firestore is utilized only for shared content 
+ *    and transient workflow triggers.
+ */
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- GLOBAL HELPER FUNCTIONS ---
+
+    /**
+     * @description Checks if the request is made by an authenticated user.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Verifies if the provided UID matches the authenticated user's UID.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // --- COLLECTION RULES ---
+
+    /**
+     * @description Public legal/administrative procedures. Read-only for all users.
+     * @path /procedures/{procedureId}
+     * @allow get, list: if true; (Public access)
+     * @deny create, update, delete: if false; (Restricted to admin/backend)
+     * @principle Public consumption of static application content.
+     */
+    match /procedures/{procedureId} {
+      allow read: if true;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+
+      /**
+       * @description Granular steps within a procedure. Inherits public read access.
+       * @path /procedures/{procedureId}/steps/{stepId}
+       * @allow get, list: if true;
+       * @deny create, update, delete: if false;
+       */
+      match /steps/{stepId} {
+        allow read: if true;
+        allow create: if false;
+        allow update: if false;
+        allow delete: if false;
+      }
+    }
+
+    /**
+     * @description Definitions of mandatory and optional document requirements.
+     * @path /documentRequirements/{documentRequirementId}
+     * @allow get, list: if true;
+     * @deny write: if false;
+     * @principle Centralized registry for documentation standards.
+     */
+    match /documentRequirements/{documentRequirementId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    /**
+     * @description Directory of support entities (NGOs, Public Offices).
+     * @path /externalResources/{externalResourceId}
+     * @allow get, list: if true;
+     * @deny write: if false;
+     * @principle Open access to community and governmental resources.
+     */
+    match /externalResources/{externalResourceId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    /**
+     * @description Metadata for official forms and portal links.
+     * @path /officialFormLinks/{officialFormLinkId}
+     * @allow get, list: if true;
+     * @deny write: if false;
+     * @principle Public access to government-related navigation.
+     */
+    match /officialFormLinks/{officialFormLinkId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    /**
+     * @description Captures form data to trigger Cloud Function workflows (Redirection Logic).
+     * @path /formSubmissions/{submissionId}
+     * @allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+     * @allow get: if isOwner(resource.data.userId);
+     * @deny list: if false; (Prevent enumeration of submissions)
+     * @deny update, delete: if false; (Immutable audit log for functions)
+     * @principle Ownership-based creation for workflow triggers.
+     */
+    match /formSubmissions/{submissionId} {
+      // Allow creation if the user is signed in and provides their own UID
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      // Allow the user to read back their specific submission status/result
+      allow get: if isOwner(resource.data.userId);
+      // Deny listing and modifications to protect integrity and privacy
+      allow list: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // --- DEFAULT DENY ---
+    // Catch-all to ensure no unintended paths are exposed.
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}
