@@ -1,19 +1,18 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Phone, 
-  Stethoscope, 
   ShieldAlert, 
-  Heart, 
   MapPin, 
   ExternalLink, 
   Plus, 
   Smartphone,
   Play,
-  Activity
+  Stethoscope,
+  HeartPulse
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -38,10 +37,10 @@ export function HealthHub({ lang }: { lang: string }) {
     <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center">
         <div className="space-y-1">
-          <h3 className="text-xl font-black text-primary uppercase tracking-tighter">Sistema de Salud Público</h3>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Servicios Médicos en Jaén</p>
+          <h3 className="text-xl font-black text-red-600 uppercase tracking-tighter">Sanidad Pública</h3>
+          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Citas y Urgencias</p>
         </div>
-        <SpeechButton text="Sistema de salud. Urgencias y citas médicas en Jaén." language={lang} />
+        <SpeechButton text="Sanidad pública. Gestión exclusiva de citas y urgencias en Jaén." language={lang} />
       </div>
 
       {/* BLOQUE URGENCIAS */}
@@ -68,14 +67,14 @@ export function HealthHub({ lang }: { lang: string }) {
           <CardContent className="p-5 space-y-3">
             <div className="flex justify-between items-start">
               <div className="bg-white/10 p-2 rounded-xl">
-                <MapPin className="h-5 w-5 text-primary" />
+                <MapPin className="h-5 w-5 text-red-500" />
               </div>
-              <Badge className="bg-primary/20 text-primary border-none text-[8px] font-black uppercase">CAPITAL</Badge>
+              <Badge className="bg-red-500/20 text-red-500 border-none text-[8px] font-black uppercase">CAPITAL</Badge>
             </div>
             <h4 className="text-xs font-black uppercase tracking-tight">Hosp. Médico-Quirúrgico</h4>
             <Button 
               onClick={() => handleCall("953 00 80 00")}
-              className="w-full h-10 rounded-xl bg-primary text-white font-black text-[10px]"
+              className="w-full h-10 rounded-xl bg-red-600 text-white font-black text-[10px] hover:bg-red-700"
             >
               953 00 80 00
             </Button>
@@ -109,17 +108,17 @@ export function HealthHub({ lang }: { lang: string }) {
       {/* CENTROS LOCALES */}
       <section className="space-y-3 pt-2">
         <h4 className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-2 flex items-center gap-2">
-          <Smartphone className="h-3 w-3" /> Teléfonos Directos
+          <Smartphone className="h-3 w-3" /> Teléfonos Directos Jaén
         </h4>
         <div className="grid grid-cols-2 gap-2">
           {centers.map(center => (
             <button 
               key={center.name}
               onClick={() => handleCall(center.phone)}
-              className="p-4 rounded-2xl bg-white/50 hover:bg-primary/5 border border-primary/5 transition-all flex flex-col items-start gap-1 active:scale-95 text-left"
+              className="p-4 rounded-2xl bg-white/50 hover:bg-red-50 border border-red-100 transition-all flex flex-col items-start gap-1 active:scale-95 text-left"
             >
               <p className="text-[10px] font-black text-slate-800 uppercase leading-none">{center.name}</p>
-              <p className="text-[9px] font-bold text-primary">{center.phone}</p>
+              <p className="text-[9px] font-bold text-red-600">{center.phone}</p>
             </button>
           ))}
         </div>
@@ -127,15 +126,15 @@ export function HealthHub({ lang }: { lang: string }) {
 
       {/* ACCESIBILIDAD LSE */}
       {accMode === 'accessible' && (
-        <section className="bg-emerald-50 p-6 rounded-[2.5rem] border-2 border-emerald-100 space-y-4">
+        <section className="bg-red-50 p-6 rounded-[2.5rem] border-2 border-red-100 space-y-4">
           <div className="flex justify-between items-center">
-            <h4 className="font-black text-xs uppercase text-emerald-900 flex items-center gap-2">
+            <h4 className="font-black text-xs uppercase text-red-900 flex items-center gap-2">
               <Play className="h-4 w-4" /> Salud en LSE
             </h4>
             <SpeechButton text="Cómo pedir cita médica y solicitar intérprete de lengua de signos en el hospital." language={lang} />
           </div>
-          <p className="text-[10px] text-emerald-800 font-bold leading-normal">
-            Te explicamos cómo solicitar el servicio gratuito de intérprete de LSE en los hospitales de Jaén y cómo usar la web para pedir cita.
+          <p className="text-[10px] text-red-800 font-bold leading-normal">
+            Este video explica exclusivamente cómo usar los servicios de salud y el derecho a intérprete en los hospitales de Jaén.
           </p>
         </section>
       )}

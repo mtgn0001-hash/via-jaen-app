@@ -10,7 +10,7 @@ import {
   MessageSquare, 
   Building2, 
   Heart, 
-  Baby,
+  Users,
   Briefcase,
   GraduationCap,
   ShieldCheck,
@@ -18,20 +18,18 @@ import {
   Play,
   ArrowRight,
   Zap,
-  Globe,
-  Plus
+  Stethoscope
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SpeechButton } from "@/components/ui/SpeechButton";
-import { OFFICIAL_LINKS } from "@/services/links-service";
 
 type DashboardProps = {
   lang: Language;
   setActiveTab: (tab: string) => void;
+  setResourceSection: (section: string) => void;
   progress: UserProgress;
 };
 
-export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
+export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: DashboardProps) {
   const isLSE = progress.accessibilityMode === 'accessible';
   
   const bentoCardClass = "relative overflow-hidden border-none shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98] group cursor-pointer";
@@ -66,7 +64,7 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
       {/* 2. BENTO GRID PRINCIPAL */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         
-        {/* TRÁMITES CRÍTICOS (2x2) */}
+        {/* TRÁMITES CRÍTICOS (2x2) - EXCLUSIVO IDENTIDAD */}
         <Card 
           className={cn(bentoCardClass, "col-span-2 row-span-2 bg-white rounded-[3rem] border-2 border-primary/5 flex flex-col justify-between")}
           onClick={() => setActiveTab('procedures')}
@@ -86,44 +84,42 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase leading-tight">Trámites<br/>Residencia</h3>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase leading-tight">Trámites</h3>
               <p className="text-[10px] font-bold text-muted-foreground uppercase leading-relaxed max-w-[180px]">
-                Gestión de TIE, Modelo EX-15 y Citas en la Plaza de las Batallas.
+                Gestión exclusiva de TIE, Modelo EX-15 y Citas Plaza de las Batallas.
               </p>
-              <div className="grid grid-cols-1 gap-2 pt-2">
-                 <Button className="h-12 rounded-xl font-black text-xs gap-2 shadow-lg">
-                    VER TRÁMITES <ArrowRight className="h-4 w-4" />
-                 </Button>
-              </div>
+              <Button className="h-12 rounded-xl font-black text-xs gap-2 shadow-lg w-fit">
+                VER TRÁMITES <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* SALUD JAÉN (1x1) */}
+        {/* SALUD JAÉN (1x1) - EXCLUSIVO SANIDAD */}
         <Card 
           className={cn(bentoCardClass, "bg-red-50/50 border border-red-100 rounded-[2rem]")}
-          onClick={() => setActiveTab('guides_hub')}
+          onClick={() => setResourceSection('salud')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
             <div className="bg-red-500 p-3 rounded-2xl text-white shadow-lg">
-              <Heart className="h-6 w-6" />
+              <Stethoscope className="h-6 w-6" />
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-red-900">Salud</h4>
-              <p className="text-[8px] text-red-800/60 font-black uppercase">Cita SAS / 112</p>
+              <p className="text-[8px] text-red-800/60 font-black uppercase">Citas / Urgencias</p>
             </div>
             {isLSE && <Play className="h-3 w-3 text-red-400" />}
           </CardContent>
         </Card>
 
-        {/* PARA FAMILIAS (1x1) */}
+        {/* PARA FAMILIAS (1x1) - EXCLUSIVO AYUDAS Y COLEGIOS */}
         <Card 
           className={cn(bentoCardClass, "bg-emerald-50/50 border border-emerald-100 rounded-[2rem]")}
-          onClick={() => setActiveTab('guides_hub')}
+          onClick={() => setResourceSection('familias')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
             <div className="bg-emerald-600 p-3 rounded-2xl text-white shadow-lg">
-              <Baby className="h-6 w-6" />
+              <Users className="h-6 w-6" />
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-emerald-900">Familias</h4>
@@ -133,10 +129,10 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
           </CardContent>
         </Card>
 
-        {/* ESTUDIAR UJA (1x1) */}
+        {/* ESTUDIAR UJA (1x1) - EXCLUSIVO UNIVERSIDAD */}
         <Card 
           className={cn(bentoCardClass, "bg-indigo-50/50 border border-indigo-100 rounded-[2rem]")}
-          onClick={() => setActiveTab('guides_hub')}
+          onClick={() => setResourceSection('uja')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
             <div className="bg-indigo-600 p-3 rounded-2xl text-white shadow-lg">
@@ -168,7 +164,7 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
 
       </section>
 
-      {/* 3. BLOQUE DE EMERGENCIA S.O.S (FLOTANTE DENTRO DE FLUJO) */}
+      {/* 3. BLOQUE DE EMERGENCIA S.O.S */}
       <section className="flex justify-center py-2">
          <Button 
             onClick={() => window.open('tel:112', '_self')}
@@ -179,7 +175,7 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
          </Button>
       </section>
 
-      {/* 4. UTILIDADES DE SEGURIDAD (FONDO) */}
+      {/* 4. UTILIDADES DE SEGURIDAD */}
       <section>
         <Card className="border-none bg-emerald-50/50 border border-emerald-100 rounded-[2.5rem] overflow-hidden">
           <CardContent className="p-6 flex items-center gap-4">
@@ -194,7 +190,6 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
         </Card>
       </section>
 
-      {/* DECORACIÓN VISUAL */}
       <div className="flex justify-center pt-8 opacity-5 scale-125">
          <Zap className="h-16 w-16 text-primary" />
       </div>

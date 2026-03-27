@@ -24,6 +24,8 @@ import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeResourceSection, setActiveResourceSection] = useState('salud');
+  
   const { 
     progress, 
     updateProgress, 
@@ -38,6 +40,11 @@ export default function Home() {
       document.documentElement.setAttribute('data-accessibility', progress.accessibilityMode);
     }
   }, [progress.theme, isLoaded, progress.accessibilityMode]);
+
+  const handleResourceNavigation = (sectionId: string) => {
+    setActiveResourceSection(sectionId);
+    setActiveTab('guides_hub');
+  };
 
   if (!isLoaded) return null;
 
@@ -60,12 +67,23 @@ export default function Home() {
 
         <main className="max-w-5xl mx-auto p-6 pt-8 min-h-screen">
           <div className="transition-all duration-500 ease-in-out">
-            {activeTab === 'dashboard' && <Dashboard lang={lang} setActiveTab={setActiveTab} progress={progress} />}
+            {activeTab === 'dashboard' && (
+              <Dashboard 
+                lang={lang} 
+                setActiveTab={setActiveTab} 
+                setResourceSection={handleResourceNavigation}
+                progress={progress} 
+              />
+            )}
             
-            {/* Secciones de Recursos Combinadas */}
-            {activeTab === 'guides_hub' && <ResourcesHub lang={lang} />}
+            {activeTab === 'guides_hub' && (
+              <ResourcesHub 
+                lang={lang} 
+                activeSection={activeResourceSection} 
+                onSectionChange={setActiveResourceSection}
+              />
+            )}
             
-            {/* Trámites Reorganizados */}
             {activeTab === 'procedures' && (
               <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700 pb-24">
                 <div className="space-y-1">
@@ -80,7 +98,6 @@ export default function Home() {
             {activeTab === 'directory' && <div className="animate-in slide-in-from-right-4 duration-500"><ResourceDirectory lang={lang} /></div>}
             {activeTab === 'employment_portal' && <div className="animate-in slide-in-from-right-4 duration-500"><EmploymentPortal lang={lang} /></div>}
             
-            {/* Otras Features */}
             {activeTab === 'profile_hub' && <div className="animate-in slide-in-from-right-4 duration-500"><UserProfile lang={lang} /></div>}
             {activeTab === 'vault' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentVault lang={lang} /></div>}
             {activeTab === 'scanner' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentScanner lang={lang} /></div>}
