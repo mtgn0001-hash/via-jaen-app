@@ -32,7 +32,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
     },
     { 
       section: "Empadronamiento Municipal", 
-      url: "https://sede.aytojaen.es/portal/p_20_contenedor1.jsp?codres=1&codmenu=497",
+      url: "https://sede.aytojaen.es/",
       where: "Ayuntamiento de Jaén (Plaza de Santa María)",
       fields: [
         { id: "housing", label: "DATOS VIVIENDA", hint: "Debes aportar contrato de alquiler original o autorización del dueño." },

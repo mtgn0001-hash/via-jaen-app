@@ -75,13 +75,13 @@ export function ProcedureList({ lang }: ProcedureListProps) {
     },
     {
       id: 'padron',
-      title: 'Padrón Jaén (Impresos)',
-      desc: 'Descarga directa del alta en el Padrón del Ayuntamiento de Jaén.',
-      url: 'https://sede.aytojaen.es/portal/p_20_contenedor1.jsp?codres=1&codmenu=497',
-      backupUrl: 'https://sede.aytojaen.es/',
+      title: 'Padrón Jaén (Sede)',
+      desc: 'Acceso a la Sede Electrónica del Ayuntamiento para el alta en el Padrón.',
+      url: 'https://sede.aytojaen.es/',
+      backupUrl: 'https://www.aytojaen.es/',
       type: 'Ayuntamiento',
       org: 'City',
-      rules: ["Contrato de alquiler original.", "Pasaporte en vigor.", "Original y copia de todos los documentos."],
+      rules: ["Entra en 'Catálogo de Trámites'.", "Busca 'Alta en el Padrón Municipal'.", "Descarga el impreso o rellena con Certificado Digital."],
       jaenNote: true
     },
     {
@@ -169,7 +169,7 @@ export function ProcedureList({ lang }: ProcedureListProps) {
 
   const getJaenNote = (id: string) => {
     if (id === 'nie_ex15') return l.ex15Note;
-    if (id === 'padron') return "Este trámite se realiza en el Ayuntamiento de Jaén, situado en la Plaza de Santa María. Recuerda pedir cita previa si es necesario.";
+    if (id === 'padron') return "Este trámite se gestiona en la Sede Electrónica del Ayuntamiento de Jaén. Si prefieres hacerlo en persona, acude al Ayuntamiento en la Plaza de Santa María.";
     return "Nota informativa para la provincia de Jaén.";
   };
 
