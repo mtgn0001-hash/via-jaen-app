@@ -1,17 +1,17 @@
-
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { 
   School, 
   Baby, 
   Wallet, 
-  ExternalLink, 
   Play, 
   MapPin,
   Heart,
   Utensils,
+  Home,
+  UserCheck,
   Users
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
@@ -27,60 +27,97 @@ export function FamilyHub({ lang }: { lang: string }) {
       <div className="flex justify-between items-center">
         <div className="space-y-1">
           <h3 className="text-xl font-black text-emerald-600 uppercase tracking-tighter">Familias y Colegios</h3>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas</p>
+          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas Sociales</p>
         </div>
-        <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales." language={lang} />
+        <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales de la Junta de Andalucía." language={lang} />
       </div>
 
-      {/* EDUCACIÓN */}
+      {/* VIVIENDA Y SUSTENTO */}
       <section className="space-y-3">
         <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
-          <School className="h-3 w-3" /> Centros Educativos Jaén
+          <Home className="h-3 w-3" /> Vivienda y Sustento
+        </h4>
+        <div className="grid grid-cols-1 gap-2">
+          <ResourceLauncher 
+            title="Ayuda al Alquiler"
+            description="Plan Vive Andalucía y Bono Alquiler Joven para facilitar el acceso a la vivienda en Jaén."
+            url={OFFICIAL_LINKS.juntaAndalucia.ayudaAlquiler}
+            lseInstructions="Requisitos de empadronamiento y contrato para pedir la ayuda de alquiler."
+            triggerLabel="Solicitar Alquiler"
+            lang={lang}
+          />
+          <div className="grid grid-cols-2 gap-2">
+            <ResourceLauncher 
+              title="Renta Mínima"
+              description="Renta Mínima de Inserción Social (RMISA) de la Junta de Andalucía."
+              url={OFFICIAL_LINKS.juntaAndalucia.rmisa}
+              triggerLabel="RMISA"
+              variant="secondary"
+              lang={lang}
+            />
+            <ResourceLauncher 
+              title="Bono Carestía"
+              description="Pago único para familias con menores a cargo y bajos ingresos."
+              url={OFFICIAL_LINKS.juntaAndalucia.bonoCarestia}
+              triggerLabel="Bono Carestía"
+              variant="secondary"
+              lang={lang}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* EDUCACIÓN INFANTIL */}
+      <section className="space-y-3">
+        <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
+          <School className="h-3 w-3" /> Colegios y Guarderías
         </h4>
         <Card className="border-none bg-white/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-emerald-100">
           <CardContent className="p-6 space-y-4">
-            <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Buscador de colegios e institutos públicos y concertados en la capital.
-            </p>
-            <Button 
-              asChild
-              className="w-full h-14 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700 font-black text-sm uppercase tracking-tight flex justify-between px-6 shadow-lg shadow-emerald-200"
-            >
-              <a href={OFFICIAL_LINKS.juntaAndalucia.escolarizacion} target="_blank">
-                <span>Buscar Colegio / Matrícula</span>
-                <ExternalLink className="h-5 w-5" />
-              </a>
-            </Button>
+            <div className="grid grid-cols-1 gap-3">
+              <ResourceLauncher 
+                title="Escolarización"
+                description="Buscador de colegios y proceso de admisión para Primaria y Secundaria en Jaén capital."
+                url={OFFICIAL_LINKS.juntaAndalucia.escolarizacion}
+                lseInstructions="Cómo matricular a tu hijo en un colegio de Jaén paso a paso."
+                triggerLabel="Buscar Colegio Jaén"
+                lang={lang}
+              />
+              <ResourceLauncher 
+                title="Guarderías (0-3 años)"
+                description="Ayudas para el primer ciclo de educación infantil en centros de la provincia."
+                url={OFFICIAL_LINKS.juntaAndalucia.guarderias}
+                triggerLabel="Ayuda Guardería"
+                variant="outline"
+                lang={lang}
+              />
+            </div>
           </CardContent>
         </Card>
       </section>
 
-      {/* AYUDAS ECONÓMICAS */}
+      {/* DEPENDENCIA Y TÍTULOS */}
       <section className="space-y-3">
         <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
-          <Wallet className="h-3 w-3" /> Ayudas y Subvenciones
+          <UserCheck className="h-3 w-3" /> Otros Títulos y Dependencia
         </h4>
         <div className="grid grid-cols-1 gap-2">
-          <Button 
-            asChild
+          <ResourceLauncher 
+            title="Ayuda a la Dependencia"
+            description="Solicitud de teleasistencia y ayuda a domicilio en la ciudad de Jaén."
+            url={OFFICIAL_LINKS.juntaAndalucia.dependencia}
+            triggerLabel="Gestionar Dependencia"
             variant="outline"
-            className="h-14 rounded-2xl border-2 border-emerald-100 hover:bg-emerald-50 text-emerald-700 font-bold text-xs uppercase tracking-tight flex justify-between px-6"
-          >
-            <a href={OFFICIAL_LINKS.juntaAndalucia.ayudaAlquiler} target="_blank">
-              <span>Ayuda al Alquiler (Plan Vive)</span>
-              <Heart className="h-4 w-4" />
-            </a>
-          </Button>
-          <Button 
-            asChild
+            lang={lang}
+          />
+          <ResourceLauncher 
+            title="Familia Numerosa"
+            description="Obtención y renovación del título para acceder a bonificaciones en transporte y tasas."
+            url={OFFICIAL_LINKS.juntaAndalucia.familiaNumerosa}
+            triggerLabel="Título Familia Numerosa"
             variant="outline"
-            className="h-14 rounded-2xl border-2 border-emerald-100 hover:bg-emerald-50 text-emerald-700 font-bold text-xs uppercase tracking-tight flex justify-between px-6"
-          >
-            <a href={OFFICIAL_LINKS.juntaAndalucia.bonoCarestia} target="_blank">
-              <span>Bono Carestía / Comedor</span>
-              <Utensils className="h-4 w-4" />
-            </a>
-          </Button>
+            lang={lang}
+          />
         </div>
       </section>
 
@@ -100,27 +137,17 @@ export function FamilyHub({ lang }: { lang: string }) {
                 <p className="text-[10px] text-orange-800/60 font-bold uppercase">Ayuntamiento de Jaén</p>
               </div>
             </div>
-            <Button asChild size="sm" variant="ghost" className="text-orange-700 hover:bg-orange-100 font-black text-[10px]">
-              <a href={OFFICIAL_LINKS.ayuntamiento.ludotecas} target="_blank">INFO</a>
-            </Button>
+            <ResourceLauncher 
+              title="Ludotecas Jaén"
+              description="Información sobre actividades de conciliación del Ayuntamiento."
+              url={OFFICIAL_LINKS.ayuntamiento.ludotecas}
+              triggerLabel="INFO"
+              variant="outline"
+              lang={lang}
+            />
           </CardContent>
         </Card>
       </section>
-
-      {/* ACCESIBILIDAD LSE */}
-      {accMode === 'accessible' && (
-        <section className="bg-emerald-50 p-6 rounded-[2.5rem] border-2 border-emerald-100 space-y-4">
-          <div className="flex justify-between items-center">
-            <h4 className="font-black text-xs uppercase text-emerald-900 flex items-center gap-2">
-              <Play className="h-4 w-4" /> Familias en LSE
-            </h4>
-            <SpeechButton text="Cómo matricular a un niño en el colegio y solicitar ayudas en Jaén." language={lang} />
-          </div>
-          <p className="text-[10px] text-emerald-800 font-bold leading-normal">
-            Este video se centra exclusivamente en el calendario escolar de marzo y la documentación para becas de comedor y ayudas al alquiler.
-          </p>
-        </section>
-      )}
     </div>
   );
 }

@@ -6,7 +6,11 @@ export const OFFICIAL_LINKS = {
   extranjeria: {
     ex15: "https://www.inclusion.gob.es/web/migraciones/modelos-de-solicitud",
     citaPrevia: "https://icp.administracionelectronica.gob.es/icpco/index.html",
-    modelosGeneral: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html"
+    modelosGeneral: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html",
+    arraigo: "https://extranjeros.inclusion.gob.es/es/informacioninteres/informacionprocedimientos/Ciudadanosnocomunitarios/hojasinformativas/index.html",
+    proteccionInternacional: "https://www.policia.es/_es/tramites_extranjeria_tramite_solicitud_asilo.php",
+    asistenciaJuridica: "https://www.icajaen.es/servicios/asistencia-juridica-gratuita/",
+    retornoVoluntario: "https://www.inclusion.gob.es/web/migraciones/retorno-voluntario"
   },
   ayuntamiento: {
     padron: "https://sede.aytojaen.es/",
@@ -17,26 +21,31 @@ export const OFFICIAL_LINKS = {
     acceso: "https://www.ujaen.es/estudios/acceso",
     internacional: "https://www.ujaen.es/internacional",
     matricula: "https://www.ujaen.es/estudios/acceso/automatricula",
-    saludMental: "https://www.ujaen.es/servicios/uapsicologica/",
     becas: "https://www.ujaen.es/servicios/vicest/becas",
     platea: "https://platea.ujaen.es/",
-    notas: "https://www.ujaen.es/servicios/iuja/"
+    notas: "https://www.ujaen.es/servicios/iuja/",
+    bonificacion99: "https://www.juntadeandalucia.es/organismos/universidadinvestigacioneinnovacion/areas/universidad/bonificacion-99.html",
+    erasmus: "https://www.ujaen.es/internacional/movilidad/erasmus-estudios-salientes"
   },
   salud: {
     clicSalud: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/",
-    intervencion: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/pages/contacto/index.xhtml",
-    appSaludResponde: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/consejos-de-salud/app-salud-responde",
-    farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/"
-  },
-  seguridadSocial: {
-    importass: "https://portal.seg-social.gob.es/wps/portal/importass/importass",
-    cita: "https://portal.seg-social.gob.es/wps/portal/importass/importass/tramites/solicitudCitaPrevia"
+    farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/",
+    tse: "https://sede.seg-social.gob.es/wps/portal/sede/sede/Ciudadanos/Asistencia+Sanitaria/01asistencia+sanitaria",
+    reintegroOrtoprotesico: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/reintegro-de-gastos-ortoprotésicos",
+    ayudaDesplazamiento: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/ayudas-por-desplazamiento"
   },
   juntaAndalucia: {
     escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion",
+    rmisa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/renta-minima.html",
     bonoCarestia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/bono-carestia.html",
     ayudaAlquiler: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/plan-vive.html",
-    becasMec: "https://www.becaseducacion.gob.es/becas-y-ayudas.html"
+    bonoAlquilerJoven: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/fomento-alquiler/paginas/bono-alquiler-joven.html",
+    becasMec: "https://www.becaseducacion.gob.es/becas-y-ayudas.html",
+    beca6000: "https://www.juntadeandalucia.es/educacion/portals/web/becas-y-ayudas/beca-6000",
+    becaAdriano: "https://www.juntadeandalucia.es/educacion/portals/web/becas-y-ayudas/beca-adriano",
+    familiaNumerosa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/familias/familia-numerosa.html",
+    dependencia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/dependencia.html",
+    guarderias: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion/0-a-3-anos"
   },
   transporte: {
     horariosUja: "https://jaen.ctas.cti.es/lineas"
