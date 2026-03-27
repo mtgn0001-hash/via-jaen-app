@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,7 +6,6 @@ import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { MapPin, Zap, Info, Scale } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { useLocalStorage } from "@/lib/store";
-import { CommunityReferents } from "./comunidad/CommunityReferents";
 
 export function ManagementTIENIE() {
   const { progress } = useLocalStorage();
@@ -104,9 +104,6 @@ export function ManagementTIENIE() {
           </div>
         </div>
       </div>
-
-      {/* SECCIÓN DE COMUNIDAD Y REFERENTES */}
-      <CommunityReferents lang={lang} />
     </div>
   );
 }

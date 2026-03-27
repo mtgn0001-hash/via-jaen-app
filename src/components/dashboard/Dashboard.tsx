@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -19,6 +20,7 @@ import {
   Stethoscope
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CommunityReferents } from "@/features/extranjeria/comunidad/CommunityReferents";
 
 type DashboardProps = {
   lang: Language;
@@ -82,7 +84,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-3xl font-black text-slate-950 tracking-tighter uppercase leading-tight">Trámites</h3>
+              <h3 className="text-3xl font-black text-[#1A1A1B] tracking-tighter uppercase leading-tight">Trámites</h3>
               <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed max-w-[180px]">
                 Gestión exclusiva de TIE, Modelo EX-15 y Citas Plaza de las Batallas.
               </p>
@@ -162,7 +164,10 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
 
       </section>
 
-      {/* 3. BLOQUE DE EMERGENCIA S.O.S */}
+      {/* 3. VOCES QUE TE GUÍAN (REFERENTES) */}
+      <CommunityReferents lang={lang} />
+
+      {/* 4. BLOQUE DE EMERGENCIA S.O.S */}
       <section className="flex justify-center py-2">
          <Button 
             onClick={() => window.open('tel:112', '_self')}
@@ -173,7 +178,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
          </Button>
       </section>
 
-      {/* 4. UTILIDADES DE SEGURIDAD */}
+      {/* 5. UTILIDADES DE SEGURIDAD */}
       <section>
         <Card className="border-none bg-emerald-50 border border-emerald-100 rounded-[2.5rem] overflow-hidden">
           <CardContent className="p-6 flex items-center gap-4">

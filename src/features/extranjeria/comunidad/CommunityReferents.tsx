@@ -1,5 +1,7 @@
+
 "use client"
 
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -8,169 +10,208 @@ import {
   Globe, 
   Users, 
   ShieldAlert, 
-  PlusCircle, 
   ArrowUpRight, 
   Play,
-  UserCheck
+  User,
+  Info,
+  X
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { 
   Carousel, 
   CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
+  CarouselItem 
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+
+type Referent = {
+  name: string;
+  handle: string;
+  spec: string;
+  description: string;
+  url: string;
+  icon: any;
+  platform: string;
+  color: string;
+  label: string;
+};
 
 export function CommunityReferents({ lang }: { lang: string }) {
-  const referents = [
+  const [selectedRef, setSelectedRef] = useState<Referent | null>(null);
+
+  const referents: Referent[] = [
     {
       name: "Hija de Inmigrantes",
       handle: "@hijadeinmigrantes",
-      spec: "Derechos, identidad y guía de vida.",
+      spec: "Identidad",
+      label: "Identidad y Guía",
+      description: "Referente en derechos, identidad y vivencias de las segundas generaciones en España. Ofrece una perspectiva real y necesaria.",
       url: OFFICIAL_LINKS.comunidad.hijaDeInmigrantes,
       icon: Instagram,
-      platform: "Instagram"
+      platform: "Instagram",
+      color: "bg-blue-100 text-blue-700"
     },
     {
       name: "Vicente Marín",
       handle: "Parainmigrantes",
-      spec: "Abogado experto en nacionalidad y arraigo.",
+      spec: "Leyes",
+      label: "Abogado Experto",
+      description: "Director de Parainmigrantes.info. Experto líder en trámites de extranjería, nacionalidad española y recursos legales.",
       url: OFFICIAL_LINKS.comunidad.vicenteMarin,
       icon: Youtube,
-      platform: "YouTube"
+      platform: "YouTube",
+      color: "bg-amber-100 text-amber-700"
     },
     {
       name: "Desirée Bela-Lobedde",
       handle: "@desireebela",
-      spec: "Activismo y educación antirracista.",
+      spec: "Ayuda",
+      label: "Activismo y Educación",
+      description: "Escritora y activista. Su contenido se centra en la educación antirracista y el empoderamiento de la comunidad.",
       url: OFFICIAL_LINKS.comunidad.desireeBela,
       icon: Instagram,
-      platform: "Instagram"
+      platform: "Instagram",
+      color: "bg-emerald-100 text-emerald-700"
     },
     {
       name: "SOS Racismo",
-      handle: "Federación Estatal",
-      spec: "Denuncia legal y apoyo antidiscriminación.",
+      handle: "Federación",
+      spec: "Leyes",
+      label: "Denuncia Legal",
+      description: "Organización dedicada a la lucha contra el racismo. Ofrecen apoyo legal y acompañamiento ante discriminaciones.",
       url: OFFICIAL_LINKS.comunidad.sosRacismo,
       icon: Globe,
-      platform: "Web Oficial"
+      platform: "Web",
+      color: "bg-red-100 text-red-700"
     },
     {
       name: "Quan Zhou",
       handle: "@gazpachoagridulce",
-      spec: "Cultura y vivencias desde el arte.",
+      spec: "Cultura",
+      label: "Arte y Vivencias",
+      description: "Ilustradora que narra la experiencia migrante desde el humor y el arte, ayudando a entender la dualidad cultural.",
       url: OFFICIAL_LINKS.comunidad.quanZhou,
       icon: Instagram,
-      platform: "Instagram"
+      platform: "Instagram",
+      color: "bg-indigo-100 text-indigo-700"
     },
     {
       name: "Safa El-Msaouri",
       handle: "@safaelmsaouri",
-      spec: "Derechos de las mujeres migrantes.",
+      spec: "Identidad",
+      label: "Derechos Mujer",
+      description: "Voz activa en la defensa de los derechos de las mujeres migrantes y la visibilidad de sus retos específicos.",
       url: OFFICIAL_LINKS.comunidad.safaElMsaouri,
       icon: Instagram,
-      platform: "Instagram"
+      platform: "Instagram",
+      color: "bg-purple-100 text-purple-700"
     }
   ];
 
-  const handleLaunch = (url: string) => {
-    window.open(url, '_blank');
-  };
-
   return (
-    <div className="space-y-6 pt-4">
-      <div className="flex justify-between items-center px-4">
-        <div className="space-y-1">
-          <h3 className="text-xl font-black text-primary uppercase tracking-tighter flex items-center gap-2">
-            <Users className="h-5 w-5" /> Comunidad y Voces de Apoyo
+    <section className="space-y-4 py-4">
+      <div className="flex justify-between items-center px-2">
+        <div className="space-y-0.5">
+          <h3 className="text-lg font-black text-[#1A1A1B] uppercase tracking-tighter flex items-center gap-2">
+            Voces que te Guían
           </h3>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest leading-none">
-            Aprende de quienes ya han pasado por esto
+          <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest leading-none">
+            Referentes de confianza en redes sociales
           </p>
         </div>
         <div className="flex items-center gap-2">
-           <SpeechButton 
-            text="Sección de comunidad. Aquí tienes personas que ayudan a los extranjeros en redes sociales. Pulsa para ver sus videos y aprender sobre tus derechos." 
+          <SpeechButton 
+            text="Sección Voces que te guían. Desliza para conocer referentes que apoyan a inmigrantes en redes sociales." 
             language={lang} 
           />
-          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-primary/5 text-primary border border-primary/10">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="h-9 w-9 rounded-2xl bg-primary/5 text-primary border border-primary/10"
+            aria-label="Ver video en LSE sobre esta sección"
+          >
             <Play className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
-      <div className="px-4">
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {referents.map((ref) => (
-              <CarouselItem key={ref.name} className="pl-2 md:pl-4 basis-4/5 sm:basis-1/2 lg:basis-1/3">
-                <Card className="border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border border-primary/5 h-full transition-all hover:scale-[1.02] active:scale-95 group">
-                  <CardContent className="p-6 flex flex-col h-full justify-between">
-                    <div>
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="bg-primary/10 p-3 rounded-2xl group-hover:bg-primary group-hover:text-white transition-colors duration-500 shadow-inner">
-                          <ref.icon className="h-6 w-6" />
-                        </div>
-                        <div className="text-[8px] font-black uppercase text-primary/40 bg-primary/5 px-2 py-1 rounded-lg">
-                          {ref.platform}
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-1.5 mb-6">
-                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-tight leading-none truncate">{ref.name}</h4>
-                        <p className="text-[9px] font-black text-primary/60 uppercase tracking-widest">{ref.handle}</p>
-                        <p className="text-[11px] text-muted-foreground font-medium leading-relaxed italic mt-2">
-                          "{ref.spec}"
-                        </p>
-                      </div>
-                    </div>
+      <Carousel className="w-full" opts={{ align: "start", dragFree: true }}>
+        <CarouselContent className="-ml-3 px-2">
+          {referents.map((ref) => (
+            <CarouselItem key={ref.name} className="pl-3 basis-[160px]">
+              <Card 
+                className="border-none bg-white shadow-md rounded-[2rem] overflow-hidden transition-all active:scale-95 cursor-pointer border border-slate-100"
+                onClick={() => setSelectedRef(ref)}
+              >
+                <CardContent className="p-5 flex flex-col items-center text-center gap-3">
+                  <div className={cn("p-3 rounded-full shadow-inner", ref.color.split(' ')[0])}>
+                    <ref.icon className={cn("h-6 w-6", ref.color.split(' ')[1])} />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-semibold text-[#1A1A1B] leading-tight line-clamp-1">{ref.name}</h4>
+                    <Badge variant="secondary" className={cn("text-[8px] uppercase font-black px-2 py-0.5 border-none", ref.color)}>
+                      {ref.spec}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
 
-                    <Button 
-                      onClick={() => handleLaunch(ref.url)}
-                      className="w-full rounded-2xl h-11 font-black text-[10px] uppercase gap-2 bg-slate-50 text-primary border-2 border-primary/5 hover:bg-primary hover:text-white transition-all shadow-sm"
-                      aria-label={`Botón externo: Abrir ${ref.platform} de ${ref.name} experto en ${ref.spec}`}
-                    >
-                      Ver en {ref.platform} <ArrowUpRight className="h-3 w-3" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="hidden sm:flex justify-end gap-2 mt-4 px-4">
-            <CarouselPrevious className="static translate-y-0 h-10 w-10 rounded-xl border-2" />
-            <CarouselNext className="static translate-y-0 h-10 w-10 rounded-xl border-2" />
-          </div>
-        </Carousel>
-      </div>
+      {/* DETALLE DEL REFERENTE (BOTTOM SHEET STYLE) */}
+      <Dialog open={!!selectedRef} onOpenChange={() => setSelectedRef(null)}>
+        <DialogContent className="sm:max-w-md rounded-t-[3rem] sm:rounded-[3rem] bg-white/90 backdrop-blur-2xl border-none shadow-2xl p-0 overflow-hidden outline-none">
+          {selectedRef && (
+            <div className="animate-in slide-in-from-bottom-4 duration-500">
+              <div className={cn("p-10 flex flex-col items-center text-center gap-4", selectedRef.color.split(' ')[0])}>
+                <div className="bg-white p-5 rounded-[2.5rem] shadow-xl">
+                   <selectedRef.icon className={cn("h-10 w-10", selectedRef.color.split(' ')[1])} />
+                </div>
+                <div className="space-y-1">
+                  <DialogTitle className="text-2xl font-black text-[#1A1A1B] uppercase tracking-tighter">
+                    {selectedRef.name}
+                  </DialogTitle>
+                  <p className="text-xs font-bold opacity-70 uppercase tracking-widest">{selectedRef.handle}</p>
+                </div>
+              </div>
 
-      {/* AVISO DE SEGURIDAD Y CONTEXTO */}
-      <div className="px-4">
-        <div className="bg-amber-50 p-5 rounded-[2.5rem] border border-amber-100 flex gap-4 items-start shadow-sm">
-          <ShieldAlert className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <p className="text-[10px] text-amber-800 font-bold leading-normal">
-              Estás saliendo a una red externa. Estos referentes ofrecen consejos y apoyo real en redes sociales. 
-            </p>
-            <p className="text-[8px] text-amber-700/60 font-black uppercase tracking-widest">
-              Vía Jaén no gestiona estas cuentas; consulta siempre las fuentes oficiales para trámites legales.
-            </p>
-          </div>
-        </div>
-      </div>
+              <div className="p-8 space-y-6">
+                <div className="space-y-2">
+                  <h5 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Especialidad: {selectedRef.label}</h5>
+                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                    {selectedRef.description}
+                  </p>
+                </div>
 
-      {/* SUGERIR REFERENTE */}
-      <div className="flex justify-center pt-2 px-4">
-        <Button 
-          variant="outline" 
-          onClick={() => handleLaunch(OFFICIAL_LINKS.comunidad.sugerirReferente)}
-          className="w-full h-14 rounded-[1.5rem] border-2 border-dashed border-primary/20 text-primary hover:border-primary font-black text-[10px] uppercase gap-2 px-8 bg-primary/5"
-        >
-          <PlusCircle className="h-4 w-4" /> Sugerir Referente Útil
-        </Button>
-      </div>
-    </div>
+                <div className="bg-amber-50 p-4 rounded-2xl border border-amber-100 flex gap-3">
+                  <ShieldAlert className="h-5 w-5 text-amber-600 shrink-0" />
+                  <p className="text-[10px] text-amber-800 font-bold leading-tight">
+                    Consulta siempre fuentes oficiales para trámites legales finales. Vía Jaén no gestiona estas cuentas externas.
+                  </p>
+                </div>
+
+                <Button 
+                  className="w-full h-16 rounded-[1.5rem] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-black text-lg gap-3 shadow-xl active:scale-95 transition-all"
+                  onClick={() => window.open(selectedRef.url, '_blank')}
+                >
+                  VER EN {selectedRef.platform.toUpperCase()} <ArrowUpRight className="h-6 w-6" />
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </section>
   );
 }
