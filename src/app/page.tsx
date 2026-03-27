@@ -21,6 +21,7 @@ import { OtherAppointments } from "@/features/citas/OtherAppointments";
 import { JaenBot } from "@/features/ia/JaenBot";
 import { DocumentScanner } from "@/features/ia/DocumentScanner";
 import { DocumentVault } from "@/features/seguridad/DocumentVault";
+import { HealthHub } from "@/features/salud/HealthHub";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -61,6 +62,9 @@ export default function Home() {
         <main className="max-w-5xl mx-auto p-6 pt-8 min-h-screen">
           <div className="transition-all duration-500 ease-in-out">
             {activeTab === 'dashboard' && <Dashboard lang={lang} setActiveTab={setActiveTab} progress={progress} />}
+            
+            {/* Secciones de Recursos */}
+            {activeTab === 'guides_hub' && <HealthHub lang={lang} />}
             
             {/* Trámites Reorganizados */}
             {activeTab === 'procedures' && (

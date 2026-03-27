@@ -9,17 +9,20 @@ export const OFFICIAL_LINKS = {
     modelosGeneral: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html"
   },
   ayuntamiento: {
-    padron: "https://sede.aytojaen.es/", // Enlace a la sede principal para evitar 404
+    padron: "https://sede.aytojaen.es/",
     sede: "https://sede.aytojaen.es/"
   },
   uja: {
     acceso: "https://www.ujaen.es/estudios/acceso",
     internacional: "https://www.ujaen.es/internacional",
-    matricula: "https://www.ujaen.es/estudios/acceso/automatricula"
+    matricula: "https://www.ujaen.es/estudios/acceso/automatricula",
+    saludMental: "https://www.ujaen.es/servicios/uapsicologica/"
   },
   salud: {
     clicSalud: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/",
-    intervencion: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/pages/contacto/index.xhtml"
+    intervencion: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/pages/contacto/index.xhtml",
+    appSaludResponde: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/consejos-de-salud/app-salud-responde",
+    farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/"
   },
   seguridadSocial: {
     importass: "https://portal.seg-social.gob.es/wps/portal/importass/importass",
