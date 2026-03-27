@@ -28,7 +28,7 @@ export function ResourcesHub({ lang, activeSection, onSectionChange }: Resources
   const sections = [
     { 
       id: "salud", 
-      title: "Recursos Salud", 
+      title: "Recursos", 
       subtitle: "Citas Médicas y Urgencias",
       icon: Stethoscope, 
       content: <HealthHub lang={lang} />,

@@ -12,8 +12,8 @@ type BottomNavProps = {
 export function BottomNav({ activeTab, setActiveTab }: BottomNavProps) {
   const tabs = [
     { id: 'dashboard', icon: Home, label: 'Inicio' },
-    { id: 'guides_hub', icon: HeartPulse, label: 'Recursos Salud' },
-    { id: 'directory', icon: MapPin, label: 'Recursos' },
+    { id: 'guides_hub', icon: HeartPulse, label: 'Recursos' },
+    { id: 'directory', icon: MapPin, label: 'Mapa' },
     { id: 'profile_hub', icon: User, label: 'Mi Perfil' },
   ];
 

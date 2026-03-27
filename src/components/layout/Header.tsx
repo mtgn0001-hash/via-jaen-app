@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Accessibility, Bell } from "lucide-react";
@@ -29,7 +30,7 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
   const getBreadcrumb = () => {
     switch (activeTab) {
       case 'dashboard': return 'Resumen Inteligente';
-      case 'guides_hub': return 'Recursos Salud';
+      case 'guides_hub': return 'Recursos';
       case 'procedures': return 'Guías / Trámites';
       case 'employment_portal': return 'Guías / Empleo';
       case 'directory': return 'Mapa de Recursos';
