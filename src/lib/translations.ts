@@ -11,6 +11,7 @@ export const translations = {
     settings: 'Ajustes',
     language: 'Idioma',
     theme: 'Tema',
+    colorPrimary: 'Color Principal',
     welcome: 'Hola, bienvenido',
     botTitle: 'Jaén-Bot',
     botSubtitle: 'Asistente IA',
@@ -25,7 +26,11 @@ export const translations = {
     themes: {
       light: 'Vía Jaén (Claro)',
       dark: 'Noche Jaenera',
-      contrast: 'Alto Contraste'
+      contrast: 'Alto Contraste',
+      purple: 'Morado',
+      red: 'Rojo',
+      green: 'Verde',
+      blue: 'Azul'
     },
     languages: {
       es: 'Español',
@@ -47,6 +52,7 @@ export const translations = {
     settings: 'Settings',
     language: 'Language',
     theme: 'Theme',
+    colorPrimary: 'Primary Color',
     welcome: 'Hello, welcome',
     botTitle: 'Jaen-Bot',
     botSubtitle: 'AI Assistant',
@@ -61,7 +67,11 @@ export const translations = {
     themes: {
       light: 'Via Jaen (Light)',
       dark: 'Jaenera Night',
-      contrast: 'High Contrast'
+      contrast: 'High Contrast',
+      purple: 'Purple',
+      red: 'Red',
+      green: 'Green',
+      blue: 'Blue'
     },
     languages: {
       es: 'Español',
@@ -83,6 +93,7 @@ export const translations = {
     settings: 'Paramètres',
     language: 'Langue',
     theme: 'Thème',
+    colorPrimary: 'Couleur Principale',
     welcome: 'Bonjour, bienvenue',
     botTitle: 'Jaén-Bot',
     botSubtitle: 'Assistant IA',
@@ -97,7 +108,11 @@ export const translations = {
     themes: {
       light: 'Via Jaén (Clair)',
       dark: 'Nuit Jaenera',
-      contrast: 'Haut Contraste'
+      contrast: 'Haut Contraste',
+      purple: 'Violet',
+      red: 'Rouge',
+      green: 'Vert',
+      blue: 'Bleu'
     },
     languages: {
       es: 'Español',
@@ -119,6 +134,7 @@ export const translations = {
     settings: 'الإعدادات',
     language: 'اللغة',
     theme: 'المظهر',
+    colorPrimary: 'اللون الأساسي',
     welcome: 'مرحباً بك',
     botTitle: 'جيان-بوت',
     botSubtitle: 'مساعد ذكي',
@@ -133,7 +149,11 @@ export const translations = {
     themes: {
       light: 'طريق جيان (فاتح)',
       dark: 'ليل جيان',
-      contrast: 'تباين عالي'
+      contrast: 'تباين عالي',
+      purple: 'أرجواني',
+      red: 'أحمر',
+      green: 'أخضر',
+      blue: 'أزرق'
     },
     languages: {
       es: 'Español',
@@ -155,6 +175,7 @@ export const translations = {
     settings: 'Налаштування',
     language: 'Мова',
     theme: 'Тема',
+    colorPrimary: 'Основний колір',
     welcome: 'Привіт, ласкаво просимо',
     botTitle: 'Хаен-Бот',
     botSubtitle: 'ШІ Помічник',
@@ -169,7 +190,11 @@ export const translations = {
     themes: {
       light: 'Шлях Хаен (Світла)',
       dark: 'Ніч Хаена',
-      contrast: 'Високий контраст'
+      contrast: 'Високий контраст',
+      purple: 'Фіолетовий',
+      red: 'Червоний',
+      green: 'Зелений',
+      blue: 'Синій'
     },
     languages: {
       es: 'Español',

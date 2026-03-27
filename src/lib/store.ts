@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export type ThemeType = 'light' | 'dark' | 'contrast' | 'purple' | 'olive' | 'night' | 'ocean' | 'red';
+export type ThemeType = 'light' | 'dark' | 'contrast' | 'purple' | 'red' | 'green' | 'blue';
 export type ProvinceType = 'jaen';
 export type AccessibilityMode = 'standard' | 'accessible';
 
@@ -38,7 +38,7 @@ const defaultProgress: UserProgress = {
   },
   language: 'es',
   onboardingCompleted: false,
-  theme: 'light',
+  theme: 'purple',
   province: 'jaen',
   easyReading: false,
   accessibilityMode: 'standard',

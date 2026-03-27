@@ -10,8 +10,7 @@ import {
   SheetDescription 
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Globe, Palette, ShieldAlert, Check } from "lucide-react";
+import { Globe, Palette, ShieldAlert, Check, Pipette } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SettingsPanelProps = {
@@ -32,30 +31,44 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
     { id: 'uk', flag: '🇺🇦', label: t.languages.uk },
   ];
 
-  const themes: { id: ThemeType; color: string; label: string }[] = [
-    { id: 'light', color: 'bg-white', label: t.themes.light },
-    { id: 'dark', color: 'bg-slate-900', label: t.themes.dark },
-    { id: 'contrast', color: 'bg-black border-2 border-yellow-400', label: t.themes.contrast },
+  const colorThemes: { id: ThemeType; color: string; label: string }[] = [
+    { id: 'purple', color: '#8B5CF6', label: t.themes.purple },
+    { id: 'red', color: '#EF4444', label: t.themes.red },
+    { id: 'green', color: '#22C55E', label: t.themes.green },
+    { id: 'blue', color: '#3B82F6', label: t.themes.blue },
+  ];
+
+  const visualModes: { id: ThemeType; label: string; icon: any }[] = [
+    { id: 'light', label: t.themes.light, icon: Palette },
+    { id: 'dark', label: t.themes.dark, icon: Palette },
+    { id: 'contrast', label: t.themes.contrast, icon: Palette },
   ];
 
   const handleLanguageChange = (newLang: Language) => {
     updateProgress({ language: newLang });
-    
-    // Feedback de audio si el modo audio está activo o para confirmar cambio
     if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(translations[newLang].language + " changed");
+      const msg = newLang === 'es' ? 'Idioma cambiado a español' : 
+                  newLang === 'en' ? 'Language changed to English' : 
+                  'Language changed';
+      const utterance = new SpeechSynthesisUtterance(msg);
       utterance.lang = newLang === 'ar' ? 'ar-SA' : newLang === 'uk' ? 'uk-UA' : 'es-ES';
       window.speechSynthesis.speak(utterance);
     }
   };
 
-  const handleThemeChange = (newTheme: ThemeType) => {
+  const handleColorChange = (newTheme: ThemeType) => {
     updateProgress({ theme: newTheme });
+    if ('speechSynthesis' in window) {
+      const colorLabel = t.themes[newTheme as keyof typeof t.themes] || newTheme;
+      const utterance = new SpeechSynthesisUtterance(`Color de la aplicación cambiado a ${colorLabel}`);
+      utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
   };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="rounded-t-[3rem] p-8 bg-background/95 backdrop-blur-3xl border-t-4 border-primary/20">
+      <SheetContent side="bottom" className="rounded-t-[3rem] p-8 bg-background/95 backdrop-blur-3xl border-t-4 border-primary/20 max-h-[90vh] overflow-y-auto">
         <SheetHeader className="mb-8">
           <div className="flex items-center gap-3">
             <div className="bg-primary p-3 rounded-2xl shadow-lg">
@@ -68,7 +81,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
           </div>
         </SheetHeader>
 
-        <div className="space-y-8 max-w-md mx-auto">
+        <div className="space-y-8 max-w-md mx-auto pb-10">
           {/* SECCIÓN: IDIOMA */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
@@ -93,28 +106,60 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
             </div>
           </div>
 
-          {/* SECCIÓN: TEMAS */}
+          {/* SECCIÓN: COLORES PRINCIPALES */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
-              <Palette className="h-4 w-4" /> {t.theme}
+              <Pipette className="h-4 w-4" /> {t.colorPrimary}
+            </div>
+            <div className="grid grid-cols-4 gap-3">
+              {colorThemes.map((ct) => (
+                <button
+                  key={ct.id}
+                  onClick={() => handleColorChange(ct.id)}
+                  className={cn(
+                    "h-16 w-full rounded-2xl border-4 transition-all flex items-center justify-center relative overflow-hidden active:scale-90",
+                    progress.theme === ct.id ? "border-primary scale-105 shadow-lg" : "border-transparent opacity-70 hover:opacity-100"
+                  )}
+                  style={{ backgroundColor: ct.color }}
+                  aria-label={`Color: ${ct.label}`}
+                >
+                  {progress.theme === ct.id && (
+                    <div className="bg-white/30 backdrop-blur-sm p-1 rounded-full">
+                      <Check className="h-6 w-6 text-white" />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* SECCIÓN: MODOS VISUALES */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
+              <Palette className="h-4 w-4" /> Visualización
             </div>
             <div className="grid grid-cols-1 gap-3">
-              {themes.map((th) => (
+              {visualModes.map((vm) => (
                 <Button
-                  key={th.id}
+                  key={vm.id}
                   variant="outline"
-                  onClick={() => handleThemeChange(th.id)}
+                  onClick={() => handleColorChange(vm.id)}
                   className={cn(
                     "h-16 rounded-2xl justify-between px-6 border-2 font-black uppercase text-xs tracking-widest",
-                    progress.theme === th.id ? "border-primary bg-primary/5" : "bg-card"
+                    progress.theme === vm.id ? "border-primary bg-primary/5" : "bg-card"
                   )}
-                  aria-label={`${t.theme}: ${th.label}`}
+                  aria-label={`Modo: ${vm.label}`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className={cn("h-8 w-8 rounded-full shadow-inner", th.color)} />
-                    {th.label}
+                    <div className={cn(
+                      "h-8 w-8 rounded-full shadow-inner",
+                      vm.id === 'light' ? 'bg-white border' : 
+                      vm.id === 'dark' ? 'bg-slate-900' : 
+                      'bg-black border-2 border-yellow-400'
+                    )} />
+                    {vm.label}
                   </div>
-                  {progress.theme === th.id && <Check className="h-5 w-5 text-primary" />}
+                  {progress.theme === vm.id && <Check className="h-5 w-5 text-primary" />}
                 </Button>
               ))}
             </div>
