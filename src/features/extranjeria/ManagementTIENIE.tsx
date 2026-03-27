@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -61,7 +62,7 @@ export function ManagementTIENIE() {
         {/* RECURSOS ADICIONALES EXTRANJERÍA */}
         <div className="grid grid-cols-1 gap-3 px-2">
           <h4 className="text-[11px] font-black uppercase text-slate-900 tracking-widest ml-2 flex items-center gap-2">
-            <Scale className="h-4 w-4" /> Apoyo Legal y Protección
+            <Scale className="h-4 w-4 text-primary" /> Apoyo Legal y Protección
           </h4>
           
           <div className="grid grid-cols-1 gap-2">
@@ -70,7 +71,7 @@ export function ManagementTIENIE() {
               description="Información oficial sobre los procedimientos de arraigo para regularizar tu situación en España."
               url={OFFICIAL_LINKS.extranjeria.arraigo}
               triggerLabel="Info Arraigo"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
             
@@ -79,7 +80,7 @@ export function ManagementTIENIE() {
               description="Cómo solicitar asistencia jurídica gratuita a través del Colegio de Abogados de Jaén si no tienes recursos."
               url={OFFICIAL_LINKS.extranjeria.asistenciaJuridica}
               triggerLabel="Asistencia Legal Jaén"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
 
@@ -89,7 +90,7 @@ export function ManagementTIENIE() {
                 description="Recursos y cita para Protección Internacional en la provincia de Jaén."
                 url={OFFICIAL_LINKS.extranjeria.proteccionInternacional}
                 triggerLabel="Asilo / Protección"
-                variant="outline"
+                variant="primary"
                 lang={lang}
               />
               <ResourceLauncher 
@@ -97,7 +98,7 @@ export function ManagementTIENIE() {
                 description="Programas oficiales de retorno voluntario a tu país de origen."
                 url={OFFICIAL_LINKS.extranjeria.retornoVoluntario}
                 triggerLabel="Retorno Voluntario"
-                variant="outline"
+                variant="primary"
                 lang={lang}
               />
             </div>
