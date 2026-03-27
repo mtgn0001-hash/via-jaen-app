@@ -26,6 +26,10 @@ export const OFFICIAL_LINKS = {
     sede: "https://sede.aytojaen.es/",
     ludotecas: "https://www.aytojaen.es/portal/p_20_contenedor1.jsp?codres=1&codmenu=516"
   },
+  seguridadSocial: {
+    cita: "https://portal.seg-social.gob.es/wps/portal/importass/importass",
+    informes: "https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Vida+laboral+e+informes"
+  },
   uja: {
     acceso: "https://www.ujaen.es/estudios/acceso",
     internacional: "https://www.ujaen.es/internacional",

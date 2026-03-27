@@ -43,7 +43,7 @@ export function OtherAppointments() {
     {
       title: 'Seguridad Social',
       desc: 'Cita Previa Tesorería (Jaén)',
-      url: OFFICIAL_LINKS.seguridadSocial.cita,
+      url: OFFICIAL_LINKS.seguridadSocial?.cita || "https://portal.seg-social.gob.es/",
       icon: Briefcase,
       color: 'bg-blue-50 text-blue-600'
     },
