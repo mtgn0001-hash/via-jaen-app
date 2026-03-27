@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -25,7 +26,7 @@ export function ManagementTIENIE() {
       
       <CardContent className="p-8 space-y-6 relative z-10">
         <div className="space-y-2">
-          <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none">Gestión TIE y NIE</h3>
+          <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none">Trámites</h3>
           <p className="text-white/70 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
             <MapPin className="h-3 w-3" /> Plaza de las Batallas (Jaén)
           </p>

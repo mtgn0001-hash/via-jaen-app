@@ -84,7 +84,7 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
               </div>
             </div>
             <div className="mt-12 space-y-4">
-              <h3 className="text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Gestión NIE/TIE</h3>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Trámites</h3>
               <p className="text-sm font-bold text-muted-foreground max-w-md">Consulta el estado de las citas en Comisaría y rellena los formularios oficiales EX-15 y EX-17.</p>
               <Button className="rounded-2xl h-14 px-8 font-black gap-3 mt-4 text-lg">
                 Ver Guía Completa <ArrowRight className="h-5 w-5" />
