@@ -49,7 +49,7 @@ export function HealthHub({ lang }: { lang: string }) {
             <h4 className="text-lg font-black uppercase tracking-tight text-white">112 Urgencias</h4>
             <button 
               onClick={() => handleCall("112")}
-              className="w-full h-10 rounded-xl bg-white text-destructive hover:bg-white/95 font-black text-xs shadow-md"
+              className="w-full h-10 rounded-xl bg-white text-black hover:bg-white/95 font-black text-xs shadow-md border-2 border-transparent active:scale-95 transition-all"
             >
               LLAMAR AHORA
             </button>
@@ -67,9 +67,9 @@ export function HealthHub({ lang }: { lang: string }) {
             <h4 className="text-xs font-black uppercase tracking-tight leading-tight text-white">Hosp. Médico-Quirúrgico</h4>
             <button 
               onClick={() => handleCall("953 00 80 00")}
-              className="w-full h-10 rounded-xl bg-red-700 text-black font-black text-[10px] hover:bg-red-800 shadow-md"
+              className="w-full h-10 rounded-xl bg-white text-black font-black text-[11px] hover:bg-slate-100 shadow-md border-2 border-transparent active:scale-95 transition-all"
             >
-              953 00 80 00
+              LLAMAR: 953 00 80 00
             </button>
           </CardContent>
         </Card>
@@ -145,10 +145,10 @@ export function HealthHub({ lang }: { lang: string }) {
             <button 
               key={center.name}
               onClick={() => handleCall(center.phone)}
-              className="p-4 rounded-2xl bg-white border border-red-100 hover:bg-red-50 transition-all flex flex-col items-start gap-1 active:scale-95 text-left shadow-sm"
+              className="p-4 rounded-2xl bg-white border-2 border-red-100 hover:border-red-300 hover:bg-red-50 transition-all flex flex-col items-start gap-1 active:scale-95 text-left shadow-sm group"
             >
-              <p className="text-[10px] font-black text-black uppercase leading-none">{center.name}</p>
-              <p className="text-[10px] font-bold text-red-700">{center.phone}</p>
+              <p className="text-[11px] font-black text-black uppercase leading-none group-hover:text-red-700">{center.name}</p>
+              <p className="text-[11px] font-black text-black mt-1">{center.phone}</p>
             </button>
           ))}
         </div>
