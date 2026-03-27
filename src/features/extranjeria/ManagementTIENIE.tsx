@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,8 +21,8 @@ export function ManagementTIENIE() {
           
           <CardContent className="p-8 space-y-6 relative z-10">
             <div className="space-y-2">
-              <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none">Identidad</h3>
-              <p className="text-white/95 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+              <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none text-shadow-sm">Identidad</h3>
+              <p className="text-white text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                 <MapPin className="h-3 w-3 text-white" /> Plaza de las Batallas (Jaén)
               </p>
             </div>
@@ -50,9 +49,9 @@ export function ManagementTIENIE() {
               />
             </div>
 
-            <div className="bg-white/15 p-4 rounded-2xl flex gap-3 items-center backdrop-blur-sm">
+            <div className="bg-white/20 p-4 rounded-2xl flex gap-3 items-center backdrop-blur-md border border-white/10 shadow-inner">
               <Info className="h-5 w-5 text-white shrink-0" />
-              <p className="text-[10px] text-white font-bold leading-tight">
+              <p className="text-[10px] text-white font-black leading-tight uppercase tracking-tight">
                 Recuerda: Consultas presenciales en Plaza de las Batallas. Los viernes a las 9:00 AM suelen liberar nuevas citas.
               </p>
             </div>
@@ -61,7 +60,7 @@ export function ManagementTIENIE() {
 
         {/* RECURSOS ADICIONALES EXTRANJERÍA */}
         <div className="grid grid-cols-1 gap-3 px-2">
-          <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
+          <h4 className="text-[10px] font-black uppercase text-slate-900 tracking-widest ml-2 flex items-center gap-2">
             <Scale className="h-3 w-3" /> Apoyo Legal y Protección
           </h4>
           

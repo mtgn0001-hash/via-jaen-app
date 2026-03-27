@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -49,13 +48,13 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
                 <MessageSquare className="h-8 w-8 text-white" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-2xl font-black uppercase tracking-tighter leading-none">Hablar con Jaén-Bot</h2>
-                <p className="text-[10px] font-bold opacity-90 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
+                <h2 className="text-2xl font-black uppercase tracking-tighter leading-none text-white text-shadow-sm">Hablar con Jaén-Bot</h2>
+                <p className="text-[10px] font-bold text-white/90 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
                <Badge className="bg-white/25 text-white border-none text-[9px] font-black uppercase px-3 py-1 rounded-full hidden sm:flex">IA Activa</Badge>
-               <ArrowRight className="h-6 w-6 opacity-60 group-hover:translate-x-1 transition-transform" />
+               <ArrowRight className="h-6 w-6 text-white opacity-80 group-hover:translate-x-1 transition-transform" />
             </div>
           </CardContent>
         </Card>
@@ -85,7 +84,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             
             <div className="space-y-4">
               <h3 className="text-3xl font-black text-[#1A1A1B] tracking-tighter uppercase leading-tight">Trámites</h3>
-              <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed max-w-[180px]">
+              <p className="text-[10px] font-bold text-slate-800 uppercase leading-relaxed max-w-[180px]">
                 Gestión exclusiva de TIE, Modelo EX-15 y Citas Plaza de las Batallas.
               </p>
               <Button className="h-12 rounded-xl font-black text-xs gap-2 shadow-lg w-fit">
@@ -106,7 +105,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-red-950">Salud</h4>
-              <p className="text-[8px] text-red-800 font-black uppercase">Citas / Urgencias</p>
+              <p className="text-[8px] text-red-900 font-black uppercase">Citas / Urgencias</p>
             </div>
             {isLSE && <Play className="h-3 w-3 text-red-600" />}
           </CardContent>
@@ -123,7 +122,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-emerald-950">Familias</h4>
-              <p className="text-[8px] text-emerald-800 font-black uppercase">Colegios / Ayudas</p>
+              <p className="text-[8px] text-emerald-900 font-black uppercase">Colegios / Ayudas</p>
             </div>
             {isLSE && <Play className="h-3 w-3 text-emerald-700" />}
           </CardContent>
@@ -140,7 +139,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-indigo-950">UJA</h4>
-              <p className="text-[8px] text-indigo-800 font-black uppercase">Becas / Notas</p>
+              <p className="text-[8px] text-indigo-900 font-black uppercase">Becas / Notas</p>
             </div>
             {isLSE && <Play className="h-3 w-3 text-indigo-700" />}
           </CardContent>
@@ -157,7 +156,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             <div className="space-y-1">
               <h4 className="font-black text-xs uppercase text-slate-950">Empleo</h4>
-              <p className="text-[8px] text-slate-700 font-black uppercase">SAE / Ofertas</p>
+              <p className="text-[8px] text-slate-900 font-black uppercase">SAE / Ofertas</p>
             </div>
           </CardContent>
         </Card>
@@ -171,7 +170,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
       <section className="flex justify-center py-2">
          <Button 
             onClick={() => window.open('tel:112', '_self')}
-            className="h-20 w-20 rounded-full bg-destructive shadow-2xl border-4 border-white animate-pulse flex flex-col items-center justify-center gap-0.5 active:scale-90 transition-all"
+            className="h-20 w-20 rounded-full bg-destructive shadow-2xl border-4 border-white animate-pulse flex flex-col items-center justify-center gap-0.5 active:scale-90 transition-all text-white"
          >
             <ShieldAlert className="h-8 w-8 text-white" />
             <span className="text-[9px] font-black uppercase">S.O.S</span>
@@ -187,7 +186,7 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
             </div>
             <div className="space-y-0.5">
               <h4 className="font-black text-xs uppercase text-emerald-950">Bóveda Segura Activa</h4>
-              <p className="text-[10px] font-bold text-emerald-800 uppercase">Tus documentos están protegidos localmente.</p>
+              <p className="text-[10px] font-bold text-emerald-900 uppercase">Tus documentos están protegidos localmente.</p>
             </div>
           </CardContent>
         </Card>
