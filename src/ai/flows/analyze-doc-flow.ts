@@ -1,7 +1,7 @@
 'use server';
 /**
- * @fileOverview Flow de IA para el análisis de documentos de extranjería y salud.
- * Extrae texto mediante OCR y genera un resumen de lectura fácil.
+ * @fileOverview Flow de IA para el análisis detallado de documentos.
+ * No solo identifica el documento, sino que proporciona una guía paso a paso.
  */
 
 import { ai } from '@/ai/genkit';
@@ -13,10 +13,15 @@ const AnalyzeDocInputSchema = z.object({
 });
 
 const AnalyzeDocOutputSchema = z.object({
-  docType: z.enum(['NIE', 'CITA_MEDICA', 'TASA', 'PADRON', 'AYUDA_SOCIAL', 'OTRO']),
-  summary: z.string().describe("Resumen en lenguaje sencillo y directo"),
+  docType: z.string().describe("Nombre común del documento (ej: NIE, Tasa 790)"),
+  summary: z.string().describe("Resumen general de qué es el documento"),
+  explanation: z.string().describe("Explicación de conceptos difíciles (ej: qué es un cánon)"),
+  steps: z.array(z.object({
+    title: z.string().describe("Título del paso"),
+    instruction: z.string().describe("Qué debe hacer el usuario exactamente en esta parte del papel")
+  })).describe("Pasos guiados para rellenar o entender el documento"),
   actionLabel: z.string().describe("Texto para el botón de acción principal"),
-  actionUrl: z.string().describe("Enlace oficial relacionado con el documento"),
+  actionUrl: z.string().describe("Enlace oficial relacionado"),
 });
 
 export async function analyzeDocument(input: z.infer<typeof AnalyzeDocInputSchema>) {
@@ -32,13 +37,13 @@ const analyzeDocFlow = ai.defineFlow(
   async (input) => {
     const { output } = await ai.generate({
       prompt: `Actúa como un asistente experto en trámites para inmigrantes en Jaén, España.
-      Analiza esta imagen de un documento oficial.
+      Analiza esta imagen de un documento oficial y explica al usuario qué tiene delante de forma muy sencilla.
       
-      1. Identifica qué es (NIE, Cita Médica SAS, Tasa 790, Padrón, etc).
-      2. Genera un "Resumen de Lectura Fácil" en el idioma: ${input.language}.
-      3. El resumen debe ser muy corto y decir exactamente qué tiene que hacer el usuario. 
-         - Ejemplo: "Esta es tu cita para el médico. Tienes que ir al Hospital General el lunes a las 9."
-         - Ejemplo: "Es una tasa de extranjería. Tienes que ir al banco a pagar 12 euros."
+      1. Identifica el tipo de documento.
+      2. Si hay palabras difíciles (Cánon, Devengo, Exención, etc), explícalas de forma que un niño las entienda.
+      3. Divide la explicación en 3 o 4 pasos claros siguiendo el orden visual del papel (de arriba a abajo).
+      
+      Importante: El idioma de respuesta debe ser: ${input.language}.
       
       Imagen: {{media url=photoDataUri}}`,
       input: { photoDataUri: input.photoDataUri },

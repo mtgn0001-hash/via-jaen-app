@@ -48,6 +48,7 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
       case 'procedures': return t.procedures;
       case 'directory': return t.directory;
       case 'profile_hub': return 'Mi Perfil';
+      case 'scanner': return 'Escáner IA';
       default: return 'Jaén Integra';
     }
   };
@@ -73,15 +74,15 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
             onClick={toggleMasterAccessibility}
             variant={isAccessible ? "default" : "outline"}
             className={cn(
-              "h-12 px-4 rounded-2xl gap-2 transition-all active:scale-95 border-2",
+              "h-12 w-12 sm:w-auto px-0 sm:px-4 rounded-2xl gap-2 transition-all active:scale-95 border-2",
               isAccessible 
-                ? "bg-yellow-400 text-black border-black animate-pulse" 
+                ? "bg-yellow-400 text-black border-black animate-pulse shadow-[0_0_20px_rgba(250,204,21,0.4)]" 
                 : "bg-primary/5 text-primary border-primary/10"
             )}
             aria-label="Botón Maestro de Accesibilidad: Activar navegación asistida y alto contraste"
           >
             {isAccessible ? <Zap className="h-6 w-6 fill-current" /> : <Accessibility className="h-6 w-6" />}
-            <span className="hidden sm:inline font-black text-[10px] uppercase">A11y</span>
+            <span className="hidden sm:inline font-black text-[10px] uppercase">Accesibilidad</span>
           </Button>
 
           {/* BOTÓN DE AJUSTES */}
@@ -93,10 +94,6 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
             aria-label="Configuración de idioma y colores"
           >
             <Settings2 className="h-6 w-6" />
-          </Button>
-
-          <Button variant="ghost" size="icon" className="h-12 w-12 rounded-2xl bg-slate-50 border hidden md:flex">
-            <Bell className="h-5 w-5 text-slate-400" />
           </Button>
         </div>
       </div>

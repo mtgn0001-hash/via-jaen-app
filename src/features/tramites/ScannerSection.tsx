@@ -12,23 +12,31 @@ import {
   Volume2, 
   ExternalLink,
   ShieldCheck,
-  FileText
+  FileText,
+  Eye,
+  ChevronRight,
+  ChevronLeft,
+  Info,
+  ShieldAlert
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { analyzeDocument } from "@/ai/flows/analyze-doc-flow";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { SpeechButton } from "@/components/ui/SpeechButton";
 
 export function ScannerSection() {
   const { progress } = useLocalStorage();
   const { toast } = useToast();
-  const [isScanning, setIsScanning] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
   const [result, setResult] = useState<{
     docType: string;
     summary: string;
+    explanation: string;
+    steps: { title: string; instruction: string }[];
     actionLabel: string;
     actionUrl: string;
   } | null>(null);
@@ -50,7 +58,7 @@ export function ScannerSection() {
       toast({
         variant: "destructive",
         title: "Error de Cámara",
-        description: "Permite el acceso a la cámara para escanear tus papeles.",
+        description: "Permite el acceso a la cámara para que el bot pueda ver tu papel.",
       });
       setShowCamera(false);
     }
@@ -75,9 +83,11 @@ export function ScannerSection() {
       if ('vibrate' in navigator) navigator.vibrate(100);
       const aiResult = await analyzeDocument({ photoDataUri, language: lang });
       setResult(aiResult);
+      setCurrentStep(0);
       
+      // Auto-narración inicial si es modo accesible
       if (isAccessible && 'speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance("Análisis completado. " + aiResult.summary);
+        const utterance = new SpeechSynthesisUtterance(`He detectado un ${aiResult.docType}. ${aiResult.summary}`);
         utterance.lang = lang === 'ar' ? 'ar-SA' : 'es-ES';
         window.speechSynthesis.speak(utterance);
       }
@@ -85,7 +95,7 @@ export function ScannerSection() {
       toast({
         variant: "destructive",
         title: "Error de IA",
-        description: "No se pudo leer el documento. Intenta con mejor luz.",
+        description: "No he podido leer el papel. Intenta que haya más luz.",
       });
     } finally {
       setIsAnalyzing(false);
@@ -99,127 +109,201 @@ export function ScannerSection() {
     setShowCamera(false);
   };
 
-  const speakResult = () => {
-    if (result && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(result.summary);
-      utterance.lang = lang === 'ar' ? 'ar-SA' : 'es-ES';
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
   return (
     <div className="space-y-6">
-      {/* TRIGGER BUTTON */}
+      {/* BOTÓN MAESTRO DE ASISTENCIA */}
       <section className="px-2">
         <Button 
           onClick={startCamera}
           className={cn(
-            "w-full h-24 rounded-[2.5rem] bg-indigo-600 text-white shadow-2xl border-4 border-white flex items-center justify-between px-8 group active:scale-95 transition-all animate-emergency-pulse",
-            isAccessible && "h-32 rounded-none border-8"
+            "w-full h-28 rounded-[2.5rem] bg-indigo-600 text-white shadow-2xl border-4 border-white flex items-center justify-between px-8 group active:scale-95 transition-all animate-emergency-pulse",
+            isAccessible && "h-36 rounded-none border-8"
           )}
           style={{ "--pulse-color": "79, 70, 229" } as any}
         >
-          <div className="flex items-center gap-4">
-            <Camera className={cn("h-8 w-8", isAccessible && "h-12 w-12")} />
+          <div className="flex items-center gap-5">
+            <div className="bg-white/20 p-4 rounded-3xl backdrop-blur-md">
+              <Eye className={cn("h-10 w-10 text-white", isAccessible && "h-14 w-14")} />
+            </div>
             <div className="text-left">
-              <span className={cn("block text-xl font-black uppercase tracking-tight", isAccessible && "text-3xl")}>Escanear Papel</span>
-              <span className={cn("block text-[10px] font-bold uppercase opacity-80", isAccessible && "text-lg")}>IA Jaén: Lectura Fácil</span>
+              <span className={cn("block text-2xl font-black uppercase tracking-tighter", isAccessible && "text-4xl")}>Ayúdame con este papel</span>
+              <span className={cn("block text-[11px] font-bold uppercase opacity-80 tracking-widest", isAccessible && "text-xl")}>Asistente Visual IA</span>
             </div>
           </div>
-          <Scan className="h-6 w-6 opacity-40 group-hover:rotate-90 transition-transform" />
+          <Camera className="h-8 w-8 opacity-40 group-hover:scale-110 transition-transform" />
         </Button>
       </section>
 
-      {/* CAMERA OVERLAY */}
+      {/* CÁMARA CON GUÍA */}
       <Dialog open={showCamera} onOpenChange={(val) => !val && closeCamera()}>
-        <DialogContent className="sm:max-w-lg p-0 border-none bg-black rounded-[3rem] overflow-hidden outline-none h-[80vh]">
+        <DialogContent className="sm:max-w-xl p-0 border-none bg-black rounded-[3rem] overflow-hidden outline-none h-[85vh]">
           <div className="relative h-full flex flex-col">
             <video ref={videoRef} autoPlay playsInline muted className="flex-1 object-cover" />
             
-            {/* ENCUADRE OCR */}
+            {/* MARCO GUÍA PARA EL USUARIO */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[80%] aspect-[3/4] border-4 border-dashed border-white/40 rounded-3xl relative">
-                <div className="absolute -top-2 -left-2 w-10 h-10 border-t-8 border-l-8 border-indigo-500 rounded-tl-xl" />
-                <div className="absolute -bottom-2 -right-2 w-10 h-10 border-b-8 border-r-8 border-indigo-500 rounded-br-xl" />
+              <div className="w-[85%] aspect-[3/4] border-4 border-dashed border-white/30 rounded-3xl relative">
+                <div className="absolute -top-4 -left-4 w-16 h-16 border-t-[12px] border-l-12 border-indigo-500 rounded-tl-2xl" />
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-[12px] border-r-12 border-indigo-500 rounded-br-2xl" />
+                
+                <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-indigo-500/30 animate-pulse" />
               </div>
             </div>
 
-            <div className="p-8 bg-black/60 backdrop-blur-xl flex justify-center gap-6">
-              <Button variant="outline" size="icon" onClick={closeCamera} className="h-16 w-16 rounded-full border-2 border-white/20 text-white">
-                <X className="h-8 w-8" />
-              </Button>
-              <Button onClick={captureAndAnalyze} className="h-20 w-20 rounded-full bg-white text-indigo-600 shadow-2xl border-4 border-indigo-500 active:scale-90 transition-transform">
-                <Camera className="h-10 w-10" />
-              </Button>
+            <div className="p-8 bg-black/80 backdrop-blur-2xl flex flex-col items-center gap-6">
+              <p className="text-white font-black text-xs uppercase tracking-[0.2em] animate-pulse">Encuadra el papel dentro del marco</p>
+              
+              <div className="flex justify-center gap-8 w-full">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={closeCamera} 
+                  className="h-16 w-16 rounded-full border-4 border-white/10 text-white bg-white/5 hover:bg-white/20"
+                >
+                  <X className="h-8 w-8" />
+                </Button>
+                <Button 
+                  onClick={captureAndAnalyze} 
+                  className="h-24 w-24 rounded-full bg-white text-indigo-600 shadow-[0_0_50px_rgba(255,255,255,0.3)] border-8 border-indigo-500 active:scale-90 transition-transform"
+                >
+                  <Camera className="h-12 w-12" />
+                </Button>
+              </div>
             </div>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* ANALYSIS MODAL */}
+      {/* RESULTADO Y GUÍA PASO A PASO */}
       <Dialog open={isAnalyzing || !!result} onOpenChange={() => !isAnalyzing && setResult(null)}>
-        <DialogContent className="sm:max-w-md rounded-[3rem] bg-white p-0 border-none shadow-2xl overflow-hidden outline-none">
+        <DialogContent className="sm:max-w-lg rounded-[3rem] bg-white p-0 border-none shadow-2xl overflow-hidden outline-none max-h-[90vh] flex flex-col">
           {isAnalyzing ? (
-            <div className="p-12 flex flex-col items-center text-center gap-6">
+            <div className="p-20 flex flex-col items-center text-center gap-8">
               <div className="relative">
-                <Loader2 className="h-20 w-20 text-indigo-600 animate-spin" />
-                <Scan className="absolute inset-0 m-auto h-8 w-8 text-indigo-400 animate-pulse" />
+                <div className="h-32 w-32 border-8 border-indigo-100 border-t-indigo-600 rounded-full animate-spin" />
+                <Eye className="absolute inset-0 m-auto h-12 w-12 text-indigo-600 animate-pulse" />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-2xl font-black text-indigo-900 uppercase">Analizando...</h3>
-                <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">Jaén-Bot está leyendo el papel</p>
+              <div className="space-y-3">
+                <h3 className="text-3xl font-black text-indigo-900 uppercase tracking-tighter">Jaén-Bot está mirando...</h3>
+                <p className="text-md font-bold text-slate-500 uppercase tracking-widest">Analizando tu documento ahora mismo</p>
               </div>
             </div>
           ) : result && (
-            <div className="animate-in fade-in zoom-in-95 duration-500">
-              <div className="p-8 bg-indigo-600 text-white flex flex-col items-center text-center gap-4">
+            <div className="flex flex-col h-full overflow-y-auto scrollbar-hide">
+              {/* HEADER DEL RESULTADO */}
+              <div className="p-8 bg-indigo-600 text-white flex flex-col items-center text-center gap-4 sticky top-0 z-10 shadow-lg">
                 <div className="bg-white/20 p-4 rounded-[2rem] backdrop-blur-md">
-                  <FileText className="h-12 w-12 text-white" />
+                  <FileText className="h-10 w-10 text-white" />
                 </div>
                 <div className="space-y-1">
-                  <DialogTitle className="text-3xl font-black uppercase tracking-tighter text-white">Resumen IA</DialogTitle>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">{result.docType}</p>
+                  <DialogTitle className="text-3xl font-black uppercase tracking-tighter text-white">Guía de tu Documento</DialogTitle>
+                  <div className="flex items-center gap-2 justify-center">
+                    <Badge className="bg-yellow-400 text-black font-black text-[10px] px-3">{result.docType}</Badge>
+                    <SpeechButton text={`${result.docType}. ${result.summary}`} language={lang} variant="white" className="h-8 w-8" />
+                  </div>
                 </div>
               </div>
 
-              <div className="p-8 space-y-8">
-                <div className="bg-slate-50 p-6 rounded-[2rem] border-2 border-slate-100 relative group">
+              <div className="p-8 space-y-8 pb-32">
+                {/* RESUMEN INICIAL */}
+                <div className="bg-slate-50 p-6 rounded-[2.5rem] border-2 border-slate-100 space-y-4">
+                  <div className="flex justify-between items-start">
+                    <h4 className="text-[10px] font-black uppercase text-indigo-600 tracking-widest">Resumen de Lectura Fácil</h4>
+                    <Info className="h-4 w-4 text-indigo-300" />
+                  </div>
                   <p className={cn(
-                    "text-xl font-bold leading-relaxed text-[#1A1A1B]",
+                    "text-2xl font-bold leading-relaxed text-slate-900",
                     isAccessible && "text-3xl font-black"
                   )}>
                     "{result.summary}"
                   </p>
-                  <Button 
-                    size="icon" 
-                    onClick={speakResult}
-                    className="absolute -top-4 -right-4 h-12 w-12 rounded-full bg-white shadow-xl border-2 border-indigo-100 text-indigo-600 hover:bg-indigo-50"
-                  >
-                    <Volume2 className="h-6 w-6" />
-                  </Button>
                 </div>
 
-                <div className="bg-emerald-50 p-5 rounded-2xl flex gap-4 items-center border border-emerald-100">
-                  <ShieldCheck className="h-8 w-8 text-emerald-600 shrink-0" />
-                  <p className="text-[11px] text-emerald-900 font-black leading-tight uppercase">
-                    Análisis de privacidad: Los datos no se han guardado. Solo tú ves esta información.
+                {/* EXPLICACIÓN DE CONCEPTOS */}
+                <div className="bg-amber-50 p-6 rounded-[2.5rem] border-2 border-amber-100 space-y-3">
+                  <h4 className="text-[10px] font-black uppercase text-amber-700 tracking-widest flex items-center gap-2">
+                    <ShieldAlert className="h-4 w-4" /> ¿Qué significa esto?
+                  </h4>
+                  <p className="text-lg font-bold text-amber-900 leading-tight">
+                    {result.explanation}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3">
+                {/* PASOS GUIADOS */}
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center px-2">
+                    <h4 className="text-[12px] font-black uppercase text-slate-400 tracking-[0.2em]">Paso a Paso</h4>
+                    <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase">
+                      {currentStep + 1} de {result.steps.length}
+                    </span>
+                  </div>
+
+                  <Card className="border-4 border-indigo-600 bg-white rounded-[2.5rem] shadow-xl overflow-hidden animate-in slide-in-from-right-4 duration-500">
+                    <CardContent className="p-8 space-y-6">
+                      <div className="space-y-2">
+                        <h5 className="text-xl font-black text-indigo-600 uppercase tracking-tight">
+                          {result.steps[currentStep].title}
+                        </h5>
+                        <p className={cn(
+                          "text-2xl font-bold text-slate-800 leading-snug",
+                          isAccessible && "text-3xl font-black"
+                        )}>
+                          {result.steps[currentStep].instruction}
+                        </p>
+                      </div>
+                      
+                      <div className="flex justify-between items-center pt-4">
+                        <SpeechButton 
+                          text={`${result.steps[currentStep].title}. ${result.steps[currentStep].instruction}`} 
+                          language={lang} 
+                          variant="secondary"
+                          className="h-14 w-14"
+                        />
+                        
+                        <div className="flex gap-2">
+                          <Button 
+                            variant="outline" 
+                            disabled={currentStep === 0}
+                            onClick={() => setCurrentStep(prev => prev - 1)}
+                            className="h-14 w-14 rounded-2xl border-2"
+                          >
+                            <ChevronLeft className="h-6 w-6" />
+                          </Button>
+                          <Button 
+                            disabled={currentStep === result.steps.length - 1}
+                            onClick={() => setCurrentStep(prev => prev + 1)}
+                            className="h-14 w-24 rounded-2xl font-black uppercase text-xs gap-2"
+                          >
+                            Sig. <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* SEGURIDAD */}
+                <div className="bg-emerald-50 p-6 rounded-3xl flex gap-4 items-center border border-emerald-100">
+                  <ShieldCheck className="h-10 w-10 text-emerald-600 shrink-0" />
+                  <p className="text-[11px] text-emerald-900 font-bold uppercase leading-tight">
+                    Tus datos están seguros. Esta foto no se ha guardado en internet, solo se ha usado para ayudarte en este momento.
+                  </p>
+                </div>
+
+                {/* ACCIÓN FINAL */}
+                <div className="grid grid-cols-1 gap-4 pt-4">
                   <Button 
-                    className="h-16 rounded-2xl bg-indigo-600 text-white font-black text-lg gap-3 shadow-xl active:scale-95 transition-all"
+                    className="h-20 rounded-[1.75rem] bg-indigo-600 text-white font-black text-xl gap-3 shadow-xl active:scale-95 transition-all uppercase tracking-tighter"
                     onClick={() => window.open(result.actionUrl, '_blank')}
                   >
-                    {result.actionLabel.toUpperCase()} <ExternalLink className="h-5 w-5" />
+                    {result.actionLabel} <ExternalLink className="h-6 w-6" />
                   </Button>
                   <Button 
                     variant="ghost" 
                     onClick={() => setResult(null)} 
-                    className="rounded-xl font-black text-slate-400 text-xs uppercase"
+                    className="h-14 rounded-2xl font-black text-slate-400 text-sm uppercase tracking-widest"
                   >
-                    Cerrar y Borrar
+                    Cerrar Asistencia
                   </Button>
                 </div>
               </div>
