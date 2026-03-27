@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react";
-import { Settings2, Bell } from "lucide-react";
+import { Settings2, Bell, Accessibility, Zap } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { AppLogo } from "@/components/ui/AppLogo";
 import { UserProgress } from "@/lib/store";
 import { SettingsPanel } from "@/components/ui/SettingsPanel";
+import { cn } from "@/lib/utils";
 
 type HeaderProps = {
   lang: Language;
@@ -18,6 +19,27 @@ type HeaderProps = {
 export function Header({ lang, progress, updateProgress, activeTab }: HeaderProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const t = translations[lang] || translations.es;
+  const isAccessible = progress.accessibilityMode === 'accessible';
+
+  const toggleMasterAccessibility = () => {
+    const nextMode = isAccessible ? 'standard' : 'accessible';
+    if ('vibrate' in navigator) navigator.vibrate(nextMode === 'accessible' ? [100, 50, 100] : 50);
+    
+    updateProgress({ 
+      accessibilityMode: nextMode,
+      easyReading: nextMode === 'accessible'
+    });
+
+    if ('speechSynthesis' in window) {
+      const msg = nextMode === 'accessible' 
+        ? "Modo de accesibilidad activado. Navegación asistida lista." 
+        : "Modo estándar activado.";
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(msg);
+      utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
   const getBreadcrumb = () => {
     switch (activeTab) {
@@ -46,18 +68,34 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
         </div>
 
         <div className="flex items-center gap-2">
-          {/* BOTÓN DE AJUSTES: ACCESO PRINCIPAL */}
+          {/* BOTÓN MAESTRO DE ACCESIBILIDAD */}
+          <Button
+            onClick={toggleMasterAccessibility}
+            variant={isAccessible ? "default" : "outline"}
+            className={cn(
+              "h-12 px-4 rounded-2xl gap-2 transition-all active:scale-95 border-2",
+              isAccessible 
+                ? "bg-yellow-400 text-black border-black animate-pulse" 
+                : "bg-primary/5 text-primary border-primary/10"
+            )}
+            aria-label="Botón Maestro de Accesibilidad: Activar navegación asistida y alto contraste"
+          >
+            {isAccessible ? <Zap className="h-6 w-6 fill-current" /> : <Accessibility className="h-6 w-6" />}
+            <span className="hidden sm:inline font-black text-[10px] uppercase">A11y</span>
+          </Button>
+
+          {/* BOTÓN DE AJUSTES */}
           <Button 
             variant="ghost" 
             size="icon" 
             className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10 transition-all active:scale-90"
             onClick={() => setSettingsOpen(true)}
-            aria-label="Configuración de idioma y colores de la aplicación"
+            aria-label="Configuración de idioma y colores"
           >
             <Settings2 className="h-6 w-6" />
           </Button>
 
-          <Button variant="ghost" size="icon" className="h-12 w-12 rounded-2xl bg-slate-50 border hidden sm:flex">
+          <Button variant="ghost" size="icon" className="h-12 w-12 rounded-2xl bg-slate-50 border hidden md:flex">
             <Bell className="h-5 w-5 text-slate-400" />
           </Button>
         </div>

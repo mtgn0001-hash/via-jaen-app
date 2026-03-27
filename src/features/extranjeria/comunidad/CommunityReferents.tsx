@@ -7,9 +7,8 @@ import {
   Instagram, 
   Youtube, 
   Globe, 
-  Play,
-  ShieldAlert,
-  ArrowUpRight
+  ArrowUpRight,
+  ShieldAlert
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -26,6 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useLocalStorage } from "@/lib/store";
 
 type Referent = {
   name: string;
@@ -40,7 +40,9 @@ type Referent = {
 };
 
 export function CommunityReferents({ lang }: { lang: string }) {
+  const { progress } = useLocalStorage();
   const [selectedRef, setSelectedRef] = useState<Referent | null>(null);
+  const isAccessible = progress.accessibilityMode === 'accessible';
 
   const referents: Referent[] = [
     {
@@ -89,6 +91,33 @@ export function CommunityReferents({ lang }: { lang: string }) {
     }
   ];
 
+  const renderCard = (ref: Referent) => (
+    <Card 
+      key={ref.name}
+      className={cn(
+        "border-none bg-white shadow-xl rounded-[2rem] overflow-hidden border-2 border-slate-200 cursor-pointer active:scale-95 transition-all",
+        isAccessible && "rounded-none border-4 border-primary mb-4"
+      )}
+      onClick={() => setSelectedRef(ref)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Referente: ${ref.name}, experto en ${ref.spec}.`}
+    >
+      <CardContent className={cn("p-6 flex flex-col items-center text-center gap-3", isAccessible && "flex-row text-left gap-6 p-8")}>
+        <div className={cn("p-4 rounded-full shadow-inner", ref.color.split(' ')[0], isAccessible && "rounded-2xl p-6")}>
+          <ref.icon className={cn("h-8 w-8", ref.color.split(' ')[1], isAccessible && "h-12 w-12")} aria-hidden="true" />
+        </div>
+        <div className="space-y-1 flex-1">
+          <h4 className={cn("text-[15px] font-black text-[#1A1A1B] leading-tight line-clamp-2", isAccessible && "text-3xl")}>{ref.name}</h4>
+          <Badge className={cn("text-[10px] uppercase font-black px-2 py-1 border-none", ref.color, isAccessible && "text-lg px-4 py-2")}>
+            {ref.spec}
+          </Badge>
+          {isAccessible && <p className="text-xl mt-4 font-bold text-foreground line-clamp-2">{ref.description}</p>}
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <section className="space-y-4 py-4" aria-labelledby="comm-title">
       <div className="flex justify-between items-center px-2">
@@ -97,7 +126,7 @@ export function CommunityReferents({ lang }: { lang: string }) {
             Voces que te Guían
           </h3>
           <p className="text-[11px] text-[#1A1A1B] font-black uppercase tracking-widest leading-none">
-            Referentes de confianza (Visibilidad Permanente)
+            Referentes de confianza
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -108,33 +137,21 @@ export function CommunityReferents({ lang }: { lang: string }) {
         </div>
       </div>
 
-      <Carousel className="w-full" opts={{ align: "start", dragFree: true }}>
-        <CarouselContent className="-ml-3 px-2">
-          {referents.map((ref) => (
-            <CarouselItem key={ref.name} className="pl-3 basis-[180px]">
-              <Card 
-                className="border-none bg-white shadow-xl rounded-[2rem] overflow-hidden border-2 border-slate-200 cursor-pointer active:scale-95 transition-all"
-                onClick={() => setSelectedRef(ref)}
-                role="button"
-                tabIndex={0}
-                aria-label={`Referente: ${ref.name}, experto en ${ref.spec}.`}
-              >
-                <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-                  <div className={cn("p-4 rounded-full shadow-inner", ref.color.split(' ')[0])}>
-                    <ref.icon className={cn("h-8 w-8", ref.color.split(' ')[1])} aria-hidden="true" />
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-[15px] font-black text-[#1A1A1B] leading-tight line-clamp-2">{ref.name}</h4>
-                    <Badge className={cn("text-[10px] uppercase font-black px-2 py-1 border-none", ref.color)}>
-                      {ref.spec}
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {isAccessible ? (
+        <div className="flex flex-col animate-in fade-in duration-700">
+          {referents.map(renderCard)}
+        </div>
+      ) : (
+        <Carousel className="w-full" opts={{ align: "start", dragFree: true }}>
+          <CarouselContent className="-ml-3 px-2">
+            {referents.map((ref) => (
+              <CarouselItem key={ref.name} className="pl-3 basis-[180px]">
+                {renderCard(ref)}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      )}
 
       {/* DETALLE DEL REFERENTE */}
       <Dialog open={!!selectedRef} onOpenChange={() => setSelectedRef(null)}>

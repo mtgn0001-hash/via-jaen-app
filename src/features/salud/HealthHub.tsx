@@ -7,7 +7,6 @@ import {
   ShieldAlert, 
   MapPin, 
   HeartPulse,
-  CreditCard,
   Navigation,
   Phone,
   Heart
@@ -16,8 +15,12 @@ import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLocalStorage } from "@/lib/store";
 
 export function HealthHub({ lang }: { lang: string }) {
+  const { progress } = useLocalStorage();
+  const isAccessible = progress.accessibilityMode === 'accessible';
+
   const suapCenters = [
     { 
       name: "SUAP BULEVAR (URGENCIAS)", 
@@ -34,7 +37,7 @@ export function HealthHub({ lang }: { lang: string }) {
   ];
 
   const handleCall = (number: string) => {
-    if ('vibrate' in navigator) navigator.vibrate(100);
+    if ('vibrate' in navigator) navigator.vibrate(number === '112' ? [200, 50, 200, 50, 200] : 100);
     window.open(`tel:${number.replace(/\s/g, '')}`, '_self');
   };
 
@@ -43,15 +46,16 @@ export function HealthHub({ lang }: { lang: string }) {
   };
 
   return (
-    <div className="space-y-10 animate-in slide-in-from-bottom-2 duration-500">
+    <div className={cn("space-y-10 animate-in slide-in-from-bottom-2 duration-500", isAccessible && "space-y-16")}>
       <div className="flex justify-between items-center px-2">
         <div className="space-y-1">
-          <h3 className="text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter">SALUD Y URGENCIAS</h3>
+          <h3 className={cn("text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter", isAccessible && "text-5xl")}>SALUD Y URGENCIAS</h3>
           <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">INFORMACIÓN CRÍTICA 24H EN JAÉN</p>
         </div>
         <SpeechButton 
           text="Sección Salud y Urgencias. Aquí encontrarás el botón de emergencias 112, hospitales principales y centros de urgencia en Jaén. Puedes llamar directamente o ver la ruta en el mapa." 
           language={lang} 
+          size={isAccessible ? "lg" : "icon"}
         />
       </div>
 
@@ -59,12 +63,15 @@ export function HealthHub({ lang }: { lang: string }) {
       <div className="relative group">
         <Button 
           onClick={() => handleCall("112")}
-          className="w-full h-36 rounded-[2rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all relative overflow-hidden animate-emergency-pulse"
-          aria-label="Botón de emergencia resaltado visualmente: Llamar al 112 ahora mismo"
+          className={cn(
+            "w-full h-36 rounded-[2rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all relative overflow-hidden animate-emergency-pulse",
+            isAccessible && "h-56 rounded-none border-8"
+          )}
+          aria-label="Botón de emergencia: Llamar al 112 ahora mismo"
         >
-          <ShieldAlert className="h-14 w-14 text-white" />
-          <span className="text-4xl font-black uppercase tracking-tighter text-shadow-strong">LLAMAR AL 112</span>
-          <span className="text-[14px] font-black opacity-100">EMERGENCIAS ANDALUCÍA</span>
+          <ShieldAlert className={cn("h-14 w-14 text-white", isAccessible && "h-24 w-24")} />
+          <span className={cn("text-4xl font-black uppercase tracking-tighter text-shadow-strong", isAccessible && "text-6xl")}>LLAMAR AL 112</span>
+          <span className={cn("text-[14px] font-black", isAccessible && "text-2xl")}>EMERGENCIAS ANDALUCÍA</span>
         </Button>
       </div>
 
@@ -78,67 +85,39 @@ export function HealthHub({ lang }: { lang: string }) {
         </div>
         
         <div className="grid grid-cols-1 gap-6">
-          <Card className="border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200">
-            <CardContent className="p-8 space-y-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <h4 className="text-3xl font-black text-[#1A1A1B] uppercase leading-tight">HOSP. UNIVERSITARIO</h4>
-                  <p className="text-md font-bold text-[#1A1A1B] flex items-center gap-1">
-                    <MapPin className="h-4 w-4 text-red-600" /> AV. DE MADRID, JAÉN
-                  </p>
+          {[
+            { name: "HOSP. UNIVERSITARIO", loc: "AV. DE MADRID, JAÉN", tel: "953 00 80 00", badge: "URGENCIAS 24H", query: "Hospital Universitario de Jaén Av. de Madrid" },
+            { name: "HOSP. MÉDICO-QUIRÚRGICO", loc: "CARRETERA DE MADRID, JAÉN", tel: "953 00 80 00", badge: "TRAUMA / REHAB", query: "Hospital Neurotraumatológico Jaén Carretera de Madrid" }
+          ].map((hosp) => (
+            <Card key={hosp.name} className={cn("border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200", isAccessible && "rounded-none border-4")}>
+              <CardContent className="p-8 space-y-6">
+                <div className="flex justify-between items-start">
+                  <div className="space-y-1">
+                    <h4 className={cn("text-3xl font-black text-[#1A1A1B] uppercase leading-tight", isAccessible && "text-5xl")}>{hosp.name}</h4>
+                    <p className={cn("text-md font-bold text-[#1A1A1B] flex items-center gap-1", isAccessible && "text-2xl mt-4")}>
+                      <MapPin className="h-4 w-4 text-red-600" /> {hosp.loc}
+                    </p>
+                  </div>
+                  <Badge className="bg-red-600 text-white font-black text-[10px] px-4 py-2 animate-emergency-pulse">{hosp.badge}</Badge>
                 </div>
-                <Badge className="bg-red-600 text-white font-black text-[10px] px-4 py-2 animate-emergency-pulse">URGENCIAS 24H</Badge>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button 
-                  onClick={() => handleCall("953 00 80 00")}
-                  variant="outline"
-                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl"
-                  aria-label="Llamar al Hospital General de Jaén"
-                >
-                  <Phone className="h-6 w-6" /> LLAMAR
-                </Button>
-                <Button 
-                  onClick={() => handleNavigate("Hospital Universitario de Jaén Av. de Madrid")}
-                  className="h-16 rounded-2xl font-black gap-3 shadow-lg text-xl"
-                  aria-label="Ver cómo llegar al Hospital General en el mapa"
-                >
-                  <Navigation className="h-6 w-6" /> NAVEGAR
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200">
-            <CardContent className="p-8 space-y-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <h4 className="text-3xl font-black text-[#1A1A1B] uppercase leading-tight">HOSP. MÉDICO-QUIRÚRGICO</h4>
-                  <p className="text-md font-bold text-[#1A1A1B] flex items-center gap-1">
-                    <MapPin className="h-4 w-4 text-red-600" /> CARRETERA DE MADRID, JAÉN
-                  </p>
+                <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", isAccessible && "grid-cols-1 gap-6")}>
+                  <Button 
+                    onClick={() => handleCall(hosp.tel)}
+                    variant="outline"
+                    className={cn("h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl", isAccessible && "h-24 text-3xl")}
+                  >
+                    <Phone className={cn("h-6 w-6", isAccessible && "h-10 w-10")} /> LLAMAR
+                  </Button>
+                  <Button 
+                    onClick={() => handleNavigate(hosp.query)}
+                    className={cn("h-16 rounded-2xl font-black gap-3 shadow-lg text-xl", isAccessible && "h-24 text-3xl")}
+                  >
+                    <Navigation className={cn("h-6 w-6", isAccessible && "h-10 w-10")} /> NAVEGAR
+                  </Button>
                 </div>
-                <Badge variant="secondary" className="bg-slate-900 text-white font-black text-[10px] px-4 py-2">TRAUMA / REHAB</Badge>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button 
-                  onClick={() => handleCall("953 00 80 00")}
-                  variant="outline"
-                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl"
-                  aria-label="Llamar al Hospital Médico-Quirúrgico"
-                >
-                  <Phone className="h-6 w-6" /> LLAMAR
-                </Button>
-                <Button 
-                  onClick={() => handleNavigate("Hospital Neurotraumatológico Jaén Carretera de Madrid")}
-                  className="h-16 rounded-2xl font-black gap-3 shadow-lg text-xl"
-                  aria-label="Ver cómo llegar al Hospital Médico-Quirúrgico en el mapa"
-                >
-                  <Navigation className="h-6 w-6" /> NAVEGAR
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -152,9 +131,9 @@ export function HealthHub({ lang }: { lang: string }) {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {suapCenters.map(center => (
-            <Card key={center.name} className="border-none bg-white border-2 border-slate-200 rounded-[2.5rem] overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+            <Card key={center.name} className={cn("border-none bg-white border-2 border-slate-200 rounded-[2.5rem] overflow-hidden shadow-lg", isAccessible && "rounded-none border-4")}>
               <CardContent className="p-8 space-y-6">
-                <h5 className="font-black text-2xl text-[#1A1A1B] uppercase leading-tight">{center.name}</h5>
+                <h5 className={cn("font-black text-2xl text-[#1A1A1B] uppercase leading-tight", isAccessible && "text-4xl")}>{center.name}</h5>
                 <p className="text-[12px] font-bold text-[#1A1A1B] leading-tight uppercase opacity-70">
                   {center.address}
                 </p>
@@ -162,15 +141,13 @@ export function HealthHub({ lang }: { lang: string }) {
                   <Button 
                     onClick={() => handleCall(center.phone)}
                     variant="outline"
-                    className="w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-2xl font-black h-16 text-xl"
-                    aria-label={`Llamar a ${center.name}`}
+                    className={cn("w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-2xl font-black h-16 text-xl", isAccessible && "h-24 text-3xl")}
                   >
                     TEL: {center.phone}
                   </Button>
                   <Button 
                     onClick={() => handleNavigate(center.map)}
-                    className="w-full rounded-2xl font-black h-16 text-xl gap-2 shadow-md"
-                    aria-label={`Ver ruta a ${center.name}`}
+                    className={cn("w-full rounded-2xl font-black h-16 text-xl gap-2 shadow-md", isAccessible && "h-24 text-3xl")}
                   >
                     <Navigation className="h-5 w-5" /> VER MAPA
                   </Button>
@@ -195,32 +172,6 @@ export function HealthHub({ lang }: { lang: string }) {
             variant="primary"
             lang={lang}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <ResourceLauncher 
-              title="SOLICITAR TSE"
-              description="Solicita la Tarjeta Sanitaria Europea para desplazamientos internacionales."
-              url={OFFICIAL_LINKS.salud.tse}
-              triggerLabel="TSE EUROPA"
-              variant="primary"
-              lang={lang}
-            />
-            <ResourceLauncher 
-              title="REINTEGRO GASTOS"
-              description="Solicitud de reintegro de gastos ortoprotésicos en el SAS."
-              url={OFFICIAL_LINKS.salud.reintegroOrtoprotesico}
-              triggerLabel="REINTEGROS"
-              variant="primary"
-              lang={lang}
-            />
-            <ResourceLauncher 
-              title="AYUDA VIAJE"
-              description="Compensación por gastos de desplazamiento por motivos de salud."
-              url={OFFICIAL_LINKS.salud.ayudaDesplazamiento}
-              triggerLabel="AYUDA VIAJE"
-              variant="primary"
-              lang={lang}
-            />
-          </div>
         </div>
       </section>
     </div>
