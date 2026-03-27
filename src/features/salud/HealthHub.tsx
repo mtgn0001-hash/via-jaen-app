@@ -67,7 +67,7 @@ export function HealthHub({ lang }: { lang: string }) {
             <h4 className="text-xs font-black uppercase tracking-tight leading-tight text-white">Hosp. Médico-Quirúrgico</h4>
             <button 
               onClick={() => handleCall("953 00 80 00")}
-              className="w-full h-10 rounded-xl bg-red-700 text-white font-black text-[10px] hover:bg-red-800 shadow-md"
+              className="w-full h-10 rounded-xl bg-red-700 text-black font-black text-[10px] hover:bg-red-800 shadow-md"
             >
               953 00 80 00
             </button>
