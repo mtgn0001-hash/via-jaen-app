@@ -76,7 +76,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
             </div>
             <div className="text-left">
               <SheetTitle className="text-2xl font-black text-primary uppercase tracking-tighter">{t.settings}</SheetTitle>
-              <SheetDescription className="font-medium">{t.disclaimer}</SheetDescription>
+              <SheetDescription className="font-bold text-sm text-[#1A1A1B]">{t.disclaimer}</SheetDescription>
             </div>
           </div>
         </SheetHeader>

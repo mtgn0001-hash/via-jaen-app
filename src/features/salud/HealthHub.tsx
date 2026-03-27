@@ -44,7 +44,7 @@ export function HealthHub({ lang }: { lang: string }) {
     <div className="space-y-8 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center px-2">
         <div className="space-y-1">
-          <h3 className="text-2xl font-black text-[#1A1A1B] uppercase tracking-tighter">Salud y Urgencias</h3>
+          <h3 className="text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter">Salud y Urgencias</h3>
           <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">Información Crítica 24H en Jaén</p>
         </div>
         <SpeechButton 
@@ -56,12 +56,12 @@ export function HealthHub({ lang }: { lang: string }) {
       {/* 1. BOTÓN DE PÁNICO 112 */}
       <Button 
         onClick={() => handleCall("112")}
-        className="w-full h-28 rounded-[2.5rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
+        className="w-full h-32 rounded-[2.5rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
         aria-label="Botón de emergencia: Llamar al 112 ahora mismo"
       >
-        <ShieldAlert className="h-10 w-10 text-white" />
-        <span className="text-3xl font-black uppercase tracking-tighter text-shadow-strong">LLAMAR AL 112</span>
-        <span className="text-[12px] font-bold opacity-100">EMERGENCIAS ANDALUCÍA</span>
+        <ShieldAlert className="h-12 w-12 text-white" />
+        <span className="text-4xl font-black uppercase tracking-tighter text-shadow-strong">LLAMAR AL 112</span>
+        <span className="text-[14px] font-black opacity-100">EMERGENCIAS ANDALUCÍA</span>
       </Button>
 
       {/* 2. HOSPITALES PRINCIPALES */}
@@ -78,8 +78,8 @@ export function HealthHub({ lang }: { lang: string }) {
             <CardContent className="p-8 space-y-6">
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                  <h4 className="text-2xl font-black text-[#1A1A1B] uppercase leading-tight">Hosp. Universitario (General)</h4>
-                  <p className="text-sm font-black text-[#1A1A1B] flex items-center gap-1">
+                  <h4 className="text-3xl font-black text-[#1A1A1B] uppercase leading-tight">Hosp. Universitario (General)</h4>
+                  <p className="text-md font-black text-[#1A1A1B] flex items-center gap-1">
                     <MapPin className="h-4 w-4 text-red-600" /> Av. de Madrid, Jaén
                   </p>
                 </div>
@@ -89,14 +89,14 @@ export function HealthHub({ lang }: { lang: string }) {
                 <Button 
                   onClick={() => handleCall("953 00 80 00")}
                   variant="outline"
-                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-lg"
+                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl"
                   aria-label="Llamar al Hospital General de Jaén"
                 >
                   <Phone className="h-6 w-6" /> LLAMAR
                 </Button>
                 <Button 
                   onClick={() => handleNavigate("Hospital Universitario de Jaén Av. de Madrid")}
-                  className="h-16 rounded-2xl font-black gap-2 shadow-lg text-lg"
+                  className="h-16 rounded-2xl font-black gap-2 shadow-lg text-xl"
                   aria-label="Ver cómo llegar al Hospital General en el mapa"
                 >
                   <Navigation className="h-6 w-6" /> CÓMO LLEGAR
@@ -109,8 +109,8 @@ export function HealthHub({ lang }: { lang: string }) {
             <CardContent className="p-8 space-y-6">
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                  <h4 className="text-2xl font-black text-[#1A1A1B] uppercase leading-tight">Hosp. Médico-Quirúrgico</h4>
-                  <p className="text-sm font-black text-[#1A1A1B] flex items-center gap-1">
+                  <h4 className="text-3xl font-black text-[#1A1A1B] uppercase leading-tight">Hosp. Médico-Quirúrgico</h4>
+                  <p className="text-md font-black text-[#1A1A1B] flex items-center gap-1">
                     <MapPin className="h-4 w-4 text-red-600" /> Carretera de Madrid, Jaén
                   </p>
                 </div>
@@ -120,14 +120,14 @@ export function HealthHub({ lang }: { lang: string }) {
                 <Button 
                   onClick={() => handleCall("953 00 80 00")}
                   variant="outline"
-                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-lg"
+                  className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl"
                   aria-label="Llamar al Hospital Médico-Quirúrgico"
                 >
                   <Phone className="h-6 w-6" /> LLAMAR
                 </Button>
                 <Button 
                   onClick={() => handleNavigate("Hospital Neurotraumatológico Jaén Carretera de Madrid")}
-                  className="h-16 rounded-2xl font-black gap-2 shadow-lg text-lg"
+                  className="h-16 rounded-2xl font-black gap-2 shadow-lg text-xl"
                   aria-label="Ver cómo llegar al Hospital Médico-Quirúrgico en el mapa"
                 >
                   <Navigation className="h-6 w-6" /> CÓMO LLEGAR
@@ -150,22 +150,22 @@ export function HealthHub({ lang }: { lang: string }) {
           {suapCenters.map(center => (
             <Card key={center.name} className="border-none bg-white border-2 border-slate-200 rounded-[2rem] overflow-hidden">
               <CardContent className="p-6 space-y-4">
-                <h5 className="font-black text-lg text-[#1A1A1B] uppercase leading-tight">{center.name}</h5>
-                <p className="text-[11px] font-black text-[#1A1A1B] leading-tight uppercase">
+                <h5 className="font-black text-2xl text-[#1A1A1B] uppercase leading-tight">{center.name}</h5>
+                <p className="text-[12px] font-black text-[#1A1A1B] leading-tight uppercase">
                   {center.address}
                 </p>
                 <div className="flex flex-col gap-2">
                   <Button 
                     onClick={() => handleCall(center.phone)}
                     variant="outline"
-                    className="w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-xl font-black h-12"
+                    className="w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-xl font-black h-14 text-lg"
                     aria-label={`Llamar a ${center.name}`}
                   >
                     TEL: {center.phone}
                   </Button>
                   <Button 
                     onClick={() => handleNavigate(center.map)}
-                    className="w-full rounded-xl font-black h-12"
+                    className="w-full rounded-xl font-black h-14 text-lg"
                     aria-label={`Ver ruta a ${center.name}`}
                   >
                     <Navigation className="h-4 w-4 mr-2" /> VER MAPA
