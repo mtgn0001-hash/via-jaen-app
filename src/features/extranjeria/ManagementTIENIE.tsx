@@ -24,7 +24,7 @@ export function ManagementTIENIE() {
             <div className="space-y-2">
               <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none">Identidad</h3>
               <p className="text-white/95 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-                <MapPin className="h-3 w-3" /> Plaza de las Batallas (Jaén)
+                <MapPin className="h-3 w-3 text-white" /> Plaza de las Batallas (Jaén)
               </p>
             </div>
 
@@ -35,6 +35,7 @@ export function ManagementTIENIE() {
                 url={OFFICIAL_LINKS.extranjeria.ex15}
                 lseInstructions="Cómo rellenar el papel blanco EX-15 para tu primera vez en Jaén."
                 triggerLabel="Solicitar / Renovar NIE"
+                variant="white"
                 lang={lang}
               />
 

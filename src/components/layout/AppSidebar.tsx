@@ -134,7 +134,7 @@ export function AppSidebar({
                 <span className="font-headline font-black text-xl tracking-tight text-primary uppercase leading-none">
                   Vía Jaén
                 </span>
-                <span className="text-[9px] font-black text-primary/40 uppercase tracking-[0.2em] mt-1">
+                <span className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1">
                   Guía Comunitaria
                 </span>
               </div>

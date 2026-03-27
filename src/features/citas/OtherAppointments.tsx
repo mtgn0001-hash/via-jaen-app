@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -72,7 +73,7 @@ export function OtherAppointments() {
       >
         <span>Otras Citas y Trámites</span>
         <div className="bg-primary/10 p-3 rounded-full group-hover:bg-primary group-hover:text-white transition-all">
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-6 w-6 text-primary group-hover:text-white transition-all" />
         </div>
       </Button>
 
@@ -107,7 +108,7 @@ export function OtherAppointments() {
                       <p className="text-[10px] text-muted-foreground font-bold">{cita.desc}</p>
                     </div>
                   </div>
-                  <ExternalLink className="h-4 w-4 text-primary/30" />
+                  <ExternalLink className="h-4 w-4 text-primary/60" />
                 </CardContent>
               </Card>
             ))}

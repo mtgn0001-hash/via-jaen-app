@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -19,7 +20,7 @@ type ResourceLauncherProps = {
   url: string;
   lseInstructions?: string;
   triggerLabel?: string;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "white";
   lang: string;
 };
 
@@ -44,25 +45,34 @@ export function ResourceLauncher({
     }, 1500);
   };
 
-  const btnClass = variant === "primary" 
-    ? "bg-primary text-white hover:bg-primary/90" 
-    : variant === "secondary" 
-    ? "bg-slate-100 text-slate-700 hover:bg-slate-200" 
-    : "border-2 border-primary/20 text-primary hover:bg-primary/5";
+  const getVariantStyles = () => {
+    switch (variant) {
+      case "primary":
+        return "bg-primary text-white hover:bg-primary/90";
+      case "secondary":
+        return "bg-slate-100 text-slate-700 hover:bg-slate-200";
+      case "outline":
+        return "border-2 border-primary/20 text-primary hover:bg-primary/5";
+      case "white":
+        return "bg-white text-primary hover:bg-white/90 shadow-xl";
+      default:
+        return "bg-primary text-white hover:bg-primary/90";
+    }
+  };
 
   return (
     <>
       <div className="flex gap-2 w-full">
         <Button 
           onClick={() => setIsOpen(true)}
-          className={`flex-1 h-12 rounded-xl font-black text-xs uppercase tracking-tight shadow-sm ${btnClass}`}
+          className={`flex-1 h-12 rounded-xl font-black text-xs uppercase tracking-tight shadow-sm transition-all active:scale-95 ${getVariantStyles()}`}
         >
           {triggerLabel}
         </Button>
         <Button 
           variant="outline" 
           size="icon" 
-          className="h-12 w-12 rounded-xl border-slate-200 text-slate-400 hover:text-primary"
+          className={`h-12 w-12 rounded-xl ${variant === 'white' ? 'bg-white/20 border-white/20 text-white' : 'border-slate-200 text-slate-400 hover:text-primary'}`}
           onClick={() => setIsOpen(true)}
         >
           <Info className="h-5 w-5" />
