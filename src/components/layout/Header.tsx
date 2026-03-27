@@ -1,21 +1,12 @@
-
 "use client"
 
-import { Accessibility, Bell } from "lucide-react";
+import { useState } from "react";
+import { Accessibility, Settings2, Bell } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { AppLogo } from "@/components/ui/AppLogo";
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetDescription,
-  SheetTrigger 
-} from "@/components/ui/sheet";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { UserProgress } from "@/lib/store";
+import { UserProgress, useLocalStorage } from "@/lib/store";
+import { SettingsPanel } from "@/components/ui/SettingsPanel";
 
 type HeaderProps = {
   lang: Language;
@@ -25,16 +16,16 @@ type HeaderProps = {
 };
 
 export function Header({ lang, progress, updateProgress, activeTab }: HeaderProps) {
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const t = translations[lang] || translations.es;
 
   const getBreadcrumb = () => {
     switch (activeTab) {
-      case 'dashboard': return 'Resumen Inteligente';
-      case 'guides_hub': return 'Recursos';
-      case 'procedures': return 'Guías / Trámites';
-      case 'employment_portal': return 'Guías / Empleo';
-      case 'directory': return 'Ayuda Local';
-      case 'profile_hub': return 'Mi Espacio';
+      case 'dashboard': return t.dashboard;
+      case 'guides_hub': return t.backpack;
+      case 'procedures': return t.procedures;
+      case 'directory': return t.directory;
+      case 'profile_hub': return 'Mi Perfil';
       default: return 'Jaén Integra';
     }
   };
@@ -55,64 +46,23 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
         </div>
 
         <div className="flex items-center gap-2">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10"
-              >
-                <Accessibility className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="bottom" className="rounded-t-[3rem] p-8 bg-white/90 backdrop-blur-3xl border-t-4 border-primary/20">
-              <SheetHeader className="mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="bg-primary p-3 rounded-2xl">
-                    <Accessibility className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <SheetTitle className="text-2xl font-black text-primary uppercase tracking-tighter">Panel de Accesibilidad</SheetTitle>
-                    <SheetDescription className="font-medium">Configura ayudas visuales y auditivas para Jaén.</SheetDescription>
-                  </div>
-                </div>
-              </SheetHeader>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10"
+            onClick={() => setSettingsOpen(true)}
+            aria-label={t.settings}
+          >
+            <Settings2 className="h-6 w-6" />
+          </Button>
 
-              <div className="space-y-6">
-                <div className="flex items-center justify-between p-6 bg-primary/5 rounded-[2rem] border border-primary/10">
-                  <div className="space-y-1">
-                    <Label className="text-lg font-black text-primary uppercase">Modo LSE (Sordos)</Label>
-                    <p className="text-xs text-muted-foreground font-medium">Activa videos signados e iconos gestuales.</p>
-                  </div>
-                  <Switch 
-                    checked={progress.accessibilityMode === 'accessible'} 
-                    onCheckedChange={(val) => updateProgress({ accessibilityMode: val ? 'accessible' : 'standard' })} 
-                  />
-                </div>
-
-                <div className="flex items-center justify-between p-6 bg-primary/5 rounded-[2rem] border border-primary/10">
-                  <div className="space-y-1">
-                    <Label className="text-lg font-black text-primary uppercase">Modo Audio (Ciegos)</Label>
-                    <p className="text-xs text-muted-foreground font-medium">Lectura de pantalla automática y alto contraste.</p>
-                  </div>
-                  <Switch 
-                    checked={progress.easyReading} 
-                    onCheckedChange={(val) => updateProgress({ easyReading: val })} 
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-8 pt-6 border-t flex justify-center">
-                 <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Jaén Integra Accesibilidad 2026</p>
-              </div>
-            </SheetContent>
-          </Sheet>
-
-          <Button variant="ghost" size="icon" className="h-12 w-12 rounded-2xl bg-slate-50 border">
+          <Button variant="ghost" size="icon" className="h-12 w-12 rounded-2xl bg-slate-50 border hidden sm:flex">
             <Bell className="h-5 w-5 text-slate-400" />
           </Button>
         </div>
       </div>
+
+      <SettingsPanel open={settingsOpen} onOpenChange={setSettingsOpen} />
     </header>
   );
 }

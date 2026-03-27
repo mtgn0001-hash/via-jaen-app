@@ -1,9 +1,8 @@
-
 "use client"
 
 import { useState, useEffect } from 'react';
 
-export type ThemeType = 'purple' | 'olive' | 'night' | 'contrast' | 'ocean' | 'red';
+export type ThemeType = 'light' | 'dark' | 'contrast' | 'purple' | 'olive' | 'night' | 'ocean' | 'red';
 export type ProvinceType = 'jaen';
 export type AccessibilityMode = 'standard' | 'accessible';
 
@@ -27,7 +26,7 @@ export type UserProgress = {
   profile: UserProfile;
 };
 
-const STORAGE_KEY = 'jaen_integra_storage';
+const STORAGE_KEY = 'viajaen_config';
 
 const defaultProgress: UserProgress = {
   procedures: {},
@@ -39,7 +38,7 @@ const defaultProgress: UserProgress = {
   },
   language: 'es',
   onboardingCompleted: false,
-  theme: 'olive',
+  theme: 'light',
   province: 'jaen',
   easyReading: false,
   accessibilityMode: 'standard',
@@ -59,7 +58,6 @@ export function useLocalStorage() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Mezclamos con el default para asegurar que si faltan llaves nuevas no explote
         setProgress({ ...defaultProgress, ...parsed });
       } catch (e) {
         console.error("Failed to parse local storage", e);
@@ -99,15 +97,6 @@ export function useLocalStorage() {
     updateProgress({ firstSteps: newFirstSteps });
   };
 
-  const calculateCompletion = () => {
-    const totalItems = 12; // Ajustado a los items reales
-    const completedItems = 
-      Object.values(progress.procedures).filter(Boolean).length +
-      Object.values(progress.checklist).filter(Boolean).length +
-      Object.values(progress.firstSteps).filter(Boolean).length;
-    return Math.min(Math.round((completedItems / totalItems) * 100), 100);
-  };
-
   return {
     progress,
     updateProgress,
@@ -115,7 +104,6 @@ export function useLocalStorage() {
     toggleProcedure,
     toggleChecklist,
     toggleFirstStep,
-    calculateCompletion,
     isLoaded
   };
 }
