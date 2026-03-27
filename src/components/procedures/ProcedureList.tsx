@@ -28,6 +28,7 @@ import {
 import { useLocalStorage } from "@/lib/store";
 import { Badge } from "@/components/ui/badge";
 import { SpeechButton } from "@/components/ui/SpeechButton";
+import { ScannerSection } from "@/features/tramites/ScannerSection";
 
 type ProcedureListProps = {
   lang: Language;
@@ -35,7 +36,6 @@ type ProcedureListProps = {
 
 export function ProcedureList({ lang }: ProcedureListProps) {
   const t = translations[lang] || translations.es;
-  const l = t.launcher;
   const { progress } = useLocalStorage();
   const accMode = progress.accessibilityMode;
 
@@ -89,6 +89,9 @@ export function ProcedureList({ lang }: ProcedureListProps) {
         <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">Gestión de Residencia y Citas Oficiales</p>
       </div>
 
+      {/* IA SCANNER INTEGRATION */}
+      <ScannerSection />
+
       {/* BLOQUE PRINCIPAL: TIE/NIE */}
       <Card className="border-none bg-primary shadow-2xl rounded-[3rem] overflow-hidden relative group">
         <div className="absolute top-0 right-0 p-8 opacity-10">
@@ -140,21 +143,6 @@ export function ProcedureList({ lang }: ProcedureListProps) {
           <ChevronRight className="h-6 w-6" />
         </div>
       </Button>
-
-      {/* ACCESIBILIDAD ADAPTADA */}
-      {accMode === 'accessible' && (
-        <section className="bg-emerald-50 p-6 rounded-[2.5rem] border-2 border-emerald-100 space-y-4">
-          <div className="flex justify-between items-center">
-            <h4 className="font-black text-xs uppercase text-emerald-900 flex items-center gap-2">
-              <Play className="h-4 w-4" /> Guía en LSE
-            </h4>
-            <SpeechButton text="Instrucción de citas: Si no encuentras cita previa online para el TIE o el NIE, es importante que acudas físicamente a la Comisaría de la Plaza de las Batallas, ya que la disponibilidad de citas se actualiza semanalmente." language={lang} />
-          </div>
-          <p className="text-[10px] text-emerald-800 font-bold leading-normal">
-            Aviso importante: Si el sistema de citas online está saturado, la oficina de Jaén recomienda acudir en persona para consultar la asignación semanal.
-          </p>
-        </section>
-      )}
 
       {/* BOTTOM SHEET: OTRAS CITAS */}
       <Dialog open={isOtherCitasOpen} onOpenChange={setIsOtherCitasOpen}>
