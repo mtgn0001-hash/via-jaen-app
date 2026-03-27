@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -19,6 +20,7 @@ import { JaenBot } from "@/features/ia/JaenBot";
 import { DocumentScanner } from "@/features/ia/DocumentScanner";
 import { DocumentVault } from "@/features/seguridad/DocumentVault";
 import { ResourcesHub } from "@/components/recursos/ResourcesHub";
+import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -76,6 +78,7 @@ export default function Home() {
             )}
 
             {activeTab === 'directory' && <div className="animate-in slide-in-from-right-4 duration-500"><ResourceDirectory lang={lang} /></div>}
+            {activeTab === 'employment_portal' && <div className="animate-in slide-in-from-right-4 duration-500"><EmploymentPortal lang={lang} /></div>}
             
             {/* Otras Features */}
             {activeTab === 'profile_hub' && <div className="animate-in slide-in-from-right-4 duration-500"><UserProfile lang={lang} /></div>}

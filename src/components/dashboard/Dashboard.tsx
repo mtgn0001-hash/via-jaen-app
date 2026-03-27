@@ -8,17 +8,22 @@ import { UserProgress } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { 
   MessageSquare, 
-  Scan, 
   Building2, 
   Heart, 
   Baby,
-  ArrowRight,
+  Briefcase,
+  GraduationCap,
+  ShieldCheck,
   ShieldAlert,
+  Play,
+  ArrowRight,
   Zap,
-  Clock,
-  ExternalLink
+  Globe,
+  Plus
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SpeechButton } from "@/components/ui/SpeechButton";
+import { OFFICIAL_LINKS } from "@/services/links-service";
 
 type DashboardProps = {
   lang: Language;
@@ -27,123 +32,171 @@ type DashboardProps = {
 };
 
 export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
-  const cardClass = "border-none shadow-xl bg-white/40 backdrop-blur-2xl transition-all hover:scale-[1.01] active:scale-[0.98] group overflow-hidden flex flex-col justify-between cursor-pointer border border-white/40";
+  const isLSE = progress.accessibilityMode === 'accessible';
+  
+  const bentoCardClass = "relative overflow-hidden border-none shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98] group cursor-pointer";
 
   return (
-    <div className="space-y-8 pb-32 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      {/* 1. BLOQUE IA (SUPERIOR) */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="space-y-6 pb-32 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      
+      {/* 1. CABECERA INTELIGENTE: JAÉN-BOT */}
+      <section>
         <Card 
-          className={cn(cardClass, "bg-gradient-to-br from-primary to-indigo-600 text-white min-h-[220px] rounded-[3rem]")}
+          className={cn(bentoCardClass, "bg-gradient-to-br from-primary to-indigo-600 text-white rounded-[2.5rem]")}
           onClick={() => setActiveTab('bot')}
         >
-          <CardContent className="p-10 flex flex-col h-full justify-between">
-            <div className="flex justify-between items-start">
-              <div className="bg-white/20 p-4 rounded-3xl backdrop-blur-md">
+          <CardContent className="p-8 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <div className="bg-white/20 p-4 rounded-3xl backdrop-blur-md shadow-inner">
                 <MessageSquare className="h-8 w-8 text-white" />
               </div>
-              <Badge className="bg-white/20 text-white border-none text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">IA Activa</Badge>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black uppercase tracking-tighter leading-none">Hablar con Jaén-Bot</h2>
+                <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4">Hablar con Jaén-Bot</h2>
-              <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card 
-          className={cn(cardClass, "bg-emerald-500 text-white rounded-[3rem]")}
-          onClick={() => setActiveTab('scanner')}
-        >
-          <CardContent className="p-10 flex flex-col items-center justify-center text-center gap-6">
-            <div className="bg-white/20 p-6 rounded-full backdrop-blur-md animate-pulse border-4 border-white/10">
-              <Scan className="h-12 w-12 text-white" />
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-black text-xl uppercase tracking-tighter">Escanear Carta</h3>
-              <p className="text-[10px] opacity-80 font-black uppercase tracking-widest">Lectura inteligente de documentos</p>
+            <div className="flex items-center gap-2">
+               <Badge className="bg-white/20 text-white border-none text-[9px] font-black uppercase px-3 py-1 rounded-full hidden sm:flex">IA Activa</Badge>
+               <ArrowRight className="h-6 w-6 opacity-40 group-hover:translate-x-1 transition-transform" />
             </div>
           </CardContent>
         </Card>
       </section>
 
-      {/* 2. BLOQUE TRÁMITES (CENTRAL IZQUIERDA) Y VIDA (CENTRAL DERECHA) */}
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Tarjeta Grande Trámites */}
+      {/* 2. BENTO GRID PRINCIPAL */}
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        {/* TRÁMITES CRÍTICOS (2x2) */}
         <Card 
-          className={cn(cardClass, "lg:col-span-2 bg-white/60 rounded-[3.5rem] border-2 border-primary/10")}
+          className={cn(bentoCardClass, "col-span-2 row-span-2 bg-white rounded-[3rem] border-2 border-primary/5 flex flex-col justify-between")}
           onClick={() => setActiveTab('procedures')}
         >
-          <CardContent className="p-10 flex flex-col h-full justify-between">
-            <div className="flex items-start justify-between">
-              <div className="bg-primary/10 p-5 rounded-[2rem] text-primary">
-                <Building2 className="h-10 w-10" />
+          <div className="absolute top-0 right-0 p-6 opacity-5">
+             <Building2 className="h-32 w-32 text-primary" />
+          </div>
+          <CardContent className="p-8 flex flex-col h-full justify-between gap-6">
+            <div className="flex justify-between items-start">
+              <div className="bg-primary/10 p-4 rounded-2xl text-primary shadow-sm">
+                <Building2 className="h-8 w-8" />
               </div>
-              <div className="bg-amber-100 text-amber-700 px-4 py-2 rounded-2xl flex items-center gap-2 font-black text-[10px] uppercase">
-                <Clock className="h-4 w-4" /> Citas: Plaza Batallas
+              <div className="flex items-center gap-2">
+                {isLSE && <div className="bg-primary p-2 rounded-full shadow-lg animate-bounce"><Play className="h-3 w-3 text-white fill-current" /></div>}
+                <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-100 font-black text-[8px] uppercase">Prioridad 1</Badge>
               </div>
             </div>
-            <div className="mt-12 space-y-4">
-              <h3 className="text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Trámites</h3>
-              <p className="text-sm font-bold text-muted-foreground max-w-md">Consulta el estado de las citas en Comisaría y rellena los formularios oficiales EX-15 y EX-17.</p>
-              <Button className="rounded-2xl h-14 px-8 font-black gap-3 mt-4 text-lg">
-                Ver Guía Completa <ArrowRight className="h-5 w-5" />
-              </Button>
+            
+            <div className="space-y-4">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase leading-tight">Trámites<br/>Residencia</h3>
+              <p className="text-[10px] font-bold text-muted-foreground uppercase leading-relaxed max-w-[180px]">
+                Gestión de TIE, Modelo EX-15 y Citas en la Plaza de las Batallas.
+              </p>
+              <div className="grid grid-cols-1 gap-2 pt-2">
+                 <Button className="h-12 rounded-xl font-black text-xs gap-2 shadow-lg">
+                    VER TRÁMITES <ArrowRight className="h-4 w-4" />
+                 </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Bloque Vida (Vertical Grid) */}
-        <div className="grid grid-cols-1 gap-6">
-          <Card 
-            className={cn(cardClass, "bg-orange-50/50 border-orange-100 rounded-[2.5rem]")}
-            onClick={() => setActiveTab('guides_hub')}
-          >
-            <CardContent className="p-8 flex items-center gap-6">
-              <div className="bg-orange-500 p-4 rounded-2xl text-white shadow-lg">
-                <Heart className="h-8 w-8" />
-              </div>
-              <div>
-                <h4 className="font-black text-lg uppercase text-orange-900 tracking-tighter leading-none">Salud</h4>
-                <p className="text-[10px] text-orange-800/60 font-black uppercase mt-1">Citas SAS</p>
-              </div>
-            </CardContent>
-          </Card>
+        {/* SALUD JAÉN (1x1) */}
+        <Card 
+          className={cn(bentoCardClass, "bg-red-50/50 border border-red-100 rounded-[2rem]")}
+          onClick={() => setActiveTab('guides_hub')}
+        >
+          <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+            <div className="bg-red-500 p-3 rounded-2xl text-white shadow-lg">
+              <Heart className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <h4 className="font-black text-xs uppercase text-red-900">Salud</h4>
+              <p className="text-[8px] text-red-800/60 font-black uppercase">Cita SAS / 112</p>
+            </div>
+            {isLSE && <Play className="h-3 w-3 text-red-400" />}
+          </CardContent>
+        </Card>
 
-          <Card 
-            className={cn(cardClass, "bg-blue-50/50 border-blue-100 rounded-[2.5rem]")}
-            onClick={() => setActiveTab('guides_hub')}
-          >
-            <CardContent className="p-8 flex items-center gap-6">
-              <div className="bg-blue-600 p-4 rounded-2xl text-white shadow-lg">
-                <Baby className="h-8 w-8" />
-              </div>
-              <div>
-                <h4 className="font-black text-lg uppercase text-blue-900 tracking-tighter leading-none">Familias</h4>
-                <p className="text-[10px] text-blue-800/60 font-black uppercase mt-1">Colegios Jaén</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* PARA FAMILIAS (1x1) */}
+        <Card 
+          className={cn(bentoCardClass, "bg-emerald-50/50 border border-emerald-100 rounded-[2rem]")}
+          onClick={() => setActiveTab('guides_hub')}
+        >
+          <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+            <div className="bg-emerald-600 p-3 rounded-2xl text-white shadow-lg">
+              <Baby className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <h4 className="font-black text-xs uppercase text-emerald-900">Familias</h4>
+              <p className="text-[8px] text-emerald-800/60 font-black uppercase">Colegios / Ayudas</p>
+            </div>
+            {isLSE && <Play className="h-3 w-3 text-emerald-400" />}
+          </CardContent>
+        </Card>
+
+        {/* ESTUDIAR UJA (1x1) */}
+        <Card 
+          className={cn(bentoCardClass, "bg-indigo-50/50 border border-indigo-100 rounded-[2rem]")}
+          onClick={() => setActiveTab('guides_hub')}
+        >
+          <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+            <div className="bg-indigo-600 p-3 rounded-2xl text-white shadow-lg">
+              <GraduationCap className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <h4 className="font-black text-xs uppercase text-indigo-900">UJA</h4>
+              <p className="text-[8px] text-indigo-800/60 font-black uppercase">Becas / Notas</p>
+            </div>
+            {isLSE && <Play className="h-3 w-3 text-indigo-400" />}
+          </CardContent>
+        </Card>
+
+        {/* EMPLEO (1x1) */}
+        <Card 
+          className={cn(bentoCardClass, "bg-slate-100/50 border border-slate-200 rounded-[2rem]")}
+          onClick={() => setActiveTab('employment_portal')}
+        >
+          <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+            <div className="bg-slate-800 p-3 rounded-2xl text-white shadow-lg">
+              <Briefcase className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <h4 className="font-black text-xs uppercase text-slate-900">Empleo</h4>
+              <p className="text-[8px] text-slate-800/60 font-black uppercase">SAE / Ofertas</p>
+            </div>
+          </CardContent>
+        </Card>
+
       </section>
 
-      {/* 3. AVISO DE PRIVACIDAD Y SEGURIDAD */}
-      <div className="bg-emerald-50/50 border border-emerald-100 p-10 rounded-[4rem] flex flex-col md:flex-row gap-8 items-center text-center md:text-left shadow-inner">
-        <div className="bg-emerald-100 p-6 rounded-full text-emerald-600">
-          <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-        </div>
-        <div className="space-y-2">
-          <h4 className="text-2xl font-black text-emerald-900 uppercase tracking-tighter">Privacidad 100% Local</h4>
-          <p className="text-sm font-bold text-emerald-800/70 max-w-2xl leading-relaxed">
-            Vía Jaén no recopila tus datos en ningún servidor externo. Todo lo que escaneas o escribes se queda en tu teléfono de forma cifrada. Sin cuentas, sin rastreo.
-          </p>
-        </div>
-      </div>
+      {/* 3. BLOQUE DE EMERGENCIA S.O.S (FLOTANTE DENTRO DE FLUJO) */}
+      <section className="flex justify-center py-2">
+         <Button 
+            onClick={() => window.open('tel:112', '_self')}
+            className="h-20 w-20 rounded-full bg-destructive shadow-2xl border-4 border-white animate-pulse flex flex-col items-center justify-center gap-0.5 active:scale-90 transition-all"
+         >
+            <ShieldAlert className="h-8 w-8 text-white" />
+            <span className="text-[9px] font-black uppercase">S.O.S</span>
+         </Button>
+      </section>
 
-      <div className="flex justify-center pt-12 opacity-5 scale-150">
-         <Zap className="h-20 w-20 text-primary" />
+      {/* 4. UTILIDADES DE SEGURIDAD (FONDO) */}
+      <section>
+        <Card className="border-none bg-emerald-50/50 border border-emerald-100 rounded-[2.5rem] overflow-hidden">
+          <CardContent className="p-6 flex items-center gap-4">
+            <div className="bg-emerald-100 p-3 rounded-2xl text-emerald-600">
+              <ShieldCheck className="h-6 w-6" />
+            </div>
+            <div className="space-y-0.5">
+              <h4 className="font-black text-xs uppercase text-emerald-900">Bóveda Segura Activa</h4>
+              <p className="text-[10px] font-bold text-emerald-800/60 uppercase">Tus documentos están protegidos localmente.</p>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* DECORACIÓN VISUAL */}
+      <div className="flex justify-center pt-8 opacity-5 scale-125">
+         <Zap className="h-16 w-16 text-primary" />
       </div>
     </div>
   );
