@@ -68,7 +68,7 @@
     --ring: 262 83% 65%;
   }
 
-  [data-theme='contrast'] {
+  [data-theme='contrast'], [data-accessibility='accessible'] {
     --background: 0 0% 0%;
     --foreground: 60 100% 50%;
     --card: 0 0% 0%;
@@ -80,8 +80,8 @@
     --border: 60 100% 50%;
     --muted: 0 0% 10%;
     --muted-foreground: 60 100% 50%;
-    --accent: 262 83% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 60 100% 50%;
+    --accent-foreground: 0 0% 0%;
     --radius: 0;
     font-size: 20px;
   }
@@ -89,37 +89,55 @@
 
 @layer base {
   * {
-    @apply border-border transition-none; /* Eliminar transiciones lentas para mayor claridad */
+    @apply border-border transition-none;
   }
   body {
     @apply bg-background text-foreground font-body antialiased text-[16px];
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-[#1A1A1B] font-black;
+    @apply text-foreground font-black;
   }
 }
 
-/* Regla Anti-Camuflaje: Texto blanco sobre fondo de color */
-.bg-primary text-white, 
-.bg-destructive text-white,
-.bg-primary button,
-.btn-primary {
-  text-shadow: 0px 1px 2px rgba(0,0,0,0.2);
-  @apply font-black;
+/* Accessible Mode Scaling */
+[data-accessibility='accessible'] button {
+  @apply h-20 min-h-[80px] text-xl border-4 !important;
 }
 
-/* Asegurar que el texto sobre blanco sea negro carbón */
+[data-accessibility='accessible'] .space-y-4 {
+  @apply space-y-8 !important;
+}
+
+[data-accessibility='accessible'] .space-y-6 {
+  @apply space-y-10 !important;
+}
+
+[data-accessibility='accessible'] .rounded-\[2\.5rem\],
+[data-accessibility='accessible'] .rounded-\[3rem\],
+[data-accessibility='accessible'] .rounded-3xl,
+[data-accessibility='accessible'] .rounded-2xl {
+  @apply rounded-none !important;
+}
+
+/* Highlight for Speech Reading */
+.speech-highlight {
+  @apply bg-yellow-400 text-black px-2 rounded-sm ring-4 ring-yellow-400 !important;
+}
+
+[data-theme='dark'] .speech-highlight {
+  @apply bg-yellow-500 text-black !important;
+}
+
+/* Anti-Camouflage Rules */
+.bg-primary .text-white, 
+.bg-destructive .text-white,
+.btn-primary {
+  color: white !important;
+  @apply font-black opacity-100 !important;
+}
+
 .bg-white p, .bg-white span, .bg-white h4, .bg-card p, .bg-card span {
   @apply text-[#1A1A1B] opacity-100 !important;
-}
-
-/* Deshabilitar efectos hover que ocultan contenido */
-.group:hover .group-hover\:opacity-100 {
-  opacity: 1 !important;
-}
-
-.opacity-0 {
-  opacity: 1 !important;
 }
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }

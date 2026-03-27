@@ -6,7 +6,6 @@ import { translations, Language } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, RefreshCw, Send, Bot, Volume2 } from "lucide-react";
-import { textToSpeech } from "@/ai/flows/tts-flow";
 import { cn } from "@/lib/utils";
 
 type Node = {
@@ -75,17 +74,22 @@ export function JaenBot({ lang }: { lang: Language }) {
     }
   }, [history, lang, node.text]);
 
-  const speakText = async (text: string) => {
+  const speakText = (text: string) => {
+    if (!('speechSynthesis' in window)) return;
+    
+    window.speechSynthesis.cancel();
     setIsSpeaking(true);
-    try {
-      const response = await textToSpeech({ text, language: lang as any });
-      const audio = new Audio(response.media);
-      audio.onended = () => setIsSpeaking(false);
-      audio.play();
-    } catch (e) {
-      console.error("Bot TTS Error:", e);
-      setIsSpeaking(false);
-    }
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    const langMap: Record<string, string> = {
+      es: 'es-ES', en: 'en-GB', fr: 'fr-FR', ar: 'ar-SA', uk: 'uk-UA'
+    };
+    
+    utterance.lang = langMap[lang] || 'es-ES';
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    window.speechSynthesis.speak(utterance);
   };
 
   const handleOption = (next: string, link?: string) => {
@@ -111,34 +115,39 @@ export function JaenBot({ lang }: { lang: Language }) {
         <div className="p-4 bg-primary text-white flex items-center justify-between shadow-lg">
           <div className="flex items-center gap-3">
              <div className="bg-white/20 p-2 rounded-xl">
-               {isSpeaking ? <Volume2 className="h-5 w-5 animate-pulse" /> : <Bot className="h-5 w-5" />}
+               {isSpeaking ? <Volume2 className="h-5 w-5 animate-pulse text-yellow-300" /> : <Bot className="h-5 w-5" />}
              </div>
              <span className="font-black text-xs uppercase tracking-widest">{t.botTitle}</span>
           </div>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => setHistory(['start'])} 
-            className="text-white hover:bg-white/10 rounded-full"
-            aria-label="Reiniciar conversación"
-          >
-            <RefreshCw className="h-4 w-4" />
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="ghost" size="icon" onClick={() => speakText(node.text)} className="text-white hover:bg-white/10 rounded-full" aria-label="Escuchar respuesta">
+              <Volume2 className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => setHistory(['start'])} className="text-white hover:bg-white/10 rounded-full" aria-label="Reiniciar conversación">
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-hide">
-          {history.map((id, idx) => (
-            <div key={idx} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-               <div className="flex items-start gap-3">
-                 <div className="bg-primary/10 p-2 rounded-full mt-1">
-                   <Bot className="h-3 w-3 text-primary" />
+          {history.map((id, idx) => {
+            const isLast = idx === history.length - 1;
+            return (
+              <div key={idx} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                 <div className="flex items-start gap-3">
+                   <div className="bg-primary/10 p-2 rounded-full mt-1">
+                     <Bot className="h-3 w-3 text-primary" />
+                   </div>
+                   <div className={cn(
+                     "bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-black text-foreground border-2",
+                     isLast && isSpeaking && "speech-highlight"
+                   )}>
+                      {tree[id]?.text || t.botWelcome}
+                   </div>
                  </div>
-                 <div className="bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-black text-foreground border-2">
-                    {tree[id]?.text || t.botWelcome}
-                 </div>
-               </div>
-            </div>
-          ))}
+              </div>
+            );
+          })}
           <div ref={scrollRef} />
         </div>
 

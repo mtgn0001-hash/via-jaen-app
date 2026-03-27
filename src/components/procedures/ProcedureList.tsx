@@ -124,7 +124,7 @@ export function ProcedureList({ lang }: ProcedureListProps) {
           <div className="bg-white/10 p-4 rounded-2xl flex gap-3 items-center">
             <Info className="h-5 w-5 text-white shrink-0" />
             <p className="text-[10px] text-white font-bold leading-tight">
-              Recuerda: Si no encuentras cita online, acude presencialmente a la Comisaría de la Plaza de las Batallas para consultar.
+              Si no hay citas disponibles online, acude presencialmente a la Comisaría de la Plaza de las Batallas ya que la disponibilidad cambia semanalmente.
             </p>
           </div>
         </CardContent>
@@ -148,10 +148,10 @@ export function ProcedureList({ lang }: ProcedureListProps) {
             <h4 className="font-black text-xs uppercase text-emerald-900 flex items-center gap-2">
               <Play className="h-4 w-4" /> Guía en LSE
             </h4>
-            <SpeechButton text="Diferencia entre NIE y tarjeta TIE. El NIE es tu número personal y la TIE es el carné físico." language={lang} />
+            <SpeechButton text="Instrucción de citas: Si no encuentras cita previa online para el TIE o el NIE, es importante que acudas físicamente a la Comisaría de la Plaza de las Batallas, ya que la disponibilidad de citas se actualiza semanalmente." language={lang} />
           </div>
           <p className="text-[10px] text-emerald-800 font-bold leading-normal">
-            En este video te explicamos la diferencia entre el número NIE (papel blanco) y la tarjeta física TIE (plástico con foto).
+            Aviso importante: Si el sistema de citas online está saturado, la oficina de Jaén recomienda acudir en persona para consultar la asignación semanal.
           </p>
         </section>
       )}

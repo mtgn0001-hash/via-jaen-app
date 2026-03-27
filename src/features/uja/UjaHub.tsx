@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,20 +20,25 @@ export function UjaHub({ lang }: { lang: string }) {
           <h3 className="text-xl font-black text-indigo-700 uppercase tracking-tighter">Estudiar UJA</h3>
           <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Exclusivo: Universidad de Jaén y Ayudas Académicas</p>
         </div>
-        <SpeechButton text="Estudiar en la UJA. Becas y servicios académicos exclusivos de la Universidad de Jaén." language={lang} />
+        <SpeechButton 
+          text="Portal del Estudiante UJA. Información sobre la bonificación del 99 por ciento, becas MEC, procesos de matrícula y transporte al campus de Las Lagunillas." 
+          language={lang} 
+        />
       </div>
 
       {/* BECAS Y AYUDAS */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-indigo-700/80 tracking-widest ml-2 flex items-center gap-2">
-          <Award className="h-3 w-3" /> Becas y Bonificaciones
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[10px] font-black uppercase text-indigo-700/80 tracking-widest ml-2 flex items-center gap-2">
+            <Award className="h-3 w-3" /> Becas y Bonificaciones
+          </h4>
+          <SpeechButton text="Ayudas económicas para el estudio. La bonificación del 99 por ciento te permite pagar solo un euro por cada crédito aprobado el año anterior." language={lang} />
+        </div>
         <div className="grid grid-cols-1 gap-2">
           <ResourceLauncher 
             title="Bonificación del 99%"
             description="Iniciativa de la Junta de Andalucía para premiar el esfuerzo: paga solo el 1% de tus créditos aprobados."
             url={OFFICIAL_LINKS.uja.bonificacion99}
-            lseInstructions="Cómo se aplica automáticamente el descuento del 99% en tu matrícula de la UJA."
             triggerLabel="Ver Requisitos 99%"
             variant="primary"
             lang={lang}
@@ -57,22 +61,17 @@ export function UjaHub({ lang }: { lang: string }) {
               lang={lang}
             />
           </div>
-          <ResourceLauncher 
-            title="Beca Adriano"
-            description="Para alumnos que no cumplen requisitos de renta de la beca general."
-            url={OFFICIAL_LINKS.juntaAndalucia.becaAdriano}
-            triggerLabel="Beca Adriano / 2ª Oportunidad"
-            variant="primary"
-            lang={lang}
-          />
         </div>
       </section>
 
       {/* GESTIÓN ACADÉMICA */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
-          <Zap className="h-3 w-3" /> Servicios Campus Las Lagunillas
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
+            <Zap className="h-3 w-3" /> Servicios Campus
+          </h4>
+          <SpeechButton text="Acceso a matrícula, campus virtual Platea y consulta de notas oficiales." language={lang} />
+        </div>
         <div className="grid grid-cols-1 gap-2">
           <ResourceLauncher 
             title="Automatrícula"
@@ -103,26 +102,14 @@ export function UjaHub({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* INTERNACIONAL Y MOVILIDAD */}
-      <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
-          <Globe className="h-3 w-3" /> Movilidad
-        </h4>
-        <ResourceLauncher 
-          title="Erasmus+ y Movilidad"
-          description="Ayudas para estancias en el extranjero para estudiantes de la UJA."
-          url={OFFICIAL_LINKS.uja.erasmus}
-          triggerLabel="Becas Erasmus+ UJA"
-          variant="primary"
-          lang={lang}
-        />
-      </section>
-
       {/* TRANSPORTE */}
       <section className="space-y-3 pt-2">
-        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
-          <Bus className="h-3 w-3" /> Transporte al Campus
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
+            <Bus className="h-3 w-3" /> Transporte al Campus
+          </h4>
+          <SpeechButton text="Horarios de los autobuses que suben a la Universidad. Líneas 4, 7, 12, 14 y 17." language={lang} />
+        </div>
         <Card className="border-none bg-indigo-50 rounded-3xl border border-indigo-100">
           <CardContent className="p-5 flex items-center justify-between">
             <div className="flex gap-4 items-center">

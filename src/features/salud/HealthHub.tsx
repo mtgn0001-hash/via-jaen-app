@@ -47,13 +47,17 @@ export function HealthHub({ lang }: { lang: string }) {
           <h3 className="text-2xl font-black text-[#1A1A1B] uppercase tracking-tighter">Salud y Urgencias</h3>
           <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">Información Crítica 24H en Jaén</p>
         </div>
-        <SpeechButton text="Portal de Salud. Emergencias, hospitales y centros de urgencia en Jaén." language={lang} />
+        <SpeechButton 
+          text="Sección Salud y Urgencias. Aquí encontrarás el botón de emergencias 112, hospitales principales y centros de urgencia en Jaén. Puedes llamar directamente o ver la ruta en el mapa." 
+          language={lang} 
+        />
       </div>
 
       {/* 1. BOTÓN DE PÁNICO 112 */}
       <Button 
         onClick={() => handleCall("112")}
         className="w-full h-28 rounded-[2.5rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
+        aria-label="Botón de emergencia: Llamar al 112 ahora mismo"
       >
         <ShieldAlert className="h-10 w-10 text-white" />
         <span className="text-3xl font-black uppercase tracking-tighter text-shadow-strong">LLAMAR AL 112</span>
@@ -62,12 +66,14 @@ export function HealthHub({ lang }: { lang: string }) {
 
       {/* 2. HOSPITALES PRINCIPALES */}
       <section className="space-y-4">
-        <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-          <MapPin className="h-4 w-4 text-red-600" /> Hospitales Universitarios (+20% Tamaño)
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-red-600" /> Hospitales Universitarios
+          </h4>
+          <SpeechButton text="Hospital Universitario de Jaén, ubicado en Avenida de Madrid. Hospital Médico-Quirúrgico, en Carretera de Madrid." language={lang} />
+        </div>
         
         <div className="grid grid-cols-1 gap-4">
-          {/* Hospital General */}
           <Card className="border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200">
             <CardContent className="p-8 space-y-6">
               <div className="flex justify-between items-start">
@@ -84,12 +90,14 @@ export function HealthHub({ lang }: { lang: string }) {
                   onClick={() => handleCall("953 00 80 00")}
                   variant="outline"
                   className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-lg"
+                  aria-label="Llamar al Hospital General de Jaén"
                 >
-                  <Phone className="h-6 w-6" /> LLAMAR: 953 00 80 00
+                  <Phone className="h-6 w-6" /> LLAMAR
                 </Button>
                 <Button 
                   onClick={() => handleNavigate("Hospital Universitario de Jaén Av. de Madrid")}
                   className="h-16 rounded-2xl font-black gap-2 shadow-lg text-lg"
+                  aria-label="Ver cómo llegar al Hospital General en el mapa"
                 >
                   <Navigation className="h-6 w-6" /> CÓMO LLEGAR
                 </Button>
@@ -97,7 +105,6 @@ export function HealthHub({ lang }: { lang: string }) {
             </CardContent>
           </Card>
 
-          {/* Hospital Neurotraumatológico */}
           <Card className="border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200">
             <CardContent className="p-8 space-y-6">
               <div className="flex justify-between items-start">
@@ -114,12 +121,14 @@ export function HealthHub({ lang }: { lang: string }) {
                   onClick={() => handleCall("953 00 80 00")}
                   variant="outline"
                   className="h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-lg"
+                  aria-label="Llamar al Hospital Médico-Quirúrgico"
                 >
-                  <Phone className="h-6 w-6" /> LLAMAR: 953 00 80 00
+                  <Phone className="h-6 w-6" /> LLAMAR
                 </Button>
                 <Button 
                   onClick={() => handleNavigate("Hospital Neurotraumatológico Jaén Carretera de Madrid")}
                   className="h-16 rounded-2xl font-black gap-2 shadow-lg text-lg"
+                  aria-label="Ver cómo llegar al Hospital Médico-Quirúrgico en el mapa"
                 >
                   <Navigation className="h-6 w-6" /> CÓMO LLEGAR
                 </Button>
@@ -131,9 +140,12 @@ export function HealthHub({ lang }: { lang: string }) {
 
       {/* 3. URGENCIAS ATENCIÓN PRIMARIA (SUAP) */}
       <section className="space-y-4">
-        <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-          <ShieldAlert className="h-4 w-4 text-red-600" /> Urgencias de Primaria (SUAP)
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
+            <ShieldAlert className="h-4 w-4 text-red-600" /> Urgencias de Primaria (SUAP)
+          </h4>
+          <SpeechButton text="Centros de Urgencias de Atención Primaria. Bulevar en calle las fuentezuelas y Felipe Arche en el centro." language={lang} />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {suapCenters.map(center => (
             <Card key={center.name} className="border-none bg-white border-2 border-slate-200 rounded-[2rem] overflow-hidden">
@@ -147,12 +159,14 @@ export function HealthHub({ lang }: { lang: string }) {
                     onClick={() => handleCall(center.phone)}
                     variant="outline"
                     className="w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-xl font-black h-12"
+                    aria-label={`Llamar a ${center.name}`}
                   >
                     TEL: {center.phone}
                   </Button>
                   <Button 
                     onClick={() => handleNavigate(center.map)}
                     className="w-full rounded-xl font-black h-12"
+                    aria-label={`Ver ruta a ${center.name}`}
                   >
                     <Navigation className="h-4 w-4 mr-2" /> VER MAPA
                   </Button>
@@ -185,41 +199,6 @@ export function HealthHub({ lang }: { lang: string }) {
             variant="secondary"
             lang={lang}
           />
-        </div>
-      </section>
-
-      {/* 5. AYUDAS MÉDICAS */}
-      <section className="space-y-3">
-        <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-          <CreditCard className="h-4 w-4 text-red-600" /> Ayudas y Viajes
-        </h4>
-        <div className="grid grid-cols-1 gap-3">
-          <ResourceLauncher 
-            title="Tarjeta Sanitaria Europea"
-            description="Solicita cobertura médica para tus viajes por Europa."
-            url={OFFICIAL_LINKS.salud.tse}
-            triggerLabel="Solicitar TSE"
-            variant="primary"
-            lang={lang}
-          />
-          <div className="grid grid-cols-2 gap-3">
-            <ResourceLauncher 
-              title="Gastos Prótesis"
-              description="Reintegro de gastos por gafas o audífonos."
-              url={OFFICIAL_LINKS.salud.reintegroOrtoprotesico}
-              triggerLabel="Reintegro"
-              variant="primary"
-              lang={lang}
-            />
-            <ResourceLauncher 
-              title="Desplazamiento"
-              description="Ayudas por traslados a otros hospitales."
-              url={OFFICIAL_LINKS.salud.ayudaDesplazamiento}
-              triggerLabel="Ayuda Viaje"
-              variant="primary"
-              lang={lang}
-            />
-          </div>
         </div>
       </section>
     </div>

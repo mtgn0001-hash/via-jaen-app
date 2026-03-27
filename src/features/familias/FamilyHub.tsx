@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { 
   School, 
-  Baby, 
   MapPin,
   Home,
   UserCheck
@@ -20,14 +19,20 @@ export function FamilyHub({ lang }: { lang: string }) {
           <h3 className="text-2xl font-black text-emerald-800 uppercase tracking-tighter">Familias y Colegios</h3>
           <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">Educación y Ayudas Sociales</p>
         </div>
-        <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales." language={lang} />
+        <SpeechButton 
+          text="Portal de Familias y Colegios. Aquí puedes gestionar ayudas al alquiler, renta mínima, bonos de carestía y buscar colegio para tus hijos. También tienes recursos para la dependencia y el título de familia numerosa." 
+          language={lang} 
+        />
       </div>
 
       {/* VIVIENDA Y SUSTENTO */}
       <section className="space-y-3">
-        <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
-          <Home className="h-4 w-4" /> Vivienda y Sustento
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
+            <Home className="h-4 w-4" /> Vivienda y Sustento
+          </h4>
+          <SpeechButton text="Ayudas para el alquiler y sustento económico de la familia. Incluye el bono carestía y la renta mínima." language={lang} />
+        </div>
         <div className="grid grid-cols-1 gap-3">
           <ResourceLauncher 
             title="Ayuda al Alquiler"
@@ -60,9 +65,12 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* EDUCACIÓN INFANTIL */}
       <section className="space-y-3">
-        <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
-          <School className="h-4 w-4" /> Colegios y Guarderías
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
+            <School className="h-4 w-4" /> Colegios y Guarderías
+          </h4>
+          <SpeechButton text="Gestión de escolarización y búsqueda de centros en Jaén. También ayudas para guarderías de cero a tres años." language={lang} />
+        </div>
         <Card className="border-none bg-white rounded-[2.5rem] border-2 border-emerald-200 shadow-sm">
           <CardContent className="p-8 space-y-4">
             <div className="grid grid-cols-1 gap-4">
@@ -89,9 +97,12 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* DEPENDENCIA Y TÍTULOS */}
       <section className="space-y-3">
-        <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-2 flex items-center gap-2">
-          <UserCheck className="h-4 w-4" /> Otros Títulos y Dependencia
-        </h4>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-2 flex items-center gap-2">
+            <UserCheck className="h-4 w-4" /> Otros Títulos
+          </h4>
+          <SpeechButton text="Ayudas a la dependencia para mayores y solicitud del título de familia numerosa." language={lang} />
+        </div>
         <div className="grid grid-cols-1 gap-3">
           <ResourceLauncher 
             title="Ayuda a la Dependencia"
