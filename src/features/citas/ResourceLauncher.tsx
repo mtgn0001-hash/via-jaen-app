@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -56,7 +57,7 @@ export function ResourceLauncher({
       case "primary":
         return "bg-primary text-white hover:bg-primary/90 text-[15px]";
       case "secondary":
-        return "bg-slate-100 text-slate-900 hover:bg-slate-200 text-[15px]";
+        return "bg-slate-100 text-black hover:bg-slate-200 text-[15px]";
       case "outline":
         return "border-2 border-primary/20 text-primary hover:bg-primary/5 text-[15px]";
       case "white":
@@ -79,7 +80,7 @@ export function ResourceLauncher({
         <Button 
           variant="outline" 
           size="icon" 
-          className={`h-14 w-14 rounded-xl ${variant === 'white' ? 'bg-white/30 border-white/40 text-white' : 'border-slate-300 text-slate-900 hover:text-primary'}`}
+          className={`h-14 w-14 rounded-xl ${variant === 'white' ? 'bg-white/30 border-white/40 text-white' : 'border-slate-300 text-black hover:text-primary'}`}
           onClick={() => setIsOpen(true)}
           aria-label={`Más información sobre ${title}`}
         >
@@ -92,7 +93,7 @@ export function ResourceLauncher({
           <DialogHeader className="p-8 bg-slate-50 border-b">
             <div className="flex justify-between items-start">
               <div className="space-y-1">
-                <DialogTitle className="text-2xl font-black text-slate-900 uppercase tracking-tighter">{title}</DialogTitle>
+                <DialogTitle className="text-2xl font-black text-black uppercase tracking-tighter">{title}</DialogTitle>
                 <DialogDescription className="font-black text-xs uppercase tracking-widest text-slate-500">Sede Electrónica Oficial</DialogDescription>
               </div>
               <SpeechButton text={`${title}. ${description}`} language={lang} />
@@ -100,7 +101,7 @@ export function ResourceLauncher({
           </DialogHeader>
 
           <div className="p-8 space-y-6">
-            <p className="text-md text-slate-900 leading-relaxed font-bold">
+            <p className="text-md text-black leading-relaxed font-black">
               {description}
             </p>
 
@@ -112,7 +113,7 @@ export function ResourceLauncher({
                   </h4>
                   <SpeechButton text="Ver instrucciones en lengua de signos" language={lang} />
                 </div>
-                <p className="text-[11px] text-slate-700 font-black leading-tight uppercase">
+                <p className="text-[11px] text-black font-black leading-tight uppercase">
                   {lseInstructions}
                 </p>
               </div>
