@@ -110,24 +110,24 @@ export function HealthHub({ lang }: { lang: string }) {
             description="Solicita la TSE para tener cobertura médica en tus viajes por Europa."
             url={OFFICIAL_LINKS.salud.tse}
             triggerLabel="Solicitar TSE"
-            variant="outline"
+            variant="primary"
             lang={lang}
           />
           <div className="grid grid-cols-2 gap-2">
             <ResourceLauncher 
               title="Gastos Prótesis"
-              description="Solicitud de reintegro de gastos ortoprotésicos (gafas, audífonos)."
+              description="Solicitud de reintegro de gastos ortoprotésicos (gafas, audífonos) ante el SAS en Jaén."
               url={OFFICIAL_LINKS.salud.reintegroOrtoprotesico}
               triggerLabel="Reintegro"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
             <ResourceLauncher 
               title="Desplazamiento"
-              description="Ayudas por traslados a hospitales fuera de Jaén capital."
+              description="Ayudas por traslados a hospitales de referencia fuera de la provincia de Jaén."
               url={OFFICIAL_LINKS.salud.ayudaDesplazamiento}
               triggerLabel="Ayuda Viaje"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
           </div>
