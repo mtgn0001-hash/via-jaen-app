@@ -1,7 +1,6 @@
-
 "use client"
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +21,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
   
   const [filter, setFilter] = useState("");
   const [selectedType, setSelectedType] = useState<string>("Todos");
+  const [announcement, setAnnouncement] = useState("");
 
   const isEasy = progress.easyReading;
   const types = ["Todos", "ONG", "Salud", "Albergue", "Comedor", "Administración"];
@@ -46,13 +46,20 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
     );
   }, [currentProvince, selectedType, filter]);
 
+  // Anuncio dinámico para lectores de pantalla sobre resultados de búsqueda
+  useEffect(() => {
+    if (filter || selectedType !== "Todos") {
+      setAnnouncement(`Se han encontrado ${filtered.length} recursos de ${selectedType === "Todos" ? 'todas las categorías' : selectedType}`);
+    }
+  }, [filtered.length, filter, selectedType]);
+
   const openInMaps = (address: string) => {
     const query = encodeURIComponent(address);
     window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
   };
 
   return (
-    <div className="space-y-6 pb-20">
+    <div className="space-y-6 pb-20" role="main">
       <div className="space-y-1">
         <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight text-primary" : "text-2xl font-black uppercase text-primary tracking-tight"}>Ayuda Local</h2>
         <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.2em]">
@@ -60,7 +67,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
         </p>
       </div>
 
-      <section className="bg-primary/5 p-5 rounded-[2.5rem] border-2 border-primary/10 flex gap-4 items-center">
+      <section className="bg-primary/5 p-5 rounded-[2.5rem] border-2 border-primary/10 flex gap-4 items-center" aria-label="Aviso de Ubicación">
          <div className="bg-primary p-3 rounded-2xl shadow-xl shadow-primary/20 animate-pulse">
             <Navigation className="h-6 w-6 text-white" />
          </div>
@@ -72,22 +79,25 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
       {!isEasy && (
         <div className="space-y-4">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" aria-hidden="true" />
             <Input 
               placeholder="¿Qué necesitas buscar en Jaén?" 
-              className="pl-12 h-16 rounded-[2rem] bg-white border-none shadow-xl font-bold text-lg"
+              className="pl-12 h-16 rounded-[2rem] bg-white border-none shadow-xl font-bold text-lg text-black"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
+              aria-label="Buscar recursos en Jaén"
             />
           </div>
 
           <div className="space-y-3">
             <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground ml-2">Categorías</p>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" role="tablist">
               {types.map(type => (
                 <Badge 
                   key={type}
                   variant={selectedType === type ? 'secondary' : 'outline'}
+                  role="tab"
+                  aria-selected={selectedType === type}
                   className={`cursor-pointer px-6 py-3 rounded-2xl whitespace-nowrap text-xs font-black transition-all flex items-center gap-2 border-2 shadow-sm ${selectedType === type ? 'bg-primary text-white border-primary' : 'bg-white border-primary/5 text-primary hover:border-primary/20'}`}
                   onClick={() => {
                     if ('vibrate' in navigator) navigator.vibrate(10);
@@ -102,9 +112,14 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
         </div>
       )}
 
+      {/* Región ARIA para anunciar cambios en los resultados */}
+      <div className="sr-only" aria-live="polite">
+        {announcement}
+      </div>
+
       <div className="grid gap-6">
         {filtered.map((res, i) => (
-          <Card key={i} className={`overflow-hidden border-none shadow-2xl bg-white transition-all active:scale-[0.98] ${isEasy ? 'rounded-[3rem] border-[8px] border-primary/5' : 'rounded-[2.5rem] hover:border-primary/20 hover:-translate-y-1'}`}>
+          <Card key={i} className={`overflow-hidden border-none shadow-2xl bg-white transition-all active:scale-[0.98] ${isEasy ? 'rounded-none border-4 border-black' : 'rounded-[2.5rem] hover:border-primary/20 hover:-translate-y-1'}`}>
             <CardContent className={isEasy ? "p-10" : "p-8"}>
               <div className="flex justify-between items-start mb-6">
                 <div className="bg-primary/10 p-4 rounded-3xl text-primary shadow-inner">
@@ -121,7 +136,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
               </p>
               
               <div className="flex gap-4">
-                <Button asChild size="lg" className="flex-1 rounded-[1.5rem] h-16 gap-3 font-black text-lg shadow-xl bg-emerald-600 hover:bg-emerald-700 text-white active:scale-95 transition-all">
+                <Button asChild size="lg" className="flex-1 rounded-[1.5rem] h-16 gap-3 font-black text-lg shadow-xl bg-emerald-600 hover:bg-emerald-700 text-white active:scale-95 transition-all" aria-label={`Llamar a ${res.name} al número ${res.phone}`}>
                   <a href={`tel:${res.phone.replace(/\s/g, '')}`}>
                     <Phone className="h-6 w-6" /> {res.phone}
                   </a>
@@ -131,6 +146,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
                   size="icon" 
                   variant="outline"
                   className="w-16 h-16 rounded-[1.5rem] border-2 border-slate-200 active:scale-95 transition-all hover:border-primary hover:text-primary group"
+                  aria-label={`Abrir ubicación de ${res.name} en Google Maps`}
                 >
                   <Navigation className="h-6 w-6 text-primary group-hover:animate-bounce" />
                 </Button>

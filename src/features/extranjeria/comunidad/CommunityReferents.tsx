@@ -112,10 +112,10 @@ export function CommunityReferents({ lang }: { lang: string }) {
   ];
 
   return (
-    <section className="space-y-4 py-4">
+    <section className="space-y-4 py-4" aria-labelledby="comm-title">
       <div className="flex justify-between items-center px-2">
         <div className="space-y-0.5">
-          <h3 className="text-xl font-black text-[#1A1A1B] uppercase tracking-tighter flex items-center gap-2">
+          <h3 id="comm-title" className="text-xl font-black text-[#1A1A1B] uppercase tracking-tighter flex items-center gap-2">
             Voces que te Guían
           </h3>
           <p className="text-[10px] text-slate-600 font-black uppercase tracking-widest leading-none">
@@ -131,7 +131,7 @@ export function CommunityReferents({ lang }: { lang: string }) {
             variant="ghost" 
             size="icon" 
             className="h-9 w-9 rounded-2xl bg-primary/10 text-primary border border-primary/20"
-            aria-label="Ver video en LSE sobre esta sección"
+            aria-label="Ver video explicativo en Lengua de Signos sobre referentes comunitarios"
           >
             <Play className="h-4 w-4" />
           </Button>
@@ -145,14 +145,17 @@ export function CommunityReferents({ lang }: { lang: string }) {
               <Card 
                 className="border-none bg-white shadow-xl rounded-[2rem] overflow-hidden transition-all active:scale-95 cursor-pointer border-2 border-slate-100"
                 onClick={() => setSelectedRef(ref)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Referente: ${ref.name}, experto en ${ref.spec}. Pulsa para ver detalles.`}
               >
                 <CardContent className="p-5 flex flex-col items-center text-center gap-3">
-                  <div className={cn("p-3 rounded-full shadow-inner opacity-100", ref.color.split(' ')[0])}>
-                    <ref.icon className={cn("h-6 w-6", ref.color.split(' ')[1])} />
+                  <div className={cn("p-3 rounded-full shadow-inner", ref.color.split(' ')[0])}>
+                    <ref.icon className={cn("h-6 w-6", ref.color.split(' ')[1])} aria-hidden="true" />
                   </div>
                   <div className="space-y-1">
                     <h4 className="text-[13px] font-black text-[#1A1A1B] leading-tight line-clamp-1">{ref.name}</h4>
-                    <Badge variant="secondary" className={cn("text-[9px] uppercase font-black px-2 py-0.5 border-none opacity-100", ref.color)}>
+                    <Badge variant="secondary" className={cn("text-[9px] uppercase font-black px-2 py-0.5 border-none", ref.color)}>
                       {ref.spec}
                     </Badge>
                   </div>
@@ -163,14 +166,14 @@ export function CommunityReferents({ lang }: { lang: string }) {
         </CarouselContent>
       </Carousel>
 
-      {/* DETALLE DEL REFERENTE (BOTTOM SHEET STYLE) */}
+      {/* DETALLE DEL REFERENTE */}
       <Dialog open={!!selectedRef} onOpenChange={() => setSelectedRef(null)}>
         <DialogContent className="sm:max-w-md rounded-t-[3rem] sm:rounded-[3rem] bg-white/95 backdrop-blur-2xl border-none shadow-2xl p-0 overflow-hidden outline-none">
           {selectedRef && (
             <div className="animate-in slide-in-from-bottom-4 duration-500">
               <div className={cn("p-10 flex flex-col items-center text-center gap-4", selectedRef.color.split(' ')[0])}>
                 <div className="bg-white p-5 rounded-[2.5rem] shadow-xl">
-                   <selectedRef.icon className={cn("h-10 w-10", selectedRef.color.split(' ')[1])} />
+                   <selectedRef.icon className={cn("h-10 w-10", selectedRef.color.split(' ')[1])} aria-hidden="true" />
                 </div>
                 <div className="space-y-1">
                   <DialogTitle className="text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter">
@@ -196,8 +199,9 @@ export function CommunityReferents({ lang }: { lang: string }) {
                 </div>
 
                 <Button 
-                  className="w-full h-16 rounded-[1.5rem] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-black text-xl gap-3 shadow-xl active:scale-95 transition-all"
+                  className="w-full h-16 rounded-[1.5rem] bg-primary hover:bg-primary/90 text-white font-black text-xl gap-3 shadow-xl active:scale-95 transition-all"
                   onClick={() => window.open(selectedRef.url, '_blank')}
+                  aria-label={`Abrir perfil de ${selectedRef.platform} de ${selectedRef.name} en una ventana nueva`}
                 >
                   VER EN {selectedRef.platform.toUpperCase()} <ArrowUpRight className="h-6 w-6" />
                 </Button>

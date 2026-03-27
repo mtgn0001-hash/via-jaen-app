@@ -6,17 +6,17 @@
   :root {
     /* TEMA MORADO (DEFAULT) - Contrastes Mejorados */
     --background: 260 30% 98%;
-    --foreground: 222 47% 11%; /* Azul Oscuro Profundo para lectura máxima */
+    --foreground: 222 47% 11%;
     --card: 260 30% 99%;
     --card-foreground: 222 47% 11%;
     --popover: 260 30% 99%;
     --popover-foreground: 222 47% 11%;
     --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%; /* Blanco Puro */
+    --primary-foreground: 0 0% 100%;
     --secondary: 262 40% 92%;
     --secondary-foreground: 222 47% 15%;
     --muted: 262 20% 94%;
-    --muted-foreground: 215 25% 20%; /* Gris muy oscuro para legibilidad total */
+    --muted-foreground: 215 25% 20%;
     --accent: 262 40% 90%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 60%;
@@ -25,18 +25,11 @@
     --input: 262 30% 88%;
     --ring: 262 83% 58%;
     --radius: 1.5rem;
-
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 262 83% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-border: 262 20% 92%;
-    --sidebar-ring: 262 83% 58%;
   }
 
   [data-accessibility='accessible'] {
     --background: 0 0% 0%;
-    --foreground: 60 100% 50%; /* Amarillo Neón */
+    --foreground: 60 100% 50%; /* Amarillo Neón para Máximo Contraste */
     --card: 0 0% 0%;
     --card-foreground: 60 100% 50%;
     --primary: 60 100% 50%;
@@ -47,14 +40,7 @@
     --accent: 262 83% 58%; 
     --accent-foreground: 0 0% 100%;
     --radius: 0;
-  }
-
-  [data-theme='night'] {
-    --background: 260 25% 6%;
-    --foreground: 260 10% 95%;
-    --card: 260 25% 10%;
-    --muted-foreground: 260 10% 75%;
-    --border: 260 20% 18%;
+    font-size: 20px; /* Fuente aumentada para baja visión */
   }
 }
 
@@ -73,6 +59,11 @@
 [data-accessibility='accessible'] .card,
 [data-accessibility='accessible'] input {
   border: 3px solid currentColor !important;
+  @apply rounded-none;
+}
+
+[data-accessibility='accessible'] .text-muted-foreground {
+  @apply text-primary font-black;
 }
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }

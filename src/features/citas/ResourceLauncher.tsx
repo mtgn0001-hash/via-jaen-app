@@ -37,6 +37,13 @@ export function ResourceLauncher({
 
   const handleLaunch = () => {
     setIsRedirecting(true);
+    
+    // Anuncio para lectores de pantalla antes de redirigir
+    const announcement = `Abriendo sitio web externo oficial en una ventana nueva. Redirigiendo a ${url}`;
+    const utterance = new SpeechSynthesisUtterance(announcement);
+    utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
+    window.speechSynthesis.speak(utterance);
+
     setTimeout(() => {
       window.open(url, '_blank');
       setIsOpen(false);
@@ -65,6 +72,7 @@ export function ResourceLauncher({
         <Button 
           onClick={() => setIsOpen(true)}
           className={`flex-1 h-14 rounded-xl font-black uppercase tracking-tight shadow-md transition-all active:scale-95 ${getVariantStyles()}`}
+          aria-label={`Botón: ${triggerLabel} para ${title}. Abre ventana de confirmación.`}
         >
           {triggerLabel}
         </Button>
@@ -73,6 +81,7 @@ export function ResourceLauncher({
           size="icon" 
           className={`h-14 w-14 rounded-xl ${variant === 'white' ? 'bg-white/30 border-white/40 text-white' : 'border-slate-300 text-slate-900 hover:text-primary'}`}
           onClick={() => setIsOpen(true)}
+          aria-label={`Más información sobre ${title}`}
         >
           <Info className="h-6 w-6" />
         </Button>
@@ -123,6 +132,7 @@ export function ResourceLauncher({
               onClick={handleLaunch} 
               disabled={isRedirecting}
               className="flex-1 rounded-xl h-14 bg-primary text-white font-black uppercase text-sm gap-2"
+              aria-live="polite"
             >
               {isRedirecting ? (
                 <><Loader2 className="h-5 w-5 animate-spin" /> Conectando...</>
