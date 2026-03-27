@@ -23,7 +23,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
   const guideSections = [
     { 
       section: "NIE / Certificados (Modelo EX-15)", 
-      url: "https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf",
+      url: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html",
       where: "Comisaría de Policía (Plaza de las Batallas, Jaén)",
       fields: [
         { id: "nie", label: "PASAPORTE / NIE", hint: "Si es tu primera vez, escribe el número de tu pasaporte. Usa siempre MAYÚSCULAS." },
@@ -73,7 +73,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
                   </div>
                   <Button variant="outline" size="sm" className="rounded-xl h-10 gap-2 border-primary/20 hover:bg-primary/10 text-primary font-black text-[10px] uppercase" asChild>
                     <a href={group.url} target="_blank">
-                      {group.url.endsWith('.pdf') ? <Download className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
+                      <ExternalLink className="h-4 w-4" />
                       Acceder
                     </a>
                   </Button>

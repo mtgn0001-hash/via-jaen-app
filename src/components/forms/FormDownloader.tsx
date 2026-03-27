@@ -17,9 +17,9 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
     {
       title: 'Modelo EX-15',
       desc: 'Solicitud de NIE y Certificados (Imprescindible para Jaén)',
-      url: 'https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf',
-      backupUrl: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
-      type: 'PDF'
+      url: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
+      backupUrl: 'https://www.inclusion.gob.es/web/migraciones/modelos-de-solicitud',
+      type: 'Sede'
     },
     {
       title: 'Modelo 790-012',
@@ -30,8 +30,8 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
     {
       title: 'Modelo EX-10',
       desc: 'Solicitud de Arraigo (Circunstancias Excepcionales)',
-      url: 'https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/10-Formulario_autorizacion_residencia_circunstancias_excepcionales.pdf',
-      type: 'PDF'
+      url: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
+      type: 'Sede'
     }
   ];
 
@@ -67,11 +67,11 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
               <Button 
                 asChild 
                 className="w-full gap-2 rounded-xl"
-                variant={form.type === 'PDF' ? 'default' : 'secondary'}
+                variant={form.type === 'Sede' ? 'default' : 'secondary'}
               >
                 <a href={form.url} target="_blank" rel="noopener noreferrer">
-                  {form.type === 'PDF' ? <Download className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
-                  {form.type === 'PDF' ? t.downloadForm : t.fillOnline}
+                  {form.type === 'Sede' ? <ExternalLink className="h-4 w-4" /> : <Download className="h-4 w-4" />}
+                  {form.type === 'Sede' ? 'Ir a la Sede' : t.downloadForm}
                 </a>
               </Button>
               {form.backupUrl && (

@@ -66,11 +66,11 @@ export function ProcedureList({ lang }: ProcedureListProps) {
       id: 'nie_ex15',
       title: 'Modelo EX-15 (NIE)',
       desc: 'Formulario oficial de solicitud de Número de Identidad de Extranjero.',
-      url: 'https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf',
-      backupUrl: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
+      url: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
+      backupUrl: 'https://www.inclusion.gob.es/web/migraciones/modelos-de-solicitud',
       type: 'Formulario',
       org: 'Police',
-      rules: [l.rule1, l.rule2, l.rule3],
+      rules: [l.rule1, l.rule2, l.rule3, "Una vez en la web, pulsa en 'Modelo EX-15' para descargar."],
       jaenNote: true
     },
     {
