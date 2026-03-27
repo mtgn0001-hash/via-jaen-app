@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import { Accessibility, Settings2, Bell } from "lucide-react";
+import { Settings2, Bell } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { AppLogo } from "@/components/ui/AppLogo";
-import { UserProgress, useLocalStorage } from "@/lib/store";
+import { UserProgress } from "@/lib/store";
 import { SettingsPanel } from "@/components/ui/SettingsPanel";
 
 type HeaderProps = {
@@ -46,12 +46,13 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
         </div>
 
         <div className="flex items-center gap-2">
+          {/* BOTÓN DE AJUSTES: ACCESO PRINCIPAL */}
           <Button 
             variant="ghost" 
             size="icon" 
-            className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10"
+            className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10 transition-all active:scale-90"
             onClick={() => setSettingsOpen(true)}
-            aria-label={t.settings}
+            aria-label="Configuración de idioma y colores de la aplicación"
           >
             <Settings2 className="h-6 w-6" />
           </Button>

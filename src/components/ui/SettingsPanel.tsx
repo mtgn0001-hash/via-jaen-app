@@ -40,9 +40,13 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
 
   const handleLanguageChange = (newLang: Language) => {
     updateProgress({ language: newLang });
-    const utterance = new SpeechSynthesisUtterance(translations[newLang].language + " changed");
-    utterance.lang = newLang === 'ar' ? 'ar-SA' : newLang === 'uk' ? 'uk-UA' : 'es-ES';
-    window.speechSynthesis.speak(utterance);
+    
+    // Feedback de audio si el modo audio está activo o para confirmar cambio
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(translations[newLang].language + " changed");
+      utterance.lang = newLang === 'ar' ? 'ar-SA' : newLang === 'uk' ? 'uk-UA' : 'es-ES';
+      window.speechSynthesis.speak(utterance);
+    }
   };
 
   const handleThemeChange = (newTheme: ThemeType) => {
@@ -65,7 +69,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
         </SheetHeader>
 
         <div className="space-y-8 max-w-md mx-auto">
-          {/* Idioma */}
+          {/* SECCIÓN: IDIOMA */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
               <Globe className="h-4 w-4" /> {t.language}
@@ -82,14 +86,14 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                   )}
                   aria-label={`${t.language}: ${l.label}`}
                 >
-                  <span className="text-xl">{l.flag}</span>
+                  <span className="text-xl" aria-hidden="true">{l.flag}</span>
                   {l.id.toUpperCase()}
                 </Button>
               ))}
             </div>
           </div>
 
-          {/* Temas */}
+          {/* SECCIÓN: TEMAS */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
               <Palette className="h-4 w-4" /> {t.theme}
@@ -104,6 +108,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                     "h-16 rounded-2xl justify-between px-6 border-2 font-black uppercase text-xs tracking-widest",
                     progress.theme === th.id ? "border-primary bg-primary/5" : "bg-card"
                   )}
+                  aria-label={`${t.theme}: ${th.label}`}
                 >
                   <div className="flex items-center gap-4">
                     <div className={cn("h-8 w-8 rounded-full shadow-inner", th.color)} />
@@ -115,10 +120,11 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
             </div>
           </div>
 
-          {/* SOS Persistente */}
+          {/* BOTÓN SOS PERMANENTE */}
           <Button 
             onClick={() => window.open('tel:112', '_self')}
             className="w-full h-20 rounded-3xl bg-destructive text-white text-xl font-black uppercase border-4 border-white shadow-2xl animate-pulse"
+            aria-label={t.sosTitle}
           >
             <ShieldAlert className="h-8 w-8 mr-3" /> {t.sosTitle}
           </Button>

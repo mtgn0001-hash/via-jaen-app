@@ -21,6 +21,7 @@ export const translations = {
     families: 'Familias',
     referents: 'Voces que te Guían',
     sosTitle: 'EMERGENCIA 112',
+    disclaimer: 'Personaliza tu experiencia segura.',
     themes: {
       light: 'Vía Jaén (Claro)',
       dark: 'Noche Jaenera',
@@ -56,6 +57,7 @@ export const translations = {
     families: 'Families',
     referents: 'Voices that Guide You',
     sosTitle: 'EMERGENCY 112',
+    disclaimer: 'Customize your safe experience.',
     themes: {
       light: 'Via Jaen (Light)',
       dark: 'Jaenera Night',
@@ -91,6 +93,7 @@ export const translations = {
     families: 'Familles',
     referents: 'Voix qui vous guident',
     sosTitle: 'URGENCE 112',
+    disclaimer: 'Personnalisez votre expérience sécurisée.',
     themes: {
       light: 'Via Jaén (Clair)',
       dark: 'Nuit Jaenera',
@@ -126,6 +129,7 @@ export const translations = {
     families: 'العائلات',
     referents: 'أصوات ترشدك',
     sosTitle: 'طوارئ 112',
+    disclaimer: 'خصص تجربتك الآمنة.',
     themes: {
       light: 'طريق جيان (فاتح)',
       dark: 'ليل جيان',
@@ -161,6 +165,7 @@ export const translations = {
     families: 'Сім\'ї',
     referents: 'Голоси, що ведуть вас',
     sosTitle: 'ТЕРМІНОВА ДОПОМОГА 112',
+    disclaimer: 'Налаштуйте свій безпечний досвід.',
     themes: {
       light: 'Шлях Хаен (Світла)',
       dark: 'Ніч Хаена',

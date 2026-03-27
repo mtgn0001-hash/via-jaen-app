@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, RefreshCw, Send, Bot, Volume2 } from "lucide-react";
 import { textToSpeech } from "@/ai/flows/tts-flow";
+import { cn } from "@/lib/utils";
 
 type Node = {
   id: string;
@@ -15,10 +16,6 @@ type Node = {
 };
 
 const getTree = (lang: Language): Record<string, Node> => {
-  const isAr = lang === 'ar';
-  const isUk = lang === 'uk';
-  
-  // Minimal tree structure for the prototype with translated core texts
   const labels = {
     legal: lang === 'es' ? 'Papeles / Cita' : lang === 'en' ? 'Papers / Appt' : lang === 'fr' ? 'Papiers' : lang === 'ar' ? 'أوراق' : 'Документи',
     work: lang === 'es' ? 'Trabajo / Olivar' : lang === 'en' ? 'Work' : lang === 'fr' ? 'Travail' : lang === 'ar' ? 'عمل' : 'Робота',
@@ -86,7 +83,7 @@ export function JaenBot({ lang }: { lang: Language }) {
       audio.onended = () => setIsSpeaking(false);
       audio.play();
     } catch (e) {
-      console.error(e);
+      console.error("Bot TTS Error:", e);
       setIsSpeaking(false);
     }
   };
@@ -118,7 +115,13 @@ export function JaenBot({ lang }: { lang: Language }) {
              </div>
              <span className="font-black text-xs uppercase tracking-widest">{t.botTitle}</span>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setHistory(['start'])} className="text-white hover:bg-white/10 rounded-full">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setHistory(['start'])} 
+            className="text-white hover:bg-white/10 rounded-full"
+            aria-label="Reiniciar conversación"
+          >
             <RefreshCw className="h-4 w-4" />
           </Button>
         </div>
@@ -130,7 +133,7 @@ export function JaenBot({ lang }: { lang: Language }) {
                  <div className="bg-primary/10 p-2 rounded-full mt-1">
                    <Bot className="h-3 w-3 text-primary" />
                  </div>
-                 <div className="bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-medium text-foreground border">
+                 <div className="bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-black text-foreground border-2">
                     {tree[id]?.text || t.botWelcome}
                  </div>
                </div>
@@ -146,17 +149,24 @@ export function JaenBot({ lang }: { lang: Language }) {
                 key={opt.label} 
                 variant="outline"
                 onClick={() => handleOption(opt.next, opt.link)}
-                className="h-12 rounded-2xl justify-between px-4 border-2 border-primary/10 hover:border-primary hover:bg-primary/5 group"
+                className="h-14 rounded-2xl justify-between px-6 border-2 border-primary/20 hover:border-primary hover:bg-primary/5 group active:scale-95 transition-all"
+                aria-label={`Opción: ${opt.label}`}
               >
-                <span className="font-bold text-xs uppercase tracking-tight">{opt.label}</span>
-                <Send className={cn("h-4 w-4 text-primary opacity-20 group-hover:opacity-100 transition-all", lang === 'ar' && "rotate-180")} />
+                <span className="font-black text-sm uppercase tracking-tight">{opt.label}</span>
+                <Send className={cn("h-4 w-4 text-primary opacity-40 group-hover:opacity-100 transition-all", lang === 'ar' && "rotate-180")} />
               </Button>
             ))}
           </div>
           
           {history.length > 1 && (
-            <Button variant="ghost" onClick={handleBack} className="w-full text-[10px] font-black uppercase tracking-widest gap-2 text-muted-foreground">
-              <ArrowLeft className={cn("h-3 w-3", lang === 'ar' && "rotate-180")} /> Volver
+            <Button 
+              variant="ghost" 
+              onClick={handleBack} 
+              className="w-full h-10 text-[10px] font-black uppercase tracking-widest gap-2 text-muted-foreground hover:text-primary"
+              aria-label="Volver al mensaje anterior"
+            >
+              <ArrowLeft className={cn("h-3 w-3", lang === 'ar' && "rotate-180")} /> 
+              {lang === 'es' ? 'Volver' : 'Back'}
             </Button>
           )}
         </div>
