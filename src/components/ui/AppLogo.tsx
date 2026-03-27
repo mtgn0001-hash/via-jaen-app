@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from "react";
@@ -40,17 +41,14 @@ export function AppLogo({ className, size = 40, variant = "default" }: AppLogoPr
         className={cn("relative z-10 transition-all duration-500 group-hover:scale-110", fillColors[variant])}
         style={{ width: size * 0.6, height: size * 0.6 }}
       >
-        {/* Silueta Rectilínea de la Catedral de Jaén */}
+        {/* Corazón con Cruz Médica (Logo Salud) */}
         <path 
-          d="M10 85h80V35H75V15h-12v20H55v5H45v-5h-7V15H26v20H10v50zM42 75h16v10H42V75z" 
+          d="M50 90C48 90 10 65 10 35C10 18 25 10 40 10C44 10 48 12 50 15C52 12 56 10 60 10C75 10 90 18 90 35C90 65 52 90 50 90Z" 
           fill="currentColor"
         />
-        {/* Detalles negativos */}
-        <rect x="18" y="45" width="6" height="4" fill="white" fillOpacity="0.4" />
-        <rect x="76" y="45" width="6" height="4" fill="white" fillOpacity="0.4" />
-        <rect x="18" y="55" width="6" height="4" fill="white" fillOpacity="0.3" />
-        <rect x="76" y="55" width="6" height="4" fill="white" fillOpacity="0.3" />
-        <rect x="42" y="50" width="16" height="2" fill="white" fillOpacity="0.2" />
+        {/* Cruz en negativo */}
+        <rect x="44" y="25" width="12" height="30" fill="white" rx="2" />
+        <rect x="35" y="34" width="30" height="12" fill="white" rx="2" />
       </svg>
     </div>
   );
