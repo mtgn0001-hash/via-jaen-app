@@ -153,17 +153,25 @@ export const translations = {
     },
     launcher: {
       confirmTitle: 'Saliendo a Sede Oficial',
-      confirmDesc: 'Estás saliendo de Vía Jaén para rellenar tu modelo en el portal oficial.',
+      confirmDesc: 'Vas a rellenar el formulario oficial. Ten a mano tu DNI/NIE y Certificado Digital si lo tienes.',
       continue: 'Continuar al Trámite',
       instructions: 'Instrucciones Rápidas',
       close: 'Cerrar',
       officialShield: 'Ministerio / Extranjería',
       ujaShield: 'Universidad de Jaén',
       aytoShield: 'Ayuntamiento de Jaén',
+      sasShield: 'Salud Responde (SAS)',
       reminderPlaza: 'Recuerda: Si no encuentras cita online, acude presencialmente a Plaza de las Batallas para consultar el tablón.',
       rule1: 'Usa siempre letra MAYÚSCULA y bolígrafo NEGRO.',
       rule2: 'Los datos deben coincidir exactamente con tu Pasaporte.',
-      rule3: 'Asegúrate de llevar el justificante de la Tasa pagada.'
+      rule3: 'Asegúrate de llevar el justificante de la Tasa pagada.',
+      copyLink: 'Copiar enlace',
+      copied: '¡Enlace copiado!',
+      linkError: '¿No funciona este link?',
+      reportSuccess: '¡Gracias por reportar! Lo revisaremos pronto.',
+      redirectWarning: 'Ahora se abrirá la web oficial del Gobierno. Es un sitio seguro.',
+      domainLabel: 'Abriendo el dominio: ',
+      lseRedirect: 'Ahora se abrirá la web oficial. No te asustes si el diseño cambia, es un sitio seguro y oficial.'
     },
     legalRights: {
       title: 'Tus Derechos',
@@ -206,25 +214,6 @@ export const translations = {
       red: 'Rojo',
       night: 'Noche',
       contrast: 'Contraste'
-    }
-  },
-  en: {
-    // ... English translations remain consistent or slightly updated if needed
-    title: 'Vía Jaén',
-    // ...
-    launcher: {
-      confirmTitle: 'Leaving to Official Site',
-      confirmDesc: 'You are leaving Vía Jaén to fill your form at the official government portal.',
-      continue: 'Continue to Form',
-      instructions: 'Quick Instructions',
-      close: 'Close',
-      officialShield: 'Government / Immigration',
-      ujaShield: 'University of Jaén',
-      aytoShield: 'Jaén City Council',
-      reminderPlaza: 'Remember: If no appointments online, visit Plaza de las Batallas in person to check the board.',
-      rule1: 'Always use CAPITAL letters and BLACK pen.',
-      rule2: 'Data must match your Passport exactly.',
-      rule3: 'Ensure you bring the proof of payment for the Tax.'
     }
   }
 };
