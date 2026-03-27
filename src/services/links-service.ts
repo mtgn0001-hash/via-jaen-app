@@ -14,7 +14,11 @@ export const OFFICIAL_LINKS = {
   },
   comunidad: {
     hijaDeInmigrantes: "https://www.instagram.com/hijadeinmigrantes/",
-    legalteam: "https://www.instagram.com/legalteam/",
+    vicenteMarin: "https://www.youtube.com/c/parainmigrantes",
+    desireeBela: "https://www.instagram.com/desireebela/",
+    sosRacismo: "https://sosracismo.eu/",
+    quanZhou: "https://www.instagram.com/gazpachoagridulce/",
+    safaElMsaouri: "https://www.instagram.com/safaelmsaouri/",
     sugerirReferente: "mailto:ayuda@viajaen.es?subject=Sugerencia de Referente Digital"
   },
   ayuntamiento: {
