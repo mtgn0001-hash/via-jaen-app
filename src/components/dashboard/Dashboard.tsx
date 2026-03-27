@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -9,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { 
   MessageSquare, 
   Building2, 
-  Heart, 
   Users,
   Briefcase,
   GraduationCap,
@@ -45,17 +43,17 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
         >
           <CardContent className="p-8 flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <div className="bg-white/20 p-4 rounded-3xl backdrop-blur-md shadow-inner">
+              <div className="bg-white/25 p-4 rounded-3xl backdrop-blur-md shadow-inner">
                 <MessageSquare className="h-8 w-8 text-white" />
               </div>
               <div className="space-y-1">
                 <h2 className="text-2xl font-black uppercase tracking-tighter leading-none">Hablar con Jaén-Bot</h2>
-                <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
+                <p className="text-[10px] font-bold opacity-90 uppercase tracking-widest">Resuelve tus dudas en tiempo real</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-               <Badge className="bg-white/20 text-white border-none text-[9px] font-black uppercase px-3 py-1 rounded-full hidden sm:flex">IA Activa</Badge>
-               <ArrowRight className="h-6 w-6 opacity-40 group-hover:translate-x-1 transition-transform" />
+               <Badge className="bg-white/25 text-white border-none text-[9px] font-black uppercase px-3 py-1 rounded-full hidden sm:flex">IA Activa</Badge>
+               <ArrowRight className="h-6 w-6 opacity-60 group-hover:translate-x-1 transition-transform" />
             </div>
           </CardContent>
         </Card>
@@ -64,9 +62,9 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
       {/* 2. BENTO GRID PRINCIPAL */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         
-        {/* TRÁMITES CRÍTICOS (2x2) - EXCLUSIVO IDENTIDAD */}
+        {/* TRÁMITES CRÍTICOS (2x2) */}
         <Card 
-          className={cn(bentoCardClass, "col-span-2 row-span-2 bg-white rounded-[3rem] border-2 border-primary/5 flex flex-col justify-between")}
+          className={cn(bentoCardClass, "col-span-2 row-span-2 bg-white rounded-[3rem] border-2 border-primary/10 flex flex-col justify-between")}
           onClick={() => setActiveTab('procedures')}
         >
           <div className="absolute top-0 right-0 p-6 opacity-5">
@@ -79,13 +77,13 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
               </div>
               <div className="flex items-center gap-2">
                 {isLSE && <div className="bg-primary p-2 rounded-full shadow-lg animate-bounce"><Play className="h-3 w-3 text-white fill-current" /></div>}
-                <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-100 font-black text-[8px] uppercase">Prioridad 1</Badge>
+                <Badge variant="outline" className="bg-amber-100 text-amber-900 border-amber-200 font-black text-[8px] uppercase">Prioridad 1</Badge>
               </div>
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase leading-tight">Trámites</h3>
-              <p className="text-[10px] font-bold text-muted-foreground uppercase leading-relaxed max-w-[180px]">
+              <h3 className="text-3xl font-black text-slate-950 tracking-tighter uppercase leading-tight">Trámites</h3>
+              <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed max-w-[180px]">
                 Gestión exclusiva de TIE, Modelo EX-15 y Citas Plaza de las Batallas.
               </p>
               <Button className="h-12 rounded-xl font-black text-xs gap-2 shadow-lg w-fit">
@@ -95,69 +93,69 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
           </CardContent>
         </Card>
 
-        {/* SALUD JAÉN (1x1) - EXCLUSIVO SANIDAD */}
+        {/* SALUD JAÉN */}
         <Card 
-          className={cn(bentoCardClass, "bg-red-50/50 border border-red-100 rounded-[2rem]")}
+          className={cn(bentoCardClass, "bg-red-50 border border-red-100 rounded-[2rem]")}
           onClick={() => setResourceSection('salud')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-            <div className="bg-red-500 p-3 rounded-2xl text-white shadow-lg">
+            <div className="bg-red-600 p-3 rounded-2xl text-white shadow-lg">
               <Stethoscope className="h-6 w-6" />
             </div>
             <div className="space-y-1">
-              <h4 className="font-black text-xs uppercase text-red-900">Salud</h4>
-              <p className="text-[8px] text-red-800/60 font-black uppercase">Citas / Urgencias</p>
+              <h4 className="font-black text-xs uppercase text-red-950">Salud</h4>
+              <p className="text-[8px] text-red-800 font-black uppercase">Citas / Urgencias</p>
             </div>
-            {isLSE && <Play className="h-3 w-3 text-red-400" />}
+            {isLSE && <Play className="h-3 w-3 text-red-600" />}
           </CardContent>
         </Card>
 
-        {/* PARA FAMILIAS (1x1) - EXCLUSIVO AYUDAS Y COLEGIOS */}
+        {/* PARA FAMILIAS */}
         <Card 
-          className={cn(bentoCardClass, "bg-emerald-50/50 border border-emerald-100 rounded-[2rem]")}
+          className={cn(bentoCardClass, "bg-emerald-50 border border-emerald-100 rounded-[2rem]")}
           onClick={() => setResourceSection('familias')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-            <div className="bg-emerald-600 p-3 rounded-2xl text-white shadow-lg">
+            <div className="bg-emerald-700 p-3 rounded-2xl text-white shadow-lg">
               <Users className="h-6 w-6" />
             </div>
             <div className="space-y-1">
-              <h4 className="font-black text-xs uppercase text-emerald-900">Familias</h4>
-              <p className="text-[8px] text-emerald-800/60 font-black uppercase">Colegios / Ayudas</p>
+              <h4 className="font-black text-xs uppercase text-emerald-950">Familias</h4>
+              <p className="text-[8px] text-emerald-800 font-black uppercase">Colegios / Ayudas</p>
             </div>
-            {isLSE && <Play className="h-3 w-3 text-emerald-400" />}
+            {isLSE && <Play className="h-3 w-3 text-emerald-700" />}
           </CardContent>
         </Card>
 
-        {/* ESTUDIAR UJA (1x1) - EXCLUSIVO UNIVERSIDAD */}
+        {/* ESTUDIAR UJA */}
         <Card 
-          className={cn(bentoCardClass, "bg-indigo-50/50 border border-indigo-100 rounded-[2rem]")}
+          className={cn(bentoCardClass, "bg-indigo-50 border border-indigo-100 rounded-[2rem]")}
           onClick={() => setResourceSection('uja')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-            <div className="bg-indigo-600 p-3 rounded-2xl text-white shadow-lg">
+            <div className="bg-indigo-700 p-3 rounded-2xl text-white shadow-lg">
               <GraduationCap className="h-6 w-6" />
             </div>
             <div className="space-y-1">
-              <h4 className="font-black text-xs uppercase text-indigo-900">UJA</h4>
-              <p className="text-[8px] text-indigo-800/60 font-black uppercase">Becas / Notas</p>
+              <h4 className="font-black text-xs uppercase text-indigo-950">UJA</h4>
+              <p className="text-[8px] text-indigo-800 font-black uppercase">Becas / Notas</p>
             </div>
-            {isLSE && <Play className="h-3 w-3 text-indigo-400" />}
+            {isLSE && <Play className="h-3 w-3 text-indigo-700" />}
           </CardContent>
         </Card>
 
-        {/* EMPLEO (1x1) */}
+        {/* EMPLEO */}
         <Card 
-          className={cn(bentoCardClass, "bg-slate-100/50 border border-slate-200 rounded-[2rem]")}
+          className={cn(bentoCardClass, "bg-slate-100 border border-slate-200 rounded-[2rem]")}
           onClick={() => setActiveTab('employment_portal')}
         >
           <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-            <div className="bg-slate-800 p-3 rounded-2xl text-white shadow-lg">
+            <div className="bg-slate-900 p-3 rounded-2xl text-white shadow-lg">
               <Briefcase className="h-6 w-6" />
             </div>
             <div className="space-y-1">
-              <h4 className="font-black text-xs uppercase text-slate-900">Empleo</h4>
-              <p className="text-[8px] text-slate-800/60 font-black uppercase">SAE / Ofertas</p>
+              <h4 className="font-black text-xs uppercase text-slate-950">Empleo</h4>
+              <p className="text-[8px] text-slate-700 font-black uppercase">SAE / Ofertas</p>
             </div>
           </CardContent>
         </Card>
@@ -177,14 +175,14 @@ export function Dashboard({ lang, setActiveTab, setResourceSection, progress }: 
 
       {/* 4. UTILIDADES DE SEGURIDAD */}
       <section>
-        <Card className="border-none bg-emerald-50/50 border border-emerald-100 rounded-[2.5rem] overflow-hidden">
+        <Card className="border-none bg-emerald-50 border border-emerald-100 rounded-[2.5rem] overflow-hidden">
           <CardContent className="p-6 flex items-center gap-4">
-            <div className="bg-emerald-100 p-3 rounded-2xl text-emerald-600">
+            <div className="bg-emerald-100 p-3 rounded-2xl text-emerald-700">
               <ShieldCheck className="h-6 w-6" />
             </div>
             <div className="space-y-0.5">
-              <h4 className="font-black text-xs uppercase text-emerald-900">Bóveda Segura Activa</h4>
-              <p className="text-[10px] font-bold text-emerald-800/60 uppercase">Tus documentos están protegidos localmente.</p>
+              <h4 className="font-black text-xs uppercase text-emerald-950">Bóveda Segura Activa</h4>
+              <p className="text-[10px] font-bold text-emerald-800 uppercase">Tus documentos están protegidos localmente.</p>
             </div>
           </CardContent>
         </Card>

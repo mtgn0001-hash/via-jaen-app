@@ -4,8 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { 
   GraduationCap, 
-  BookOpen, 
-  FileCheck, 
   Bus, 
   Zap,
   Globe,
@@ -13,24 +11,21 @@ import {
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
-import { useLocalStorage } from "@/lib/store";
 
 export function UjaHub({ lang }: { lang: string }) {
-  const { progress } = useLocalStorage();
-
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center">
         <div className="space-y-1">
-          <h3 className="text-xl font-black text-indigo-600 uppercase tracking-tighter">Estudiar UJA</h3>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Universidad de Jaén y Ayudas Académicas</p>
+          <h3 className="text-xl font-black text-indigo-700 uppercase tracking-tighter">Estudiar UJA</h3>
+          <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Exclusivo: Universidad de Jaén y Ayudas Académicas</p>
         </div>
         <SpeechButton text="Estudiar en la UJA. Becas y servicios académicos exclusivos de la Universidad de Jaén." language={lang} />
       </div>
 
       {/* BECAS Y AYUDAS */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-indigo-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-indigo-700/80 tracking-widest ml-2 flex items-center gap-2">
           <Award className="h-3 w-3" /> Becas y Bonificaciones
         </h4>
         <div className="grid grid-cols-1 gap-2">
@@ -73,7 +68,7 @@ export function UjaHub({ lang }: { lang: string }) {
 
       {/* GESTIÓN ACADÉMICA */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-indigo-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
           <Zap className="h-3 w-3" /> Servicios Campus Las Lagunillas
         </h4>
         <div className="grid grid-cols-1 gap-2">
@@ -107,7 +102,7 @@ export function UjaHub({ lang }: { lang: string }) {
 
       {/* INTERNACIONAL Y MOVILIDAD */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-indigo-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
           <Globe className="h-3 w-3" /> Movilidad
         </h4>
         <ResourceLauncher 
@@ -121,19 +116,19 @@ export function UjaHub({ lang }: { lang: string }) {
       </section>
 
       {/* TRANSPORTE */}
-      <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-indigo-600/60 tracking-widest ml-2 flex items-center gap-2">
+      <section className="space-y-3 pt-2">
+        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
           <Bus className="h-3 w-3" /> Transporte al Campus
         </h4>
-        <Card className="border-none bg-slate-50 rounded-3xl border border-slate-200">
+        <Card className="border-none bg-indigo-50 rounded-3xl border border-indigo-100">
           <CardContent className="p-5 flex items-center justify-between">
             <div className="flex gap-4 items-center">
-              <div className="bg-indigo-600 p-3 rounded-2xl text-white">
+              <div className="bg-indigo-700 p-3 rounded-2xl text-white shadow-sm">
                 <Bus className="h-5 w-5" />
               </div>
               <div>
-                <h5 className="font-black text-xs text-indigo-900 uppercase">Buses Lagunillas</h5>
-                <p className="text-[10px] text-indigo-800/60 font-bold uppercase">Líneas 4, 7, 12, 14, 17</p>
+                <h5 className="font-black text-xs text-indigo-950 uppercase">Buses Lagunillas</h5>
+                <p className="text-[10px] text-indigo-800 font-bold uppercase">Líneas 4, 7, 12, 14, 17</p>
               </div>
             </div>
             <ResourceLauncher 

@@ -5,36 +5,27 @@ import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { 
   School, 
   Baby, 
-  Wallet, 
-  Play, 
   MapPin,
-  Heart,
-  Utensils,
   Home,
-  UserCheck,
-  Users
+  UserCheck
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
-import { useLocalStorage } from "@/lib/store";
 
 export function FamilyHub({ lang }: { lang: string }) {
-  const { progress } = useLocalStorage();
-  const accMode = progress.accessibilityMode;
-
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center">
         <div className="space-y-1">
-          <h3 className="text-xl font-black text-emerald-600 uppercase tracking-tighter">Familias y Colegios</h3>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas Sociales</p>
+          <h3 className="text-xl font-black text-emerald-700 uppercase tracking-tighter">Familias y Colegios</h3>
+          <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas Sociales</p>
         </div>
         <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales de la Junta de Andalucía." language={lang} />
       </div>
 
       {/* VIVIENDA Y SUSTENTO */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-emerald-700/80 tracking-widest ml-2 flex items-center gap-2">
           <Home className="h-3 w-3" /> Vivienda y Sustento
         </h4>
         <div className="grid grid-cols-1 gap-2">
@@ -69,10 +60,10 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* EDUCACIÓN INFANTIL */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-emerald-700/80 tracking-widest ml-2 flex items-center gap-2">
           <School className="h-3 w-3" /> Colegios y Guarderías
         </h4>
-        <Card className="border-none bg-white/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-emerald-100">
+        <Card className="border-none bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-sm">
           <CardContent className="p-6 space-y-4">
             <div className="grid grid-cols-1 gap-3">
               <ResourceLauncher 
@@ -98,7 +89,7 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* DEPENDENCIA Y TÍTULOS */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
+        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
           <UserCheck className="h-3 w-3" /> Otros Títulos y Dependencia
         </h4>
         <div className="grid grid-cols-1 gap-2">
@@ -122,19 +113,19 @@ export function FamilyHub({ lang }: { lang: string }) {
       </section>
 
       {/* CONCILIACIÓN */}
-      <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-600/60 tracking-widest ml-2 flex items-center gap-2">
+      <section className="space-y-3 pt-2">
+        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
           <Baby className="h-3 w-3" /> Conciliación Local
         </h4>
-        <Card className="border-none bg-orange-50/50 rounded-3xl border border-orange-100">
+        <Card className="border-none bg-orange-50 rounded-3xl border border-orange-100">
           <CardContent className="p-5 flex items-center justify-between">
             <div className="flex gap-4 items-center">
-              <div className="bg-orange-500 p-3 rounded-2xl text-white">
+              <div className="bg-orange-600 p-3 rounded-2xl text-white shadow-sm">
                 <MapPin className="h-5 w-5" />
               </div>
               <div>
-                <h5 className="font-black text-xs text-orange-900 uppercase">Ludotecas Municipales</h5>
-                <p className="text-[10px] text-orange-800/60 font-bold uppercase">Ayuntamiento de Jaén</p>
+                <h5 className="font-black text-xs text-orange-950 uppercase">Ludotecas Municipales</h5>
+                <p className="text-[10px] text-orange-800 font-bold uppercase">Ayuntamiento de Jaén</p>
               </div>
             </div>
             <ResourceLauncher 
