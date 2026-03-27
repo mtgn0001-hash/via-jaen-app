@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,33 +17,30 @@ export function FamilyHub({ lang }: { lang: string }) {
     <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center">
         <div className="space-y-1">
-          <h3 className="text-xl font-black text-emerald-700 uppercase tracking-tighter">Familias y Colegios</h3>
-          <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas Sociales</p>
+          <h3 className="text-2xl font-black text-emerald-800 uppercase tracking-tighter">Familias y Colegios</h3>
+          <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">Educación y Ayudas Sociales</p>
         </div>
-        <div className="flex items-center gap-2">
-          <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales de la Junta de Andalucía." language={lang} />
-        </div>
+        <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales." language={lang} />
       </div>
 
       {/* VIVIENDA Y SUSTENTO */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-700/80 tracking-widest ml-2 flex items-center gap-2">
-          <Home className="h-3 w-3" /> Vivienda y Sustento
+        <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
+          <Home className="h-4 w-4" /> Vivienda y Sustento
         </h4>
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-3">
           <ResourceLauncher 
             title="Ayuda al Alquiler"
-            description="Plan Vive Andalucía y Bono Alquiler Joven para facilitar el acceso a la vivienda en Jaén."
+            description="Plan Vive Andalucía y Bono Alquiler Joven en Jaén."
             url={OFFICIAL_LINKS.juntaAndalucia.ayudaAlquiler}
-            lseInstructions="Requisitos de empadronamiento y contrato para pedir la ayuda de alquiler."
             triggerLabel="Solicitar Alquiler"
             variant="primary"
             lang={lang}
           />
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             <ResourceLauncher 
               title="Renta Mínima"
-              description="Renta Mínima de Inserción Social (RMISA) de la Junta de Andalucía."
+              description="RMISA de la Junta de Andalucía."
               url={OFFICIAL_LINKS.juntaAndalucia.rmisa}
               triggerLabel="RMISA"
               variant="primary"
@@ -52,7 +48,7 @@ export function FamilyHub({ lang }: { lang: string }) {
             />
             <ResourceLauncher 
               title="Bono Carestía"
-              description="Pago único para familias con menores a cargo y bajos ingresos."
+              description="Pago único para familias con menores."
               url={OFFICIAL_LINKS.juntaAndalucia.bonoCarestia}
               triggerLabel="Bono Carestía"
               variant="primary"
@@ -64,24 +60,23 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* EDUCACIÓN INFANTIL */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-emerald-700/80 tracking-widest ml-2 flex items-center gap-2">
-          <School className="h-3 w-3" /> Colegios y Guarderías
+        <h4 className="text-[12px] font-black uppercase text-emerald-800 tracking-widest ml-2 flex items-center gap-2">
+          <School className="h-4 w-4" /> Colegios y Guarderías
         </h4>
-        <Card className="border-none bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-sm">
-          <CardContent className="p-6 space-y-4">
-            <div className="grid grid-cols-1 gap-3">
+        <Card className="border-none bg-white rounded-[2.5rem] border-2 border-emerald-200 shadow-sm">
+          <CardContent className="p-8 space-y-4">
+            <div className="grid grid-cols-1 gap-4">
               <ResourceLauncher 
                 title="Escolarización"
-                description="Buscador de colegios y proceso de admisión para Primaria y Secundaria en Jaén capital."
+                description="Buscador de colegios y admisión para Primaria y Secundaria."
                 url={OFFICIAL_LINKS.juntaAndalucia.escolarizacion}
-                lseInstructions="Cómo matricular a tu hijo en un colegio de Jaén paso a paso."
                 triggerLabel="Buscar Colegio Jaén"
                 variant="primary"
                 lang={lang}
               />
               <ResourceLauncher 
                 title="Guarderías (0-3 años)"
-                description="Ayudas para el primer ciclo de educación infantil en centros de la provincia."
+                description="Ayudas para el primer ciclo de educación infantil."
                 url={OFFICIAL_LINKS.juntaAndalucia.guarderias}
                 triggerLabel="Ayuda Guardería"
                 variant="primary"
@@ -94,13 +89,13 @@ export function FamilyHub({ lang }: { lang: string }) {
 
       {/* DEPENDENCIA Y TÍTULOS */}
       <section className="space-y-3">
-        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
-          <UserCheck className="h-3 w-3" /> Otros Títulos y Dependencia
+        <h4 className="text-[12px] font-black uppercase text-[#1A1A1B] tracking-widest ml-2 flex items-center gap-2">
+          <UserCheck className="h-4 w-4" /> Otros Títulos y Dependencia
         </h4>
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-3">
           <ResourceLauncher 
             title="Ayuda a la Dependencia"
-            description="Solicitud de teleasistencia y ayuda a domicilio en la ciudad de Jaén."
+            description="Solicitud de teleasistencia y ayuda a domicilio."
             url={OFFICIAL_LINKS.juntaAndalucia.dependencia}
             triggerLabel="Gestionar Dependencia"
             variant="primary"
@@ -108,41 +103,13 @@ export function FamilyHub({ lang }: { lang: string }) {
           />
           <ResourceLauncher 
             title="Familia Numerosa"
-            description="Obtención y renovación del título para acceder a bonificaciones en transporte y tasas."
+            description="Obtención y renovación del título oficial."
             url={OFFICIAL_LINKS.juntaAndalucia.familiaNumerosa}
             triggerLabel="Título Familia Numerosa"
             variant="primary"
             lang={lang}
           />
         </div>
-      </section>
-
-      {/* CONCILIACIÓN */}
-      <section className="space-y-3 pt-2">
-        <h4 className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-2 flex items-center gap-2">
-          <Baby className="h-3 w-3" /> Conciliación Local
-        </h4>
-        <Card className="border-none bg-orange-50 rounded-3xl border border-orange-100">
-          <CardContent className="p-5 flex items-center justify-between">
-            <div className="flex gap-4 items-center">
-              <div className="bg-orange-600 p-3 rounded-2xl text-white shadow-sm">
-                <MapPin className="h-5 w-5" />
-              </div>
-              <div>
-                <h5 className="font-black text-xs text-orange-950 uppercase">Ludotecas Municipales</h5>
-                <p className="text-[10px] text-orange-800 font-bold uppercase">Ayuntamiento de Jaén</p>
-              </div>
-            </div>
-            <ResourceLauncher 
-              title="Ludotecas Jaén"
-              description="Información sobre actividades de conciliación del Ayuntamiento."
-              url={OFFICIAL_LINKS.ayuntamiento.ludotecas}
-              triggerLabel="INFO"
-              variant="primary"
-              lang={lang}
-            />
-          </CardContent>
-        </Card>
       </section>
     </div>
   );
