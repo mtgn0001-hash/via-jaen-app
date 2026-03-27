@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { Settings2, Bell, Accessibility, Zap } from "lucide-react";
+import { Settings2, Accessibility, Zap, Eye } from "lucide-react";
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { AppLogo } from "@/components/ui/AppLogo";
@@ -14,9 +14,10 @@ type HeaderProps = {
   progress: UserProgress;
   updateProgress: (updates: Partial<UserProgress>) => void;
   activeTab: string;
+  setActiveTab: (tab: string) => void;
 };
 
-export function Header({ lang, progress, updateProgress, activeTab }: HeaderProps) {
+export function Header({ lang, progress, updateProgress, activeTab, setActiveTab }: HeaderProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const t = translations[lang] || translations.es;
   const isAccessible = progress.accessibilityMode === 'accessible';
@@ -48,7 +49,7 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
       case 'procedures': return t.procedures;
       case 'directory': return t.directory;
       case 'profile_hub': return 'Mi Perfil';
-      case 'scanner': return 'Escáner IA';
+      case 'scanner': return 'Asistente Visual';
       default: return 'Jaén Integra';
     }
   };
@@ -69,6 +70,21 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
         </div>
 
         <div className="flex items-center gap-2">
+          {/* ASISTENTE VISUAL (OJO) */}
+          <Button
+            onClick={() => setActiveTab('scanner')}
+            variant="outline"
+            className={cn(
+              "h-12 w-12 rounded-2xl transition-all active:scale-95 border-2",
+              activeTab === 'scanner' 
+                ? "bg-indigo-600 text-white border-indigo-600 shadow-lg" 
+                : "bg-indigo-50 text-indigo-600 border-indigo-100 hover:bg-indigo-100"
+            )}
+            aria-label="Asistente Visual IA: Escanear y explicar documentos"
+          >
+            <Eye className="h-6 w-6" />
+          </Button>
+
           {/* BOTÓN MAESTRO DE ACCESIBILIDAD */}
           <Button
             onClick={toggleMasterAccessibility}

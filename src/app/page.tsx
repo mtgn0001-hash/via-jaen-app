@@ -65,6 +65,7 @@ export default function Home() {
           progress={progress} 
           updateProgress={updateProgress}
           activeTab={activeTab}
+          setActiveTab={setActiveTab}
         />
 
         <main className="max-w-5xl mx-auto p-6 pt-8 min-h-screen">
