@@ -23,7 +23,7 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 262 83% 58%;
-    --radius: 1.25rem;
+    --radius: 1.5rem;
   }
 
   [data-theme='purple'] {
@@ -89,34 +89,45 @@
 
 @layer base {
   * {
-    @apply border-border transition-none;
+    @apply border-border transition-all duration-300;
   }
   body {
     @apply bg-background text-foreground font-body antialiased text-[16px] leading-[1.6];
+    font-family: 'Outfit', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply text-foreground font-black tracking-tight;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Accessible Mode Scaling */
-[data-accessibility='accessible'] button {
-  @apply h-20 min-h-[80px] text-xl border-4 font-black !important;
+/* Animación Pulso de Vida */
+@keyframes emergency-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb, 124, 58, 237), 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(var(--primary-rgb, 124, 58, 237), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb, 124, 58, 237), 0); }
 }
 
-[data-accessibility='accessible'] .space-y-4 {
-  @apply space-y-8 !important;
+.animate-emergency-pulse {
+  animation: emergency-pulse 2s infinite;
 }
 
-[data-accessibility='accessible'] .space-y-6 {
-  @apply space-y-10 !important;
+[data-accessibility='accessible'] .animate-emergency-pulse {
+  animation-duration: 1.5s;
+  box-shadow: 0 0 0 30px rgba(255, 255, 0, 0.5);
 }
 
-/* Bento Style & Radius Fixes */
-.rounded-bento {
-  border-radius: var(--radius);
+/* Estilo Mayúsculas Salud y Extranjería */
+.text-action-critical {
+  @apply uppercase font-bold tracking-wider;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl;
 }
 
 /* Text Definition Utilities */
@@ -129,7 +140,7 @@
 }
 
 /* Anti-Camouflage Rules: Ensuring high contrast always */
-.bg-primary, .bg-destructive, .btn-primary {
+.bg-primary, .btn-primary {
   color: #FFFFFF !important;
   @apply font-black opacity-100 !important;
 }
@@ -139,11 +150,5 @@
   @apply opacity-100 !important;
 }
 
-/* Custom Scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Speech Highlight */
-.speech-highlight {
-  @apply bg-yellow-400 text-black px-2 rounded-sm ring-4 ring-yellow-400 !important;
-}
