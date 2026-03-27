@@ -12,6 +12,11 @@ export const OFFICIAL_LINKS = {
     asistenciaJuridica: "https://www.icajaen.es/servicios/asistencia-juridica-gratuita/",
     retornoVoluntario: "https://www.inclusion.gob.es/web/migraciones/retorno-voluntario"
   },
+  comunidad: {
+    hijaDeInmigrantes: "https://www.instagram.com/hijadeinmigrantes/",
+    legalteam: "https://www.instagram.com/legalteam/",
+    sugerirReferente: "mailto:ayuda@viajaen.es?subject=Sugerencia de Referente Digital"
+  },
   ayuntamiento: {
     padron: "https://sede.aytojaen.es/",
     sede: "https://sede.aytojaen.es/",
