@@ -1,7 +1,7 @@
 
 "use client"
 
-import { Home, HeartPulse, MapPin, User, Search } from "lucide-react";
+import { Home, HeartPulse, Navigation, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type BottomNavProps = {
@@ -13,7 +13,7 @@ export function BottomNav({ activeTab, setActiveTab }: BottomNavProps) {
   const tabs = [
     { id: 'dashboard', icon: Home, label: 'Inicio' },
     { id: 'guides_hub', icon: HeartPulse, label: 'Recursos' },
-    { id: 'directory', icon: MapPin, label: 'Mapa' },
+    { id: 'directory', icon: Navigation, label: 'Ayuda Local' },
     { id: 'profile_hub', icon: User, label: 'Mi Perfil' },
   ];
 

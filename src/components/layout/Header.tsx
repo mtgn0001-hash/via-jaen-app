@@ -33,7 +33,7 @@ export function Header({ lang, progress, updateProgress, activeTab }: HeaderProp
       case 'guides_hub': return 'Recursos';
       case 'procedures': return 'Guías / Trámites';
       case 'employment_portal': return 'Guías / Empleo';
-      case 'directory': return 'Mapa de Recursos';
+      case 'directory': return 'Ayuda Local';
       case 'profile_hub': return 'Mi Espacio';
       default: return 'Jaén Integra';
     }

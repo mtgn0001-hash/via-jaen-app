@@ -54,9 +54,9 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
   return (
     <div className="space-y-6 pb-20">
       <div className="space-y-1">
-        <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight text-primary" : "text-2xl font-black uppercase text-primary tracking-tight"}>{t.directory}</h2>
+        <h2 className={isEasy ? "text-4xl font-black uppercase tracking-tight text-primary" : "text-2xl font-black uppercase text-primary tracking-tight"}>Ayuda Local</h2>
         <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.2em]">
-          Recursos Premium en <span className="text-primary">{currentProvince.name}</span>
+          Recursos de apoyo en <span className="text-primary">{currentProvince.name}</span>
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
             <Navigation className="h-6 w-6 text-white" />
          </div>
          <p className="text-[10px] text-primary font-black uppercase leading-tight tracking-wider">
-            Geolocalización Activa: Iconos destacados para recursos críticos.
+            Geolocalización Activa: Encuentra ayuda profesional cerca de ti.
          </p>
       </section>
 
@@ -74,7 +74,7 @@ export function ResourceDirectory({ lang }: ResourceDirectoryProps) {
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
             <Input 
-              placeholder="Buscar recurso en Jaén..." 
+              placeholder="¿Qué necesitas buscar en Jaén?" 
               className="pl-12 h-16 rounded-[2rem] bg-white border-none shadow-xl font-bold text-lg"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
