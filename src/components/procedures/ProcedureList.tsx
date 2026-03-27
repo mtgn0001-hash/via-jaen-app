@@ -78,9 +78,11 @@ export function ProcedureList({ lang }: ProcedureListProps) {
       title: 'Padrón Jaén (Impresos)',
       desc: 'Descarga directa del alta en el Padrón del Ayuntamiento de Jaén.',
       url: 'https://sede.aytojaen.es/portal/p_20_contenedor1.jsp?codres=1&codmenu=497',
+      backupUrl: 'https://sede.aytojaen.es/',
       type: 'Ayuntamiento',
       org: 'City',
-      rules: ["Contrato de alquiler original.", "Pasaporte en vigor.", "Original y copia de todos los documentos."]
+      rules: ["Contrato de alquiler original.", "Pasaporte en vigor.", "Original y copia de todos los documentos."],
+      jaenNote: true
     },
     {
       id: 'tasa',
@@ -163,6 +165,12 @@ export function ProcedureList({ lang }: ProcedureListProps) {
     } catch {
       return url;
     }
+  };
+
+  const getJaenNote = (id: string) => {
+    if (id === 'nie_ex15') return l.ex15Note;
+    if (id === 'padron') return "Este trámite se realiza en el Ayuntamiento de Jaén, situado en la Plaza de Santa María. Recuerda pedir cita previa si es necesario.";
+    return "Nota informativa para la provincia de Jaén.";
   };
 
   return (
@@ -250,7 +258,7 @@ export function ProcedureList({ lang }: ProcedureListProps) {
                     <div className="space-y-1">
                       <h4 className="font-black text-[10px] uppercase text-amber-900">Nota para Jaén</h4>
                       <p className="text-[11px] text-amber-800 font-bold leading-tight">
-                        {l.ex15Note}
+                        {getJaenNote(selectedLauncher?.id)}
                       </p>
                     </div>
                   </div>

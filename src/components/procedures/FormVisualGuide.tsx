@@ -23,7 +23,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
   const guideSections = [
     { 
       section: "NIE / Certificados (Modelo EX-15)", 
-      url: "https://www.policia.es/documentacion/formularios/ex15.pdf",
+      url: "https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf",
       where: "Comisaría de Policía (Plaza de las Batallas, Jaén)",
       fields: [
         { id: "nie", label: "PASAPORTE / NIE", hint: "Si es tu primera vez, escribe el número de tu pasaporte. Usa siempre MAYÚSCULAS." },
