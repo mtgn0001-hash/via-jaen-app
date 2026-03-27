@@ -12,11 +12,11 @@
     --popover: 260 30% 99%;
     --popover-foreground: 222 47% 11%;
     --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 0 0% 100%; /* Siempre blanco sobre morado */
     --secondary: 262 40% 92%;
     --secondary-foreground: 222 47% 15%;
     --muted: 262 20% 94%;
-    --muted-foreground: 215 25% 20%;
+    --muted-foreground: 215 25% 10%; /* Más oscuro para legibilidad */
     --accent: 262 40% 90%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 60%;
