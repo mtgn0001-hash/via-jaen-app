@@ -5,10 +5,7 @@ import { useLocalStorage } from "@/lib/store";
 import { Header } from "@/components/layout/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
-import { StudyUJA } from "@/components/study/StudyUJA";
-import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 import { Onboarding } from "@/components/onboarding/Onboarding";
-import { CommonAndalucia } from "@/components/regional/CommonAndalucia";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { FirebaseClientProvider } from "@/firebase";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -21,7 +18,7 @@ import { OtherAppointments } from "@/features/citas/OtherAppointments";
 import { JaenBot } from "@/features/ia/JaenBot";
 import { DocumentScanner } from "@/features/ia/DocumentScanner";
 import { DocumentVault } from "@/features/seguridad/DocumentVault";
-import { HealthHub } from "@/features/salud/HealthHub";
+import { ResourcesHub } from "@/components/recursos/ResourcesHub";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -63,8 +60,8 @@ export default function Home() {
           <div className="transition-all duration-500 ease-in-out">
             {activeTab === 'dashboard' && <Dashboard lang={lang} setActiveTab={setActiveTab} progress={progress} />}
             
-            {/* Secciones de Recursos */}
-            {activeTab === 'guides_hub' && <HealthHub lang={lang} />}
+            {/* Secciones de Recursos Combinadas */}
+            {activeTab === 'guides_hub' && <ResourcesHub lang={lang} />}
             
             {/* Trámites Reorganizados */}
             {activeTab === 'procedures' && (
@@ -78,13 +75,10 @@ export default function Home() {
               </div>
             )}
 
-            {activeTab === 'employment_portal' && <div className="animate-in slide-in-from-right-4 duration-500"><EmploymentPortal lang={lang} /></div>}
-            {activeTab === 'study' && <div className="animate-in slide-in-from-right-4 duration-500"><StudyUJA lang={lang} /></div>}
-            {activeTab === 'andalucia_common' && <div className="animate-in slide-in-from-right-4 duration-500"><CommonAndalucia lang={lang} /></div>}
             {activeTab === 'directory' && <div className="animate-in slide-in-from-right-4 duration-500"><ResourceDirectory lang={lang} /></div>}
             
             {/* Otras Features */}
-            {activeTab === 'profile' && <div className="animate-in slide-in-from-right-4 duration-500"><UserProfile lang={lang} /></div>}
+            {activeTab === 'profile_hub' && <div className="animate-in slide-in-from-right-4 duration-500"><UserProfile lang={lang} /></div>}
             {activeTab === 'vault' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentVault lang={lang} /></div>}
             {activeTab === 'scanner' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentScanner lang={lang} /></div>}
             {activeTab === 'bot' && <div className="animate-in slide-in-from-right-4 duration-500"><JaenBot lang={lang} /></div>}
