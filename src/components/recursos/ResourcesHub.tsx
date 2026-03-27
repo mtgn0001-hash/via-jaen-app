@@ -28,7 +28,7 @@ export function ResourcesHub({ lang, activeSection, onSectionChange }: Resources
   const sections = [
     { 
       id: "salud", 
-      title: "Recursos", 
+      title: "Salud", 
       subtitle: "Citas Médicas y Urgencias",
       icon: Stethoscope, 
       content: <HealthHub lang={lang} />,
@@ -58,7 +58,7 @@ export function ResourcesHub({ lang, activeSection, onSectionChange }: Resources
   return (
     <div className="space-y-8 pb-32 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="space-y-1 px-2">
-        <h2 className="text-3xl font-black text-primary uppercase tracking-tighter">Guía de Recursos</h2>
+        <h2 className="text-3xl font-black text-primary uppercase tracking-tighter">Recursos</h2>
         <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">Información Segmentada por Categorías</p>
       </div>
 

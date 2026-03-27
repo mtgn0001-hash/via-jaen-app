@@ -37,10 +37,10 @@ export function HealthHub({ lang }: { lang: string }) {
     <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-500">
       <div className="flex justify-between items-center">
         <div className="space-y-1">
-          <h3 className="text-xl font-black text-red-600 uppercase tracking-tighter">Sanidad Pública</h3>
+          <h3 className="text-xl font-black text-red-600 uppercase tracking-tighter">Salud</h3>
           <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Exclusivo: Citas y Urgencias</p>
         </div>
-        <SpeechButton text="Sanidad pública. Gestión exclusiva de citas y urgencias en Jaén." language={lang} />
+        <SpeechButton text="Portal de Salud. Gestión exclusiva de citas y urgencias en Jaén." language={lang} />
       </div>
 
       {/* BLOQUE URGENCIAS */}
