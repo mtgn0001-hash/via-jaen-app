@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,7 +21,9 @@ export function FamilyHub({ lang }: { lang: string }) {
           <h3 className="text-xl font-black text-emerald-700 uppercase tracking-tighter">Familias y Colegios</h3>
           <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Exclusivo: Educación y Ayudas Sociales</p>
         </div>
-        <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales de la Junta de Andalucía." language={lang} />
+        <div className="flex items-center gap-2">
+          <SpeechButton text="Portal para familias. Recursos de educación y ayudas sociales de la Junta de Andalucía." language={lang} />
+        </div>
       </div>
 
       {/* VIVIENDA Y SUSTENTO */}
@@ -35,6 +38,7 @@ export function FamilyHub({ lang }: { lang: string }) {
             url={OFFICIAL_LINKS.juntaAndalucia.ayudaAlquiler}
             lseInstructions="Requisitos de empadronamiento y contrato para pedir la ayuda de alquiler."
             triggerLabel="Solicitar Alquiler"
+            variant="primary"
             lang={lang}
           />
           <div className="grid grid-cols-2 gap-2">
@@ -43,7 +47,7 @@ export function FamilyHub({ lang }: { lang: string }) {
               description="Renta Mínima de Inserción Social (RMISA) de la Junta de Andalucía."
               url={OFFICIAL_LINKS.juntaAndalucia.rmisa}
               triggerLabel="RMISA"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
             <ResourceLauncher 
@@ -51,7 +55,7 @@ export function FamilyHub({ lang }: { lang: string }) {
               description="Pago único para familias con menores a cargo y bajos ingresos."
               url={OFFICIAL_LINKS.juntaAndalucia.bonoCarestia}
               triggerLabel="Bono Carestía"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
           </div>
@@ -72,6 +76,7 @@ export function FamilyHub({ lang }: { lang: string }) {
                 url={OFFICIAL_LINKS.juntaAndalucia.escolarizacion}
                 lseInstructions="Cómo matricular a tu hijo en un colegio de Jaén paso a paso."
                 triggerLabel="Buscar Colegio Jaén"
+                variant="primary"
                 lang={lang}
               />
               <ResourceLauncher 
@@ -79,7 +84,7 @@ export function FamilyHub({ lang }: { lang: string }) {
                 description="Ayudas para el primer ciclo de educación infantil en centros de la provincia."
                 url={OFFICIAL_LINKS.juntaAndalucia.guarderias}
                 triggerLabel="Ayuda Guardería"
-                variant="outline"
+                variant="primary"
                 lang={lang}
               />
             </div>
@@ -98,7 +103,7 @@ export function FamilyHub({ lang }: { lang: string }) {
             description="Solicitud de teleasistencia y ayuda a domicilio en la ciudad de Jaén."
             url={OFFICIAL_LINKS.juntaAndalucia.dependencia}
             triggerLabel="Gestionar Dependencia"
-            variant="outline"
+            variant="primary"
             lang={lang}
           />
           <ResourceLauncher 
@@ -106,7 +111,7 @@ export function FamilyHub({ lang }: { lang: string }) {
             description="Obtención y renovación del título para acceder a bonificaciones en transporte y tasas."
             url={OFFICIAL_LINKS.juntaAndalucia.familiaNumerosa}
             triggerLabel="Título Familia Numerosa"
-            variant="outline"
+            variant="primary"
             lang={lang}
           />
         </div>
@@ -133,7 +138,7 @@ export function FamilyHub({ lang }: { lang: string }) {
               description="Información sobre actividades de conciliación del Ayuntamiento."
               url={OFFICIAL_LINKS.ayuntamiento.ludotecas}
               triggerLabel="INFO"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
           </CardContent>

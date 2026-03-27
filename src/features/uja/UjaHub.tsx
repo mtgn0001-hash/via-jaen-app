@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +36,7 @@ export function UjaHub({ lang }: { lang: string }) {
             url={OFFICIAL_LINKS.uja.bonificacion99}
             lseInstructions="Cómo se aplica automáticamente el descuento del 99% en tu matrícula de la UJA."
             triggerLabel="Ver Requisitos 99%"
+            variant="primary"
             lang={lang}
           />
           <div className="grid grid-cols-2 gap-2">
@@ -43,7 +45,7 @@ export function UjaHub({ lang }: { lang: string }) {
               description="Becas de carácter general del Ministerio de Educación."
               url={OFFICIAL_LINKS.juntaAndalucia.becasMec}
               triggerLabel="Beca General"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
             <ResourceLauncher 
@@ -51,7 +53,7 @@ export function UjaHub({ lang }: { lang: string }) {
               description="Ayuda para alumnos de post-obligatoria de la Junta de Andalucía."
               url={OFFICIAL_LINKS.juntaAndalucia.beca6000}
               triggerLabel="Beca 6000"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
           </div>
@@ -60,7 +62,7 @@ export function UjaHub({ lang }: { lang: string }) {
             description="Para alumnos que no cumplen requisitos de renta de la beca general."
             url={OFFICIAL_LINKS.juntaAndalucia.becaAdriano}
             triggerLabel="Beca Adriano / 2ª Oportunidad"
-            variant="outline"
+            variant="primary"
             lang={lang}
           />
         </div>
@@ -77,6 +79,7 @@ export function UjaHub({ lang }: { lang: string }) {
             description="Acceso al portal de automatrícula oficial de la Universidad de Jaén."
             url={OFFICIAL_LINKS.uja.matricula}
             triggerLabel="Automatrícula UJA"
+            variant="primary"
             lang={lang}
           />
           <div className="grid grid-cols-2 gap-2">
@@ -85,7 +88,7 @@ export function UjaHub({ lang }: { lang: string }) {
               description="Acceso a Plate@ para contenidos de asignaturas."
               url={OFFICIAL_LINKS.uja.platea}
               triggerLabel="Plate@"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
             <ResourceLauncher 
@@ -93,7 +96,7 @@ export function UjaHub({ lang }: { lang: string }) {
               description="Consulta de expedientes y calificaciones académicas."
               url={OFFICIAL_LINKS.uja.notas}
               triggerLabel="Mis Notas"
-              variant="secondary"
+              variant="primary"
               lang={lang}
             />
           </div>
@@ -110,7 +113,7 @@ export function UjaHub({ lang }: { lang: string }) {
           description="Ayudas para estancias en el extranjero para estudiantes de la UJA."
           url={OFFICIAL_LINKS.uja.erasmus}
           triggerLabel="Becas Erasmus+ UJA"
-          variant="outline"
+          variant="primary"
           lang={lang}
         />
       </section>
@@ -136,7 +139,7 @@ export function UjaHub({ lang }: { lang: string }) {
               description="Consulta las líneas del Consorcio que suben a la Universidad."
               url={OFFICIAL_LINKS.transporte.horariosUja}
               triggerLabel="HORARIOS"
-              variant="outline"
+              variant="primary"
               lang={lang}
             />
           </CardContent>
