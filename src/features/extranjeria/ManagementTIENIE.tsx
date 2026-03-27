@@ -13,21 +13,21 @@ export function ManagementTIENIE() {
   return (
     <div className="space-y-8 pb-10">
       <div className="space-y-6">
-        {/* BLOQUE PRINCIPAL: TIE/NIE */}
+        {/* BLOQUE PRINCIPAL: TIE/NIE - VISIBILIDAD MÁXIMA */}
         <Card className="border-none bg-primary shadow-2xl rounded-[3rem] overflow-hidden relative group">
-          <div className="absolute top-0 right-0 p-8 opacity-10">
+          <div className="absolute top-0 right-0 p-8 opacity-20">
              <Zap className="h-32 w-32 text-white" />
           </div>
           
           <CardContent className="p-8 space-y-6 relative z-10">
             <div className="space-y-2">
-              <h3 className="text-white text-2xl font-black uppercase tracking-tighter leading-none text-shadow-sm">Identidad</h3>
-              <p className="text-white text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                <MapPin className="h-3 w-3 text-white" /> Plaza de las Batallas (Jaén)
+              <h3 className="text-white text-3xl font-black uppercase tracking-tighter leading-none text-shadow-strong">Identidad</h3>
+              <p className="text-white text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-2 opacity-100">
+                <MapPin className="h-4 w-4 text-white" /> Plaza de las Batallas (Jaén)
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-4">
               <ResourceLauncher 
                 title="Modelo EX-15 (NIE)"
                 description="Solicitud de Número de Identidad de Extranjero y Certificados. Debes buscar el enlace EX-15 en la página de modelos."
@@ -49,9 +49,9 @@ export function ManagementTIENIE() {
               />
             </div>
 
-            <div className="bg-white/20 p-4 rounded-2xl flex gap-3 items-center backdrop-blur-md border border-white/10 shadow-inner">
-              <Info className="h-5 w-5 text-white shrink-0" />
-              <p className="text-[10px] text-white font-black leading-tight uppercase tracking-tight">
+            <div className="bg-white/20 p-5 rounded-2xl flex gap-3 items-center backdrop-blur-md border border-white/30 shadow-inner">
+              <Info className="h-6 w-6 text-white shrink-0" />
+              <p className="text-[11px] text-white font-black leading-tight uppercase tracking-tight">
                 Recuerda: Consultas presenciales en Plaza de las Batallas. Los viernes a las 9:00 AM suelen liberar nuevas citas.
               </p>
             </div>
@@ -60,8 +60,8 @@ export function ManagementTIENIE() {
 
         {/* RECURSOS ADICIONALES EXTRANJERÍA */}
         <div className="grid grid-cols-1 gap-3 px-2">
-          <h4 className="text-[10px] font-black uppercase text-slate-900 tracking-widest ml-2 flex items-center gap-2">
-            <Scale className="h-3 w-3" /> Apoyo Legal y Protección
+          <h4 className="text-[11px] font-black uppercase text-slate-900 tracking-widest ml-2 flex items-center gap-2">
+            <Scale className="h-4 w-4" /> Apoyo Legal y Protección
           </h4>
           
           <div className="grid grid-cols-1 gap-2">

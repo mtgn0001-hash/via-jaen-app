@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react";
@@ -8,13 +7,9 @@ import {
   Instagram, 
   Youtube, 
   Globe, 
-  Users, 
-  ShieldAlert, 
-  ArrowUpRight, 
   Play,
-  User,
-  Info,
-  X
+  ShieldAlert,
+  ArrowUpRight
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -28,7 +23,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -121,10 +115,10 @@ export function CommunityReferents({ lang }: { lang: string }) {
     <section className="space-y-4 py-4">
       <div className="flex justify-between items-center px-2">
         <div className="space-y-0.5">
-          <h3 className="text-lg font-black text-[#1A1A1B] uppercase tracking-tighter flex items-center gap-2">
+          <h3 className="text-xl font-black text-[#1A1A1B] uppercase tracking-tighter flex items-center gap-2">
             Voces que te Guían
           </h3>
-          <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest leading-none">
+          <p className="text-[10px] text-slate-600 font-black uppercase tracking-widest leading-none">
             Referentes de confianza en redes sociales
           </p>
         </div>
@@ -136,7 +130,7 @@ export function CommunityReferents({ lang }: { lang: string }) {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="h-9 w-9 rounded-2xl bg-primary/5 text-primary border border-primary/10"
+            className="h-9 w-9 rounded-2xl bg-primary/10 text-primary border border-primary/20"
             aria-label="Ver video en LSE sobre esta sección"
           >
             <Play className="h-4 w-4" />
@@ -149,16 +143,16 @@ export function CommunityReferents({ lang }: { lang: string }) {
           {referents.map((ref) => (
             <CarouselItem key={ref.name} className="pl-3 basis-[160px]">
               <Card 
-                className="border-none bg-white shadow-md rounded-[2rem] overflow-hidden transition-all active:scale-95 cursor-pointer border border-slate-100"
+                className="border-none bg-white shadow-xl rounded-[2rem] overflow-hidden transition-all active:scale-95 cursor-pointer border-2 border-slate-100"
                 onClick={() => setSelectedRef(ref)}
               >
                 <CardContent className="p-5 flex flex-col items-center text-center gap-3">
-                  <div className={cn("p-3 rounded-full shadow-inner", ref.color.split(' ')[0])}>
+                  <div className={cn("p-3 rounded-full shadow-inner opacity-100", ref.color.split(' ')[0])}>
                     <ref.icon className={cn("h-6 w-6", ref.color.split(' ')[1])} />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="text-xs font-semibold text-[#1A1A1B] leading-tight line-clamp-1">{ref.name}</h4>
-                    <Badge variant="secondary" className={cn("text-[8px] uppercase font-black px-2 py-0.5 border-none", ref.color)}>
+                    <h4 className="text-[13px] font-black text-[#1A1A1B] leading-tight line-clamp-1">{ref.name}</h4>
+                    <Badge variant="secondary" className={cn("text-[9px] uppercase font-black px-2 py-0.5 border-none opacity-100", ref.color)}>
                       {ref.spec}
                     </Badge>
                   </div>
@@ -171,7 +165,7 @@ export function CommunityReferents({ lang }: { lang: string }) {
 
       {/* DETALLE DEL REFERENTE (BOTTOM SHEET STYLE) */}
       <Dialog open={!!selectedRef} onOpenChange={() => setSelectedRef(null)}>
-        <DialogContent className="sm:max-w-md rounded-t-[3rem] sm:rounded-[3rem] bg-white/90 backdrop-blur-2xl border-none shadow-2xl p-0 overflow-hidden outline-none">
+        <DialogContent className="sm:max-w-md rounded-t-[3rem] sm:rounded-[3rem] bg-white/95 backdrop-blur-2xl border-none shadow-2xl p-0 overflow-hidden outline-none">
           {selectedRef && (
             <div className="animate-in slide-in-from-bottom-4 duration-500">
               <div className={cn("p-10 flex flex-col items-center text-center gap-4", selectedRef.color.split(' ')[0])}>
@@ -179,30 +173,30 @@ export function CommunityReferents({ lang }: { lang: string }) {
                    <selectedRef.icon className={cn("h-10 w-10", selectedRef.color.split(' ')[1])} />
                 </div>
                 <div className="space-y-1">
-                  <DialogTitle className="text-2xl font-black text-[#1A1A1B] uppercase tracking-tighter">
+                  <DialogTitle className="text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter">
                     {selectedRef.name}
                   </DialogTitle>
-                  <p className="text-xs font-bold opacity-70 uppercase tracking-widest">{selectedRef.handle}</p>
+                  <p className="text-sm font-black opacity-80 uppercase tracking-widest text-slate-900">{selectedRef.handle}</p>
                 </div>
               </div>
 
               <div className="p-8 space-y-6">
                 <div className="space-y-2">
-                  <h5 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Especialidad: {selectedRef.label}</h5>
-                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                  <h5 className="text-[11px] font-black uppercase text-slate-500 tracking-widest">Especialidad: {selectedRef.label}</h5>
+                  <p className="text-md text-slate-900 leading-relaxed font-bold">
                     {selectedRef.description}
                   </p>
                 </div>
 
-                <div className="bg-amber-50 p-4 rounded-2xl border border-amber-100 flex gap-3">
-                  <ShieldAlert className="h-5 w-5 text-amber-600 shrink-0" />
-                  <p className="text-[10px] text-amber-800 font-bold leading-tight">
+                <div className="bg-amber-50 p-5 rounded-2xl border-2 border-amber-200 flex gap-3">
+                  <ShieldAlert className="h-6 w-6 text-amber-600 shrink-0" />
+                  <p className="text-[11px] text-amber-900 font-black leading-tight uppercase">
                     Consulta siempre fuentes oficiales para trámites legales finales. Vía Jaén no gestiona estas cuentas externas.
                   </p>
                 </div>
 
                 <Button 
-                  className="w-full h-16 rounded-[1.5rem] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-black text-lg gap-3 shadow-xl active:scale-95 transition-all"
+                  className="w-full h-16 rounded-[1.5rem] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-black text-xl gap-3 shadow-xl active:scale-95 transition-all"
                   onClick={() => window.open(selectedRef.url, '_blank')}
                 >
                   VER EN {selectedRef.platform.toUpperCase()} <ArrowUpRight className="h-6 w-6" />
