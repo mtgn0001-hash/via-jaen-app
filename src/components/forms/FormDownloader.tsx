@@ -1,9 +1,10 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Download, ExternalLink, FileText, AlertCircle } from "lucide-react";
+import { Download, ExternalLink, FileText, AlertCircle, Zap } from "lucide-react";
 
 type FormDownloaderProps = {
   lang: Language;
@@ -15,8 +16,9 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
   const forms = [
     {
       title: 'Modelo EX-15',
-      desc: 'Solicitud de NIE y Certificados',
-      url: 'https://www.policia.es/documentacion/formularios/ex15.pdf',
+      desc: 'Solicitud de NIE y Certificados (Imprescindible para Jaén)',
+      url: 'https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf',
+      backupUrl: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
       type: 'PDF'
     },
     {
@@ -61,7 +63,7 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
               </div>
               <CardDescription>{form.desc}</CardDescription>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="pt-0 space-y-2">
               <Button 
                 asChild 
                 className="w-full gap-2 rounded-xl"
@@ -72,6 +74,17 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
                   {form.type === 'PDF' ? t.downloadForm : t.fillOnline}
                 </a>
               </Button>
+              {form.backupUrl && (
+                <Button 
+                  asChild 
+                  variant="ghost" 
+                  className="w-full text-[10px] font-black uppercase text-muted-foreground hover:text-primary h-8"
+                >
+                  <a href={form.backupUrl} target="_blank" rel="noopener noreferrer">
+                    <Zap className="h-3 w-3 mr-1" /> Backup Link
+                  </a>
+                </Button>
+              )}
             </CardContent>
           </Card>
         ))}

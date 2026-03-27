@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Language, translations } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,10 @@ import {
   Stethoscope,
   Copy,
   Check,
-  AlertCircle
+  AlertCircle,
+  Loader2,
+  Zap,
+  Volume2
 } from "lucide-react";
 import { 
   Dialog, 
@@ -31,6 +34,7 @@ import { AppLogo } from "@/components/ui/AppLogo";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { SpeechButton } from "@/components/ui/SpeechButton";
+import { textToSpeech } from "@/ai/flows/tts-flow";
 
 type ProcedureListProps = {
   lang: Language;
@@ -46,6 +50,7 @@ export function ProcedureList({ lang }: ProcedureListProps) {
   const [selectedLauncher, setSelectedLauncher] = useState<any | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const procedures = [
     {
@@ -61,10 +66,12 @@ export function ProcedureList({ lang }: ProcedureListProps) {
       id: 'nie_ex15',
       title: 'Modelo EX-15 (NIE)',
       desc: 'Formulario oficial de solicitud de Número de Identidad de Extranjero.',
-      url: 'https://www.policia.es/documentacion/formularios/ex15.pdf',
+      url: 'https://extranjeros.inclusion.gob.es/ficheros/Modelos_solicitudes/mod_solicitudes2/15-Formulario_NIE_y_certificados.pdf',
+      backupUrl: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
       type: 'Formulario',
       org: 'Police',
-      rules: [l.rule1, l.rule2, l.rule3]
+      rules: [l.rule1, l.rule2, l.rule3],
+      jaenNote: true
     },
     {
       id: 'padron',
@@ -106,6 +113,15 @@ export function ProcedureList({ lang }: ProcedureListProps) {
 
   const handleLaunch = (proc: any) => {
     setSelectedLauncher(proc);
+  };
+
+  const executeLaunch = async (url: string) => {
+    setIsLoading(true);
+    // Simular verificación de carga para evitar pantallas blancas
+    setTimeout(() => {
+      setIsLoading(false);
+      window.open(url, '_blank');
+    }, 1500);
   };
 
   const handleCopyLink = () => {
@@ -194,26 +210,33 @@ export function ProcedureList({ lang }: ProcedureListProps) {
       </div>
 
       {/* VENTANA PUENTE (BOTTOM SHEET / DIALOG) */}
-      <Dialog open={!!selectedLauncher} onOpenChange={() => { setSelectedLauncher(null); setShowInstructions(false); }}>
+      <Dialog open={!!selectedLauncher} onOpenChange={() => { setSelectedLauncher(null); setShowInstructions(false); setIsLoading(false); }}>
         <DialogContent className="sm:max-w-md rounded-[3rem] bg-white/90 backdrop-blur-2xl border-none shadow-2xl overflow-hidden p-0 outline-none">
           <div className="bg-primary p-8 text-white text-center space-y-4">
             <div className="bg-white/20 w-20 h-20 rounded-[2.5rem] flex items-center justify-center mx-auto backdrop-blur-md shadow-inner">
-              <Download className="h-10 w-10 text-white" />
+              {isLoading ? <Loader2 className="h-10 w-10 text-white animate-spin" /> : <Download className="h-10 w-10 text-white" />}
             </div>
             <div className="space-y-1">
               <DialogTitle className="text-white text-2xl font-black uppercase tracking-tighter">
-                {selectedLauncher?.title}
+                {isLoading ? l.preparing : selectedLauncher?.title}
               </DialogTitle>
               <DialogDescription className="text-white/80 font-bold text-sm">
-                {l.confirmDesc}
+                {isLoading ? l.redirectWarning : l.confirmDesc}
               </DialogDescription>
             </div>
             
             {/* Accesibilidad LSE Redirect */}
-            {accMode === 'accessible' && (
-              <div className="bg-white/10 p-3 rounded-2xl flex items-center gap-3 text-left">
-                <Play className="h-5 w-5 shrink-0" />
-                <p className="text-[10px] font-black uppercase leading-tight">{l.lseRedirect}</p>
+            {accMode === 'accessible' && !isLoading && (
+              <div className="bg-white/10 p-4 rounded-2xl flex flex-col gap-3 text-left animate-in zoom-in-95">
+                <div className="flex items-center gap-3">
+                  <Play className="h-5 w-5 shrink-0" />
+                  <p className="text-[10px] font-black uppercase leading-tight">{l.lseRedirect}</p>
+                </div>
+                {selectedLauncher?.id === 'nie_ex15' && (
+                  <p className="text-[10px] font-bold opacity-90 leading-tight italic border-t border-white/10 pt-2">
+                    "{l.lseEx15}"
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -221,12 +244,15 @@ export function ProcedureList({ lang }: ProcedureListProps) {
           <div className="p-8 space-y-6">
             {!showInstructions ? (
               <div className="space-y-4">
-                {(selectedLauncher?.id.includes('nie')) && (
-                  <div className="bg-amber-50 p-4 rounded-2xl border border-amber-100 flex gap-3">
-                    <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0" />
-                    <p className="text-[10px] text-amber-800 font-bold leading-tight">
-                      {l.reminderPlaza}
-                    </p>
+                {selectedLauncher?.jaenNote && (
+                  <div className="bg-amber-50 p-5 rounded-2xl border-2 border-amber-100 flex gap-4 animate-in slide-in-from-top-2">
+                    <AlertTriangle className="h-6 w-6 text-amber-600 shrink-0" />
+                    <div className="space-y-1">
+                      <h4 className="font-black text-[10px] uppercase text-amber-900">Nota para Jaén</h4>
+                      <p className="text-[11px] text-amber-800 font-bold leading-tight">
+                        {l.ex15Note}
+                      </p>
+                    </div>
                   </div>
                 )}
 
@@ -235,19 +261,35 @@ export function ProcedureList({ lang }: ProcedureListProps) {
                     <span className="text-[8px] font-black uppercase text-muted-foreground tracking-widest">{l.domainLabel}</span>
                     <span className="text-xs font-bold text-primary truncate max-w-[180px]">{getDomain(selectedLauncher?.url || "")}</span>
                   </div>
-                  <SpeechButton text={`${l.domainLabel} ${getDomain(selectedLauncher?.url || "")}`} size="sm" />
+                  <SpeechButton 
+                    text={selectedLauncher?.id === 'nie_ex15' ? `${l.preparing}. ${l.ex15Note}` : `${l.domainLabel} ${getDomain(selectedLauncher?.url || "")}`} 
+                    size="sm" 
+                  />
                 </div>
 
                 <div className="grid grid-cols-1 gap-3">
                   <Button 
-                    className="h-16 rounded-2xl font-black text-lg gap-3 shadow-xl active:scale-95" 
+                    disabled={isLoading}
+                    className="h-16 rounded-2xl font-black text-lg gap-3 shadow-xl active:scale-95 transition-all" 
                     onClick={() => {
                       if ('vibrate' in navigator) navigator.vibrate(50);
-                      window.open(selectedLauncher?.url, '_blank');
+                      executeLaunch(selectedLauncher?.url);
                     }}
                   >
-                    <ExternalLink className="h-6 w-6" /> {l.continue}
+                    {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : <ExternalLink className="h-6 w-6" />}
+                    {isLoading ? "Cargando..." : l.continue}
                   </Button>
+
+                  {selectedLauncher?.backupUrl && (
+                    <Button 
+                      variant="outline" 
+                      className="h-12 rounded-2xl font-black gap-2 border-2 border-amber-200 text-amber-700 bg-amber-50/50 hover:bg-amber-100"
+                      onClick={() => executeLaunch(selectedLauncher.backupUrl)}
+                    >
+                      <Zap className="h-4 w-4" /> {l.backupLink}
+                    </Button>
+                  )}
+
                   <div className="grid grid-cols-2 gap-2">
                     <Button 
                       variant="outline" 

@@ -171,7 +171,11 @@ export const translations = {
       reportSuccess: '¡Gracias por reportar! Lo revisaremos pronto.',
       redirectWarning: 'Ahora se abrirá la web oficial del Gobierno. Es un sitio seguro.',
       domainLabel: 'Abriendo el dominio: ',
-      lseRedirect: 'Ahora se abrirá la web oficial. No te asustes si el diseño cambia, es un sitio seguro y oficial.'
+      lseRedirect: 'Ahora se abrirá la web oficial. No te asustes si el diseño cambia, es un sitio seguro y oficial.',
+      backupLink: '¿El enlace no carga? Descargar copia de seguridad',
+      preparing: 'Preparando el documento oficial...',
+      ex15Note: 'Este modelo es el que necesitas llevar impreso a la Comisaría de la Plaza de las Batallas si vas a solicitar tu NIE por primera vez.',
+      lseEx15: 'Este es el papel EX-15. Debes rellenarlo con tus datos personales y marcar la casilla de "Número de Identidad de Extranjero" antes de ir a tu cita en Jaén.'
     },
     legalRights: {
       title: 'Tus Derechos',
