@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -26,6 +27,8 @@ import { TransportTab } from "@/components/transport/TransportTab";
 import { DocumentScanner } from "@/components/tools/DocumentScanner";
 import { JaenBot } from "@/components/tools/JaenBot";
 import { DocumentVault } from "@/components/profile/DocumentVault";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { FirebaseClientProvider } from "@/firebase";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -35,7 +38,6 @@ export default function Home() {
     updateProfile,
     toggleProcedure, 
     toggleChecklist,
-    toggleFirstStep,
     calculateCompletion,
     isLoaded
   } = useLocalStorage();
@@ -63,133 +65,140 @@ export default function Home() {
   const setTheme = (newTheme: ThemeType) => updateProgress({ theme: newTheme });
 
   return (
-    <SidebarProvider>
-      <div 
-        className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''} ${accMode === 'accessible' ? 'animate-flash-visual' : ''}`}
-        dir={isRTL ? 'rtl' : 'ltr'}
-      >
-        <AppSidebar 
-          lang={lang} 
-          setLang={setLang} 
-          activeTab={activeTab} 
-          setActiveTab={setActiveTab}
-          currentTheme={progress.theme}
-          setTheme={setTheme}
-          progress={progress}
-          updateProgress={updateProgress}
-        />
-
-        <SidebarInset className="flex-1 overflow-x-hidden">
-          {!progress.onboardingCompleted && (
-            <Onboarding 
-              lang={lang} 
-              onComplete={() => updateProgress({ onboardingCompleted: true })} 
-            />
-          )}
-
-          <Header 
+    <FirebaseClientProvider>
+      <SidebarProvider>
+        <div 
+          className={`flex min-h-screen bg-background w-full relative ${isEasy ? 'text-lg' : ''} ${accMode === 'accessible' ? 'animate-flash-visual' : ''}`}
+          dir={isRTL ? 'rtl' : 'ltr'}
+        >
+          <AppSidebar 
             lang={lang} 
-            completion={calculateCompletion()} 
-            activeTab={activeTab}
+            setLang={setLang} 
+            activeTab={activeTab} 
             setActiveTab={setActiveTab}
+            currentTheme={progress.theme}
+            setTheme={setTheme}
             progress={progress}
+            updateProgress={updateProgress}
           />
 
-          <main 
-            className={`flex-1 pb-32 mx-auto w-full transition-all duration-500 ${isEasy ? 'p-6 max-w-4xl' : 'p-4 max-w-5xl'}`}
-            aria-live="polite"
-          >
-            {activeTab === 'dashboard' && (
-              <Dashboard 
+          <SidebarInset className="flex-1 overflow-x-hidden">
+            {!progress.onboardingCompleted && (
+              <Onboarding 
                 lang={lang} 
-                setActiveTab={setActiveTab} 
-                progress={progress} 
-              />
-            )}
-            
-            {activeTab === 'profile' && (
-              <UserProfile 
-                lang={lang} 
-                progress={progress} 
-                updateProfile={updateProfile} 
+                onComplete={() => updateProgress({ onboardingCompleted: true })} 
               />
             )}
 
-            {activeTab === 'bot' && (
-              <JaenBot lang={lang} progress={progress} />
-            )}
+            <Header 
+              lang={lang} 
+              completion={calculateCompletion()} 
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              progress={progress}
+            />
 
-            {activeTab === 'vault' && (
-              <DocumentVault lang={lang} />
-            )}
-
-            {activeTab === 'scanner' && (
-              <DocumentScanner lang={lang} />
-            )}
-
-            {activeTab === 'procedures' && (
-              <div className="space-y-8 animate-in fade-in duration-700">
-                {accMode !== 'auditory' && !isEasy && (
-                  <DocumentChecklist 
-                    lang={lang} 
-                    progress={progress} 
-                    toggleChecklist={toggleChecklist} 
-                  />
-                )}
-                {accMode !== 'auditory' && !isEasy && <FormVisualGuide lang={lang} />}
-                <ProcedureList 
+            <main 
+              className={`flex-1 pb-32 mx-auto w-full transition-all duration-500 ${isEasy ? 'p-6 max-w-4xl' : 'p-4 max-w-5xl'}`}
+              aria-live="polite"
+            >
+              {activeTab === 'dashboard' && (
+                <Dashboard 
                   lang={lang} 
-                  toggleProcedure={toggleProcedure} 
-                  completedProcedures={progress.procedures} 
-                  progress={progress}
+                  setActiveTab={setActiveTab} 
+                  progress={progress} 
                 />
-              </div>
-            )}
+              )}
+              
+              {activeTab === 'profile' && (
+                <UserProfile 
+                  lang={lang} 
+                  progress={progress} 
+                  updateProfile={updateProfile} 
+                />
+              )}
 
-            {activeTab === 'andalucia_common' && (
-              <CommonAndalucia lang={lang} />
-            )}
+              {activeTab === 'bot' && (
+                <JaenBot lang={lang} progress={progress} />
+              )}
 
-            {activeTab === 'family' && (
-              <FamilyResources lang={lang} />
-            )}
+              {activeTab === 'vault' && (
+                <DocumentVault lang={lang} />
+              )}
 
-            {activeTab === 'study' && (
-              <StudyUJA lang={lang} progress={progress} />
-            )}
+              {activeTab === 'scanner' && (
+                <DocumentScanner lang={lang} />
+              )}
 
-            {activeTab === 'employment_portal' && (
-              <EmploymentPortal lang={lang} progress={progress} />
-            )}
-
-            {activeTab === 'directory' && (
-              <div className="space-y-8">
-                {accMode === 'standard' && <WifiPoints lang={lang} />}
-                <ResourceDirectory lang={lang} progress={progress} />
-                {!isEasy && <TransportTab lang={lang} progress={progress} />}
-              </div>
-            )}
-
-            {activeTab === 'emergency' && (
-              <EmergencyTab lang={lang} />
-            )}
-
-            {!isEasy && accMode === 'standard' && (
-              <section className="mt-12 mb-4 px-2 space-y-3 border-t pt-8">
-                <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-6 flex gap-4 max-w-2xl mx-auto">
-                  <AlertCircle className="h-6 w-6 text-primary/40 shrink-0" />
-                  <p className="text-[11px] text-muted-foreground leading-normal font-medium italic">
-                    {t.disclaimer || translations.es.disclaimer}
-                  </p>
+              {activeTab === 'form_submission' && (
+                <div className="max-w-xl mx-auto pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <ContactForm onSuccessRedirect="/procedures" />
                 </div>
-              </section>
-            )}
-          </main>
-        </SidebarInset>
+              )}
 
-        <BackFAB activeTab={activeTab} setActiveTab={setActiveTab} />
-        <EmergencyFAB lang={lang} />
-      </div>
-    </SidebarProvider>
+              {activeTab === 'procedures' && (
+                <div className="space-y-8 animate-in fade-in duration-700">
+                  {accMode !== 'auditory' && !isEasy && (
+                    <DocumentChecklist 
+                      lang={lang} 
+                      progress={progress} 
+                      toggleChecklist={toggleChecklist} 
+                    />
+                  )}
+                  {accMode !== 'auditory' && !isEasy && <FormVisualGuide lang={lang} />}
+                  <ProcedureList 
+                    lang={lang} 
+                    toggleProcedure={toggleProcedure} 
+                    completedProcedures={progress.procedures} 
+                  />
+                </div>
+              )}
+
+              {activeTab === 'andalucia_common' && (
+                <CommonAndalucia lang={lang} />
+              )}
+
+              {activeTab === 'family' && (
+                <FamilyResources lang={lang} />
+              )}
+
+              {activeTab === 'study' && (
+                <StudyUJA lang={lang} />
+              )}
+
+              {activeTab === 'employment_portal' && (
+                <EmploymentPortal lang={lang} />
+              )}
+
+              {activeTab === 'directory' && (
+                <div className="space-y-8">
+                  {accMode === 'standard' && <WifiPoints lang={lang} />}
+                  <ResourceDirectory lang={lang} />
+                  {!isEasy && <TransportTab lang={lang} />}
+                </div>
+              )}
+
+              {activeTab === 'emergency' && (
+                <EmergencyTab lang={lang} />
+              )}
+
+              {!isEasy && accMode === 'standard' && (
+                <section className="mt-12 mb-4 px-2 space-y-3 border-t pt-8">
+                  <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-6 flex gap-4 max-w-2xl mx-auto">
+                    <AlertCircle className="h-6 w-6 text-primary/40 shrink-0" />
+                    <p className="text-[11px] text-muted-foreground leading-normal font-medium italic">
+                      {t.disclaimer || translations.es.disclaimer}
+                    </p>
+                  </div>
+                </section>
+              )}
+            </main>
+          </SidebarInset>
+
+          <BackFAB activeTab={activeTab} setActiveTab={setActiveTab} />
+          <EmergencyFAB lang={lang} />
+        </div>
+      </SidebarProvider>
+    </FirebaseClientProvider>
   );
 }

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -18,7 +19,8 @@ import {
   MessageSquare,
   Lock,
   Library,
-  Heart
+  Heart,
+  FileText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -108,36 +110,23 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
 
       {/* 2. CUADRÍCULA PRINCIPAL (BENTO GRID) */}
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {/* Trámites (2x2) */}
+        {/* Solicitud de Trámite (NEW) */}
         <Card 
-          className={cn(cardClass, "sm:col-span-2 sm:row-span-2 bg-white border-2 border-primary/5 min-h-[300px]")}
-          onClick={() => setActiveTab('procedures')}
+          className={cn(cardClass, "bg-primary text-white border-none min-h-[180px]")}
+          onClick={() => setActiveTab('form_submission')}
         >
-          <CardContent className="p-8">
-            <div className="flex justify-between items-center mb-8">
-              <div className="flex items-center gap-4">
-                <div className="bg-primary/10 p-3.5 rounded-2xl text-primary">
-                  <Building2 className="h-8 w-8" />
-                </div>
-                <h3 className="font-black text-lg uppercase tracking-tighter">Trámites Críticos</h3>
-              </div>
-              <ArrowRight className="h-6 w-6 text-primary/40 group-hover:translate-x-2 transition-transform" />
+          <CardContent className="p-8 flex flex-col justify-between items-center text-center h-full">
+            <div className="bg-white/20 p-4 rounded-2xl">
+              <FileText className="h-8 w-8 text-white" />
             </div>
-            
-            <div className="grid gap-6">
-              <AppointmentStatus lang={lang} />
-              
-              <div className="bg-amber-50 border border-amber-200 p-6 rounded-[2rem] flex gap-4 items-center">
-                 <Zap className="h-8 w-8 text-amber-500 shrink-0" />
-                 <p className="text-xs text-amber-900 font-bold leading-tight">
-                    Citas NIE: Prueba los viernes a las 9:00 AM en Plaza Batallas. Suelen liberar huecos para la semana siguiente.
-                 </p>
-              </div>
+            <div className="space-y-1">
+              <h4 className="font-black text-xs uppercase tracking-tighter">Pedir Documento</h4>
+              <p className="text-[8px] opacity-60 font-black tracking-widest uppercase">Redirección Firestore</p>
             </div>
           </CardContent>
         </Card>
 
-        {/* Empleo (1x1) */}
+        {/* Empleo */}
         <Card 
           className={cn(cardClass, "bg-slate-900 text-white")}
           onClick={() => setActiveTab('employment_portal')}
@@ -153,7 +142,7 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
           </CardContent>
         </Card>
 
-        {/* Estudios (1x1) */}
+        {/* Estudios */}
         <Card 
           className={cn(cardClass, "bg-white border-2 border-primary/5")}
           onClick={() => setActiveTab('study')}
@@ -170,7 +159,26 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
         </Card>
       </section>
 
-      {/* 3. VIDA Y AYUDAS (HORIZONTAL) */}
+      {/* Trámites Críticos (Horizontal) */}
+      <Card 
+        className={cn(cardClass, "bg-white border-2 border-primary/5 min-h-[150px]")}
+        onClick={() => setActiveTab('procedures')}
+      >
+        <CardContent className="p-8 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <div className="bg-primary/10 p-4 rounded-2xl text-primary">
+              <Building2 className="h-8 w-8" />
+            </div>
+            <div>
+              <h3 className="font-black text-lg uppercase tracking-tighter text-slate-900">Trámites y Citas</h3>
+              <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest">Guía de Extranjería Jaén</p>
+            </div>
+          </div>
+          <ArrowRight className="h-7 w-7 text-primary/20 group-hover:translate-x-2 transition-transform" />
+        </CardContent>
+      </Card>
+
+      {/* Rest of components... */}
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <Card 
           className={cn(cardClass, "bg-orange-50/50 border-orange-100")}
@@ -197,57 +205,19 @@ export function Dashboard({ lang, setActiveTab, progress }: DashboardProps) {
             </div>
             <div>
               <h4 className="font-black text-sm uppercase text-blue-900 tracking-tight">Ayudas Junta</h4>
-              <p className="text-[9px] text-blue-800/60 font-bold uppercase tracking-wider">Andalucía Vive: Trámites Comunes</p>
+              <p className="text-[9px] text-blue-800/60 font-bold uppercase tracking-wider">Andalucía Vive</p>
             </div>
           </CardContent>
         </Card>
       </section>
 
-      {/* 4. AYUDA LOCAL (ONGS / DIRECTORIO) */}
-      <Card 
-        className={cn(cardClass, "bg-white border-2 border-primary/5 min-h-[120px]")}
-        onClick={() => setActiveTab('directory')}
-      >
-        <CardContent className="p-8 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <div className="bg-red-50 p-4 rounded-2xl text-red-600">
-              <MapPin className="h-8 w-8" />
-            </div>
-            <div>
-              <h3 className="font-black text-lg uppercase tracking-tighter text-slate-900">Ayuda Local y ONGs</h3>
-              <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest">Recursos Gratuitos y Comedores en Jaén</p>
-            </div>
-          </div>
-          <ArrowRight className="h-7 w-7 text-red-100 group-hover:translate-x-2 transition-transform" />
-        </CardContent>
-      </Card>
+      <div className="bg-emerald-50 border border-emerald-100 p-8 rounded-[3rem] flex gap-6 items-center shadow-inner">
+        <ShieldCheck className="h-10 w-10 text-emerald-600 shrink-0" />
+        <p className="text-xs text-emerald-900 font-bold uppercase leading-snug tracking-tight">
+          Privacidad 100%: Tus datos no salen de este teléfono. Sin registros externos ni nube.
+        </p>
+      </div>
 
-      {/* 5. UTILIDADES Y SEGURIDAD */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Card 
-          className={cn(cardClass, "bg-slate-50 border-slate-200/50")}
-          onClick={() => setActiveTab('vault')}
-        >
-          <CardContent className="p-6 flex items-center gap-6">
-            <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-              <Lock className="h-7 w-7 text-primary" />
-            </div>
-            <div>
-              <h4 className="font-black text-xs uppercase text-slate-800 tracking-tight">Bóveda Segura</h4>
-              <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-wider">Documentos protegidos localmente</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="bg-emerald-50 border border-emerald-100 p-8 rounded-[3rem] flex gap-6 items-center shadow-inner">
-          <ShieldCheck className="h-10 w-10 text-emerald-600 shrink-0" />
-          <p className="text-xs text-emerald-900 font-bold uppercase leading-snug tracking-tight">
-            Privacidad 100%: Tus datos no salen de este teléfono. Sin registros externos ni nube.
-          </p>
-        </div>
-      </section>
-
-      {/* LOGO SUTIL DE CIERRE */}
       <div className="flex justify-center pt-12 opacity-10 grayscale">
          <Zap className="h-16 w-16 text-primary" />
       </div>

@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "UserProfile": {
@@ -12,11 +13,11 @@
         },
         "preferredLanguage": {
           "type": "string",
-          "description": "The user's preferred language for the application interface (e.g., 'es' for Spanish, 'en' for English, 'fr' for French, 'ar' for Arabic for button labels)."
+          "description": "The user's preferred language for the application interface."
         },
         "overallProgressPercentage": {
           "type": "number",
-          "description": "A calculated percentage (0-100) representing the user's overall progress across all procedures and checklists."
+          "description": "A calculated percentage (0-100) representing the user's overall progress."
         }
       },
       "required": [
@@ -25,367 +26,63 @@
         "overallProgressPercentage"
       ]
     },
+    "FormSubmission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FormSubmission",
+      "type": "object",
+      "description": "Captured form data for triggering document generation or tracking user requests in the cloud.",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Reference to the authenticated user who made the submission."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name provided in the form."
+        },
+        "requestType": {
+          "type": "string",
+          "description": "The type of document or help requested (e.g., 'NIE', 'Padron')."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the submission."
+        }
+      },
+      "required": [
+        "userId",
+        "name",
+        "requestType"
+      ]
+    },
     "Procedure": {
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Procedure",
       "type": "object",
       "description": "Represents a main legal or administrative process immigrants need to follow in Spain.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Procedure entity. (Primary Key)"
-        },
-        "name": {
-          "type": "string",
-          "description": "The general name of the procedure (e.g., 'Empadronamiento', 'Arraigo Social')."
-        },
-        "description": {
-          "type": "string",
-          "description": "A detailed overview and purpose of the procedure."
-        },
-        "countrySpecificName": {
-          "type": "string",
-          "description": "The specific name of the procedure as known in Spain (e.g., 'Empadronamiento en España')."
-        },
-        "category": {
-          "type": "string",
-          "description": "The category the procedure belongs to (e.g., 'Residencia', 'Empleo', 'Salud')."
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Indicates if the procedure is currently active and visible in the application."
-        }
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "countrySpecificName": { "type": "string" },
+        "category": { "type": "string" },
+        "isEnabled": { "type": "boolean" }
       },
-      "required": [
-        "id",
-        "name",
-        "description",
-        "countrySpecificName",
-        "category",
-        "isEnabled"
-      ]
+      "required": ["id", "name", "description", "countrySpecificName", "category", "isEnabled"]
     },
     "Step": {
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Step",
       "type": "object",
-      "description": "A granular action or piece of information within a specific Procedure.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Step entity. (Primary Key)"
-        },
-        "procedureId": {
-          "type": "string",
-          "description": "Reference to the Procedure this step belongs to. (Relationship: Procedure 1:N Step)"
-        },
-        "title": {
-          "type": "string",
-          "description": "A concise title for the step (e.g., 'Obtener cita previa', 'Reunir documentos')."
-        },
-        "description": {
-          "type": "string",
-          "description": "A detailed explanation of what the user needs to do for this step, including what documents to bring."
-        },
-        "order": {
-          "type": "number",
-          "description": "The sequential order of this step within its parent procedure."
-        },
-        "tipsAndTricks": {
-          "type": "string",
-          "description": "Optional advice or 'hacks' related to completing this step (e.g., 'Trucos para la Cita Previa')."
-        },
-        "relatedOfficialFormLinkIds": {
-          "type": "array",
-          "description": "References to OfficialFormLink entities that are relevant to this step. (Relationship: Step N:N OfficialFormLink)",
-          "items": {
-            "type": "string"
-          }
-        },
-        "relatedDocumentRequirementIds": {
-          "type": "array",
-          "description": "References to DocumentRequirement entities that are required for this step. (Relationship: Step N:N DocumentRequirement)",
-          "items": {
-            "type": "string"
-          }
-        }
+        "id": { "type": "string" },
+        "procedureId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "number" }
       },
-      "required": [
-        "id",
-        "procedureId",
-        "title",
-        "description",
-        "order"
-      ]
-    },
-    "UserProcedureProgress": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "UserProcedureProgress",
-      "type": "object",
-      "description": "Tracks a user's completion status for a specific procedure and its individual steps, contributing to the overall progress percentage.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the UserProcedureProgress entity. (Primary Key)"
-        },
-        "userId": {
-          "type": "string",
-          "description": "Reference to the UserProfile this progress belongs to. (Relationship: UserProfile 1:N UserProcedureProgress)"
-        },
-        "procedureId": {
-          "type": "string",
-          "description": "Reference to the Procedure this progress tracks. (Relationship: Procedure 1:N UserProcedureProgress)"
-        },
-        "currentProgressPercentage": {
-          "type": "number",
-          "description": "The completion percentage (0-100) for this specific procedure, based on completed steps."
-        },
-        "isCompleted": {
-          "type": "boolean",
-          "description": "Indicates if the user has fully completed this procedure."
-        },
-        "lastUpdated": {
-          "type": "string",
-          "description": "The last date and time this procedure's progress was updated.",
-          "format": "date-time"
-        },
-        "completedStepIds": {
-          "type": "array",
-          "description": "An array of IDs of the Steps that the user has marked as completed within this procedure. (Relationship: UserProcedureProgress N:N Step)",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "userId",
-        "procedureId",
-        "currentProgressPercentage",
-        "isCompleted",
-        "lastUpdated",
-        "completedStepIds"
-      ]
-    },
-    "DocumentRequirement": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "DocumentRequirement",
-      "type": "object",
-      "description": "Defines a specific document required for a procedure or step, forming part of the 'Bóveda de Documentos' checklist.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the DocumentRequirement entity. (Primary Key)"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the document (e.g., 'Certificado de Empadronamiento', 'Pasaporte válido')."
-        },
-        "description": {
-          "type": "string",
-          "description": "A detailed explanation of what the document is for and what it needs to contain or prove."
-        },
-        "type": {
-          "type": "string",
-          "description": "The general type or category of the document (e.g., 'Identification', 'Residence Proof', 'Employment Contract')."
-        },
-        "isMandatory": {
-          "type": "boolean",
-          "description": "Indicates if this document is strictly mandatory for the associated procedure."
-        },
-        "exampleInfo": {
-          "type": "string",
-          "description": "Additional information or examples for the document (e.g., 'Debe tener una validez mínima de 6 meses', 'Original y copia')."
-        },
-        "relatedOfficialFormLinkIds": {
-          "type": "array",
-          "description": "References to OfficialFormLink entities that provide or relate to this document. (Relationship: DocumentRequirement N:N OfficialFormLink)",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "description",
-        "type",
-        "isMandatory"
-      ]
-    },
-    "UserDocumentStatus": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "UserDocumentStatus",
-      "type": "object",
-      "description": "Tracks the user's personal status for each required document as part of their 'Bóveda de Documentos' checklist, simulated for local storage.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the UserDocumentStatus entity. (Primary Key)"
-        },
-        "userId": {
-          "type": "string",
-          "description": "Reference to the UserProfile this document status belongs to. (Relationship: UserProfile 1:N UserDocumentStatus)"
-        },
-        "documentRequirementId": {
-          "type": "string",
-          "description": "Reference to the DocumentRequirement entity this status is for. (Relationship: DocumentRequirement 1:N UserDocumentStatus)"
-        },
-        "status": {
-          "type": "string",
-          "description": "The current status of the document for the user (e.g., 'pending', 'ready_to_simulate_upload', 'simulated_uploaded', 'not_applicable')."
-        },
-        "lastUpdated": {
-          "type": "string",
-          "description": "The last date and time this document's status was updated.",
-          "format": "date-time"
-        },
-        "simulatedFileName": {
-          "type": "string",
-          "description": "Optional: A simulated file name if the user 'uploaded' a document, for display purposes only."
-        },
-        "simulatedUploadDate": {
-          "type": "string",
-          "description": "Optional: The date and time of the simulated document upload.",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "id",
-        "userId",
-        "documentRequirementId",
-        "status",
-        "lastUpdated"
-      ]
-    },
-    "ExternalResource": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "ExternalResource",
-      "type": "object",
-      "description": "Information about non-governmental organizations (NGOs), public offices, and other points of help, forming a filterable directory.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the ExternalResource entity. (Primary Key)"
-        },
-        "name": {
-          "type": "string",
-          "description": "The official name of the organization or resource (e.g., 'Cruz Roja', 'Ayuntamiento de Jaén')."
-        },
-        "description": {
-          "type": "string",
-          "description": "A brief description of what the resource offers or its purpose."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of entity this resource represents (e.g., 'NGO', 'Public Office', 'Health Center', 'Legal Aid')."
-        },
-        "address": {
-          "type": "string",
-          "description": "The physical street address of the resource."
-        },
-        "city": {
-          "type": "string",
-          "description": "The city where the resource is located (e.g., 'Madrid', 'Barcelona', 'Jaén')."
-        },
-        "country": {
-          "type": "string",
-          "description": "The country where the resource is located (fixed to 'España')."
-        },
-        "phone": {
-          "type": "string",
-          "description": "A contact phone number for the resource."
-        },
-        "website": {
-          "type": "string",
-          "description": "The official website URL for the resource.",
-          "format": "uri"
-        },
-        "categories": {
-          "type": "array",
-          "description": "An array of categories that describe the services offered by the resource (e.g., 'Legal', 'Social Support', 'Health', 'Housing').",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isEmergencyContact": {
-          "type": "boolean",
-          "description": "Indicates if this resource is considered an emergency contact and should appear in the emergency section."
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "description",
-        "type",
-        "city",
-        "country",
-        "isEmergencyContact"
-      ]
-    },
-    "OfficialFormLink": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "OfficialFormLink",
-      "type": "object",
-      "description": "Provides direct access and metadata for official government forms and online portals required for various procedures.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the OfficialFormLink entity. (Primary Key)"
-        },
-        "title": {
-          "type": "string",
-          "description": "The display title of the form or link (e.g., 'Modelo EX-15 (Solicitud de NIE)', 'Inscripción en el Padrón (Ayuntamiento de Jaén)')."
-        },
-        "description": {
-          "type": "string",
-          "description": "Contextual description for the form or link, explaining its purpose."
-        },
-        "url": {
-          "type": "string",
-          "description": "The official URL to the PDF form or online portal of the Spanish government or regional authority.",
-          "format": "uri"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of link (e.g., 'PDF_Download', 'Online_Portal', 'Information_Page')."
-        },
-        "requiresDigitalCertificate": {
-          "type": "boolean",
-          "description": "Indicates if accessing or completing this form/portal typically requires a Digital Certificate or Cl@ve Permanente."
-        },
-        "recommendedSoftware": {
-          "type": "string",
-          "description": "A recommendation for specific software needed to correctly handle the resource (e.g., 'Adobe Acrobat Reader')."
-        },
-        "iconName": {
-          "type": "string",
-          "description": "The name of the Lucide Icon to display next to the link (e.g., 'file-text', 'download', 'external-link')."
-        },
-        "relatedProcedureIds": {
-          "type": "array",
-          "description": "References to Procedure entities that this form/link is relevant for. (Relationship: OfficialFormLink N:N Procedure)",
-          "items": {
-            "type": "string"
-          }
-        },
-        "relatedDocumentRequirementIds": {
-          "type": "array",
-          "description": "References to DocumentRequirement entities that can be fulfilled or are related to this form/link. (Relationship: OfficialFormLink N:N DocumentRequirement)",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "description",
-        "url",
-        "type",
-        "requiresDigitalCertificate",
-        "iconName"
-      ]
+      "required": ["id", "procedureId", "title", "description", "order"]
     }
   },
   "auth": {
@@ -400,63 +97,18 @@
         "path": "/procedures/{procedureId}",
         "definition": {
           "entityName": "Procedure",
-          "schema": {
-            "$ref": "#/backend/entities/Procedure"
-          },
-          "description": "Top-level collection for all defined legal/administrative procedures. These are public, read-only application content. No user-specific data."
+          "schema": { "$ref": "#/backend/entities/Procedure" },
+          "description": "Public, read-only administrative procedures."
         }
       },
       {
-        "path": "/procedures/{procedureId}/steps/{stepId}",
+        "path": "/formSubmissions/{submissionId}",
         "definition": {
-          "entityName": "Step",
-          "schema": {
-            "$ref": "#/backend/entities/Step"
-          },
-          "description": "Subcollection for granular steps within a specific procedure. These are public, read-only application content. No user-specific data.",
-          "params": [
-            {
-              "name": "procedureId",
-              "description": "The unique identifier of the parent Procedure."
-            },
-            {
-              "name": "stepId",
-              "description": "The unique identifier of the Step."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/documentRequirements/{documentRequirementId}",
-        "definition": {
-          "entityName": "DocumentRequirement",
-          "schema": {
-            "$ref": "#/backend/entities/DocumentRequirement"
-          },
-          "description": "Collection for definitions of documents required for procedures. These are public, read-only application content. No user-specific data."
-        }
-      },
-      {
-        "path": "/externalResources/{externalResourceId}",
-        "definition": {
-          "entityName": "ExternalResource",
-          "schema": {
-            "$ref": "#/backend/entities/ExternalResource"
-          },
-          "description": "Collection for information on NGOs, public offices, and other help points. These are public, read-only application content. No user-specific data."
-        }
-      },
-      {
-        "path": "/officialFormLinks/{officialFormLinkId}",
-        "definition": {
-          "entityName": "OfficialFormLink",
-          "schema": {
-            "$ref": "#/backend/entities/OfficialFormLink"
-          },
-          "description": "Collection for official government forms and online portals. These are public, read-only application content. No user-specific data."
+          "entityName": "FormSubmission",
+          "schema": { "$ref": "#/backend/entities/FormSubmission" },
+          "description": "User-submitted data for document generation workflows."
         }
       }
-    ],
-    "reasoning": "This Firestore structure is designed with a paramount focus on the application's explicit privacy requirements: 'no guardas datos en la nube, sino que todo se queda en el teléfono del usuario'. Consequently, all user-specific and sensitive data, including 'UserProfile', 'UserProcedureProgress', and 'UserDocumentStatus', are NOT stored in Firestore. These entities are intended for local storage (localStorage) as per the application's privacy mandate. The Firestore database will solely house the application's core content, which is public and read-only for all users.\n\n**Justification of Design Principles:**\n\n1.  **Authorization Independence:** For the application's public content (Procedures, Steps, DocumentRequirements, ExternalResources, OfficialFormLinks), authorization is inherently independent. All documents within these collections are globally readable. This eliminates the need for complex `get()` calls in security rules, as there are no parent-child authorization dependencies, user-specific ownership, or membership roles to manage within these content collections. Rules will simply permit public read access, making them straightforward and robust.\n\n2.  **Clarity of Intent (Debuggability):** The collection paths clearly delineate the type of content stored. For example, `/procedures` contains global procedure definitions, and `/procedures/{procedureId}/steps` contains the steps for a specific procedure. The security intent is transparent: global read access for all application content, which aligns with the app's function as a public guide.\n\n3.  **DBAC (No Custom Claims):** Since all content is public and read-only, there's no need for complex database-backed access control or custom claims for these entities. Any user, authenticated or not, can read the content.\n\n4.  **QAPs (Rules are not Filters):** This structure fully supports Query-as-Permission (QAPs). Because the content collections are intended for public read access, security rules will grant `list` and `get` permissions to everyone. Any query against these collections will therefore return all relevant documents, as all documents are permitted to be read by all users. There is no need for client-side filtering or server-side rule filtering based on user permissions, simplifying queries and rules significantly.\n\n5.  **Invariants:** The content stored in these collections (e.g., procedure definitions, form links) is static application data. Ownership (implicit in the app's content team) and timestamps are managed at the content creation/update level, not dynamically by end-users. The structure supports the integrity of this core data.\n\n**Addressing the 'Form Submission with Cloud Function' (Variant B):**\nThe user's request for a form submission that triggers a Cloud Function to generate a document and return a URL (variant B) conflicts directly with the application's core privacy principle of 'no guardar datos en la nube' for user-specific information. If such a form were to collect *any personal user data*, it would violate this mandate.\n\nTherefore, if this functionality is to be implemented, it must be for:\n*   **Anonymous, non-personal data:** E.g., a generic bug report, feedback without personal identifiers. In such a case, a new collection (e.g., `/feedbackSubmissions`) would be needed, separate from the core content and user-local data. The Cloud Function would then process this anonymous data.\n*   **Administrative functions:** A form used by administrators to add or update application content (e.g., a new `Procedure`, `ExternalResource`, or `OfficialFormLink`). This would involve an authenticated admin user, and the generated 'document' could be an internal confirmation or summary. However, this was not specified as an admin-facing feature.\n\nGiven the strict privacy requirements for user data, the Firestore structure provided below focuses exclusively on the public, read-only application content. Any form submission functionality requiring cloud storage for *user-submitted data* would necessitate a re-evaluation of the privacy statement or be restricted to non-personal, anonymous data with a distinct collection."
+    ]
   }
 }
