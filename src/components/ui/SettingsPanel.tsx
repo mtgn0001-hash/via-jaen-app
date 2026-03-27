@@ -10,7 +10,8 @@ import {
   SheetDescription 
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Globe, Palette, ShieldAlert, Check, Pipette } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Globe, Palette, ShieldAlert, Check, Pipette, Volume2, Turtle, Rabbit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SettingsPanelProps = {
@@ -52,6 +53,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                   'Language changed';
       const utterance = new SpeechSynthesisUtterance(msg);
       utterance.lang = newLang === 'ar' ? 'ar-SA' : newLang === 'uk' ? 'uk-UA' : 'es-ES';
+      utterance.rate = progress.speechRate || 0.9;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -62,6 +64,7 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
       const colorLabel = t.themes[newTheme as keyof typeof t.themes] || newTheme;
       const utterance = new SpeechSynthesisUtterance(`Color de la aplicación cambiado a ${colorLabel}`);
       utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
+      utterance.rate = progress.speechRate || 0.9;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -103,6 +106,30 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                   {l.id.toUpperCase()}
                 </Button>
               ))}
+            </div>
+          </div>
+
+          {/* SECCIÓN: VELOCIDAD DE VOZ (NUEVA) */}
+          <div className="space-y-4 p-6 bg-primary/5 rounded-[2rem] border border-primary/10">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
+                <Volume2 className="h-4 w-4" /> Velocidad de Voz
+              </div>
+              <span className="text-[10px] font-black text-primary bg-white px-2 py-1 rounded-lg">
+                {progress.speechRate?.toFixed(1)}x
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Turtle className="h-5 w-5 text-slate-400" />
+              <Slider 
+                value={[progress.speechRate || 0.9]} 
+                min={0.5} 
+                max={1.5} 
+                step={0.1} 
+                onValueChange={(val) => updateProgress({ speechRate: val[0] })}
+                className="flex-1"
+              />
+              <Rabbit className="h-5 w-5 text-slate-400" />
             </div>
           </div>
 

@@ -26,14 +26,23 @@
     --radius: 1.5rem;
   }
 
-  /* MODO ACCESIBILIDAD MAESTRA: ALTO CONTRASTE AMARILLO/NEGRO */
+  [data-theme='purple'] { --primary: 262 83% 58%; --ring: 262 83% 58%; }
+  [data-theme='red'] { --primary: 0 84% 60%; --ring: 0 84% 60%; }
+  [data-theme='green'] { --primary: 142 76% 45%; --ring: 142 76% 45%; }
+  [data-theme='blue'] { --primary: 217 91% 60%; --ring: 217 91% 60%; }
+  [data-theme='dark'] {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+  }
+
   [data-accessibility='accessible'] {
     --background: 0 0% 0%;
     --foreground: 60 100% 50%;
     --card: 0 0% 0%;
     --card-foreground: 60 100% 50%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 60 100% 50%;
     --primary: 60 100% 50%;
     --primary-foreground: 0 0% 0%;
     --border: 60 100% 50%;
@@ -69,7 +78,7 @@
     @apply border-border transition-all duration-300;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased text-[16px] leading-[1.6];
+    @apply bg-background text-foreground antialiased text-[16px] leading-[1.6];
     font-family: 'Outfit', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -81,7 +90,14 @@
   }
 }
 
-/* Animación Pulso de Vida */
+.speech-highlight {
+  background-color: rgba(255, 255, 0, 0.2) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.4) !important;
+  border: 2px solid #EAB308 !important;
+  transform: scale(1.02);
+  z-index: 10;
+}
+
 @keyframes emergency-pulse {
   0% { box-shadow: 0 0 0 0 rgba(var(--pulse-color, 239, 68, 68), 0.7); }
   70% { box-shadow: 0 0 0 20px rgba(var(--pulse-color, 239, 68, 68), 0); }
@@ -95,14 +111,6 @@
 [data-accessibility='accessible'] .animate-emergency-pulse {
   animation-duration: 1s;
   box-shadow: 0 0 0 30px rgba(255, 255, 0, 0.5) !important;
-}
-
-.text-action-critical {
-  @apply uppercase font-bold tracking-wider;
-}
-
-.glass-panel {
-  @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl;
 }
 
 .text-shadow-soft {

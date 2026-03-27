@@ -22,7 +22,6 @@ export function SpeechButton({ text, language, variant = "ghost", size = "icon",
   const currentLang = language || progress.language || 'es';
   const isAccessible = progress.accessibilityMode === 'accessible';
 
-  // Use Web Speech API for faster response and "Fin de información" logic
   const handleSpeak = () => {
     if (!('speechSynthesis' in window)) {
       toast({
@@ -36,10 +35,17 @@ export function SpeechButton({ text, language, variant = "ghost", size = "icon",
     if (isPlaying) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      document.querySelectorAll('.speech-highlight').forEach(el => el.classList.remove('speech-highlight'));
       return;
     }
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    // Preparar texto con pausas gramaticales
+    // Usamos puntuación para forzar pausas naturales
+    const processedText = text
+      .replace(/\. /g, '. ... ') // Pausa larga tras punto
+      .replace(/, /g, ', .. ');   // Pausa corta tras coma
+
+    const utterance = new SpeechSynthesisUtterance(processedText);
     
     // Map language to synthesis codes
     const langMap: Record<string, string> = {
@@ -51,32 +57,52 @@ export function SpeechButton({ text, language, variant = "ghost", size = "icon",
     };
     
     utterance.lang = langMap[currentLang] || 'es-ES';
-    utterance.rate = 0.9; // Slightly slower for clarity
+    
+    // Calibración de Calidad
+    utterance.rate = progress.speechRate || 0.9; 
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    // Selección de voz premium si está disponible
+    const voices = window.speechSynthesis.getVoices();
+    const preferredVoice = voices.find(v => 
+      v.lang.startsWith(utterance.lang) && 
+      (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Premium'))
+    );
+    if (preferredVoice) utterance.voice = preferredVoice;
 
     utterance.onstart = () => {
       setIsPlaying(true);
-      // Logic to highlight parent or associated text could go here via a global event if needed
+      // Intentar encontrar el contenedor padre para resaltarlo
+      const parentCard = document.querySelector(`[aria-label*="${text.substring(0, 20)}"]`) || 
+                         document.activeElement?.closest('.card, section, div');
+      if (parentCard) parentCard.classList.add('speech-highlight');
     };
 
     utterance.onend = () => {
       setIsPlaying(false);
+      document.querySelectorAll('.speech-highlight').forEach(el => el.classList.remove('speech-highlight'));
       
-      // Closing notification logic
-      const endMsg = currentLang === 'es' ? 'Fin de la información. ¿Deseas volver al menú principal?' :
-                     currentLang === 'en' ? 'End of information. Do you want to return to the main menu?' :
-                     'End of information.';
-      
-      const endUtterance = new SpeechSynthesisUtterance(endMsg);
-      endUtterance.lang = langMap[currentLang] || 'es-ES';
-      window.speechSynthesis.speak(endUtterance);
+      // Notificación de cierre con pausa
+      setTimeout(() => {
+        const endMsg = currentLang === 'es' ? 'Fin de la información.' :
+                       currentLang === 'en' ? 'End of information.' :
+                       'End.';
+        const endUtterance = new SpeechSynthesisUtterance(endMsg);
+        endUtterance.lang = langMap[currentLang] || 'es-ES';
+        endUtterance.rate = progress.speechRate || 0.9;
+        window.speechSynthesis.speak(endUtterance);
+      }, 500);
     };
 
-    utterance.onerror = () => setIsPlaying(false);
+    utterance.onerror = () => {
+      setIsPlaying(false);
+      document.querySelectorAll('.speech-highlight').forEach(el => el.classList.remove('speech-highlight'));
+    };
 
     window.speechSynthesis.speak(utterance);
   };
 
-  // Only show if accessible mode is on, or as a manual toggle
   if (!isAccessible && variant === "ghost") return null;
 
   return (

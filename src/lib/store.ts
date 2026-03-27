@@ -24,6 +24,7 @@ export type UserProgress = {
   easyReading: boolean;
   accessibilityMode: AccessibilityMode;
   profile: UserProfile;
+  speechRate: number; // 0.5 to 1.5
 };
 
 const STORAGE_KEY = 'viajaen_config';
@@ -46,7 +47,8 @@ const defaultProgress: UserProgress = {
     name: '',
     nie: '',
     phone: '',
-  }
+  },
+  speechRate: 0.9
 };
 
 export function useLocalStorage() {
