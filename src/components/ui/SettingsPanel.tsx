@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -11,7 +12,9 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Globe, Palette, ShieldAlert, Check, Pipette, Volume2, Turtle, Rabbit } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Globe, Palette, ShieldAlert, Check, Pipette, Volume2, Turtle, Rabbit, BatteryMedium, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SettingsPanelProps = {
@@ -39,12 +42,6 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
     { id: 'blue', color: '#3B82F6', label: t.themes.blue },
   ];
 
-  const visualModes: { id: ThemeType; label: string; icon: any }[] = [
-    { id: 'light', label: t.themes.light, icon: Palette },
-    { id: 'dark', label: t.themes.dark, icon: Palette },
-    { id: 'contrast', label: t.themes.contrast, icon: Palette },
-  ];
-
   const handleLanguageChange = (newLang: Language) => {
     updateProgress({ language: newLang });
     if ('speechSynthesis' in window) {
@@ -53,17 +50,6 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                   'Language changed';
       const utterance = new SpeechSynthesisUtterance(msg);
       utterance.lang = newLang === 'ar' ? 'ar-SA' : newLang === 'uk' ? 'uk-UA' : 'es-ES';
-      utterance.rate = progress.speechRate || 0.9;
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
-  const handleColorChange = (newTheme: ThemeType) => {
-    updateProgress({ theme: newTheme });
-    if ('speechSynthesis' in window) {
-      const colorLabel = t.themes[newTheme as keyof typeof t.themes] || newTheme;
-      const utterance = new SpeechSynthesisUtterance(`Color de la aplicación cambiado a ${colorLabel}`);
-      utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
       utterance.rate = progress.speechRate || 0.9;
       window.speechSynthesis.speak(utterance);
     }
@@ -85,6 +71,22 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
         </SheetHeader>
 
         <div className="space-y-8 max-w-md mx-auto pb-10">
+          {/* MODO AHORRO (Lite Mode) */}
+          <div className="p-6 bg-slate-900 text-white rounded-[2rem] border-4 border-white/10 shadow-2xl flex items-center justify-between group">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <BatteryMedium className="h-5 w-5 text-emerald-400 group-hover:animate-bounce" />
+                <Label className="text-lg font-black uppercase tracking-tight">{t.liteMode}</Label>
+              </div>
+              <p className="text-[10px] font-bold text-white/60 uppercase">{t.liteModeDesc}</p>
+            </div>
+            <Switch 
+              checked={progress.liteMode} 
+              onCheckedChange={(val) => updateProgress({ liteMode: val })}
+              className="data-[state=checked]:bg-emerald-500"
+            />
+          </div>
+
           {/* SECCIÓN: IDIOMA */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
@@ -100,16 +102,15 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
                     "flex-1 min-w-[100px] h-14 rounded-2xl gap-2 font-black text-sm",
                     lang === l.id ? "shadow-xl shadow-primary/20" : "bg-card"
                   )}
-                  aria-label={`${t.language}: ${l.label}`}
                 >
-                  <span className="text-xl" aria-hidden="true">{l.flag}</span>
+                  <span className="text-xl">{l.flag}</span>
                   {l.id.toUpperCase()}
                 </Button>
               ))}
             </div>
           </div>
 
-          {/* SECCIÓN: VELOCIDAD DE VOZ (NUEVA) */}
+          {/* SECCIÓN: VELOCIDAD DE VOZ */}
           <div className="space-y-4 p-6 bg-primary/5 rounded-[2rem] border border-primary/10">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
@@ -133,70 +134,10 @@ export function SettingsPanel({ open, onOpenChange }: SettingsPanelProps) {
             </div>
           </div>
 
-          {/* SECCIÓN: COLORES PRINCIPALES */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
-              <Pipette className="h-4 w-4" /> {t.colorPrimary}
-            </div>
-            <div className="grid grid-cols-4 gap-3">
-              {colorThemes.map((ct) => (
-                <button
-                  key={ct.id}
-                  onClick={() => handleColorChange(ct.id)}
-                  className={cn(
-                    "h-16 w-full rounded-2xl border-4 transition-all flex items-center justify-center relative overflow-hidden active:scale-90",
-                    progress.theme === ct.id ? "border-primary scale-105 shadow-lg" : "border-transparent opacity-70 hover:opacity-100"
-                  )}
-                  style={{ backgroundColor: ct.color }}
-                  aria-label={`Color: ${ct.label}`}
-                >
-                  {progress.theme === ct.id && (
-                    <div className="bg-white/30 backdrop-blur-sm p-1 rounded-full">
-                      <Check className="h-6 w-6 text-white" />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* SECCIÓN: MODOS VISUALES */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest">
-              <Palette className="h-4 w-4" /> Visualización
-            </div>
-            <div className="grid grid-cols-1 gap-3">
-              {visualModes.map((vm) => (
-                <Button
-                  key={vm.id}
-                  variant="outline"
-                  onClick={() => handleColorChange(vm.id)}
-                  className={cn(
-                    "h-16 rounded-2xl justify-between px-6 border-2 font-black uppercase text-xs tracking-widest",
-                    progress.theme === vm.id ? "border-primary bg-primary/5" : "bg-card"
-                  )}
-                  aria-label={`Modo: ${vm.label}`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={cn(
-                      "h-8 w-8 rounded-full shadow-inner",
-                      vm.id === 'light' ? 'bg-white border' : 
-                      vm.id === 'dark' ? 'bg-slate-900' : 
-                      'bg-black border-2 border-yellow-400'
-                    )} />
-                    {vm.label}
-                  </div>
-                  {progress.theme === vm.id && <Check className="h-5 w-5 text-primary" />}
-                </Button>
-              ))}
-            </div>
-          </div>
-
           {/* BOTÓN SOS PERMANENTE */}
           <Button 
             onClick={() => window.open('tel:112', '_self')}
             className="w-full h-20 rounded-3xl bg-destructive text-white text-xl font-black uppercase border-4 border-white shadow-2xl animate-pulse"
-            aria-label={t.sosTitle}
           >
             <ShieldAlert className="h-8 w-8 mr-3" /> {t.sosTitle}
           </Button>

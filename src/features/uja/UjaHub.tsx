@@ -1,25 +1,18 @@
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   GraduationCap, 
-  Bus, 
-  Zap,
   Globe,
   Award,
   BookOpen,
-  Home,
-  Utensils,
   Smartphone,
   Users,
-  MapPin,
-  Stethoscope,
   Info,
-  ShieldCheck,
-  FileCheck,
   ExternalLink,
-  ChevronRight,
-  Loader2
+  Loader2,
+  LocateFixed
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -28,10 +21,13 @@ import { Button } from "@/components/ui/button";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export function UjaHub({ lang }: { lang: string }) {
   const { progress } = useLocalStorage();
+  const { toast } = useToast();
   const isAccessible = progress.accessibilityMode === 'accessible';
+  const isLite = progress.liteMode;
   const [loadingLink, setLoadingLink] = useState<string | null>(null);
 
   const handleDirectAccess = (url: string, name: string) => {
@@ -49,6 +45,13 @@ export function UjaHub({ lang }: { lang: string }) {
       window.open(url, '_blank');
       setLoadingLink(null);
     }, isAccessible ? 1500 : 500);
+  };
+
+  const handleWhereAmI = () => {
+    toast({
+      title: "Campus Las Lagunillas",
+      description: "Estás en Jaén Capital. La Biblioteca está en el centro del campus.",
+    });
   };
 
   const DirectLinkButton = ({ url, label, variant = "default" }: { url: string, label: string, variant?: any }) => (
@@ -80,12 +83,18 @@ export function UjaHub({ lang }: { lang: string }) {
         />
       </div>
 
+      <Button 
+        onClick={handleWhereAmI}
+        variant="outline"
+        className="w-full h-12 rounded-2xl border-2 border-indigo-200 text-indigo-700 font-black uppercase text-xs gap-2"
+      >
+        <LocateFixed className="h-4 w-4" /> ¿Dónde estoy en el Campus?
+      </Button>
+
       <section className="space-y-6">
-        <div className="flex justify-between items-center px-2">
-          <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
-            <BookOpen className="h-5 w-5" /> Trámites Académicos
-          </h4>
-        </div>
+        <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
+          <BookOpen className="h-5 w-5" /> Trámites Académicos
+        </h4>
         
         <div className="grid grid-cols-1 gap-4">
           <Card className={cn("border-none bg-indigo-600 shadow-xl rounded-[2.5rem] overflow-hidden relative", isAccessible && "rounded-none border-4 border-indigo-800")}>
@@ -93,10 +102,7 @@ export function UjaHub({ lang }: { lang: string }) {
                <GraduationCap className="h-24 w-24 text-white" />
             </div>
             <CardContent className="p-8 space-y-6 relative z-10">
-              <div className="space-y-1">
-                <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Automatrícula y Grados</h5>
-                <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Acceso Directo Seguro</p>
-              </div>
+              <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Automatrícula y Grados</h5>
               <DirectLinkButton url={OFFICIAL_LINKS.uja.matricula} label="ACCEDER A MATRÍCULA" variant="white" />
             </CardContent>
           </Card>
@@ -126,11 +132,9 @@ export function UjaHub({ lang }: { lang: string }) {
       </section>
 
       <section className="space-y-6">
-        <div className="flex justify-between items-center px-2">
-          <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
-            <Globe className="h-5 w-5" /> Erasmus e Internacional
-          </h4>
-        </div>
+        <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
+          <Globe className="h-5 w-5" /> Erasmus e Internacional
+        </h4>
 
         <Card className={cn("border-none bg-slate-900 shadow-xl rounded-[2.5rem] overflow-hidden relative", isAccessible && "rounded-none border-4 border-black")}>
           <CardContent className="p-8 space-y-8">
@@ -157,9 +161,6 @@ export function UjaHub({ lang }: { lang: string }) {
         <div className="space-y-1">
           <p className="text-[12px] text-indigo-900 font-black leading-tight uppercase">
             CONSEJO UJA: Verifica siempre los plazos en la Sede Electrónica.
-          </p>
-          <p className="text-[10px] text-indigo-800/70 font-bold uppercase">
-            Todos los enlaces se abren en ventana nueva para tu seguridad.
           </p>
         </div>
       </div>

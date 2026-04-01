@@ -1,3 +1,4 @@
+
 export const translations = {
   es: {
     title: 'Vía Jaén',
@@ -23,6 +24,12 @@ export const translations = {
     referents: 'Voces que te Guían',
     sosTitle: 'EMERGENCIA 112',
     disclaimer: 'Personaliza tu experiencia segura.',
+    liteMode: 'Modo Ahorro',
+    liteModeDesc: 'Desactiva animaciones para ahorrar batería.',
+    schedulerTitle: '¿Qué cita necesitas?',
+    schedulerPlaceholder: 'Ej: NIE, Médico, Beca...',
+    whereAmI: '¿Dónde estoy?',
+    cityAlerts: 'Alertas de Jaén',
     themes: {
       light: 'Vía Jaén (Claro)',
       dark: 'Noche Jaenera',
@@ -64,6 +71,12 @@ export const translations = {
     referents: 'Voices that Guide You',
     sosTitle: 'EMERGENCY 112',
     disclaimer: 'Customize your safe experience.',
+    liteMode: 'Lite Mode',
+    liteModeDesc: 'Disable animations to save battery.',
+    schedulerTitle: 'What appointment do you need?',
+    schedulerPlaceholder: 'Ex: NIE, Doctor, Grant...',
+    whereAmI: 'Where am I?',
+    cityAlerts: 'Jaén Alerts',
     themes: {
       light: 'Via Jaen (Light)',
       dark: 'Jaenera Night',
@@ -105,6 +118,12 @@ export const translations = {
     referents: 'Voix qui vous guident',
     sosTitle: 'URGENCE 112',
     disclaimer: 'Personnalisez votre expérience sécurisée.',
+    liteMode: 'Mode Économie',
+    liteModeDesc: 'Désactivez les animations pour économiser.',
+    schedulerTitle: 'Quel rendez-vous avez-vous besoin?',
+    schedulerPlaceholder: 'Ex: NIE, Médecin, Bourse...',
+    whereAmI: 'Où suis-je?',
+    cityAlerts: 'Alertes Jaén',
     themes: {
       light: 'Via Jaén (Clair)',
       dark: 'Nuit Jaenera',
@@ -146,6 +165,12 @@ export const translations = {
     referents: 'أصوات ترشدك',
     sosTitle: 'طوارئ 112',
     disclaimer: 'خصص تجربتك الآمنة.',
+    liteMode: 'وضع التوفير',
+    liteModeDesc: 'تعطيل الحركات لتوفير البطارية.',
+    schedulerTitle: 'ما هو الموعد الذي تحتاجه؟',
+    schedulerPlaceholder: 'مثال: NIE، طبيب، منحة...',
+    whereAmI: 'أين أنا؟',
+    cityAlerts: 'تنبيهات جيان',
     themes: {
       light: 'طريق جيان (فاتح)',
       dark: 'ليل جيان',
@@ -187,6 +212,12 @@ export const translations = {
     referents: 'Голоси, що ведуть вас',
     sosTitle: 'ТЕРМІНОВА ДОПОМОГА 112',
     disclaimer: 'Налаштуйте свій безпечний досвід.',
+    liteMode: 'Економний режим',
+    liteModeDesc: 'Вимкнути анімацію для економії.',
+    schedulerTitle: 'Який запис вам потрібен?',
+    schedulerPlaceholder: 'Наприклад: NIE, лікар, стипендія...',
+    whereAmI: 'Де я?',
+    cityAlerts: 'Сповіщення Хаен',
     themes: {
       light: 'Шлях Хаен (Світла)',
       dark: 'Ніч Хаена',

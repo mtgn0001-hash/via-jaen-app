@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -114,6 +115,12 @@
 
 .animate-emergency-pulse {
   animation: emergency-pulse 2s infinite;
+}
+
+/* Desactivar pulso en Modo Ahorro */
+[data-lite-mode='true'] .animate-emergency-pulse {
+  animation: none !important;
+  box-shadow: none !important;
 }
 
 [data-accessibility='accessible'] .animate-emergency-pulse {

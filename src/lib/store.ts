@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 
-export type ThemeType = 'light' | 'dark' | 'contrast' | 'purple' | 'red' | 'green' | 'blue';
+export type ThemeType = 'light' | 'dark' | 'contrast' | 'purple' | 'red' | 'green' | 'blue' | 'olive' | 'ocean' | 'night';
 export type ProvinceType = 'jaen';
 export type AccessibilityMode = 'standard' | 'accessible';
 
@@ -24,12 +24,13 @@ export type UserProgress = {
   province: ProvinceType;
   easyReading: boolean;
   accessibilityMode: AccessibilityMode;
+  liteMode: boolean; // Modo Ahorro de datos/batería
   profile: UserProfile;
   speechRate: number; // 0.5 to 1.5
   currentTab: string; // Persistencia de navegación
 };
 
-const STORAGE_KEY = 'viajaen_config_v2';
+const STORAGE_KEY = 'viajaen_config_v3';
 
 const defaultProgress: UserProgress = {
   procedures: {},
@@ -45,6 +46,7 @@ const defaultProgress: UserProgress = {
   province: 'jaen',
   easyReading: false,
   accessibilityMode: 'standard',
+  liteMode: false,
   profile: {
     name: '',
     nie: '',
@@ -76,6 +78,11 @@ export function useLocalStorage() {
       const newProgress = { ...prev, ...updates };
       if (typeof window !== 'undefined') {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+        
+        // Aplicar atributo lite-mode al documento para CSS
+        if (updates.hasOwnProperty('liteMode')) {
+          document.documentElement.setAttribute('data-lite-mode', updates.liteMode ? 'true' : 'false');
+        }
       }
       return newProgress;
     });
