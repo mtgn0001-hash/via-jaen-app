@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -25,9 +26,10 @@ export type UserProgress = {
   accessibilityMode: AccessibilityMode;
   profile: UserProfile;
   speechRate: number; // 0.5 to 1.5
+  currentTab: string; // Persistencia de navegación
 };
 
-const STORAGE_KEY = 'viajaen_config';
+const STORAGE_KEY = 'viajaen_config_v2';
 
 const defaultProgress: UserProgress = {
   procedures: {},
@@ -48,7 +50,8 @@ const defaultProgress: UserProgress = {
     nie: '',
     phone: '',
   },
-  speechRate: 0.9
+  speechRate: 0.9,
+  currentTab: 'dashboard'
 };
 
 export function useLocalStorage() {

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react";
@@ -23,14 +24,27 @@ import { ResourcesHub } from "@/components/recursos/ResourcesHub";
 import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [activeResourceSection, setActiveResourceSection] = useState('salud');
-  
   const { 
     progress, 
     updateProgress, 
     isLoaded 
   } = useLocalStorage();
+
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeResourceSection, setActiveResourceSection] = useState('salud');
+  
+  // Sincronizar estado local con persistencia
+  useEffect(() => {
+    if (isLoaded && progress.currentTab) {
+      setActiveTab(progress.currentTab);
+    }
+  }, [isLoaded, progress.currentTab]);
+
+  const handleTabChange = (tab: string) => {
+    if ('vibrate' in navigator) navigator.vibrate(10);
+    setActiveTab(tab);
+    updateProgress({ currentTab: tab });
+  };
 
   const lang = (progress.language as Language) || 'es';
 
@@ -45,7 +59,7 @@ export default function Home() {
 
   const handleResourceNavigation = (sectionId: string) => {
     setActiveResourceSection(sectionId);
-    setActiveTab('guides_hub');
+    handleTabChange('guides_hub');
   };
 
   if (!isLoaded) return null;
@@ -65,7 +79,7 @@ export default function Home() {
           progress={progress} 
           updateProgress={updateProgress}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={handleTabChange}
         />
 
         <main className="max-w-5xl mx-auto p-6 pt-8 min-h-screen">
@@ -73,7 +87,7 @@ export default function Home() {
             {activeTab === 'dashboard' && (
               <Dashboard 
                 lang={lang} 
-                setActiveTab={setActiveTab} 
+                setActiveTab={handleTabChange} 
                 setResourceSection={handleResourceNavigation}
                 progress={progress} 
               />
@@ -108,8 +122,8 @@ export default function Home() {
           </div>
         </main>
 
-        <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
-        <BackFAB activeTab={activeTab} setActiveTab={setActiveTab} />
+        <BottomNav activeTab={activeTab} setActiveTab={handleTabChange} />
+        <BackFAB activeTab={activeTab} setActiveTab={handleTabChange} />
         <EmergencyFAB lang={lang} />
       </div>
     </FirebaseClientProvider>
