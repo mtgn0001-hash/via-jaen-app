@@ -10,7 +10,7 @@ import {
   DialogFooter
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Play, Loader2, Info, ShieldAlert, AlertTriangle } from "lucide-react";
+import { ExternalLink, Loader2, ShieldAlert, AlertTriangle } from "lucide-react";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
@@ -19,20 +19,20 @@ type ResourceLauncherProps = {
   title: string;
   description: string;
   url: string;
-  lseInstructions?: string;
   triggerLabel?: string;
   variant?: "primary" | "secondary" | "outline" | "white";
   lang: string;
+  className?: string;
 };
 
 export function ResourceLauncher({ 
   title, 
   description, 
   url, 
-  lseInstructions, 
   triggerLabel = "Solicitar", 
   variant = "primary",
-  lang 
+  lang,
+  className
 }: ResourceLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -56,49 +56,54 @@ export function ResourceLauncher({
       window.speechSynthesis.speak(utterance);
     }
 
-    // Simulamos validación de enlace
+    // Retraso de seguridad para que el usuario procese el aviso
     setTimeout(() => {
       try {
-        window.open(url, '_blank');
-        setIsOpen(false);
-        setIsRedirecting(false);
+        const win = window.open(url, '_blank', 'noopener,noreferrer');
+        if (win) {
+          setIsOpen(false);
+          setIsRedirecting(false);
+        } else {
+          // Si el navegador bloquea la pestaña nueva
+          setHasError(true);
+          setIsRedirecting(false);
+        }
       } catch (e) {
         setHasError(true);
         setIsRedirecting(false);
       }
-    }, isAccessible ? 2000 : 800);
+    }, isAccessible ? 1500 : 500);
   };
 
   const getVariantStyles = () => {
     switch (variant) {
       case "primary":
-        return "bg-primary text-white border-none shadow-lg";
+        return "bg-primary text-white border-none shadow-lg font-black";
       case "white":
-        return "bg-white text-primary border-primary/10 shadow-xl";
+        return "bg-white text-primary border-primary/10 shadow-xl font-black";
       case "secondary":
-        return "bg-slate-900 text-white border-none shadow-md";
+        return "bg-slate-900 text-white border-none shadow-md font-black";
       case "outline":
-        return "border-2 border-primary text-primary hover:bg-primary/5";
+        return "border-2 border-primary text-primary hover:bg-primary/5 font-black";
       default:
-        return "bg-primary text-white";
+        return "bg-primary text-white font-black";
     }
   };
 
   return (
     <>
-      <div className="flex gap-2 w-full">
-        <Button 
-          onClick={() => setIsOpen(true)}
-          className={cn(
-            "flex-1 h-16 rounded-2xl font-black uppercase tracking-tight transition-all active:scale-95 flex justify-between px-6",
-            getVariantStyles()
-          )}
-          aria-label={`${triggerLabel} para ${title}. Abre ventana de confirmación segura.`}
-        >
-          <span>{triggerLabel}</span>
-          <ExternalLink className="h-5 w-5 opacity-100" />
-        </Button>
-      </div>
+      <Button 
+        onClick={() => setIsOpen(true)}
+        className={cn(
+          "w-full h-16 rounded-2xl uppercase tracking-tight transition-all active:scale-95 flex justify-between px-6",
+          getVariantStyles(),
+          className
+        )}
+        aria-label={`${triggerLabel} para ${title}. Abre ventana de confirmación segura.`}
+      >
+        <span className="text-sm font-black">{triggerLabel}</span>
+        <ExternalLink className="h-5 w-5" />
+      </Button>
 
       <Dialog open={isOpen} onOpenChange={(val) => {
         setIsOpen(val);
@@ -132,7 +137,7 @@ export function ResourceLauncher({
                     </h4>
                   </div>
                   <p className="text-[11px] text-slate-700 font-bold leading-tight uppercase">
-                    Vas a ser redirigido a servidores oficiales. No compartas tus claves con nadie.
+                    Vas a ser redirigido a servidores oficiales externos. No compartas tus claves privadas.
                   </p>
                 </div>
               </>
@@ -140,9 +145,9 @@ export function ResourceLauncher({
               <div className="bg-destructive/5 p-6 rounded-3xl border-2 border-destructive/20 flex flex-col items-center text-center gap-4">
                 <AlertTriangle className="h-12 w-12 text-destructive" />
                 <div className="space-y-1">
-                  <h4 className="font-black text-lg text-destructive uppercase">Sitio no disponible</h4>
+                  <h4 className="font-black text-lg text-destructive uppercase">Error de Navegación</h4>
                   <p className="text-xs font-bold text-slate-700">
-                    El sitio oficial está en mantenimiento. Inténtalo de nuevo en unos minutos o contacta por teléfono si es urgente.
+                    Tu navegador ha bloqueado la apertura de la nueva ventana o el sitio no está disponible.
                   </p>
                 </div>
               </div>
@@ -158,9 +163,9 @@ export function ResourceLauncher({
                 className="flex-1 rounded-xl h-14 bg-primary text-white font-black uppercase text-sm gap-2 shadow-lg"
               >
                 {isRedirecting ? (
-                  <><Loader2 className="h-5 w-5 animate-spin" /> Conectando...</>
+                  <><Loader2 className="h-5 w-5 animate-spin" /> Cargando...</>
                 ) : (
-                  <><ExternalLink className="h-5 w-5" /> Ir a la Sede Oficial</>
+                  <><ExternalLink className="h-5 w-5" /> Abrir en Navegador</>
                 )}
               </Button>
             )}
