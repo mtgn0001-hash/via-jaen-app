@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from "react";
@@ -13,6 +12,7 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { BackFAB } from "@/components/layout/BackFAB";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
 import { Toaster } from "@/components/ui/toaster";
+import { translations, type Language } from "@/lib/translations";
 
 // Features
 import { ManagementTIENIE } from "@/features/extranjeria/ManagementTIENIE";
