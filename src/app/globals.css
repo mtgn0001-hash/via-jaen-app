@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -85,13 +84,24 @@
 @layer base {
   * {
     @apply border-border transition-all duration-300;
+    -webkit-tap-highlight-color: transparent;
   }
+  
+  html, body {
+    height: 100%;
+    height: -webkit-fill-available;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased text-[16px] leading-[1.6];
     font-family: 'Outfit', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    padding-bottom: env(safe-area-inset-bottom);
   }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply text-foreground font-black tracking-tight;
     font-family: 'Outfit', sans-serif;
@@ -121,6 +131,10 @@
 [data-lite-mode='true'] .animate-emergency-pulse {
   animation: none !important;
   box-shadow: none !important;
+}
+
+[data-lite-mode='true'] * {
+  @apply shadow-none !important;
 }
 
 [data-accessibility='accessible'] .animate-emergency-pulse {

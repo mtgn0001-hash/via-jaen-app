@@ -55,34 +55,34 @@ export function Header({ lang, progress, updateProgress, activeTab, setActiveTab
   };
 
   return (
-    <header className="sticky top-0 bg-background/60 backdrop-blur-xl z-40 px-6 py-4 border-b border-border/50">
-      <div className="max-w-5xl mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <AppLogo size={44} />
+    <header className="sticky top-0 bg-background/80 backdrop-blur-xl z-40 px-4 py-4 border-b border-border/50">
+      <div className="max-w-5xl mx-auto flex justify-between items-center gap-2">
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <AppLogo size={40} />
           <div className="flex flex-col">
-            <h1 className="font-black text-lg text-primary uppercase tracking-tighter leading-none">
+            <h1 className="font-black text-sm sm:text-lg text-primary uppercase tracking-tighter leading-none">
               {t.title}
             </h1>
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
+            <p className="text-[8px] sm:text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
               {getBreadcrumb()}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* ASISTENTE VISUAL (OJO) */}
           <Button
             onClick={() => setActiveTab('scanner')}
             variant="outline"
             className={cn(
-              "h-12 w-12 rounded-2xl transition-all active:scale-95 border-2",
+              "h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl transition-all active:scale-95 border-2 p-0",
               activeTab === 'scanner' 
                 ? "bg-indigo-600 text-white border-indigo-600 shadow-lg" 
                 : "bg-indigo-50 text-indigo-600 border-indigo-100 hover:bg-indigo-100"
             )}
-            aria-label="Asistente Visual IA: Escanear y explicar documentos"
+            aria-label="Asistente Visual IA"
           >
-            <Eye className="h-6 w-6" />
+            <Eye className="h-5 w-5 sm:h-6 sm:w-6" />
           </Button>
 
           {/* BOTÓN MAESTRO DE ACCESIBILIDAD */}
@@ -90,26 +90,26 @@ export function Header({ lang, progress, updateProgress, activeTab, setActiveTab
             onClick={toggleMasterAccessibility}
             variant={isAccessible ? "default" : "outline"}
             className={cn(
-              "h-12 w-12 sm:w-auto px-0 sm:px-4 rounded-2xl gap-2 transition-all active:scale-95 border-2",
+              "h-10 px-2 sm:h-12 sm:px-4 rounded-xl sm:rounded-2xl gap-2 transition-all active:scale-95 border-2",
               isAccessible 
                 ? "bg-yellow-400 text-black border-black animate-pulse shadow-[0_0_20px_rgba(250,204,21,0.4)]" 
                 : "bg-primary/5 text-primary border-primary/10"
             )}
-            aria-label="Botón Maestro de Accesibilidad: Activar navegación asistida y alto contraste"
+            aria-label="Modo Accesibilidad"
           >
-            {isAccessible ? <Zap className="h-6 w-6 fill-current" /> : <Accessibility className="h-6 w-6" />}
-            <span className="hidden sm:inline font-black text-[10px] uppercase">Accesibilidad</span>
+            {isAccessible ? <Zap className="h-5 w-5 sm:h-6 sm:w-6 fill-current" /> : <Accessibility className="h-5 w-5 sm:h-6 sm:w-6" />}
+            <span className="hidden md:inline font-black text-[10px] uppercase">Accesibilidad</span>
           </Button>
 
           {/* BOTÓN DE AJUSTES */}
           <Button 
             variant="ghost" 
             size="icon" 
-            className="h-12 w-12 rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10 transition-all active:scale-90"
+            className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-primary/5 hover:bg-primary/10 text-primary border border-primary/10 transition-all active:scale-90"
             onClick={() => setSettingsOpen(true)}
-            aria-label="Configuración de idioma y colores"
+            aria-label="Configuración"
           >
-            <Settings2 className="h-6 w-6" />
+            <Settings2 className="h-5 w-5 sm:h-6 sm:w-6" />
           </Button>
         </div>
       </div>
