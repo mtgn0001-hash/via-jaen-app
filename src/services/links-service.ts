@@ -33,15 +33,15 @@ export const OFFICIAL_LINKS = {
   uja: {
     acceso: "https://www.ujaen.es/estudios/acceso",
     internacional: "https://www.ujaen.es/internacional",
-    matricula: "https://www.ujaen.es/estudios/acceso/automatricula",
+    matricula: "https://www.ujaen.es/estudios/acceso",
     becas: "https://www.ujaen.es/servicios/vicest/becas",
     platea: "https://platea.ujaen.es/",
-    notas: "https://www.ujaen.es/servicios/iuja/",
+    notas: "https://www.ujaen.es/estudios/acceso",
     bonificacion99: "https://www.juntadeandalucia.es/organismos/universidadinvestigacioneinnovacion/areas/universidad/bonificacion-99.html",
     erasmus: "https://www.ujaen.es/internacional/movilidad/erasmus-estudios-salientes",
     buddyProgram: "https://www.ujaen.es/internacional/movilidad/buddy-program",
-    cealm: "https://www.ujaen.es/servicios/cealm/",
-    safyd: "https://www.ujaen.es/servicios/safyd/",
+    cealm: "https://www.ujaen.es/servicios/cealm",
+    safyd: "https://www.ujaen.es/servicios/safyd",
     comedores: "https://www.ujaen.es/servicios/vicest/servicios/comedores-universitarios",
     biblioteca: "https://biblioteca.ujaen.es/",
     alojamiento: "https://www.ujaen.es/servicios/vicest/servicios/alojamiento"
@@ -58,7 +58,7 @@ export const OFFICIAL_LINKS = {
     urgenciasFelipeArche: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-felipe-arche"
   },
   juntaAndalucia: {
-    escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion",
+    escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/ced/dua",
     rmisa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/renta-minima.html",
     bonoCarestia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/bono-carestia.html",
     ayudaAlquiler: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/plan-vive.html",
