@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@/lib/store";
-import { Language, translations } from "@/lib/translations";
 import { Header } from "@/components/layout/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";

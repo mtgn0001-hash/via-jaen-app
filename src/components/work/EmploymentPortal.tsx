@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -33,7 +34,6 @@ type EmploymentPortalProps = {
 
 export function EmploymentPortal({ lang }: EmploymentPortalProps) {
   const langPack = translations[lang] || translations.es;
-  const t = langPack;
   const e = langPack.employment || translations.es.employment;
   const { progress } = useLocalStorage();
   const currentProvince = provincesData[progress.province] || provincesData.jaen;
@@ -72,16 +72,16 @@ ${cvData.skills}
       <div className="space-y-2">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <h2 className="text-2xl font-bold tracking-tight">{e.title}</h2>
-            <p className="text-muted-foreground text-sm">{e.subtitle}</p>
+            <h2 className="text-2xl font-black tracking-tight text-primary uppercase">{e.title}</h2>
+            <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">{e.subtitle}</p>
           </div>
           <SpeechButton text={`${e.title}. ${e.subtitle}`} language={lang} />
         </div>
       </div>
 
-      <section className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex gap-3">
-        <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-        <p className="text-xs font-bold text-foreground">
+      <section className="bg-primary/5 p-5 rounded-[2rem] border-2 border-primary/10 flex gap-4 items-center">
+        <ShieldCheck className="h-8 w-8 text-primary shrink-0" />
+        <p className="text-xs font-bold text-slate-800 leading-tight uppercase">
           {e.legalWarning}
         </p>
       </section>
@@ -91,12 +91,12 @@ ${cvData.skills}
           <TabsTrigger value="olive" className={triggerClass}><Briefcase className="h-5 w-5" /></TabsTrigger>
           <TabsTrigger value="search" className={triggerClass}><MapPin className="h-5 w-5" /></TabsTrigger>
           <TabsTrigger value="cv" className={triggerClass}><FileText className="h-5 w-5" /></TabsTrigger>
-          <TabsTrigger value="rights" className={triggerClass}><ShieldCheck className="h-5 w-5" /></TabsTrigger>
+          <TabsTrigger value="rights" className={triggerClass}><Scale className="h-5 w-5" /></TabsTrigger>
           <TabsTrigger value="startup" className={triggerClass}><Rocket className="h-5 w-5" /></TabsTrigger>
         </TabsList>
 
         <TabsContent value="olive" className="space-y-4 pt-4">
-          <Card className="border-none bg-primary/5 rounded-3xl overflow-hidden shadow-sm">
+          <Card className="border-none bg-primary/5 rounded-[2.5rem] overflow-hidden shadow-sm border-2 border-primary/5">
             <CardHeader className="pb-2">
               <div className="flex justify-between items-center">
                 <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
@@ -106,42 +106,42 @@ ${cvData.skills}
                 <SpeechButton text={`${workData.campaign}. ${workData.desc}`} language={lang} />
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm leading-relaxed text-muted-foreground font-medium">{workData.desc}</p>
+            <CardContent className="space-y-6">
+              <p className="text-sm leading-relaxed text-slate-700 font-bold">{workData.desc}</p>
               
-              <div className="bg-card p-5 rounded-3xl border shadow-sm space-y-2">
+              <div className="bg-white p-6 rounded-[2rem] border shadow-sm space-y-3">
                 <div className="flex justify-between items-center">
                   <h4 className="font-black text-sm text-primary flex items-center gap-2 uppercase">
                     <Scale className="h-4 w-4" /> {e.rights}
                   </h4>
-                  <SpeechButton text={e.rightsText || "Derechos laborales"} language={lang} />
+                  <SpeechButton text={e.rightsText} language={lang} />
                 </div>
-                <p className="text-xs text-muted-foreground leading-normal font-medium">
-                  {e.rightsText || "Tienes derecho a condiciones dignas."}
+                <p className="text-xs text-slate-600 leading-normal font-bold">
+                  {e.rightsText}
                 </p>
               </div>
 
-              {workData.shelters.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <h3 className="font-black text-sm flex items-center gap-2 uppercase text-foreground">
-                    <Home className="h-4 w-4 text-primary" /> {t.work?.shelterTitle || "Albergues"}
+              {workData.shelters && workData.shelters.length > 0 && (
+                <div className="space-y-4 pt-2">
+                  <h3 className="font-black text-[10px] flex items-center gap-2 uppercase text-muted-foreground tracking-widest ml-2">
+                    <Home className="h-4 w-4 text-primary" /> {e.shelterTitle}
                   </h3>
-                  <div className="grid gap-2">
+                  <div className="grid gap-3">
                     {workData.shelters.map((s) => (
-                      <Card key={s.city} className="border-none shadow-none bg-card overflow-hidden rounded-2xl border border-primary/10">
-                        <CardContent className="p-3 flex items-center justify-between">
-                          <div className="flex gap-3 items-center">
-                            <div className="bg-primary/10 p-2 rounded-xl">
-                              <MapPin className="h-4 w-4 text-primary" />
+                      <Card key={s.city} className="border-none shadow-none bg-white overflow-hidden rounded-3xl border-2 border-slate-100">
+                        <CardContent className="p-4 flex items-center justify-between">
+                          <div className="flex gap-4 items-center">
+                            <div className="bg-primary/10 p-2.5 rounded-xl">
+                              <MapPin className="h-5 w-5 text-primary" />
                             </div>
                             <div>
-                              <h4 className="font-black text-xs text-foreground">{s.city}</h4>
+                              <h4 className="font-black text-sm text-slate-900">{s.city}</h4>
                               <p className="text-[9px] text-muted-foreground uppercase font-black">{s.open}</p>
                             </div>
                           </div>
                           <a 
                             href={`tel:${s.phone.replace(/\s/g, '')}`}
-                            className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-[11px] font-black flex items-center gap-2 shadow-lg active:scale-95 transition-transform"
+                            className="bg-emerald-600 text-white px-5 py-2.5 rounded-2xl text-[11px] font-black flex items-center gap-2 shadow-lg active:scale-95 transition-transform"
                           >
                             <Phone className="h-3 w-3" /> {s.phone}
                           </a>
@@ -156,36 +156,36 @@ ${cvData.skills}
         </TabsContent>
 
         <TabsContent value="search" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-card overflow-hidden rounded-3xl border border-primary/5">
+          <Card className="border-none shadow-xl bg-card overflow-hidden rounded-[2.5rem] border-2 border-primary/5">
             <CardHeader className="bg-primary/5">
               <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
                 <Building2 className="h-5 w-5 text-primary" /> {e.activeSearch}
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-4 space-y-4">
-              <div className="p-4 rounded-2xl bg-muted/30 border space-y-2">
-                <h4 className="font-black text-sm">SAE (Servicio Andaluz de Empleo)</h4>
-                <p className="text-xs text-muted-foreground font-medium">{e.saeDesc}</p>
-                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
+            <CardContent className="pt-6 space-y-4">
+              <div className="p-5 rounded-3xl bg-slate-50 border-2 space-y-3">
+                <h4 className="font-black text-sm text-slate-900 uppercase">SAE (Servicio Andaluz de Empleo)</h4>
+                <p className="text-xs text-muted-foreground font-bold">{e.saeDesc}</p>
+                <Button variant="outline" size="sm" className="w-full rounded-2xl gap-2 h-12 border-2 font-black text-xs uppercase" asChild>
                   <a href="https://www.juntadeandalucia.es/organismos/empleoformacionytrabajoautonomo/sae.html" target="_blank" rel="noopener noreferrer">
-                    Web SAE <ExternalLink className="h-3 w-3" />
+                    Web Oficial SAE <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
               </div>
 
-              <div className="p-4 rounded-2xl bg-muted/30 border space-y-2">
-                <h4 className="font-black text-sm">Jaén Emplea</h4>
-                <p className="text-xs text-muted-foreground font-medium">Portal de empleo municipal del Ayuntamiento de Jaén.</p>
-                <Button variant="outline" size="sm" className="w-full rounded-xl gap-2 h-10 border-2 font-bold" asChild>
+              <div className="p-5 rounded-3xl bg-slate-50 border-2 space-y-3">
+                <h4 className="font-black text-sm text-slate-900 uppercase">Jaén Emplea</h4>
+                <p className="text-xs text-muted-foreground font-bold">Portal de empleo municipal del Ayuntamiento de Jaén.</p>
+                <Button variant="outline" size="sm" className="w-full rounded-2xl gap-2 h-12 border-2 font-black text-xs uppercase" asChild>
                   <a href="https://empleo.aytojaen.es/" target="_blank" rel="noopener noreferrer">
-                    Web Jaén Emplea <ExternalLink className="h-3 w-3" />
+                    Web Jaén Emplea <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
               </div>
 
-              <div className="space-y-2">
-                <h4 className="font-black text-[10px] uppercase text-muted-foreground ml-1 tracking-widest">{e.ettTitle}</h4>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-3">
+                <h4 className="font-black text-[10px] uppercase text-muted-foreground ml-3 tracking-widest">{e.ettTitle}</h4>
+                <div className="grid grid-cols-2 gap-3">
                   <ETTCard name="Adecco Jaén" url="https://www.adecco.es/oficina/adecco-jaen" />
                   <ETTCard name="Randstad Jaén" url="https://www.randstad.es/oficinas/jaen-457/" />
                   <ETTCard name="Manpower" url="https://www.manpower.es/" />
@@ -197,99 +197,103 @@ ${cvData.skills}
         </TabsContent>
 
         <TabsContent value="cv" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-card rounded-3xl border border-primary/5">
+          <Card className="border-none shadow-xl bg-card rounded-[2.5rem] border-2 border-primary/5">
             <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2 font-black uppercase">
-                <FileText className="h-5 w-5 text-primary" /> {e.cvTools}
+              <CardTitle className="text-lg flex items-center gap-2 font-black uppercase text-primary">
+                <FileText className="h-5 w-5" /> {e.cvTools}
               </CardTitle>
-              <CardDescription className="font-medium">{e.cvAdvice}</CardDescription>
+              <CardDescription className="font-bold text-xs uppercase tracking-tight">{e.cvAdvice}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <Input 
-                  placeholder="Nombre completo" 
+                  placeholder="Tu Nombre Completo" 
                   value={cvData.name}
                   onChange={e => setCvData({...cvData, name: e.target.value})}
-                  className="rounded-2xl h-12 font-bold bg-muted/30 border-none"
+                  className="rounded-2xl h-14 font-black text-md bg-slate-50 border-none shadow-inner"
                 />
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   <Input 
                     placeholder="Email" 
                     value={cvData.email}
                     onChange={e => setCvData({...cvData, email: e.target.value})}
-                    className="rounded-2xl h-12 font-bold bg-muted/30 border-none"
+                    className="rounded-2xl h-14 font-bold bg-slate-50 border-none shadow-inner"
                   />
                   <Input 
                     placeholder="Teléfono" 
                     value={cvData.phone}
                     onChange={e => setCvData({...cvData, phone: e.target.value})}
-                    className="rounded-2xl h-12 font-bold bg-muted/30 border-none"
+                    className="rounded-2xl h-14 font-bold bg-slate-50 border-none shadow-inner"
                   />
                 </div>
                 <Textarea 
-                  placeholder="Experiencia (Qué has hecho antes)" 
+                  placeholder="Tu Experiencia (¿Qué trabajos has hecho?)" 
                   value={cvData.experience}
                   onChange={e => setCvData({...cvData, experience: e.target.value})}
-                  className="rounded-2xl min-h-[100px] font-medium bg-muted/30 border-none"
+                  className="rounded-3xl min-h-[120px] font-bold bg-slate-50 border-none shadow-inner"
                 />
                 <Textarea 
-                  placeholder="Habilidades (Idiomas, carnet, etc.)" 
+                  placeholder="Tus Habilidades (Idiomas, carnet conducir, etc.)" 
                   value={cvData.skills}
                   onChange={e => setCvData({...cvData, skills: e.target.value})}
-                  className="rounded-2xl min-h-[80px] font-medium bg-muted/30 border-none"
+                  className="rounded-3xl min-h-[100px] font-bold bg-slate-50 border-none shadow-inner"
                 />
               </div>
 
               <Button 
                 onClick={handleCopyCV} 
-                className="w-full rounded-2xl h-14 gap-2 font-black text-lg shadow-lg active:scale-95 transition-transform"
+                className="w-full h-18 rounded-[1.5rem] h-16 gap-3 font-black text-xl shadow-xl active:scale-95 transition-all mt-4"
                 variant={copied ? "secondary" : "default"}
               >
-                {copied ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                {copied ? "Copiado" : "Copiar Texto del CV"}
+                {copied ? <Check className="h-6 w-6" /> : <Copy className="h-6 w-6" />}
+                {copied ? "¡TEXTO COPIADO!" : "COPIAR TEXTO CV"}
               </Button>
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="rights" className="space-y-4 pt-4">
-          <Card className="border-none shadow-sm bg-card rounded-3xl border border-primary/5">
-            <CardContent className="p-6 space-y-4">
+          <Card className="border-none shadow-xl bg-card rounded-[2.5rem] border-2 border-primary/5">
+            <CardContent className="p-8 space-y-6">
               <div className="flex justify-between items-center">
-                <h4 className="font-black text-sm flex items-center gap-2 uppercase text-foreground">
-                  <Scale className="h-5 w-5 text-primary" /> {e.rights}
+                <h4 className="font-black text-xl flex items-center gap-2 uppercase text-slate-900">
+                  <Scale className="h-6 w-6 text-primary" /> {e.rights}
                 </h4>
-                <SpeechButton text={`${e.rights}. ${e.smiInfo}`} language={lang} />
+                <SpeechButton text={`${e.rights}. ${e.smiInfo}. ${e.rightsText}`} language={lang} />
               </div>
               
-              <div className="bg-muted/50 p-6 rounded-3xl border-2 border-dashed border-primary/20">
-                <h5 className="font-black text-xs mb-2 uppercase text-muted-foreground">{e.smiInfo}</h5>
-                <p className="text-3xl font-black text-primary">1.134€ <span className="text-sm text-muted-foreground font-bold">/ mes (aprox)</span></p>
-                <p className="text-[10px] text-muted-foreground mt-2 italic font-medium">
+              <div className="bg-primary/5 p-8 rounded-[2rem] border-4 border-dashed border-primary/20 text-center">
+                <h5 className="font-black text-xs mb-2 uppercase text-muted-foreground tracking-widest">{e.smiInfo}</h5>
+                <p className="text-5xl font-black text-primary tracking-tighter">1.134€ <span className="text-sm text-slate-400 font-bold">/ mes</span></p>
+                <p className="text-[10px] text-slate-400 mt-4 italic font-black uppercase tracking-widest">
                   * Basado en jornada completa de 40h semanales.
                 </p>
               </div>
 
-              <div className="space-y-3">
-                <div className="p-4 bg-destructive/5 rounded-2xl border border-destructive/20">
-                  <h5 className="font-black text-xs text-destructive mb-1 uppercase tracking-wider">{e.inspection}</h5>
-                  <p className="text-xs text-destructive leading-relaxed font-medium">
-                    Si sufres abusos o trabajas sin contrato, puedes denunciar de forma anónima.
+              <div className="space-y-4">
+                <div className="p-6 bg-destructive/5 rounded-3xl border-2 border-destructive/20 space-y-3">
+                  <h5 className="font-black text-sm text-destructive uppercase flex items-center gap-2">
+                    <ShieldAlert className="h-5 w-5" /> {e.inspection}
+                  </h5>
+                  <p className="text-xs text-destructive font-bold leading-relaxed">
+                    Si sufres abusos o trabajas sin contrato en Jaén, puedes denunciar de forma anónima. Tu estatus migratorio no impide denunciar abusos.
                   </p>
-                  <Button variant="link" size="sm" className="p-0 h-auto text-destructive font-black mt-2 uppercase text-[10px]" asChild>
+                  <Button variant="link" size="sm" className="p-0 h-auto text-destructive font-black mt-2 uppercase text-[10px] tracking-widest" asChild>
                     <a href="http://www.mites.gob.es/itss/web/atencion_al_ciudadano/comunicacion_irregularidades/index.html" target="_blank" rel="noopener noreferrer">
                       Ir a Inspección de Trabajo <ExternalLink className="h-3 w-3 ml-1" />
                     </a>
                   </Button>
                 </div>
 
-                <div className="p-5 bg-primary/5 rounded-3xl space-y-3 border border-primary/10">
-                  <h5 className="font-black text-sm text-primary uppercase">{e.faqLawyer}</h5>
-                  <div className="space-y-2">
-                    <p className="text-xs font-black text-foreground">¿Qué pasa si tengo un accidente y no tengo papeles?</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed font-medium">
-                      Tienes derecho a asistencia médica y protección legal inmediata. El estatus migratorio no anula tus derechos humanos básicos en el trabajo.
-                    </p>
+                <div className="p-6 bg-slate-50 rounded-3xl space-y-3 border-2 border-slate-100">
+                  <h5 className="font-black text-sm text-slate-900 uppercase">Consultas Frecuentes</h5>
+                  <div className="space-y-3">
+                    <div className="space-y-1">
+                      <p className="text-[13px] font-black text-slate-900">¿Qué pasa si tengo un accidente y no tengo contrato?</p>
+                      <p className="text-xs text-muted-foreground font-bold leading-relaxed">
+                        Tienes derecho a asistencia médica urgente y protección legal. El estatus migratorio no anula tus derechos fundamentales en el lugar de trabajo.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -299,33 +303,33 @@ ${cvData.skills}
 
         <TabsContent value="startup" className="space-y-4 pt-4">
           <div className="grid gap-4">
-            <Card className="border-none shadow-sm bg-card rounded-3xl overflow-hidden border border-primary/5">
-              <CardContent className="p-5 space-y-4">
-                <div className="flex gap-4 items-start">
-                  <div className="bg-primary/10 p-3 rounded-2xl">
-                    <Rocket className="h-6 w-6 text-primary" />
+            <Card className="border-none shadow-xl bg-card rounded-[2.5rem] overflow-hidden border-2 border-primary/5">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex gap-5 items-start">
+                  <div className="bg-primary/10 p-4 rounded-3xl shadow-inner">
+                    <Rocket className="h-10 w-10 text-primary" />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="font-black text-sm uppercase text-foreground">{e.startup}</h4>
-                    <p className="text-xs text-muted-foreground font-medium">{e.cadeInfo}</p>
+                    <h4 className="font-black text-xl uppercase text-slate-900 tracking-tight">{e.startup}</h4>
+                    <p className="text-sm text-muted-foreground font-bold leading-snug">{e.cadeInfo}</p>
                   </div>
                 </div>
-                <Button className="w-full rounded-xl h-12 gap-2 border-2 font-bold" variant="outline" asChild>
+                <Button className="w-full h-16 rounded-2xl gap-3 border-2 font-black text-sm uppercase shadow-lg" variant="outline" asChild>
                   <a href="https://www.andaluciaemprende.es/" target="_blank" rel="noopener noreferrer">
-                    Buscar Centro CADE <ExternalLink className="h-4 w-4" />
+                    BUSCAR CENTRO CADE JAÉN <ExternalLink className="h-5 w-5" />
                   </a>
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-sm bg-card rounded-2xl border border-primary/5">
-              <CardContent className="p-4 flex gap-4 items-center">
-                <div className="bg-primary/10 p-2 rounded-xl">
-                  <Plus className="h-5 w-5 text-primary" />
+            <Card className="border-none shadow-sm bg-slate-50 rounded-[2rem] border-2 border-slate-100">
+              <CardContent className="p-6 flex gap-5 items-center">
+                <div className="bg-primary/10 p-3 rounded-2xl">
+                  <Plus className="h-6 w-6 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-black text-xs uppercase text-foreground">{e.autonomous}</h4>
-                  <p className="text-[10px] text-muted-foreground font-medium">Ayudas de la Junta de Andalucía para nuevos autónomos.</p>
+                  <h4 className="font-black text-sm uppercase text-slate-900">{e.autonomous}</h4>
+                  <p className="text-[11px] text-muted-foreground font-bold">Ayudas Cuota Cero para nuevos autónomos de la Junta.</p>
                 </div>
               </CardContent>
             </Card>
@@ -342,10 +346,10 @@ function ETTCard({ name, url }: { name: string; url: string }) {
       href={url} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="p-3 px-4 rounded-xl border bg-card text-[10px] font-black text-foreground flex items-center justify-between group hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95"
+      className="p-4 rounded-2xl border-2 bg-white text-[11px] font-black text-slate-800 flex items-center justify-between group hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95"
     >
       {name}
-      <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <ExternalLink className="h-4 w-4 opacity-40 group-hover:opacity-100 transition-opacity" />
     </a>
   );
 }

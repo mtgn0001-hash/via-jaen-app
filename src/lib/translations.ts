@@ -30,6 +30,29 @@ export const translations = {
     schedulerPlaceholder: 'Ej: NIE, Médico, Beca...',
     whereAmI: '¿Dónde estoy?',
     cityAlerts: 'Alertas de Jaén',
+    employment: {
+      title: 'Portal de Empleo',
+      subtitle: 'Guía de trabajo y derechos en Jaén',
+      legalWarning: 'Trabajar con contrato garantiza tus derechos y acceso a la sanidad pública.',
+      rights: 'Tus Derechos',
+      rightsText: 'Incluso sin papeles, tienes derechos humanos básicos y derecho al SMI. Si sufres abusos, contacta con un sindicato o Jaén Acoge.',
+      activeSearch: 'Búsqueda Activa',
+      saeDesc: 'Servicio Andaluz de Empleo. Inscríbete para ofertas en toda la provincia.',
+      ettTitle: 'Empresas de Trabajo Temporal',
+      cvTools: 'Generador de CV',
+      cvAdvice: 'Crea un texto sencillo para copiar y pegar en WhatsApp o portales de empleo.',
+      smiInfo: 'Salario Mínimo (SMI)',
+      inspection: 'Inspección de Trabajo',
+      faqLawyer: 'Consultas Legales',
+      startup: 'Emprender en Jaén',
+      cadeInfo: 'Centros CADE: Apoyo gratuito de la Junta para crear tu propia empresa.',
+      autonomous: 'Ayudas Autónomos',
+      shelterTitle: 'Albergues de Temporeros'
+    },
+    work: {
+      shelterTitle: 'Red de Albergues',
+      shelterNote: 'Los albergues de la aceituna abren normalmente de noviembre a febrero.'
+    },
     themes: {
       light: 'Vía Jaén (Claro)',
       dark: 'Noche Jaenera',
@@ -77,6 +100,29 @@ export const translations = {
     schedulerPlaceholder: 'Ex: NIE, Doctor, Grant...',
     whereAmI: 'Where am I?',
     cityAlerts: 'Jaén Alerts',
+    employment: {
+      title: 'Employment Portal',
+      subtitle: 'Work guide and rights in Jaén',
+      legalWarning: 'Working with a contract guarantees your rights and access to public healthcare.',
+      rights: 'Your Rights',
+      rightsText: 'Even without papers, you have basic human rights and the right to the Minimum Wage (SMI).',
+      activeSearch: 'Active Search',
+      saeDesc: 'Andalusian Employment Service. Register for offers throughout the province.',
+      ettTitle: 'Temporary Work Agencies',
+      cvTools: 'CV Generator',
+      cvAdvice: 'Create a simple text to copy and paste into WhatsApp or job portals.',
+      smiInfo: 'Minimum Wage (SMI)',
+      inspection: 'Labor Inspection',
+      faqLawyer: 'Legal Inquiries',
+      startup: 'Start up in Jaén',
+      cadeInfo: 'CADE Centers: Free support from the regional government to create your own business.',
+      autonomous: 'Self-employed Grants',
+      shelterTitle: 'Seasonal Worker Shelters'
+    },
+    work: {
+      shelterTitle: 'Shelter Network',
+      shelterNote: 'Olive harvest shelters usually open from November to February.'
+    },
     themes: {
       light: 'Via Jaen (Light)',
       dark: 'Jaenera Night',
@@ -124,6 +170,29 @@ export const translations = {
     schedulerPlaceholder: 'Ex: NIE, Médecin, Bourse...',
     whereAmI: 'Où suis-je?',
     cityAlerts: 'Alertes Jaén',
+    employment: {
+      title: 'Portail de l\'Emploi',
+      subtitle: 'Guide du travail et des droits à Jaén',
+      legalWarning: 'Travailler avec un contrat garantit vos droits et l\'accès à la santé publique.',
+      rights: 'Vos Droits',
+      rightsText: 'Même sans papiers, vous avez des droits humains fondamentaux et droit au Salaire Minimum (SMI).',
+      activeSearch: 'Recherche Active',
+      saeDesc: 'Service de l\'Emploi Andalou. Inscrivez-vous pour des offres dans toute la province.',
+      ettTitle: 'Agences d\'Intérim',
+      cvTools: 'Générateur de CV',
+      cvAdvice: 'Créez un texte simple à copier-coller dans WhatsApp ou les portails d\'emploi.',
+      smiInfo: 'Salaire Minimum (SMI)',
+      inspection: 'Inspection du Travail',
+      faqLawyer: 'Questions Juridiques',
+      startup: 'Entreprendre à Jaén',
+      cadeInfo: 'Centres CADE : Accompagnement gratuit pour créer votre propre entreprise.',
+      autonomous: 'Aides aux Auto-entrepreneurs',
+      shelterTitle: 'Hébergements pour Saisonniers'
+    },
+    work: {
+      shelterTitle: 'Réseau d\'Hébergement',
+      shelterNote: 'Les abris pour la récolte des olives ouvrent généralement de novembre à février.'
+    },
     themes: {
       light: 'Via Jaén (Clair)',
       dark: 'Nuit Jaenera',
@@ -171,6 +240,29 @@ export const translations = {
     schedulerPlaceholder: 'مثال: NIE، طبيب، منحة...',
     whereAmI: 'أين أنا؟',
     cityAlerts: 'تنبيهات جيان',
+    employment: {
+      title: 'بوابة التوظيف',
+      subtitle: 'دليل العمل والحقوق في جيان',
+      legalWarning: 'العمل بعقد يضمن حقوقك والوصول إلى الرعاية الصحية العامة.',
+      rights: 'حقوقك',
+      rightsText: 'حتى بدون أوراق، لديك حقوق الإنسان الأساسية والحق في الحد الأدنى للأجور (SMI).',
+      activeSearch: 'البحث النشط',
+      saeDesc: 'خدمة التوظيف الأندلسية. سجل للحصول على عروض في جميع أنحاء المقاطعة.',
+      ettTitle: 'وكالات العمل المؤقت',
+      cvTools: 'مولد السيرة الذاتية',
+      cvAdvice: 'أنشئ نصاً بسيطاً لنسخه ولصقه في واتساب أو بوابات التوظيف.',
+      smiInfo: 'الحد الأدنى للأجور (SMI)',
+      inspection: 'تفتيش العمل',
+      faqLawyer: 'الاستشارات القانونية',
+      startup: 'بدء مشروع في جيان',
+      cadeInfo: 'مراكز CADE: دعم مجاني لإنشاء شركتك الخاصة.',
+      autonomous: 'مساعدات العمل الحر',
+      shelterTitle: 'ملاجئ العمال الموسميين'
+    },
+    work: {
+      shelterTitle: 'شبكة الملاجئ',
+      shelterNote: 'تفتح ملاجئ حصاد الزيتون عادة من نوفمبر إلى فبراير.'
+    },
     themes: {
       light: 'طريق جيان (فاتح)',
       dark: 'ليل جيان',
@@ -218,6 +310,29 @@ export const translations = {
     schedulerPlaceholder: 'Наприклад: NIE, лікар, стипендія...',
     whereAmI: 'Де я?',
     cityAlerts: 'Сповіщення Хаен',
+    employment: {
+      title: 'Портал зайнятості',
+      subtitle: 'Посібник з роботи та прав у Хаені',
+      legalWarning: 'Робота за контрактом гарантує ваші права та доступ до державної медицини.',
+      rights: 'Ваші права',
+      rightsText: 'Навіть без документів ви маєте основні права людини та право на мінімальну заробітну плату (SMI).',
+      activeSearch: 'Активний пошук',
+      saeDesc: 'Андалузька служба зайнятості. Реєструйтеся на пропозиції по всій провінції.',
+      ettTitle: 'Агентства тимчасової роботи',
+      cvTools: 'Генератор резюме',
+      cvAdvice: 'Створіть простий текст для копіювання та вставки у WhatsApp або на портали вакансій.',
+      smiInfo: 'Мінімальна зарплата (SMI)',
+      inspection: 'Інспекція праці',
+      faqLawyer: 'Юридичні консультації',
+      startup: 'Бізнес у Хаені',
+      cadeInfo: 'Центри CADE: Безкоштовна підтримка для створення власної компанії.',
+      autonomous: 'Допомога самозайнятим',
+      shelterTitle: 'Притулки для сезонних працівників'
+    },
+    work: {
+      shelterTitle: 'Мережа притулків',
+      shelterNote: 'Притулки для збору оливок зазвичай працюють з листопада по лютий.'
+    },
     themes: {
       light: 'Шлях Хаен (Світла)',
       dark: 'Ніч Хаена',
