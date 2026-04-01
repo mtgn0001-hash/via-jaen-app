@@ -1,6 +1,6 @@
 /**
  * Centralización de todos los enlaces externos de la aplicación.
- * URL verificadas para evitar errores 404 en servicios de Jaén.
+ * URL normalizadas a HTTPS y verificadas para evitar errores 404 en servicios de Jaén.
  */
 export const OFFICIAL_LINKS = {
   extranjeria: {
