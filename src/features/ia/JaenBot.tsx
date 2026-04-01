@@ -69,14 +69,18 @@ export function JaenBot({ lang }: { lang: Language }) {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-    if (progress.accessibilityMode === 'accessible' || progress.easyReading) {
-      speakText(node.text);
-    }
-  }, [history, lang, node.text]);
+    // Eliminada la narración automática aquí
+  }, [history]);
 
   const speakText = (text: string) => {
     if (!('speechSynthesis' in window)) return;
     
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
     window.speechSynthesis.cancel();
     setIsSpeaking(true);
     
@@ -86,6 +90,7 @@ export function JaenBot({ lang }: { lang: Language }) {
     };
     
     utterance.lang = langMap[lang] || 'es-ES';
+    utterance.rate = progress.speechRate || 0.9;
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
     
@@ -139,7 +144,7 @@ export function JaenBot({ lang }: { lang: Language }) {
                      <Bot className="h-3 w-3 text-primary" />
                    </div>
                    <div className={cn(
-                     "bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-black text-foreground border-2",
+                     "bg-card p-4 rounded-2xl rounded-tl-none shadow-sm text-sm font-black text-foreground border-2 transition-all",
                      isLast && isSpeaking && "speech-highlight"
                    )}>
                       {tree[id]?.text || t.botWelcome}

@@ -85,12 +85,7 @@ export function ScannerSection() {
       setResult(aiResult);
       setCurrentStep(0);
       
-      // Auto-narración inicial si es modo accesible
-      if (isAccessible && 'speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(`He detectado un ${aiResult.docType}. ${aiResult.summary}`);
-        utterance.lang = lang === 'ar' ? 'ar-SA' : 'es-ES';
-        window.speechSynthesis.speak(utterance);
-      }
+      // Eliminada la auto-narración inicial aquí por petición del usuario
     } catch (error) {
       toast({
         variant: "destructive",
