@@ -38,7 +38,13 @@ export const OFFICIAL_LINKS = {
     platea: "https://platea.ujaen.es/",
     notas: "https://www.ujaen.es/servicios/iuja/",
     bonificacion99: "https://www.juntadeandalucia.es/organismos/universidadinvestigacioneinnovacion/areas/universidad/bonificacion-99.html",
-    erasmus: "https://www.ujaen.es/internacional/movilidad/erasmus-estudios-salientes"
+    erasmus: "https://www.ujaen.es/internacional/movilidad/erasmus-estudios-salientes",
+    buddyProgram: "https://www.ujaen.es/internacional/movilidad/buddy-program",
+    cealm: "https://www.ujaen.es/servicios/cealm/",
+    safyd: "https://www.ujaen.es/servicios/safyd/",
+    comedores: "https://www.ujaen.es/servicios/vicest/servicios/comedores-universitarios",
+    biblioteca: "https://biblioteca.ujaen.es/",
+    alojamiento: "https://www.ujaen.es/servicios/vicest/servicios/alojamiento"
   },
   salud: {
     clicSalud: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/",
@@ -47,7 +53,9 @@ export const OFFICIAL_LINKS = {
     farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/",
     tse: "https://sede.seg-social.gob.es/wps/portal/sede/sede/Ciudadanos/Asistencia+Sanitaria/01asistencia+sanitaria",
     reintegroOrtoprotesico: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/reintegro-de-gastos-ortoprotésicos",
-    ayudaDesplazamiento: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/ayudas-por-desplazamiento"
+    ayudaDesplazamiento: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/ayudas-por-desplazamiento",
+    urgenciasBulevar: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-bulevar",
+    urgenciasFelipeArche: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-felipe-arche"
   },
   juntaAndalucia: {
     escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion",
