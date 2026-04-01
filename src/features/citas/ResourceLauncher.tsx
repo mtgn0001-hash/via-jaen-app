@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Play, Loader2, Info } from "lucide-react";
 import { SpeechButton } from "@/components/ui/SpeechButton";
+import { useLocalStorage } from "@/lib/store";
 
 type ResourceLauncherProps = {
   title: string;
@@ -35,21 +36,30 @@ export function ResourceLauncher({
 }: ResourceLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const { progress } = useLocalStorage();
+  const isAccessible = progress.accessibilityMode === 'accessible';
 
   const handleLaunch = () => {
     setIsRedirecting(true);
     
-    // Anuncio para lectores de pantalla antes de redirigir
-    const announcement = `Abriendo sitio web externo oficial en una ventana nueva. Redirigiendo a ${url}`;
-    const utterance = new SpeechSynthesisUtterance(announcement);
-    utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
-    window.speechSynthesis.speak(utterance);
+    // Solo anunciar la salida si está en modo accesible
+    if (isAccessible && 'speechSynthesis' in window) {
+      const announcement = lang === 'es' 
+        ? `Abriendo sitio web oficial. Redirigiendo a ${title}`
+        : `Opening official website. Redirecting to ${title}`;
+      
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(announcement);
+      utterance.lang = lang === 'es' ? 'es-ES' : 'en-US';
+      utterance.rate = progress.speechRate || 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
 
     setTimeout(() => {
       window.open(url, '_blank');
       setIsOpen(false);
       setIsRedirecting(false);
-    }, 1500);
+    }, isAccessible ? 1500 : 500); // Menos espera si no hay audio
   };
 
   const getVariantStyles = () => {
