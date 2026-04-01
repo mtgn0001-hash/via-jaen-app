@@ -42,6 +42,8 @@ export const OFFICIAL_LINKS = {
   },
   salud: {
     clicSalud: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/",
+    saludResponde: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/saludresponde/",
+    saludRespondeTelefono: "955545060",
     farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/",
     tse: "https://sede.seg-social.gob.es/wps/portal/sede/sede/Ciudadanos/Asistencia+Sanitaria/01asistencia+sanitaria",
     reintegroOrtoprotesico: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/reintegro-de-gastos-ortoprotésicos",

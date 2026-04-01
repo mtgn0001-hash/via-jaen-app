@@ -9,32 +9,24 @@ import {
   HeartPulse,
   Navigation,
   Phone,
-  Heart
+  Heart,
+  Calendar,
+  FolderHeart,
+  Camera,
+  Search,
+  Stethoscope,
+  Info
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocalStorage } from "@/lib/store";
+import { ScannerSection } from "@/features/tramites/ScannerSection";
 
 export function HealthHub({ lang }: { lang: string }) {
   const { progress } = useLocalStorage();
   const isAccessible = progress.accessibilityMode === 'accessible';
-
-  const suapCenters = [
-    { 
-      name: "SUAP BULEVAR (URGENCIAS)", 
-      address: "C.S. LAS FUENTEZUELAS, JAÉN",
-      phone: "953 31 15 30",
-      map: "Urgencias Bulevar Jaén"
-    },
-    { 
-      name: "SUAP FELIPE ARCHE (URGENCIAS)", 
-      address: "C.S. SAN FELIPE, JAÉN",
-      phone: "953 31 15 00",
-      map: "Centro de Salud San Felipe Jaén"
-    }
-  ];
 
   const handleCall = (number: string) => {
     if ('vibrate' in navigator) navigator.vibrate(number === '112' ? [200, 50, 200, 50, 200] : 100);
@@ -49,70 +41,155 @@ export function HealthHub({ lang }: { lang: string }) {
     <div className={cn("space-y-10 animate-in slide-in-from-bottom-2 duration-500", isAccessible && "space-y-16")}>
       <div className="flex justify-between items-center px-2">
         <div className="space-y-1">
-          <h3 className={cn("text-3xl font-black text-[#1A1A1B] uppercase tracking-tighter", isAccessible && "text-5xl")}>SALUD Y URGENCIAS</h3>
-          <p className="text-[12px] text-[#1A1A1B] font-black uppercase tracking-widest">INFORMACIÓN CRÍTICA 24H EN JAÉN</p>
+          <h3 className={cn("text-3xl font-black text-slate-900 uppercase tracking-tighter", isAccessible && "text-5xl")}>Salud Jaén</h3>
+          <p className="text-[12px] text-muted-foreground font-black uppercase tracking-widest">Servicios Oficiales Junta de Andalucía</p>
         </div>
         <SpeechButton 
-          text="Sección Salud y Urgencias. Aquí encontrarás el botón de emergencias 112, hospitales principales y centros de urgencia en Jaén. Puedes llamar directamente o ver la ruta en el mapa." 
+          text="Portal de Salud Jaén. Pulsa el primer botón para pedir cita médica en Salud Responde o el segundo para ver tus análisis en ClicSalud. Recuerda que para urgencias graves debes llamar al 112 o acudir al Hospital General." 
           language={lang} 
           size={isAccessible ? "lg" : "icon"}
         />
       </div>
 
-      {/* 1. BOTÓN DE PÁNICO 112 CON PULSO VITAL */}
-      <div className="relative group">
-        <Button 
-          onClick={() => handleCall("112")}
-          className={cn(
-            "w-full h-36 rounded-[2rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all relative overflow-hidden animate-emergency-pulse",
-            isAccessible && "h-56 rounded-none border-8"
-          )}
-          aria-label="Botón de emergencia: Llamar al 112 ahora mismo"
-        >
-          <ShieldAlert className={cn("h-14 w-14 text-white", isAccessible && "h-24 w-24")} />
-          <span className={cn("text-4xl font-black uppercase tracking-tighter text-shadow-strong", isAccessible && "text-6xl")}>LLAMAR AL 112</span>
-          <span className={cn("text-[14px] font-black", isAccessible && "text-2xl")}>EMERGENCIAS ANDALUCÍA</span>
-        </Button>
-      </div>
+      {/* 1. BOTÓN DE PÁNICO 112 */}
+      <Button 
+        onClick={() => handleCall("112")}
+        className={cn(
+          "w-full h-32 rounded-[2.5rem] bg-destructive text-white border-4 border-white shadow-2xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-all animate-emergency-pulse",
+          isAccessible && "h-48 rounded-none border-8"
+        )}
+        aria-label="Llamar al 112 ahora mismo"
+      >
+        <ShieldAlert className={cn("h-12 w-12 text-white", isAccessible && "h-20 w-24")} />
+        <span className={cn("text-3xl font-black uppercase tracking-tighter", isAccessible && "text-5xl")}>S.O.S 112</span>
+        <span className={cn("text-[12px] font-bold opacity-90", isAccessible && "text-xl")}>EMERGENCIAS 24H</span>
+      </Button>
 
-      {/* 2. HOSPITALES PRINCIPALES */}
+      {/* 2. GESTIÓN OFICIAL (SALUD RESPONDE & CLICSALUD) */}
       <section className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h4 className="text-[14px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-            <Heart className="h-5 w-5 text-red-600 fill-red-600" /> HOSPITALES UNIVERSITARIOS
+        <div className="flex justify-between items-center px-2">
+          <h4 className={cn("text-[14px] font-black uppercase text-slate-900 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
+            <Calendar className="h-5 w-5 text-primary" /> Citas y Gestión
           </h4>
-          <SpeechButton text="Hospital Universitario de Jaén y Hospital Médico-Quirúrgico. Ambos cuentan con servicios de urgencias resaltados." language={lang} />
+          <SpeechButton text="Gestión de citas médicas. Salud Responde para pedir hora y ClicSalud para tus informes médicos." language={lang} />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4">
+          {/* SALUD RESPONDE */}
+          <Card className={cn("border-none bg-primary shadow-xl rounded-[2.5rem] overflow-hidden relative group animate-emergency-pulse", isAccessible && "rounded-none border-4 border-primary")}>
+            <div className="absolute top-0 right-0 p-6 opacity-10">
+               <Phone className="h-24 w-24 text-white" />
+            </div>
+            <CardContent className="p-8 space-y-6 relative z-10">
+              <div className="space-y-1">
+                <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Salud Responde</h5>
+                <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Citas Médicas y Enfermería</p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Button 
+                  onClick={() => window.open(OFFICIAL_LINKS.salud.saludResponde, '_blank')}
+                  className="h-16 rounded-2xl bg-white text-primary hover:bg-white/90 font-black text-sm uppercase tracking-tight flex justify-between px-6 shadow-lg active:scale-95 transition-all"
+                >
+                  <span>Pedir Cita Online</span>
+                  <Calendar className="h-5 w-5" />
+                </Button>
+                <Button 
+                  onClick={() => handleCall(OFFICIAL_LINKS.salud.saludRespondeTelefono)}
+                  className="h-16 rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-md font-black text-sm uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
+                >
+                  <span>Llamar: 955 54 50 60</span>
+                  <Phone className="h-5 w-5" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* CLICSALUD+ */}
+          <Card className={cn("border-none bg-slate-900 shadow-xl rounded-[2.5rem] overflow-hidden relative", isAccessible && "rounded-none border-4 border-black")}>
+            <div className="absolute top-0 right-0 p-6 opacity-10">
+               <FolderHeart className="h-24 w-24 text-white" />
+            </div>
+            <CardContent className="p-8 space-y-6 relative z-10">
+              <div className="space-y-1">
+                <h5 className="text-white text-2xl font-black uppercase tracking-tighter">ClicSalud+</h5>
+                <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Informes, Vacunas y Pruebas</p>
+              </div>
+              <Button 
+                onClick={() => window.open(OFFICIAL_LINKS.salud.clicSalud, '_blank')}
+                className="w-full h-16 rounded-2xl bg-white text-slate-900 hover:bg-white/90 font-black text-sm uppercase tracking-tight flex justify-between px-6 shadow-lg active:scale-95 transition-all"
+              >
+                <span>Mi Carpeta de Salud</span>
+                <FolderHeart className="h-5 w-5" />
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* 3. ESCÁNER DE TARJETA SANITARIA */}
+      <section className="space-y-4">
+        <div className="flex justify-between items-center px-2">
+          <h4 className={cn("text-[14px] font-black uppercase text-slate-900 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
+            <Camera className="h-5 w-5 text-indigo-600" /> Escanear Tarjeta
+          </h4>
+          <SpeechButton text="Usa la cámara para leer tu tarjeta sanitaria. La IA detectará tu número NUHSA para que lo tengas a mano." language={lang} />
+        </div>
+        <Card className="border-4 border-dashed border-indigo-200 bg-indigo-50/50 rounded-[2.5rem] p-2">
+           <ScannerSection />
+        </Card>
+      </section>
+
+      {/* 4. HOSPITALES DE JAÉN */}
+      <section className="space-y-6">
+        <div className="flex justify-between items-center px-2">
+          <h4 className={cn("text-[14px] font-black uppercase text-slate-900 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
+            <Stethoscope className="h-5 w-5 text-red-600" /> Hospitales en Jaén
+          </h4>
+          <SpeechButton text="Centros hospitalarios principales en la capital. Hospital Universitario y Neurotraumatológico." language={lang} />
         </div>
         
         <div className="grid grid-cols-1 gap-6">
           {[
-            { name: "HOSP. UNIVERSITARIO", loc: "AV. DE MADRID, JAÉN", tel: "953 00 80 00", badge: "URGENCIAS 24H", query: "Hospital Universitario de Jaén Av. de Madrid" },
-            { name: "HOSP. MÉDICO-QUIRÚRGICO", loc: "CARRETERA DE MADRID, JAÉN", tel: "953 00 80 00", badge: "TRAUMA / REHAB", query: "Hospital Neurotraumatológico Jaén Carretera de Madrid" }
+            { 
+              name: "Hospital Universitario", 
+              loc: "Av. de Madrid, Jaén", 
+              tel: "953 00 80 00", 
+              badge: "General / Urgencias", 
+              query: "Hospital Universitario de Jaén Av. de Madrid" 
+            },
+            { 
+              name: "Hosp. Neurotraumatológico", 
+              loc: "Carretera de Madrid, Jaén", 
+              tel: "953 00 80 00", 
+              badge: "Trauma / Rehabilitación", 
+              query: "Hospital Neurotraumatológico Jaén Carretera de Madrid" 
+            }
           ].map((hosp) => (
-            <Card key={hosp.name} className={cn("border-none bg-white shadow-xl rounded-[2.5rem] overflow-hidden border-2 border-slate-200", isAccessible && "rounded-none border-4")}>
+            <Card key={hosp.name} className={cn("border-none bg-white shadow-xl rounded-[2.5rem] border-2 border-slate-100", isAccessible && "rounded-none border-4 border-black")}>
               <CardContent className="p-8 space-y-6">
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <h4 className={cn("text-3xl font-black text-[#1A1A1B] uppercase leading-tight", isAccessible && "text-5xl")}>{hosp.name}</h4>
-                    <p className={cn("text-md font-bold text-[#1A1A1B] flex items-center gap-1", isAccessible && "text-2xl mt-4")}>
+                    <h4 className={cn("text-2xl font-black text-slate-900 uppercase tracking-tighter", isAccessible && "text-4xl")}>{hosp.name}</h4>
+                    <p className={cn("text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase", isAccessible && "text-xl mt-2")}>
                       <MapPin className="h-4 w-4 text-red-600" /> {hosp.loc}
                     </p>
                   </div>
-                  <Badge className="bg-red-600 text-white font-black text-[10px] px-4 py-2 animate-emergency-pulse">{hosp.badge}</Badge>
+                  <Badge className="bg-red-50 text-red-600 border-red-100 font-black text-[10px] px-3 py-1">{hosp.badge}</Badge>
                 </div>
-                <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", isAccessible && "grid-cols-1 gap-6")}>
+                <div className="grid grid-cols-2 gap-3">
                   <Button 
                     onClick={() => handleCall(hosp.tel)}
                     variant="outline"
-                    className={cn("h-16 rounded-2xl border-2 border-slate-900 text-[#1A1A1B] font-black gap-2 text-xl", isAccessible && "h-24 text-3xl")}
+                    className="h-14 rounded-xl border-2 border-slate-200 text-slate-900 font-black gap-2 text-xs uppercase"
                   >
-                    <Phone className={cn("h-6 w-6", isAccessible && "h-10 w-10")} /> LLAMAR
+                    <Phone className="h-4 w-4" /> Llamar
                   </Button>
                   <Button 
                     onClick={() => handleNavigate(hosp.query)}
-                    className={cn("h-16 rounded-2xl font-black gap-3 shadow-lg text-xl", isAccessible && "h-24 text-3xl")}
+                    className="h-14 rounded-xl font-black gap-2 shadow-md text-xs uppercase"
                   >
-                    <Navigation className={cn("h-6 w-6", isAccessible && "h-10 w-10")} /> NAVEGAR
+                    <Navigation className="h-4 w-4" /> Cómo llegar
                   </Button>
                 </div>
               </CardContent>
@@ -121,59 +198,13 @@ export function HealthHub({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* 3. URGENCIAS ATENCIÓN PRIMARIA (SUAP) */}
-      <section className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h4 className="text-[14px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-            <ShieldAlert className="h-5 w-5 text-red-600" /> URGENCIAS PRIMARIA (SUAP)
-          </h4>
-          <SpeechButton text="Centros de Urgencias de Atención Primaria en Bulevar y Felipe Arche." language={lang} />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {suapCenters.map(center => (
-            <Card key={center.name} className={cn("border-none bg-white border-2 border-slate-200 rounded-[2.5rem] overflow-hidden shadow-lg", isAccessible && "rounded-none border-4")}>
-              <CardContent className="p-8 space-y-6">
-                <h5 className={cn("font-black text-2xl text-[#1A1A1B] uppercase leading-tight", isAccessible && "text-4xl")}>{center.name}</h5>
-                <p className="text-[12px] font-bold text-[#1A1A1B] leading-tight uppercase opacity-70">
-                  {center.address}
-                </p>
-                <div className="flex flex-col gap-3">
-                  <Button 
-                    onClick={() => handleCall(center.phone)}
-                    variant="outline"
-                    className={cn("w-full bg-slate-50 text-[#1A1A1B] border-2 border-slate-900 rounded-2xl font-black h-16 text-xl", isAccessible && "h-24 text-3xl")}
-                  >
-                    TEL: {center.phone}
-                  </Button>
-                  <Button 
-                    onClick={() => handleNavigate(center.map)}
-                    className={cn("w-full rounded-2xl font-black h-16 text-xl gap-2 shadow-md", isAccessible && "h-24 text-3xl")}
-                  >
-                    <Navigation className="h-5 w-5" /> VER MAPA
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. GESTIÓN DE CITAS */}
-      <section className="space-y-4">
-        <h4 className="text-[14px] font-black uppercase text-[#1A1A1B] tracking-widest ml-4 flex items-center gap-2">
-          <HeartPulse className="h-5 w-5 text-red-600" /> CITAS Y PRESTACIONES SAS
-        </h4>
-        <div className="grid grid-cols-1 gap-4">
-          <ResourceLauncher 
-            title="CITA MÉDICA - CLICSALUD+"
-            description="Solicita cita con tu médico de cabecera en Jaén a través del portal oficial del SAS."
-            url={OFFICIAL_LINKS.salud.clicSalud}
-            triggerLabel="PEDIR CITA ONLINE"
-            variant="primary"
-            lang={lang}
-          />
-        </div>
-      </section>
+      {/* FOOTER RECORDATORIO */}
+      <div className="bg-amber-50 p-8 rounded-[3rem] border-2 border-amber-100 flex gap-4 items-center shadow-inner mx-2">
+        <Info className="h-10 w-10 text-amber-600 shrink-0" />
+        <p className="text-[12px] text-amber-900 font-black leading-tight uppercase">
+          Si es una urgencia vital o accidente grave en Jaén, acude directamente al Hospital General o llama al 112. Tu salud es lo primero.
+        </p>
+      </div>
     </div>
   );
 }
