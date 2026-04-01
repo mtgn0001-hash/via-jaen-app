@@ -13,6 +13,7 @@ import { FirebaseClientProvider } from "@/firebase";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { BackFAB } from "@/components/layout/BackFAB";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
+import { Toaster } from "@/components/ui/toaster";
 
 // Features
 import { ManagementTIENIE } from "@/features/extranjeria/ManagementTIENIE";
@@ -125,6 +126,7 @@ export default function Home() {
         <BottomNav activeTab={activeTab} setActiveTab={handleTabChange} />
         <BackFAB activeTab={activeTab} setActiveTab={handleTabChange} />
         <EmergencyFAB lang={lang} />
+        <Toaster />
       </div>
     </FirebaseClientProvider>
   );

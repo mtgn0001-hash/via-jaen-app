@@ -48,10 +48,17 @@ export function UjaHub({ lang }: { lang: string }) {
   };
 
   const handleWhereAmI = () => {
+    if ('vibrate' in navigator) navigator.vibrate(50);
+    
     toast({
       title: "Campus Las Lagunillas",
-      description: "Estás en Jaén Capital. La Biblioteca está en el centro del campus.",
+      description: "Estás en Jaén Capital. Abriendo el mapa del campus para orientarte...",
     });
+
+    // Abrir Google Maps directamente en el Campus de las Lagunillas
+    setTimeout(() => {
+      window.open("https://www.google.com/maps/search/?api=1&query=Universidad+de+Jaen+Campus+Las+Lagunillas", "_blank");
+    }, 1000);
   };
 
   const DirectLinkButton = ({ url, label, variant = "default" }: { url: string, label: string, variant?: any }) => (
