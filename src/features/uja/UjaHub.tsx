@@ -1,7 +1,6 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
 import { 
   GraduationCap, 
   Bus, 
@@ -17,7 +16,9 @@ import {
   Stethoscope,
   Info,
   ShieldCheck,
-  FileCheck
+  FileCheck,
+  ExternalLink,
+  ChevronRight
 } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -30,6 +31,10 @@ export function UjaHub({ lang }: { lang: string }) {
   const { progress } = useLocalStorage();
   const isAccessible = progress.accessibilityMode === 'accessible';
 
+  const handleDirectAccess = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <div className={cn("space-y-10 animate-in slide-in-from-bottom-2 duration-500 pb-20", isAccessible && "space-y-16")}>
       {/* HEADER DINÁMICO */}
@@ -39,7 +44,7 @@ export function UjaHub({ lang }: { lang: string }) {
           <p className="text-[12px] text-muted-foreground font-black uppercase tracking-widest">Portal del Estudiante • Las Lagunillas</p>
         </div>
         <SpeechButton 
-          text="Portal del Estudiante Vida UJA. Aquí encontrarás todo lo necesario para tu día a día en la Universidad de Jaén. Desde automatrícula y becas hasta servicios específicos para estudiantes internacionales, Erasmus, comedores y transporte." 
+          text="Portal del Estudiante Vida UJA. Aquí encontrarás todo lo necesario para tu día a día en la Universidad de Jaén. Accede directamente a la automatrícula, becas, servicios internacionales, comedores y transporte." 
           language={lang} 
           size={isAccessible ? "lg" : "icon"}
         />
@@ -51,7 +56,7 @@ export function UjaHub({ lang }: { lang: string }) {
           <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
             <BookOpen className="h-5 w-5" /> Trámites Académicos
           </h4>
-          <SpeechButton text="Trámites académicos. Aquí puedes acceder a la automatrícula, consultar tus notas y gestionar las becas MEC o de la propia universidad." language={lang} />
+          <SpeechButton text="Trámites académicos directos: Matrícula y Becas." language={lang} />
         </div>
         
         <div className="grid grid-cols-1 gap-4">
@@ -62,16 +67,15 @@ export function UjaHub({ lang }: { lang: string }) {
             <CardContent className="p-8 space-y-6 relative z-10">
               <div className="space-y-1">
                 <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Automatrícula y Grados</h5>
-                <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Acceso Oficial UJA</p>
+                <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Acceso Directo UJA</p>
               </div>
-              <ResourceLauncher 
-                title="Automatrícula"
-                description="Portal oficial para grados y másteres. Consulta los plazos de inscripción según tu curso."
-                url={OFFICIAL_LINKS.uja.matricula}
-                triggerLabel="ACCEDER A MATRÍCULA"
-                variant="white"
-                lang={lang}
-              />
+              <Button 
+                onClick={() => handleDirectAccess(OFFICIAL_LINKS.uja.matricula)}
+                className="w-full h-16 rounded-2xl bg-white text-indigo-600 hover:bg-white/90 font-black text-sm uppercase tracking-tight flex justify-between px-6 shadow-xl active:scale-95 transition-all"
+              >
+                <span>ACCEDER A MATRÍCULA</span>
+                <ChevronRight className="h-5 w-5" />
+              </Button>
             </CardContent>
           </Card>
 
@@ -82,16 +86,12 @@ export function UjaHub({ lang }: { lang: string }) {
                   <h5 className="font-black text-sm uppercase text-slate-900">Becas y Ayudas</h5>
                   <Award className="h-5 w-5 text-indigo-600" />
                 </div>
-                <div className="grid gap-2">
-                  <ResourceLauncher 
-                    title="Beca MEC / Junta"
-                    description="Ayudas generales del Ministerio y la Junta de Andalucía (incluida la bonificación del 99%)."
-                    url={OFFICIAL_LINKS.uja.becas}
-                    triggerLabel="VER BECAS"
-                    variant="primary"
-                    lang={lang}
-                  />
-                </div>
+                <Button 
+                  onClick={() => handleDirectAccess(OFFICIAL_LINKS.uja.becas)}
+                  className="w-full h-12 rounded-xl text-xs font-black bg-indigo-50 text-indigo-600 hover:bg-indigo-100"
+                >
+                  VER BECAS OFICIALES
+                </Button>
               </CardContent>
             </Card>
 
@@ -101,7 +101,7 @@ export function UjaHub({ lang }: { lang: string }) {
                   <h5 className="font-black text-sm uppercase text-slate-900">Carné Digital</h5>
                   <Smartphone className="h-5 w-5 text-indigo-600" />
                 </div>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase leading-tight">Descarga la App de la UJA para tener tu carné universitario en el móvil.</p>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase leading-tight">Tu carné universitario en el móvil.</p>
                 <Button className="w-full h-12 rounded-xl text-xs font-black" onClick={() => window.open('https://www.ujaen.es/servicios/tic/servicios/app-uja', '_blank')}>
                   CONSEGUIR APP UJA
                 </Button>
@@ -117,7 +117,7 @@ export function UjaHub({ lang }: { lang: string }) {
           <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
             <Globe className="h-5 w-5" /> Erasmus e Internacional
           </h4>
-          <SpeechButton text="Sección internacional. Información para estudiantes extranjeros: Buddy Program, oficina de relaciones internacionales en el Edificio C2 y cursos de español." language={lang} />
+          <SpeechButton text="Sección internacional: Buddy Program y Cursos de Español." language={lang} />
         </div>
 
         <Card className={cn("border-none bg-slate-900 shadow-xl rounded-[2.5rem] overflow-hidden relative", isAccessible && "rounded-none border-4 border-black")}>
@@ -127,28 +127,24 @@ export function UjaHub({ lang }: { lang: string }) {
                 <Users className="h-8 w-8 text-white" />
               </div>
               <div className="space-y-1">
-                <h5 className="text-white text-xl font-black uppercase tracking-tighter">Buddy Program</h5>
-                <p className="text-white/60 text-[11px] font-medium leading-relaxed">¿Eres nuevo en Jaén? Conecta con un estudiante local para que te ayude con el idioma y la vida en la ciudad.</p>
+                <h5 className="text-white text-xl font-black uppercase tracking-tighter">Conecta con la UJA</h5>
+                <p className="text-white/60 text-[11px] font-medium leading-relaxed">Servicios directos para estudiantes desplazados.</p>
               </div>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <ResourceLauncher 
-                title=" Buddy Program"
-                description="Inscríbete para que te asignen un compañero que te oriente en tus primeras semanas."
-                url={OFFICIAL_LINKS.uja.buddyProgram}
-                triggerLabel="QUIERO UN BUDDY"
-                variant="white"
-                lang={lang}
-              />
-              <ResourceLauncher 
-                title="Cursos de Español"
-                description="Centro de Estudios Avanzados en Lenguas Modernas (CEALM). Clases para todos los niveles."
-                url={OFFICIAL_LINKS.uja.cealm}
-                triggerLabel="CURSOS CEALM"
-                variant="white"
-                lang={lang}
-              />
+              <Button 
+                onClick={() => handleDirectAccess(OFFICIAL_LINKS.uja.buddyProgram)}
+                className="h-14 rounded-xl bg-white text-slate-900 hover:bg-white/90 font-black text-xs uppercase"
+              >
+                QUIERO UN BUDDY
+              </Button>
+              <Button 
+                onClick={() => handleDirectAccess(OFFICIAL_LINKS.uja.cealm)}
+                className="h-14 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 font-black text-xs uppercase"
+              >
+                CURSOS ESPAÑOL
+              </Button>
             </div>
 
             <div className="bg-white/10 p-6 rounded-3xl border border-white/20">
@@ -156,7 +152,7 @@ export function UjaHub({ lang }: { lang: string }) {
                   <MapPin className="h-5 w-5 text-indigo-400" />
                   <span className="text-white font-black text-xs uppercase tracking-widest">Edificio C2 - Campus Las Lagunillas</span>
                </div>
-               <p className="text-white/80 text-[11px] font-bold uppercase">Oficina de Relaciones Internacionales: Tu punto de referencia físico en el campus para cualquier duda legal o de movilidad.</p>
+               <p className="text-white/80 text-[11px] font-bold uppercase">Relaciones Internacionales: Tu punto de referencia físico en el campus.</p>
             </div>
           </CardContent>
         </Card>
@@ -168,7 +164,7 @@ export function UjaHub({ lang }: { lang: string }) {
           <h4 className={cn("text-[14px] font-black uppercase text-indigo-800 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
             <Zap className="h-5 w-5 text-yellow-500" /> Asistente de Matrícula IA
           </h4>
-          <SpeechButton text="Usa el asistente visual para leer tu resguardo de matrícula. La IA extraerá automáticamente tus fechas de exámenes y plazos de pago." language={lang} />
+          <SpeechButton text="Escanea tu resguardo de matrícula para ver tus fechas." language={lang} />
         </div>
         <Card className="border-4 border-dashed border-indigo-200 bg-indigo-50/50 rounded-[3rem] p-2">
            <ScannerSection />
@@ -181,7 +177,7 @@ export function UjaHub({ lang }: { lang: string }) {
           <h4 className={cn("text-[14px] font-black uppercase text-slate-900 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
             <Utensils className="h-5 w-5 text-primary" /> Servicios de Campus
           </h4>
-          <SpeechButton text="Servicios del campus. Consulta el menú del día en los comedores, reserva pistas de deporte en el SAFYD o mira los horarios de los autobuses." language={lang} />
+          <SpeechButton text="Comedores, Deportes y Autobuses." language={lang} />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -231,15 +227,13 @@ export function UjaHub({ lang }: { lang: string }) {
           </h4>
           <Card className="border-none bg-indigo-50/50 rounded-3xl border border-indigo-100">
             <CardContent className="p-6 space-y-4">
-              <p className="text-[11px] font-bold text-indigo-900/70 uppercase">Residencias universitarias y portales de alquiler verificados en Jaén.</p>
-              <ResourceLauncher 
-                title="Alojamiento UJA"
-                description="Bolsa de alojamiento oficial y residencias Domingo Savio y Rector Estepa."
-                url={OFFICIAL_LINKS.uja.alojamiento}
-                triggerLabel="VER OPCIONES"
-                variant="primary"
-                lang={lang}
-              />
+              <p className="text-[11px] font-bold text-indigo-900/70 uppercase">Residencias y portales de alquiler verificados.</p>
+              <Button 
+                onClick={() => handleDirectAccess(OFFICIAL_LINKS.uja.alojamiento)}
+                className="w-full h-12 rounded-xl bg-indigo-600 text-white font-black text-xs uppercase"
+              >
+                VER ALOJAMIENTOS
+              </Button>
             </CardContent>
           </Card>
         </section>
@@ -250,9 +244,9 @@ export function UjaHub({ lang }: { lang: string }) {
           </h4>
           <Card className="border-none bg-red-50/50 rounded-3xl border border-red-100">
             <CardContent className="p-6 space-y-4">
-              <p className="text-[11px] font-bold text-red-900/70 uppercase">El Centro de Salud más cercano es "Las Lagunillas". Recuerda traer tu tarjeta sanitaria.</p>
-              <Button className="w-full h-14 rounded-xl bg-red-600 text-white font-black text-xs gap-2" onClick={() => window.open('tel:955545060')}>
-                SALUD RESPONDE: CITAS
+              <p className="text-[11px] font-bold text-red-900/70 uppercase">Centro de Salud Las Lagunillas cerca del campus.</p>
+              <Button className="w-full h-12 rounded-xl bg-red-600 text-white font-black text-xs uppercase" onClick={() => window.open('tel:955545060')}>
+                PEDIR CITA SAS
               </Button>
             </CardContent>
           </Card>
@@ -267,7 +261,7 @@ export function UjaHub({ lang }: { lang: string }) {
             CONSEJO UJA: No dejes la beca para el último día.
           </p>
           <p className="text-[10px] text-indigo-800/70 font-bold uppercase">
-            Si tienes dudas con tu matrícula internacional, el Edificio C2 atiende de 9:00 a 14:00.
+            Atención internacional: Edificio C2 de 9:00 a 14:00.
           </p>
         </div>
       </div>
