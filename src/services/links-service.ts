@@ -1,6 +1,6 @@
 /**
  * Centralización de todos los enlaces externos de la aplicación.
- * Facilita la actualización de sedes electrónicas si cambian sus rutas.
+ * URL verificadas para evitar errores 404 en servicios de Jaén.
  */
 export const OFFICIAL_LINKS = {
   extranjeria: {
@@ -52,8 +52,6 @@ export const OFFICIAL_LINKS = {
     saludRespondeTelefono: "955545060",
     farmaciasGuardia: "https://www.cofjaen.com/farmacias-de-guardia/",
     tse: "https://sede.seg-social.gob.es/wps/portal/sede/sede/Ciudadanos/Asistencia+Sanitaria/01asistencia+sanitaria",
-    reintegroOrtoprotesico: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/reintegro-de-gastos-ortoprotésicos",
-    ayudaDesplazamiento: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/prestaciones-y-ayudas/ayudas-por-desplazamiento",
     urgenciasBulevar: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-bulevar",
     urgenciasFelipeArche: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-felipe-arche"
   },
@@ -62,15 +60,12 @@ export const OFFICIAL_LINKS = {
     rmisa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/renta-minima.html",
     bonoCarestia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/bono-carestia.html",
     ayudaAlquiler: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/plan-vive.html",
-    bonoAlquilerJoven: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/fomento-alquiler/paginas/bono-alquiler-joven.html",
-    becasMec: "https://www.becaseducacion.gob.es/becas-y-ayudas.html",
-    beca6000: "https://www.juntadeandalucia.es/educacion/portals/web/becas-y-ayudas/beca-6000",
-    becaAdriano: "https://www.juntadeandalucia.es/educacion/portals/web/becas-y-ayudas/beca-adriano",
     familiaNumerosa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/familias/familia-numerosa.html",
     dependencia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/dependencia.html",
     guarderias: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion/0-a-3-anos"
   },
   transporte: {
-    horariosUja: "https://jaen.ctas.cti.es/lineas"
+    horariosUja: "https://jaen.ctas.cti.es/lineas",
+    urbanosJaen: "https://www.aytojaen.es/portal/p_20_contenedor1.jsp?codres=1&codmenu=516"
   }
 };

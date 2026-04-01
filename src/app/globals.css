@@ -63,6 +63,14 @@
     opacity: 1 !important;
   }
 
+  [data-accessibility='accessible'] a {
+    text-decoration: underline !important;
+    text-decoration-thickness: 4px !important;
+    text-underline-offset: 4px;
+    color: #FFFF00 !important;
+    background-color: #000000 !important;
+  }
+
   [data-accessibility='accessible'] .bg-primary {
     background-color: #FFFF00 !important;
     color: #000000 !important;
@@ -91,9 +99,9 @@
 }
 
 .speech-highlight {
-  background-color: rgba(255, 255, 0, 0.2) !important;
-  box-shadow: 0 0 20px rgba(255, 255, 0, 0.4) !important;
-  border: 2px solid #EAB308 !important;
+  background-color: rgba(255, 255, 0, 0.4) !important;
+  box-shadow: 0 0 25px rgba(255, 255, 0, 0.6) !important;
+  border: 3px solid #000000 !important;
   transform: scale(1.02);
   z-index: 10;
 }
