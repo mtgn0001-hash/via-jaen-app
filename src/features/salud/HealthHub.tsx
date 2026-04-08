@@ -52,7 +52,7 @@ export function HealthHub({ lang }: { lang: string }) {
           <p className="text-[12px] text-muted-foreground font-black uppercase tracking-widest">Servicios Junta de Andalucía</p>
         </div>
         <SpeechButton 
-          text="Portal de Salud Jaén. Pulsa el botón de Salud Responde para citas o ClicSalud para tu historial. En emergencias, llama al 112." 
+          text="Portal de Salud Jaén. Accede a ClicSalud para tu historial, recetas y citas. En emergencias, llama al 112." 
           language={lang} 
           size={isAccessible ? "lg" : "icon"}
         />
@@ -83,50 +83,53 @@ export function HealthHub({ lang }: { lang: string }) {
       {/* 2. GESTIÓN OFICIAL */}
       <section className="space-y-6">
         <h4 className={cn("text-[14px] font-black uppercase text-slate-900 tracking-widest flex items-center gap-2", isAccessible && "text-2xl")}>
-          <Calendar className="h-5 w-5 text-primary" /> Gestión de Citas
+          <Calendar className="h-5 w-5 text-primary" /> Gestión de Salud
         </h4>
 
         <div className="grid grid-cols-1 gap-4">
-          <Card className={cn("border-none bg-primary shadow-xl rounded-[2.5rem] overflow-hidden relative group", !isLite && "animate-emergency-pulse", isAccessible && "rounded-none border-4 border-primary")}>
+          <Card className={cn("border-none bg-primary shadow-xl rounded-[2.5rem] overflow-hidden relative group", isAccessible && "rounded-none border-4 border-primary")}>
             <div className="absolute top-0 right-0 p-6 opacity-10">
-               <Phone className="h-24 w-24 text-white" />
+               <FolderHeart className="h-24 w-24 text-white" />
             </div>
             <CardContent className="p-8 space-y-6 relative z-10">
-              <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Salud Responde</h5>
+              <div className="flex justify-between items-start">
+                <h5 className="text-white text-2xl font-black uppercase tracking-tighter">ClicSalud+</h5>
+                <Badge className="bg-white/20 text-white border-none font-black text-[10px]">RECOMENDADO</Badge>
+              </div>
               <div className="grid grid-cols-1 gap-3">
                 <ResourceLauncher 
-                  title="Cita Médica Online"
-                  description="Acceso al portal oficial del Servicio Andaluz de Salud para pedir, anular o consultar citas."
-                  url={OFFICIAL_LINKS.salud.saludResponde}
-                  triggerLabel="PEDIR CITA (WEB)"
+                  title="Acceso a ClicSalud+"
+                  description="Plataforma oficial para gestionar tus citas, consultar tu historial médico, ver vacunas y descargar tus recetas electrónicas."
+                  url={OFFICIAL_LINKS.salud.clicSalud}
+                  triggerLabel="ENTRAR A LA PLATAFORMA"
                   variant="white"
                   lang={lang}
                 />
-                <Button 
-                  onClick={() => handleCall(OFFICIAL_LINKS.salud.saludRespondeTelefono)}
-                  className="h-16 rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md font-black text-sm uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
-                >
-                  <span>LLAMAR: 955 54 50 60</span>
-                  <Phone className="h-5 w-5" />
-                </Button>
+                <div className="bg-white/10 p-4 rounded-2xl">
+                  <p className="text-[11px] text-white/90 font-bold leading-tight">
+                    TIP: Usa tu Certificado Digital o Cl@ve para ver todos tus informes médicos de Jaén.
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className={cn("border-none bg-slate-900 shadow-xl rounded-[2.5rem] overflow-hidden relative", isAccessible && "rounded-none border-4 border-black")}>
             <div className="absolute top-0 right-0 p-6 opacity-10">
-               <FolderHeart className="h-24 w-24 text-white" />
+               <Phone className="h-24 w-24 text-white" />
             </div>
             <CardContent className="p-8 space-y-6 relative z-10">
-              <h5 className="text-white text-2xl font-black uppercase tracking-tighter">ClicSalud+</h5>
-              <ResourceLauncher 
-                title="Mi Carpeta de Salud"
-                description="Consulta tus análisis de sangre, informes médicos, vacunas y recetas oficiales."
-                url={OFFICIAL_LINKS.salud.clicSalud}
-                triggerLabel="ACCEDER A MIS DATOS"
-                variant="white"
-                lang={lang}
-              />
+              <h5 className="text-white text-2xl font-black uppercase tracking-tighter">Asistencia Telefónica</h5>
+              <div className="space-y-4">
+                <p className="text-xs text-white/60 font-medium">Llama a Salud Responde para citas rápidas o dudas sanitarias.</p>
+                <Button 
+                  onClick={() => handleCall(OFFICIAL_LINKS.salud.saludRespondeTelefono)}
+                  className="w-full h-16 rounded-2xl bg-white text-slate-900 font-black text-sm uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
+                >
+                  <span>955 54 50 60</span>
+                  <Phone className="h-5 w-5" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
