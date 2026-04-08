@@ -31,19 +31,15 @@ export const OFFICIAL_LINKS = {
     informes: "https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Vida+laboral+e+informes"
   },
   uja: {
+    home: "https://www.ujaen.es/",
     acceso: "https://www.ujaen.es/estudios/acceso",
-    internacional: "https://www.ujaen.es/internacional",
     matricula: "https://www.ujaen.es/estudios/acceso/automatricula",
     becas: "https://www.ujaen.es/servicios/vicest/becas",
-    platea: "https://platea.ujaen.es/",
-    notas: "https://www.ujaen.es/estudios/acceso",
-    bonificacion99: "https://www.juntadeandalucia.es/organismos/universidadinvestigacioneinnovacion/areas/universidad/bonificacion-99.html",
-    erasmus: "https://www.ujaen.es/internacional/movilidad/erasmus-estudios-salientes",
+    calendario: "https://www.ujaen.es/estudios/calendario-academico",
+    internacional: "https://www.ujaen.es/internacional",
     buddyProgram: "https://www.ujaen.es/internacional/movilidad/buddy-program",
     cealm: "https://www.ujaen.es/servicios/cealm/",
-    safyd: "https://www.ujaen.es/servicios/safyd",
     comedores: "https://www.ujaen.es/servicios/vicest/servicios/comedores-universitarios",
-    biblioteca: "https://biblioteca.ujaen.es/",
     alojamiento: "https://www.ujaen.es/servicios/vicest/servicios/alojamiento"
   },
   salud: {
