@@ -56,7 +56,7 @@ export const OFFICIAL_LINKS = {
     urgenciasFelipeArche: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/centros/centro-de-salud-jaen-felipe-arche"
   },
   juntaAndalucia: {
-    escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/ced/dua",
+    escolarizacion: "https://www.juntadeandalucia.es/educacion/portals/web/escolarizacion",
     rmisa: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/renta-minima.html",
     bonoCarestia: "https://www.juntadeandalucia.es/organismos/inclusionsocialjuventudfamiliaseigualdad/areas/inclusion/bono-carestia.html",
     ayudaAlquiler: "https://www.juntadeandalucia.es/organismos/fomentoarticulaciondelterritorioyvivienda/areas/vivienda-rehabilitacion/plan-vive.html",
