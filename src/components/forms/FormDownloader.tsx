@@ -1,10 +1,10 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Download, ExternalLink, FileText, AlertCircle, Zap } from "lucide-react";
+import { OFFICIAL_LINKS } from "@/services/links-service";
 
 type FormDownloaderProps = {
   lang: Language;
@@ -16,9 +16,9 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
   const forms = [
     {
       title: 'Modelo EX-15',
-      desc: 'Solicitud de NIE y Certificados (Imprescindible para Jaén)',
-      url: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
-      backupUrl: 'https://www.inclusion.gob.es/web/migraciones/modelos-de-solicitud',
+      desc: 'Acceso al Ministerio para NIE y Certificados (Jaén)',
+      url: OFFICIAL_LINKS.extranjeria.ex15,
+      backupUrl: OFFICIAL_LINKS.extranjeria.modelosGeneral,
       type: 'Sede'
     },
     {
@@ -30,16 +30,16 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
     {
       title: 'Modelo EX-10',
       desc: 'Solicitud de Arraigo (Circunstancias Excepcionales)',
-      url: 'https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html',
+      url: OFFICIAL_LINKS.extranjeria.modelosGeneral,
       type: 'Sede'
     }
   ];
 
   const externalLinks = [
-    { name: 'Cita Previa Extranjería', url: 'https://icp.administracionelectronica.gob.es/icpco/index.html' },
-    { name: 'Ayuntamiento de Jaén (Padrón)', url: 'https://sede.aytojaen.es/' },
-    { name: 'ClicSalud+ (Tarjeta Sanitaria SAS)', url: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/' },
-    { name: 'Import@ss (Vida Laboral)', url: 'https://portal.seg-social.gob.es/wps/portal/importass/importass' },
+    { name: 'Cita Previa Extranjería', url: OFFICIAL_LINKS.extranjeria.citaPrevia },
+    { name: 'Ayuntamiento de Jaén (Padrón)', url: OFFICIAL_LINKS.ayuntamiento.padron },
+    { name: 'ClicSalud+ (Tarjeta Sanitaria SAS)', url: OFFICIAL_LINKS.salud.clicSalud },
+    { name: 'Import@ss (Vida Laboral)', url: OFFICIAL_LINKS.seguridadSocial.cita },
   ];
 
   return (
@@ -69,7 +69,7 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
                 className="w-full gap-2 rounded-xl"
                 variant={form.type === 'Sede' ? 'default' : 'secondary'}
               >
-                <a href={form.url} target="_blank" rel="noopener noreferrer">
+                <a href={form.url}>
                   {form.type === 'Sede' ? <ExternalLink className="h-4 w-4" /> : <Download className="h-4 w-4" />}
                   {form.type === 'Sede' ? 'Ir a la Sede' : t.downloadForm}
                 </a>
@@ -80,8 +80,8 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
                   variant="ghost" 
                   className="w-full text-[10px] font-black uppercase text-muted-foreground hover:text-primary h-8"
                 >
-                  <a href={form.backupUrl} target="_blank" rel="noopener noreferrer">
-                    <Zap className="h-3 w-3 mr-1" /> Backup Link
+                  <a href={form.backupUrl}>
+                    <Zap className="h-3 w-3 mr-1" /> Enlace Alternativo
                   </a>
                 </Button>
               )}
@@ -99,8 +99,6 @@ export function FormDownloader({ lang }: FormDownloaderProps) {
             <a 
               key={link.name}
               href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center justify-between p-4 bg-white rounded-2xl border hover:border-primary transition-all group"
             >
               <span className="text-sm font-bold text-foreground/80 group-hover:text-primary">{link.name}</span>

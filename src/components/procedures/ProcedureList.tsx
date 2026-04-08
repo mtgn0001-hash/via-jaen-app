@@ -29,6 +29,7 @@ import { useLocalStorage } from "@/lib/store";
 import { Badge } from "@/components/ui/badge";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { ScannerSection } from "@/features/tramites/ScannerSection";
+import { OFFICIAL_LINKS } from "@/services/links-service";
 
 type ProcedureListProps = {
   lang: Language;
@@ -44,38 +45,39 @@ export function ProcedureList({ lang }: ProcedureListProps) {
 
   const handleLaunch = (url: string) => {
     setIsLoading(true);
+    // Simular un pequeño retraso para feedback visual antes de que GlobalLinkHandler actúe
     setTimeout(() => {
       setIsLoading(false);
       window.open(url, '_blank');
-    }, 1200);
+    }, 800);
   };
 
   const otherCitas = [
     {
       title: 'Alta en el Padrón',
       desc: 'Sede Electrónica Ayuntamiento de Jaén',
-      url: 'https://sede.aytojaen.es/',
+      url: OFFICIAL_LINKS.ayuntamiento.padron,
       icon: Building2,
       color: 'bg-emerald-100 text-emerald-700'
     },
     {
       title: 'Cita Médica (SAS)',
       desc: 'ClicSalud+ y Salud Responde',
-      url: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/',
+      url: OFFICIAL_LINKS.salud.clicSalud,
       icon: Stethoscope,
       color: 'bg-red-50 text-red-600'
     },
     {
       title: 'Seguridad Social',
       desc: 'Cita Previa Tesorería (Jaén)',
-      url: 'https://portal.seg-social.gob.es/wps/portal/importass/importass',
+      url: OFFICIAL_LINKS.seguridadSocial.cita,
       icon: Briefcase,
       color: 'bg-blue-50 text-blue-600'
     },
     {
       title: 'Admisión UJA',
       desc: 'Grados y Matrícula Universidad',
-      url: 'https://www.ujaen.es/estudios/acceso',
+      url: OFFICIAL_LINKS.uja.acceso,
       icon: ShieldCheck,
       color: 'bg-purple-50 text-purple-600'
     }
@@ -108,15 +110,15 @@ export function ProcedureList({ lang }: ProcedureListProps) {
 
           <div className="grid grid-cols-1 gap-3">
             <Button 
-              onClick={() => handleLaunch('https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html')}
+              onClick={() => handleLaunch(OFFICIAL_LINKS.extranjeria.ex15)}
               className="h-16 rounded-2xl bg-white text-primary hover:bg-white/90 font-black text-sm uppercase tracking-tight flex justify-between px-6 shadow-xl active:scale-95 transition-all"
             >
-              <span>Solicitar / Renovar NIE (EX-15)</span>
+              <span>Ministerio: Renovar NIE</span>
               <FileText className="h-5 w-5" />
             </Button>
 
             <Button 
-              onClick={() => handleLaunch('https://icp.administracionelectronica.gob.es/icpco/index.html')}
+              onClick={() => handleLaunch(OFFICIAL_LINKS.extranjeria.citaPrevia)}
               className="h-16 rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md font-black text-sm uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
             >
               <span>Tarjeta TIE (Huellas/Recogida)</span>

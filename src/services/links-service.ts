@@ -4,7 +4,7 @@
  */
 export const OFFICIAL_LINKS = {
   extranjeria: {
-    ex15: "https://www.inclusion.gob.es/web/migraciones/modelos-de-solicitud",
+    ex15: "https://www.inclusion.gob.es/",
     citaPrevia: "https://icp.administracionelectronica.gob.es/icpco/index.html",
     modelosGeneral: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html",
     arraigo: "https://extranjeros.inclusion.gob.es/es/informacioninteres/informacionprocedimientos/Ciudadanosnocomunitarios/hojasinformativas/index.html",

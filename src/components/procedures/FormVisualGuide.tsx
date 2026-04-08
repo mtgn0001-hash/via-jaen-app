@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Language, translations } from "@/lib/translations";
@@ -12,6 +11,7 @@ import {
 import { Info, FileText, CheckCircle2, MapPin, ExternalLink, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { OFFICIAL_LINKS } from "@/services/links-service";
 
 type FormVisualGuideProps = {
   lang: Language;
@@ -23,7 +23,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
   const guideSections = [
     { 
       section: "NIE / Certificados (Modelo EX-15)", 
-      url: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html",
+      url: OFFICIAL_LINKS.extranjeria.ex15,
       where: "Comisaría de Policía (Plaza de las Batallas, Jaén)",
       fields: [
         { id: "nie", label: "PASAPORTE / NIE", hint: "Si es tu primera vez, escribe el número de tu pasaporte. Usa siempre MAYÚSCULAS." },
@@ -32,7 +32,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
     },
     { 
       section: "Empadronamiento Municipal", 
-      url: "https://sede.aytojaen.es/",
+      url: OFFICIAL_LINKS.ayuntamiento.padron,
       where: "Ayuntamiento de Jaén (Plaza de Santa María)",
       fields: [
         { id: "housing", label: "DATOS VIVIENDA", hint: "Debes aportar contrato de alquiler original o autorización del dueño." },
@@ -41,7 +41,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
     },
     { 
       section: "Tarjeta Sanitaria (SAS)", 
-      url: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/",
+      url: OFFICIAL_LINKS.salud.clicSalud,
       where: "Centro de Salud más cercano a tu casa",
       fields: [
         { id: "seg_social", label: "Nº SEGURIDAD SOCIAL", hint: "Si trabajas, pon tu número de afiliación. Si no, solicita el alta por residencia." }
@@ -72,7 +72,7 @@ export function FormVisualGuide({ lang }: FormVisualGuideProps) {
                     </div>
                   </div>
                   <Button variant="outline" size="sm" className="rounded-xl h-10 gap-2 border-primary/20 hover:bg-primary/10 text-primary font-black text-[10px] uppercase" asChild>
-                    <a href={group.url} target="_blank">
+                    <a href={group.url}>
                       <ExternalLink className="h-4 w-4" />
                       Acceder
                     </a>

@@ -1,8 +1,9 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { ResourceLauncher } from "@/features/citas/ResourceLauncher";
-import { MapPin, Zap, Info, Scale, Luggage } from "lucide-react";
+import { MapPin, Info, Scale, Luggage, ExternalLink } from "lucide-react";
 import { OFFICIAL_LINKS } from "@/services/links-service";
 import { useLocalStorage } from "@/lib/store";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -20,7 +21,7 @@ export function ManagementTIENIE() {
             <p className="text-[12px] text-muted-foreground font-black uppercase tracking-[0.2em]">GESTIÓN TIE Y NIE EN JAÉN</p>
           </div>
           <SpeechButton 
-            text="Sección Extranjería. Aquí puedes solicitar el Modelo EX-15 para el NIE y pedir cita para la toma de huellas de la tarjeta TIE en la Comisaría de la Plaza de las Batallas de Jaén. Recuerda que las citas suelen salir los viernes a las 9 de la mañana." 
+            text="Sección Extranjería. Aquí puedes acceder al Ministerio de Inclusión para el NIE y pedir cita para la tarjeta TIE en la Comisaría de la Plaza de las Batallas." 
             language={lang} 
           />
         </div>
@@ -39,14 +40,16 @@ export function ManagementTIENIE() {
             </div>
 
             <div className="grid grid-cols-1 gap-5">
-              <ResourceLauncher 
-                title="MODELO EX-15 (NIE)"
-                description="Solicitud de Número de Identidad de Extranjero y Certificados. Debes rellenar este PDF oficial y llevarlo a Comisaría."
-                url={OFFICIAL_LINKS.extranjeria.ex15}
-                triggerLabel="SOLICITAR / RENOVAR NIE"
-                variant="white"
-                lang={lang}
-              />
+              {/* ACCESO DIRECTO SOLICITADO POR EL USUARIO */}
+              <Button 
+                asChild
+                className="w-full h-16 rounded-2xl bg-white text-primary border-none shadow-xl font-black uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
+              >
+                <a href={OFFICIAL_LINKS.extranjeria.ex15}>
+                  <span>SOLICITAR / RENOVAR NIE</span>
+                  <ExternalLink className="h-5 w-5" />
+                </a>
+              </Button>
 
               <ResourceLauncher 
                 title="CITA HUELLAS / TIE"
@@ -72,7 +75,7 @@ export function ManagementTIENIE() {
             <h4 className="text-[14px] font-black uppercase text-[#1A1A1B] tracking-widest ml-2 flex items-center gap-2">
               <Scale className="h-6 w-6 text-primary" /> APOYO LEGAL Y PROTECCIÓN
             </h4>
-            <SpeechButton text="Ayuda legal y protección. Información sobre Arraigo, Asistencia Jurídica gratuita del Colegio de Abogados de Jaén, y solicitudes de Asilo o Retorno Voluntario." language={lang} />
+            <SpeechButton text="Ayuda legal y protección. Información sobre Arraigo, Asistencia Jurídica gratuita y solicitudes de Asilo." language={lang} />
           </div>
           
           <div className="grid grid-cols-1 gap-4">
