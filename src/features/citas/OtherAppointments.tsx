@@ -48,9 +48,9 @@ export function OtherAppointments() {
       color: 'bg-blue-50 text-blue-600'
     },
     {
-      title: 'Admisión UJA',
-      desc: 'Acceso a Grados y Admisión oficial',
-      url: OFFICIAL_LINKS.uja.acceso,
+      title: 'Web Universidad (UJA)',
+      desc: 'Página principal y acceso general',
+      url: OFFICIAL_LINKS.uja.home,
       icon: ShieldCheck,
       color: 'bg-purple-50 text-purple-600'
     }

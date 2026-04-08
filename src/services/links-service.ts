@@ -33,7 +33,7 @@ export const OFFICIAL_LINKS = {
   },
   uja: {
     home: "https://www.ujaen.es/",
-    acceso: "https://www.ujaen.es/estudios/acceso", // Portal directo de Admisiones
+    acceso: "https://www.ujaen.es/", // Redirección directa a la principal como solicitado
     matricula: "https://www.ujaen.es/estudios/acceso/automatricula",
     becas: "https://www.ujaen.es/servicios/vicest/becas",
     calendario: "https://www.ujaen.es/estudios/calendario-academico",
