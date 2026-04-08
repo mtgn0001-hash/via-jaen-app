@@ -40,7 +40,6 @@ export function ManagementTIENIE() {
             </div>
 
             <div className="grid grid-cols-1 gap-5">
-              {/* ACCESO DIRECTO SOLICITADO POR EL USUARIO */}
               <Button 
                 asChild
                 className="w-full h-16 rounded-2xl bg-white text-primary border-none shadow-xl font-black uppercase tracking-tight flex justify-between px-6 active:scale-95 transition-all"
@@ -81,7 +80,7 @@ export function ManagementTIENIE() {
           <div className="grid grid-cols-1 gap-4">
             <ResourceLauncher 
               title="ARRAIGO SOCIAL/LABORAL"
-              description="Información sobre procedimientos de arraigo para regularizar tu situación tras 2 o 3 años en España."
+              description="Para encontrar el Arraigo en la web del Ministerio: 1. Pulsa en el menú superior 'Migraciones'. 2. Entra en 'Información sobre Procedimientos'. 3. Selecciona 'Arraigo Social' o 'Laboral'."
               url={OFFICIAL_LINKS.extranjeria.arraigo}
               triggerLabel="INFORMACIÓN DE ARRAIGO"
               variant="primary"
@@ -89,10 +88,10 @@ export function ManagementTIENIE() {
             />
             
             <ResourceLauncher 
-              title="ABOGADO DE OFICIO"
-              description="Asistencia jurídica gratuita a través del Colegio de Abogados de Jaén para trámites de extranjería."
+              title="ASISTENCIA JURÍDICA"
+              description="Para información legal gratuita: 1. Ve al menú superior 'Migraciones'. 2. Selecciona el apartado 'Integración'. 3. Busca la sección de 'Asistencia Jurídica Gratuita'."
               url={OFFICIAL_LINKS.extranjeria.asistenciaJuridica}
-              triggerLabel="ASISTENCIA LEGAL JAÉN"
+              triggerLabel="ASISTENCIA LEGAL"
               variant="primary"
               lang={lang}
             />
@@ -100,7 +99,7 @@ export function ManagementTIENIE() {
             <div className="grid grid-cols-2 gap-4">
               <ResourceLauncher 
                 title="ASILO"
-                description="Recursos para Protección Internacional en Jaén."
+                description="Para solicitar Protección Internacional: 1. Entra en el menú 'Migraciones'. 2. Selecciona 'Protección Internacional'. 3. Consulta la guía de solicitud y requisitos."
                 url={OFFICIAL_LINKS.extranjeria.proteccionInternacional}
                 triggerLabel="ASILO"
                 variant="primary"
@@ -108,7 +107,7 @@ export function ManagementTIENIE() {
               />
               <ResourceLauncher 
                 title="RETORNO"
-                description="Programas oficiales de retorno voluntario a tu país de origen."
+                description="Para el Retorno Voluntario: 1. Pulsa en el menú 'Migraciones'. 2. Selecciona 'Retorno Voluntario'. 3. Consulta los programas vigentes para tu país."
                 url={OFFICIAL_LINKS.extranjeria.retornoVoluntario}
                 triggerLabel="RETORNO"
                 variant="primary"

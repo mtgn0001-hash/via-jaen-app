@@ -7,10 +7,10 @@ export const OFFICIAL_LINKS = {
     ex15: "https://www.inclusion.gob.es/",
     citaPrevia: "https://icp.administracionelectronica.gob.es/icpco/index.html",
     modelosGeneral: "https://extranjeros.inclusion.gob.es/es/ModelosSolicitudes/Mod_solicitudes2/index.html",
-    arraigo: "https://extranjeros.inclusion.gob.es/es/informacioninteres/informacionprocedimientos/Ciudadanosnocomunitarios/hojasinformativas/index.html",
-    proteccionInternacional: "https://www.policia.es/_es/tramites_extranjeria_tramite_solicitud_asilo.php",
-    asistenciaJuridica: "https://www.icajaen.es/servicios/asistencia-juridica-gratuita/",
-    retornoVoluntario: "https://www.inclusion.gob.es/web/migraciones/retorno-voluntario"
+    arraigo: "https://www.inclusion.gob.es/",
+    proteccionInternacional: "https://www.inclusion.gob.es/",
+    asistenciaJuridica: "https://www.inclusion.gob.es/",
+    retornoVoluntario: "https://www.inclusion.gob.es/"
   },
   comunidad: {
     hijaDeInmigrantes: "https://www.instagram.com/hijadeinmigrantes/",
