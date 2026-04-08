@@ -74,13 +74,13 @@ export function ManagementTIENIE() {
             <h4 className="text-[14px] font-black uppercase text-[#1A1A1B] tracking-widest ml-2 flex items-center gap-2">
               <Scale className="h-6 w-6 text-primary" /> APOYO LEGAL Y PROTECCIÓN
             </h4>
-            <SpeechButton text="Ayuda legal y protección. Información sobre Arraigo, Asistencia Jurídica gratuita y solicitudes de Asilo." language={lang} />
+            <SpeechButton text="Ayuda legal y protección en el portal de Migraciones. Información sobre Arraigo, Asistencia Jurídica gratuita y solicitudes de Asilo." language={lang} />
           </div>
           
           <div className="grid grid-cols-1 gap-4">
             <ResourceLauncher 
               title="ARRAIGO SOCIAL/LABORAL"
-              description="Para encontrar el Arraigo en la web del Ministerio: 1. Pulsa en el menú superior 'Migraciones'. 2. Entra en 'Información sobre Procedimientos'. 3. Selecciona 'Arraigo Social' o 'Laboral'."
+              description="Acceso al portal de Migraciones. Una vez dentro: 1. Busca en el menú lateral 'Información sobre procedimientos'. 2. Selecciona 'Autorizaciones por circunstancias excepcionales' para ver los requisitos del Arraigo."
               url={OFFICIAL_LINKS.extranjeria.arraigo}
               triggerLabel="INFORMACIÓN DE ARRAIGO"
               variant="primary"
@@ -89,7 +89,7 @@ export function ManagementTIENIE() {
             
             <ResourceLauncher 
               title="ASISTENCIA JURÍDICA"
-              description="Para información legal gratuita: 1. Ve al menú superior 'Migraciones'. 2. Selecciona el apartado 'Integración'. 3. Busca la sección de 'Asistencia Jurídica Gratuita'."
+              description="Portal de Migraciones. Para ayuda legal: 1. Localiza el apartado de 'Integración'. 2. Busca la sección de 'Asistencia Jurídica Gratuita' para conocer tus derechos y abogados de oficio."
               url={OFFICIAL_LINKS.extranjeria.asistenciaJuridica}
               triggerLabel="ASISTENCIA LEGAL"
               variant="primary"
@@ -99,7 +99,7 @@ export function ManagementTIENIE() {
             <div className="grid grid-cols-2 gap-4">
               <ResourceLauncher 
                 title="ASILO"
-                description="Para solicitar Protección Internacional: 1. Entra en el menú 'Migraciones'. 2. Selecciona 'Protección Internacional'. 3. Consulta la guía de solicitud y requisitos."
+                description="Portal de Migraciones. Para Protección Internacional: 1. Entra en el menú de trámites. 2. Busca 'Protección Internacional y Asilo' para descargar la guía de solicitud."
                 url={OFFICIAL_LINKS.extranjeria.proteccionInternacional}
                 triggerLabel="ASILO"
                 variant="primary"
@@ -107,7 +107,7 @@ export function ManagementTIENIE() {
               />
               <ResourceLauncher 
                 title="RETORNO"
-                description="Para el Retorno Voluntario: 1. Pulsa en el menú 'Migraciones'. 2. Selecciona 'Retorno Voluntario'. 3. Consulta los programas vigentes para tu país."
+                description="Programas de Migración. Para volver a tu país: 1. Busca el apartado de 'Retorno Voluntario'. 2. Consulta los programas vigentes y ayudas económicas disponibles."
                 url={OFFICIAL_LINKS.extranjeria.retornoVoluntario}
                 triggerLabel="RETORNO"
                 variant="primary"
