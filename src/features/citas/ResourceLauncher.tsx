@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react";
@@ -10,10 +11,11 @@ import {
   DialogFooter
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Loader2, ShieldAlert, AlertTriangle } from "lucide-react";
+import { ExternalLink, Loader2, ShieldAlert } from "lucide-react";
 import { SpeechButton } from "@/components/ui/SpeechButton";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 type ResourceLauncherProps = {
   title: string;
@@ -36,8 +38,8 @@ export function ResourceLauncher({
 }: ResourceLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const { progress } = useLocalStorage();
+  const { toast } = useToast();
   const isAccessible = progress.accessibilityMode === 'accessible';
 
   const handleLaunch = () => {
@@ -62,14 +64,20 @@ export function ResourceLauncher({
         const win = window.open(url, '_blank', 'noopener,noreferrer');
         if (win) {
           setIsOpen(false);
-          setIsRedirecting(false);
         } else {
-          // Si el navegador bloquea la pestaña nueva
-          setHasError(true);
-          setIsRedirecting(false);
+          toast({
+            variant: "destructive",
+            title: "Enlace Bloqueado",
+            description: "Por favor, permite las ventanas emergentes para acceder al sitio oficial.",
+          });
         }
       } catch (e) {
-        setHasError(true);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "No se pudo abrir el enlace oficial.",
+        });
+      } finally {
         setIsRedirecting(false);
       }
     }, isAccessible ? 1500 : 500);
@@ -105,10 +113,7 @@ export function ResourceLauncher({
         <ExternalLink className="h-5 w-5" />
       </Button>
 
-      <Dialog open={isOpen} onOpenChange={(val) => {
-        setIsOpen(val);
-        if (!val) setHasError(false);
-      }}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-md rounded-[3rem] bg-white p-0 overflow-hidden border-none shadow-2xl outline-none">
           <DialogHeader className="p-8 bg-slate-50 border-b">
             <div className="flex justify-between items-start">
@@ -121,54 +126,38 @@ export function ResourceLauncher({
           </DialogHeader>
 
           <div className="p-8 space-y-6">
-            {!hasError ? (
-              <>
-                <div className="space-y-2">
-                  <h4 className="font-black text-lg text-slate-900 leading-tight uppercase">{title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed font-bold">
-                    {description}
-                  </p>
-                </div>
+            <div className="space-y-2">
+              <h4 className="font-black text-lg text-slate-900 leading-tight uppercase">{title}</h4>
+              <p className="text-sm text-slate-600 leading-relaxed font-bold">
+                {description}
+              </p>
+            </div>
 
-                <div className="bg-primary/5 p-5 rounded-2xl border-2 border-primary/10 space-y-3">
-                  <div className="flex justify-between items-center">
-                    <h4 className="text-[10px] font-black uppercase text-primary tracking-widest flex items-center gap-2">
-                      <ShieldAlert className="h-4 w-4" /> Seguridad Vía Jaén
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-slate-700 font-bold leading-tight uppercase">
-                    Vas a ser redirigido a servidores oficiales externos. No compartas tus claves privadas.
-                  </p>
-                </div>
-              </>
-            ) : (
-              <div className="bg-destructive/5 p-6 rounded-3xl border-2 border-destructive/20 flex flex-col items-center text-center gap-4">
-                <AlertTriangle className="h-12 w-12 text-destructive" />
-                <div className="space-y-1">
-                  <h4 className="font-black text-lg text-destructive uppercase">Error de Navegación</h4>
-                  <p className="text-xs font-bold text-slate-700">
-                    Tu navegador ha bloqueado la apertura de la nueva ventana o el sitio no está disponible.
-                  </p>
-                </div>
+            <div className="bg-primary/5 p-5 rounded-2xl border-2 border-primary/10 space-y-3">
+              <div className="flex justify-between items-center">
+                <h4 className="text-[10px] font-black uppercase text-primary tracking-widest flex items-center gap-2">
+                  <ShieldAlert className="h-4 w-4" /> Seguridad Vía Jaén
+                </h4>
               </div>
-            )}
+              <p className="text-[11px] text-slate-700 font-bold leading-tight uppercase">
+                Vas a ser redirigido a servidores oficiales externos. No compartas tus claves privadas.
+              </p>
+            </div>
           </div>
 
           <DialogFooter className="p-6 bg-slate-50 flex gap-3 border-t">
             <Button variant="ghost" onClick={() => setIsOpen(false)} className="rounded-xl font-black text-slate-500 uppercase text-xs">Cerrar</Button>
-            {!hasError && (
-              <Button 
-                onClick={handleLaunch} 
-                disabled={isRedirecting}
-                className="flex-1 rounded-xl h-14 bg-primary text-white font-black uppercase text-sm gap-2 shadow-lg"
-              >
-                {isRedirecting ? (
-                  <><Loader2 className="h-5 w-5 animate-spin" /> Cargando...</>
-                ) : (
-                  <><ExternalLink className="h-5 w-5" /> Abrir en Navegador</>
-                )}
-              </Button>
-            )}
+            <Button 
+              onClick={handleLaunch} 
+              disabled={isRedirecting}
+              className="flex-1 rounded-xl h-14 bg-primary text-white font-black uppercase text-sm gap-2 shadow-lg"
+            >
+              {isRedirecting ? (
+                <><Loader2 className="h-5 w-5 animate-spin" /> Cargando...</>
+              ) : (
+                <><ExternalLink className="h-5 w-5" /> Abrir en Navegador</>
+              )}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
