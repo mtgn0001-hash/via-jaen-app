@@ -76,7 +76,7 @@ export function ProcedureList({ lang }: ProcedureListProps) {
     },
     {
       title: 'Admisión UJA',
-      desc: 'Grados y Matrícula Universidad',
+      desc: 'Acceso a Grados y Admisión oficial',
       url: OFFICIAL_LINKS.uja.acceso,
       icon: ShieldCheck,
       color: 'bg-purple-50 text-purple-600'
