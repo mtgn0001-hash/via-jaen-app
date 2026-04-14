@@ -1,4 +1,4 @@
-# Firebase Studio
+rm -rf .next out node_modules/.cache# Firebase Studio
 
 This is a NextJS starter in Firebase Studio.
 

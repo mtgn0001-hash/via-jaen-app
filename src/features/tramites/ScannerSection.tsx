@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { analyzeDocument } from "@/ai/flows/analyze-doc-flow";
+// import { analyzeDocument } from "@/ai/flows/analyze-doc-flow";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { SpeechButton } from "@/components/ui/SpeechButton";

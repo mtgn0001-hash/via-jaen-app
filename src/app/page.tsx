@@ -1,132 +1,125 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useLocalStorage } from "@/lib/store";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
+import { ProcedureList } from "@/components/procedures/ProcedureList";
+import { EmploymentPortal } from "@/components/work/EmploymentPortal";
 import { ResourceDirectory } from "@/components/directory/ResourceDirectory";
-import { Onboarding } from "@/components/onboarding/Onboarding";
+import { ResourcesHub } from "@/components/recursos/ResourcesHub";
 import { UserProfile } from "@/components/profile/UserProfile";
-import { FirebaseClientProvider } from "@/firebase";
+import { DocumentScanner } from "@/features/ia/DocumentScanner";
+import { DocumentVault } from "@/features/seguridad/DocumentVault";
+import { JaenBot } from "@/features/ia/JaenBot";
+import { EmergencyTab } from "@/components/emergency/EmergencyTab";
+import { Onboarding } from "@/components/onboarding/Onboarding";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { BackFAB } from "@/components/layout/BackFAB";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
-import { Toaster } from "@/components/ui/toaster";
-import { translations, type Language } from "@/lib/translations";
-
-// Features
-import { ManagementTIENIE } from "@/features/extranjeria/ManagementTIENIE";
-import { OtherAppointments } from "@/features/citas/OtherAppointments";
-import { JaenBot } from "@/features/ia/JaenBot";
-import { DocumentScanner } from "@/features/ia/DocumentScanner";
-import { DocumentVault } from "@/features/seguridad/DocumentVault";
-import { ResourcesHub } from "@/components/recursos/ResourcesHub";
-import { EmploymentPortal } from "@/components/work/EmploymentPortal";
+import { useLocalStorage, Language } from "@/lib/store";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
-  const { 
-    progress, 
-    updateProgress, 
-    isLoaded 
-  } = useLocalStorage();
-
+  const { progress, updateProgress, isLoaded } = useLocalStorage();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [activeResourceSection, setActiveResourceSection] = useState('salud');
-  
-  // Sincronizar estado local con persistencia
-  useEffect(() => {
-    if (isLoaded && progress.currentTab) {
-      setActiveTab(progress.currentTab);
-    }
-  }, [isLoaded, progress.currentTab]);
+  const [resourceSection, setResourceSection] = useState('salud');
 
-  const handleTabChange = (tab: string) => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
-    setActiveTab(tab);
-    updateProgress({ currentTab: tab });
-  };
-
-  const lang = (progress.language as Language) || 'es';
-
+  // Aplicar tema y accesibilidad al cargar
   useEffect(() => {
     if (isLoaded) {
       document.documentElement.setAttribute('data-theme', progress.theme);
       document.documentElement.setAttribute('data-accessibility', progress.accessibilityMode);
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-      document.documentElement.lang = lang;
+      document.documentElement.setAttribute('data-lite-mode', progress.liteMode ? 'true' : 'false');
     }
-  }, [progress.theme, isLoaded, progress.accessibilityMode, lang]);
-
-  const handleResourceNavigation = (sectionId: string) => {
-    setActiveResourceSection(sectionId);
-    handleTabChange('guides_hub');
-  };
+  }, [progress.theme, progress.accessibilityMode, progress.liteMode, isLoaded]);
 
   if (!isLoaded) return null;
 
-  return (
-    <FirebaseClientProvider>
-      <div className="min-h-screen bg-background relative overflow-x-hidden font-body transition-colors duration-500">
-        {!progress.onboardingCompleted && (
-          <Onboarding 
-            lang={lang} 
-            onComplete={() => updateProgress({ onboardingCompleted: true })} 
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return (
+          <Dashboard 
+            lang={progress.language as any} 
+            setActiveTab={setActiveTab} 
+            setResourceSection={(sec) => {
+              setResourceSection(sec);
+              setActiveTab('guides_hub');
+            }}
+            progress={progress}
           />
-        )}
+        );
+      case 'procedures':
+        return <ProcedureList lang={progress.language as any} />;
+      case 'employment_portal':
+        return <EmploymentPortal lang={progress.language as any} />;
+      case 'directory':
+        return <ResourceDirectory lang={progress.language as any} />;
+      case 'guides_hub':
+        return (
+          <ResourcesHub 
+            lang={progress.language} 
+            activeSection={resourceSection}
+            onSectionChange={setResourceSection}
+          />
+        );
+      case 'profile':
+      case 'profile_hub':
+        return <UserProfile lang={progress.language as any} />;
+      case 'scanner':
+        return <DocumentScanner lang={progress.language} />;
+      case 'vault':
+        return <DocumentVault lang={progress.language} />;
+      case 'bot':
+        return <JaenBot lang={progress.language as any} />;
+      case 'emergency':
+        return <EmergencyTab lang={progress.language as any} />;
+      default:
+        return <Dashboard lang={progress.language as any} setActiveTab={setActiveTab} setResourceSection={setResourceSection} progress={progress} />;
+    }
+  };
 
-        <Header 
-          lang={lang} 
-          progress={progress} 
-          updateProgress={updateProgress}
-          activeTab={activeTab}
-          setActiveTab={handleTabChange}
+  return (
+    <SidebarProvider>
+      {!progress.onboardingCompleted && (
+        <Onboarding 
+          lang={progress.language as any} 
+          onComplete={() => updateProgress({ onboardingCompleted: true })} 
         />
-
-        <main className="max-w-5xl mx-auto p-6 pt-8 min-h-screen">
-          <div className="transition-all duration-500 ease-in-out">
-            {activeTab === 'dashboard' && (
-              <Dashboard 
-                lang={lang} 
-                setActiveTab={handleTabChange} 
-                setResourceSection={handleResourceNavigation}
-                progress={progress} 
-              />
-            )}
-            
-            {activeTab === 'guides_hub' && (
-              <ResourcesHub 
-                lang={lang} 
-                activeSection={activeResourceSection} 
-                onSectionChange={setActiveResourceSection}
-              />
-            )}
-            
-            {activeTab === 'procedures' && (
-              <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700 pb-24">
-                <div className="space-y-1">
-                  <h2 className="text-3xl font-black text-primary uppercase tracking-tighter">{translations[lang].procedures}</h2>
-                  <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">{translations[lang].tieNie}</p>
-                </div>
-                <ManagementTIENIE />
-                <OtherAppointments />
-              </div>
-            )}
-
-            {activeTab === 'directory' && <div className="animate-in slide-in-from-right-4 duration-500"><ResourceDirectory lang={lang} /></div>}
-            {activeTab === 'employment_portal' && <div className="animate-in slide-in-from-right-4 duration-500"><EmploymentPortal lang={lang} /></div>}
-            
-            {activeTab === 'profile_hub' && <div className="animate-in slide-in-from-right-4 duration-500"><UserProfile lang={lang} /></div>}
-            {activeTab === 'vault' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentVault lang={lang} /></div>}
-            {activeTab === 'scanner' && <div className="animate-in slide-in-from-right-4 duration-500"><DocumentScanner lang={lang} /></div>}
-            {activeTab === 'bot' && <div className="animate-in slide-in-from-right-4 duration-500"><JaenBot lang={lang} /></div>}
+      )}
+      
+      <div className="flex min-h-screen w-full bg-background transition-colors duration-500">
+        <AppSidebar 
+          lang={progress.language as any}
+          setLang={(l) => updateProgress({ language: l })}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          currentTheme={progress.theme}
+          setTheme={(t) => updateProgress({ theme: t })}
+          progress={progress}
+          updateProgress={updateProgress}
+        />
+        
+        <main className="flex-1 flex flex-col min-w-0 relative">
+          <Header 
+            lang={progress.language as any} 
+            progress={progress} 
+            updateProgress={updateProgress}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+          
+          <div className="flex-1 overflow-y-auto p-4 sm:p-8 max-w-5xl mx-auto w-full">
+            {renderContent()}
           </div>
-        </main>
 
-        <BottomNav activeTab={activeTab} setActiveTab={handleTabChange} />
-        <BackFAB activeTab={activeTab} setActiveTab={handleTabChange} />
-        <EmergencyFAB lang={lang} />
-        <Toaster />
+          <BackFAB activeTab={activeTab} setActiveTab={setActiveTab} />
+          <EmergencyFAB lang={progress.language as any} />
+          <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+        </main>
       </div>
-    </FirebaseClientProvider>
+    </SidebarProvider>
   );
 }
