@@ -9,6 +9,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Aseguramos que no haya configuraciones de exportación que interfieran con el dev manifest
 };
 
 export default nextConfig;

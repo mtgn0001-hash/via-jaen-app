@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-// import { analyzeDocument } from "@/ai/flows/analyze-doc-flow";
+import { analyzeDocument } from "@/ai/flows/analyze-doc-flow";
 import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { SpeechButton } from "@/components/ui/SpeechButton";
@@ -84,8 +84,6 @@ export function ScannerSection() {
       const aiResult = await analyzeDocument({ photoDataUri, language: lang });
       setResult(aiResult);
       setCurrentStep(0);
-      
-      // Eliminada la auto-narración inicial aquí por petición del usuario
     } catch (error) {
       toast({
         variant: "destructive",
@@ -106,7 +104,6 @@ export function ScannerSection() {
 
   return (
     <div className="space-y-6">
-      {/* BOTÓN MAESTRO DE ASISTENCIA */}
       <section className="px-2">
         <Button 
           onClick={startCamera}
@@ -129,18 +126,15 @@ export function ScannerSection() {
         </Button>
       </section>
 
-      {/* CÁMARA CON GUÍA */}
       <Dialog open={showCamera} onOpenChange={(val) => !val && closeCamera()}>
         <DialogContent className="sm:max-w-xl p-0 border-none bg-black rounded-[3rem] overflow-hidden outline-none h-[85vh]">
           <div className="relative h-full flex flex-col">
             <video ref={videoRef} autoPlay playsInline muted className="flex-1 object-cover" />
             
-            {/* MARCO GUÍA PARA EL USUARIO */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-[85%] aspect-[3/4] border-4 border-dashed border-white/30 rounded-3xl relative">
                 <div className="absolute -top-4 -left-4 w-16 h-16 border-t-[12px] border-l-12 border-indigo-500 rounded-tl-2xl" />
                 <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-[12px] border-r-12 border-indigo-500 rounded-br-2xl" />
-                
                 <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-indigo-500/30 animate-pulse" />
               </div>
             </div>
@@ -169,7 +163,6 @@ export function ScannerSection() {
         </DialogContent>
       </Dialog>
 
-      {/* RESULTADO Y GUÍA PASO A PASO */}
       <Dialog open={isAnalyzing || !!result} onOpenChange={() => !isAnalyzing && setResult(null)}>
         <DialogContent className="sm:max-w-lg rounded-[3rem] bg-white p-0 border-none shadow-2xl overflow-hidden outline-none max-h-[90vh] flex flex-col">
           {isAnalyzing ? (
@@ -185,7 +178,6 @@ export function ScannerSection() {
             </div>
           ) : result && (
             <div className="flex flex-col h-full overflow-y-auto scrollbar-hide">
-              {/* HEADER DEL RESULTADO */}
               <div className="p-8 bg-indigo-600 text-white flex flex-col items-center text-center gap-4 sticky top-0 z-10 shadow-lg">
                 <div className="bg-white/20 p-4 rounded-[2rem] backdrop-blur-md">
                   <FileText className="h-10 w-10 text-white" />
@@ -193,14 +185,13 @@ export function ScannerSection() {
                 <div className="space-y-1">
                   <DialogTitle className="text-3xl font-black uppercase tracking-tighter text-white">Guía de tu Documento</DialogTitle>
                   <div className="flex items-center gap-2 justify-center">
-                    <Badge className="bg-yellow-400 text-black font-black text-[10px] px-3">{result.docType}</Badge>
+                    <div className="bg-yellow-400 text-black font-black text-[10px] px-3 py-1 rounded-full uppercase">{result.docType}</div>
                     <SpeechButton text={`${result.docType}. ${result.summary}`} language={lang} variant="white" className="h-8 w-8" />
                   </div>
                 </div>
               </div>
 
               <div className="p-8 space-y-8 pb-32">
-                {/* RESUMEN INICIAL */}
                 <div className="bg-slate-50 p-6 rounded-[2.5rem] border-2 border-slate-100 space-y-4">
                   <div className="flex justify-between items-start">
                     <h4 className="text-[10px] font-black uppercase text-indigo-600 tracking-widest">Resumen de Lectura Fácil</h4>
@@ -214,7 +205,6 @@ export function ScannerSection() {
                   </p>
                 </div>
 
-                {/* EXPLICACIÓN DE CONCEPTOS */}
                 <div className="bg-amber-50 p-6 rounded-[2.5rem] border-2 border-amber-100 space-y-3">
                   <h4 className="text-[10px] font-black uppercase text-amber-700 tracking-widest flex items-center gap-2">
                     <ShieldAlert className="h-4 w-4" /> ¿Qué significa esto?
@@ -224,7 +214,6 @@ export function ScannerSection() {
                   </p>
                 </div>
 
-                {/* PASOS GUIADOS */}
                 <div className="space-y-6">
                   <div className="flex justify-between items-center px-2">
                     <h4 className="text-[12px] font-black uppercase text-slate-400 tracking-[0.2em]">Paso a Paso</h4>
@@ -277,7 +266,6 @@ export function ScannerSection() {
                   </Card>
                 </div>
 
-                {/* SEGURIDAD */}
                 <div className="bg-emerald-50 p-6 rounded-3xl flex gap-4 items-center border border-emerald-100">
                   <ShieldCheck className="h-10 w-10 text-emerald-600 shrink-0" />
                   <p className="text-[11px] text-emerald-900 font-bold uppercase leading-tight">
@@ -285,7 +273,6 @@ export function ScannerSection() {
                   </p>
                 </div>
 
-                {/* ACCIÓN FINAL */}
                 <div className="grid grid-cols-1 gap-4 pt-4">
                   <Button 
                     className="h-20 rounded-[1.75rem] bg-indigo-600 text-white font-black text-xl gap-3 shadow-xl active:scale-95 transition-all uppercase tracking-tighter"
