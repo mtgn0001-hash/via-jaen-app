@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Forzamos un directorio de construcción distinto para evitar conflictos con la caché corrupta
+  distDir: '.next_dev',
   images: {
     unoptimized: true,
   },
@@ -9,7 +11,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Aseguramos que no haya configuraciones de exportación que interfieran con el dev manifest
+  serverExternalPackages: ['wav'],
 };
 
 export default nextConfig;
