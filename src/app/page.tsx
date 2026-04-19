@@ -18,7 +18,7 @@ import { Onboarding } from "@/components/onboarding/Onboarding";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { BackFAB } from "@/components/layout/BackFAB";
 import { EmergencyFAB } from "@/components/layout/EmergencyFAB";
-import { useLocalStorage, Language } from "@/lib/store";
+import { useLocalStorage } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
